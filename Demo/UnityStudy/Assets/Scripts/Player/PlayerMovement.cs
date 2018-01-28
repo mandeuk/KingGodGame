@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    
                     if (Input.GetKey(KeyCode.A) && !avatar.GetBool("StartAttack")) //Quaternion.LookRotation(new Vector3(-1, 0, 0))
                     {
                         turnDir = Turnjudge(transform.forward, new Vector3(-1, 0, 1));

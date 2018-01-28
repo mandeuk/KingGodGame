@@ -22,8 +22,9 @@ public class PlayerAttack : MonoBehaviour
         foreach(Collider one in targetList)
         {
             SlimeHealth slime = one.GetComponent<SlimeHealth>();
-            if(slime != null)
+            if (slime != null && !slime.isSinking)
             {
+                //slime.TakeDamage(normalDamage, transform.position, 1f, 3f);
                 StartCoroutine(slime.StartDamage(normalDamage, transform.position, 1f, 3f));
             }
         }
@@ -49,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
         b_attacking = true;
         avatar.SetBool("Combo", true);
         avatar.SetBool("StartAttack",true);
-        NormalAttack();
+        //NormalAttack();
     }
 
     public void StopAttacking()
@@ -57,5 +58,12 @@ public class PlayerAttack : MonoBehaviour
         b_attacking = false;
         avatar.SetBool("Combo", false);
     }
-    
+
+    public void NormalAttackEvent()
+    {
+        
+        NormalAttack();
+    }
+
+
 }

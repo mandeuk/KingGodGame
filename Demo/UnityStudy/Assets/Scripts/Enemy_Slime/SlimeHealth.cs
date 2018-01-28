@@ -13,43 +13,85 @@ public class SlimeHealth : MonoBehaviour {
     public float sinkSpeed = 1f;
 
     private Material slimeMat;
+    private Animator anim;
+    private NavMeshAgent slimenavMesh;
+    private Rigidbody slimerigidBody;
 
     bool isDead;
-    bool isSinking;
+    public bool isSinking;
     bool damaged;
 
-    private void Awake()
+    public void StopMoving()
     {
-        currentHealth = startingHealth;
-        slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
+        slimerigidBody.Sleep();
+        slimenavMesh.speed = 0;
     }
+
+    //public void PushBack(Vector3 playerPosition, float delay, float pushBack)
+    //{
+    //    Vector3 diff = playerPosition - transform.position;
+    //    slimerigidBody.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 5000f * pushBack);
+    //    Invoke("StopMoving", .08f);
+    //}
+
+    //public void TakeDamage(int damage, Vector3 playerPosition, float delay, float pushBack)
+    //{
+    //    damaged = true;
+    //    PushBack(playerPosition, delay, pushBack);
+    //    currentHealth -= damage;
+    //    //print(currentHealth);
+
+    //    if (currentHealth <= 0 && !isDead)
+    //    {
+    //        Death();
+    //    }
+    //}
 
     public void TakeDamage(int amount)
     {
         damaged = true;
-
         currentHealth -= amount;
-        //print(currentHealth);
 
-        if(currentHealth <= 0 && !isDead)
+        if (currentHealth <= 0 && !isDead)
         {
             Death();
         }
     }
 
+    private void Awake()
+    {
+        anim = transform.GetChild(0).GetComponent<Animator>();
+        slimenavMesh = GetComponent<NavMeshAgent>();
+        slimerigidBody = GetComponent<Rigidbody>();
+        currentHealth = startingHealth;
+        slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
+    }
+
+
+
+
+
     public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack)
     {
         try
         {
+            slimenavMesh.speed = 0;
+            anim.speed = 0;
             TakeDamage(damage);
             Vector3 diff = playerPosition - transform.position;
             GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 5000f * pushBack);
-        }catch(MissingComponentException e)
+        }
+        catch (MissingComponentException e)
         {
             Debug.Log(e.ToString());
+
         }
+        yield return new WaitForSeconds(.1f);
+        slimerigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
+        slimenavMesh.speed = 1;
+        anim.speed = 1;
     }
 
     // Use this for initialization
@@ -69,6 +111,7 @@ public class SlimeHealth : MonoBehaviour {
         {
             slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white, flashSpeed * Time.deltaTime));
         }
+
         damaged = false;
 
         if (isSinking)

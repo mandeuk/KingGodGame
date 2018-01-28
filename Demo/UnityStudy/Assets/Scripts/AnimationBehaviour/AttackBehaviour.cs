@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackBehaviour : StateMachineBehaviour {
-    public PlayerAttack playerAttack;
-    
+    private PlayerAttack playerAttack;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         playerAttack = GameObject.Find("Player").GetComponent<PlayerAttack>();
+        playerAttack.NormalAttack();
         playerAttack.StopAttacking();
     }
 

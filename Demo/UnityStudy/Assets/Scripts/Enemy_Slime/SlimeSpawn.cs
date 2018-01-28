@@ -14,6 +14,7 @@ public class SlimeSpawn : MonoBehaviour {
             float randomPosX = Random.Range(-10f, 10f);
             float randomPosZ = Random.Range(-10f, 10f);
             GameObject slimeClone = Instantiate(slimeChar, new Vector3(randomPosX, 0f, randomPosZ), transform.rotation);
+            //slimeClone.SetActive(true);
             slimeCharList.Add(slimeClone);
             slimeClone.SetActive(true);
         }
