@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-[RequireComponent(typeof(Animator))]
+//[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour {
 
     protected Animator avatar;
@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour {
     
     void Update()
     {
-        
         if (avatar)
         {
             avatar.SetFloat("Speed", (v * v));
@@ -30,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (rigidbody /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
+                
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
                     if (Input.GetKey(KeyCode.A) && !avatar.GetBool("StartAttack")) //Quaternion.LookRotation(new Vector3(-1, 0, 0))
@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour {
                         turnDir = Turnjudge(transform.forward, new Vector3(-1, 0, 1));
                         if (Vector3.Angle(transform.forward, new Vector3(-1, 0, 1)) > turnAngle)
                             transform.Rotate(new Vector3(0, turnDir * turnSpeedTime, 0), Space.World);
+
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 1));

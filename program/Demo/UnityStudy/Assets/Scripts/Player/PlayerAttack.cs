@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     float f_last_attacktime;
     public bool b_attacking;
 
-    public int normalDamage = 10;
+    public static int normalDamage = 10;
     public int skillDamage = 30;
 
     public NormalTarget normalTarget;

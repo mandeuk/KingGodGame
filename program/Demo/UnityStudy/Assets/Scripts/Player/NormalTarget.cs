@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalTarget : MonoBehaviour {
     public List<Collider> targetList;
 
+
 	// Use this for initialization
 	void Awake () {
         targetList = new List<Collider>();
@@ -17,6 +18,8 @@ public class NormalTarget : MonoBehaviour {
             if(!other.GetComponent<SlimeHealth>().isSinking)
                 targetList.Add(other);
         }
+
+
     }
 
     private void OnTriggerExit(Collider other)
