@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
     protected Animator avatar;
     public float turnSpeed;
+    public float moveSpeed = 1;
     private float turnSpeedTime;
     int turnDir;
 
@@ -41,6 +42,8 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 1));
+                            rigidbody.AddForce(new Vector3(-1, 0, 1) * 200 * moveSpeed);
+                            //transform.Translate(new Vector3(-2, 0, 2) * moveSpeed * Time.deltaTime,Space.World);
                             IsWalking();
                         }
 
@@ -54,6 +57,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(1, 0, -1));
+                            rigidbody.AddForce(new Vector3(1, 0, -1) * 200 * moveSpeed);
                             IsWalking();
                         }
                     }
@@ -66,6 +70,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(1, 0, 1));
+                            rigidbody.AddForce(new Vector3(1, 0, 1) * 200 * moveSpeed);
                             IsWalking();
                         }
                     }
@@ -78,6 +83,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, -1));
+                            rigidbody.AddForce(new Vector3(-1, 0, -1) * 200 * moveSpeed);
                             IsWalking();
                         }
                     }
@@ -90,6 +96,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 1));
+                            rigidbody.AddForce(new Vector3(0, 0, 1) * 200 * moveSpeed * (float)Math.Sqrt(2));
                             IsWalking();
                         }
                     }
@@ -102,6 +109,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(1, 0, 0));
+                            rigidbody.AddForce(new Vector3(1, 0, 0) * 200 * moveSpeed *(float)Math.Sqrt(2));
                             IsWalking();
                         }
                     }
@@ -114,6 +122,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 0));
+                            rigidbody.AddForce(new Vector3(-1, 0, 0) * 200 * moveSpeed * (float)Math.Sqrt(2));
                             IsWalking();
                         }
                     }
@@ -126,6 +135,7 @@ public class PlayerMovement : MonoBehaviour {
                         else
                         {
                             transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
+                            rigidbody.AddForce(new Vector3(0, 0, -1) * 200 * moveSpeed * (float)Math.Sqrt(2));
                             IsWalking();
                         }
                     }
@@ -133,6 +143,11 @@ public class PlayerMovement : MonoBehaviour {
 
                 else
                     StopWalking();
+
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    avatar.SetTrigger("Attack");
+                }
 
             }
         }
@@ -142,11 +157,13 @@ public class PlayerMovement : MonoBehaviour {
     void IsWalking()
     {
         v = 1;
+        avatar.SetBool("Dash", true);
     }
 
     void StopWalking()
     {
         v = 0;
+        avatar.SetBool("Dash", false);
     }
 
     public int Turnjudge(Vector3 forward, Vector3 dir)

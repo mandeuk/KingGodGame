@@ -90,8 +90,11 @@ public class SlimeHealth : MonoBehaviour {
         slimerigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
-        slimenavMesh.speed = 1;
-        anim.speed = 1;
+        if (!isSinking)
+        {
+            slimenavMesh.speed = 1;
+            anim.speed = 1;
+        }
     }
 
     // Use this for initialization
