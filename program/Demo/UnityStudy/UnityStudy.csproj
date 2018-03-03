@@ -288,6 +288,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BornMovement.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\AttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\IdleBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\LastAttackBehaviour.cs" />
