@@ -222,7 +222,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves:
-      - name: ColliderMove_Start
+      - name: DashForce
         curve:
           serializedVersion: 2
           curve:
@@ -231,6 +231,12 @@ ModelImporter:
             value: 0
             inSlope: 1
             outSlope: 1
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.2530987
+            value: 0.6613589
+            inSlope: 1.0157557
+            outSlope: 1.0157557
             tangentMode: 0
           - serializedVersion: 2
             time: 1

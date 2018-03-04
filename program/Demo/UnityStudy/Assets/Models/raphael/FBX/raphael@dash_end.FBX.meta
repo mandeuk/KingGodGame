@@ -222,7 +222,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves:
-      - name: DashEndForce
+      - name: DashForce
         curve:
           serializedVersion: 2
           curve:
@@ -233,8 +233,14 @@ ModelImporter:
             outSlope: 0
             tangentMode: 0
           - serializedVersion: 2
-            time: 1
+            time: 0.6
             value: 0
+            inSlope: -1.244545
+            outSlope: -1.244545
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.7
+            value: 0.1
             inSlope: 0
             outSlope: 0
             tangentMode: 0

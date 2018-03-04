@@ -28,24 +28,17 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-
-        //movePos.Set(h, 0, v);
-        movePos = movePos.normalized * 2f * Time.deltaTime;
-
-        //rigidbody.MovePosition(transform.position + movePos);
-
-        rigidbody.MoveRotation(rigidbody.rotation);
+        //movePos = movePos.normalized * 2f * Time.deltaTime;       
 
         if (avatar)
         {
             if (rigidbody /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
+                rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime * avatar.GetFloat("DashForce"));
+
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    //print(transform.forward.normalized);
-                    //rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
+
                     if (Input.GetKey(KeyCode.A)) //Quaternion.LookRotation(new Vector3(-1, 0, 0))
                         movePos.Set(-1, 0, 1);
 
@@ -77,17 +70,10 @@ public class PlayerMovement : MonoBehaviour {
                 }
                 else
                     StopWalking();
-
-                if (Input.GetKeyDown(KeyCode.K))
-                {
-                    avatar.SetTrigger("Attack");
-                }
-
             }
         }
 
     }
-
 
     void Dash(Vector3 movePos)
     {
@@ -95,21 +81,14 @@ public class PlayerMovement : MonoBehaviour {
 
         turnDir = Turnjudge(transform.forward, movePos.normalized);
         if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
-        {
-            
-            transform.Rotate(new Vector3(0, turnDir * turnSpeedTime, 0), Space.World);
-            //rigidbody.AddForce(transform.forward * 60);
-        }
+            rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
 
         else
         {
-            transform.rotation = Quaternion.LookRotation(movePos.normalized);
-            //rigidbody.MovePosition(transform.position + movePos1);
+            rigidbody.rotation = Quaternion.LookRotation(movePos.normalized);
             IsWalking();
         }
-        
     }
-
 
     void IsWalking()
     {

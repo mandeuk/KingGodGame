@@ -10,8 +10,8 @@ public class LastAttackBehaviour : StateMachineBehaviour {
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        playerAttack = GameObject.Find("Player").GetComponent<PlayerAttack>();
-        anim = GameObject.Find("Player").GetComponent<Animator>();
+        playerAttack = animator.transform.GetComponent<PlayerAttack>();
+        anim = animator.transform.GetComponent<Animator>();
         attackTime = Time.time;
     }
 
@@ -24,11 +24,9 @@ public class LastAttackBehaviour : StateMachineBehaviour {
             playerAttack.StopAttacking();
         }
 
-        if(Mathf.Approximately(attackTime + 1.0f,  Time.deltaTime))
+        if(Mathf.Approximately(attackTime + 1.0f,Time.deltaTime))
         {
-
-            Debug.Log("123");
-            playerAttack.NormalAttack();
+            //playerAttack.NormalAttack();
         }
     }
 
