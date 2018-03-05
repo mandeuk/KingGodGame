@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public int skillDamage = 30;
 
     public NormalTarget normalTarget;
-    public SkillTarget skillTarget;
+    //public SkillTarget skillTarget;
 
     public void NormalAttack()
     {
@@ -50,13 +50,13 @@ public class PlayerAttack : MonoBehaviour
         b_attacking = true;
         avatar.SetBool("Combo", true);
         avatar.SetBool("StartAttack",true);
-        //NormalAttack();
     }
 
     public void StopAttacking()
     {
         b_attacking = false;
         avatar.SetBool("Combo", false);
+        avatar.SetBool("StartAttack", false);
     }
 
     public void NormalAttackEvent()
