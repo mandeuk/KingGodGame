@@ -9,6 +9,7 @@ public class AttackBehaviour : StateMachineBehaviour {
     {
         animator.transform.GetComponent<PlayerAttack>().NormalAttack();
         animator.transform.GetComponent<PlayerAttack>().StopAttacking();
+        attackTime = Time.time;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -18,6 +19,6 @@ public class AttackBehaviour : StateMachineBehaviour {
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        
+
     }
 }

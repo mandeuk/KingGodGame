@@ -13,7 +13,6 @@ public class PlayerAttack : MonoBehaviour
     public int skillDamage = 30;
 
     public NormalTarget normalTarget;
-    //public SkillTarget skillTarget;
 
     public void NormalAttack()
     {
@@ -31,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         avatar = GetComponent<Animator>();
     }
@@ -40,28 +39,23 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
-        {
-            OnAttacking();
-        }
+                OnAttacking();
     }
 
     public void OnAttacking()
     {
-        b_attacking = true;
         avatar.SetBool("Combo", true);
-        avatar.SetBool("StartAttack",true);
+        //avatar.SetBool("StartAttack",true);
     }
 
     public void StopAttacking()
     {
-        b_attacking = false;
         avatar.SetBool("Combo", false);
-        avatar.SetBool("StartAttack", false);
+        //avatar.SetBool("StartAttack", false);
     }
 
     public void NormalAttackEvent()
     {
-        
         NormalAttack();
     }
 

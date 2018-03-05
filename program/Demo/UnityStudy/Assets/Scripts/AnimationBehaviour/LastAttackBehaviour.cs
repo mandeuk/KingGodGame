@@ -26,7 +26,7 @@ public class LastAttackBehaviour : StateMachineBehaviour {
 
         if(Mathf.Approximately(attackTime + 1.0f,Time.deltaTime))
         {
-            //playerAttack.NormalAttack();
+            playerAttack.NormalAttack();
         }
     }
 
