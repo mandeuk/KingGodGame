@@ -40,7 +40,7 @@ public class SlimeAttack : MonoBehaviour {
 
         if(timer > timeBetweenAttacks && playerInRange && slimeHealth.currentHealth > 0)
         {
-            Attack();
+            //Attack();
         }
 	}
 

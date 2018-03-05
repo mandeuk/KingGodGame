@@ -10,7 +10,7 @@ public class SlimeMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        Player = GameObject.FindGameObjectWithTag("raphael").transform;
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
         nav = GetComponent<NavMeshAgent>();
 	}
 	

@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
                     if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
                         movePos.Set(0, 0, -1);
 
-                    if (!avatar.GetBool("StartAttack")) // 공격중이 아니며 키를 누르고 있을때.
+                    if (!avatar.GetBool("Combo")) // 공격중이 아니며 키를 누르고 있을때.
                     {
                         Dash(movePos);
                     }
