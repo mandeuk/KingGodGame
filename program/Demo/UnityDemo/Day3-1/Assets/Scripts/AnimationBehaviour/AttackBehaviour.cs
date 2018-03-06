@@ -7,9 +7,9 @@ public class AttackBehaviour : StateMachineBehaviour {
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        animator.transform.GetComponent<PlayerAttack>().NormalAttack();
+        //animator.transform.GetComponent<PlayerAttack>().NormalAttack();
         animator.transform.GetComponent<PlayerAttack>().StopAttacking();
-        attackTime = Time.time;
+        //attackTime = Time.time;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

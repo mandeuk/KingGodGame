@@ -253,7 +253,15 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 0
-      events: []
+      events:
+      - time: 0.07582359
+        functionName: PlayEffect1
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

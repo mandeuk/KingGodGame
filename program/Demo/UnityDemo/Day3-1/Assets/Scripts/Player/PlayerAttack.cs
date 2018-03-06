@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void NormalAttack()
     {
+        print("123");
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
 
         foreach(Collider one in targetList)
