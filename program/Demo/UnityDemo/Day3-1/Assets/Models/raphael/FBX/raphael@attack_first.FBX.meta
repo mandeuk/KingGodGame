@@ -255,9 +255,9 @@ ModelImporter:
           rotationOrder: 0
       events:
       - time: 0.07582359
-        functionName: PlayEffect1
+        functionName: NormalAttackEvent
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
+        objectReferenceParameter: {fileID: 11500000, guid: ddf90c6c9ccc9d548a337dba98ae723c,
           type: 3}
         floatParameter: 0
         intParameter: 0

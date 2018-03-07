@@ -86,6 +86,7 @@ public class SlimeHealth : MonoBehaviour {
             Debug.Log(e.ToString());
 
         }
+
         yield return new WaitForSeconds(.1f);
         slimerigidBody.Sleep();
 
@@ -95,6 +96,7 @@ public class SlimeHealth : MonoBehaviour {
             slimenavMesh.speed = 1;
             anim.speed = 1;
         }
+        yield break;
     }
 
     // Use this for initialization

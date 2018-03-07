@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
 
     protected Animator avatar;
+    PlayerEffect effect;
     float f_last_attacktime;
     public bool b_attacking;
 
@@ -16,7 +17,6 @@ public class PlayerAttack : MonoBehaviour
 
     public void NormalAttack()
     {
-        print("123");
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
 
         foreach(Collider one in targetList)
@@ -24,7 +24,6 @@ public class PlayerAttack : MonoBehaviour
             SlimeHealth slime = one.GetComponent<SlimeHealth>();
             if (slime != null && !slime.isSinking)
             {
-                //slime.TakeDamage(normalDamage, transform.position, 1f, 3f);
                 StartCoroutine(slime.StartDamage(normalDamage, transform.position, 1f, 3f));
             }
         }
@@ -57,8 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void NormalAttackEvent()
     {
+        StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect());
         NormalAttack();
     }
-
-
 }

@@ -253,7 +253,15 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 0
-      events: []
+      events:
+      - time: 0.100793324
+        functionName: NormalAttackEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ddf90c6c9ccc9d548a337dba98ae723c,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

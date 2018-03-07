@@ -27,20 +27,20 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4835244550706272
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544744916899874}
-  m_LocalRotation: {x: 0.032865897, y: 0.7063426, z: -0.7063426, w: 0.032865897}
+  m_LocalRotation: {x: -0.59798855, y: 0.37737098, z: -0.13990754, w: 0.6931283}
   m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -270, y: 180, z: 365.328}
+  m_LocalEulerAnglesHint: {x: -406.334, y: 450, z: 650.843}
 --- !u!198 &198892325321152936
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -101,7 +101,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2028026880
+  randomSeed: 1528055889
   InitialModule:
     serializedVersion: 3
     enabled: 1
