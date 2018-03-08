@@ -6,15 +6,53 @@ public class PlayerEffect : MonoBehaviour {
     
     public List<GameObject> slashcloneList = new List<GameObject>();
     public List<GameObject> usedslashcloneList = new List<GameObject>();
-    public GameObject EffectPos;
+    public GameObject Effect1Pos;
+    public GameObject Effect2Pos;
+    public GameObject Effect3Pos;
+    public GameObject Effect4Pos;
+    AnimatorStateInfo state;
 
-    public IEnumerator PlayEffect()
+
+    public IEnumerator PlayEffect(int stateNum)
     {
+        //state = transform.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);    
+        // 이거 first 어택은 idle 다음에 읽히지 않고                                    
+        // second는 아예안읽힘   state.IsName("Base Layer.attack_second")
+        // 왜인지 모르겠음;;;;;;
+
         usedslashcloneList.Add(slashcloneList[0]);
         slashcloneList[0].SetActive(true);
-        slashcloneList[0].transform.position = EffectPos.transform.position;
-        slashcloneList[0].transform.rotation = 
-            Quaternion.Euler(-270, 180 + transform.rotation.eulerAngles.y, 20);
+
+        //slashcloneList[0].transform.position = EffectPos.transform.position;
+        //slashcloneList[0].transform.position = transform.position;
+
+        if (stateNum == 1)
+        {
+            slashcloneList[0].transform.position = Effect1Pos.transform.position;
+            slashcloneList[0].transform.rotation =
+            Quaternion.Euler(90, 180 + transform.rotation.eulerAngles.y, 20);
+        }
+
+        else if (stateNum == 2)
+        {
+            slashcloneList[0].transform.position = Effect2Pos.transform.position;
+            slashcloneList[0].transform.rotation =
+            Quaternion.Euler(-110, 270 + transform.rotation.eulerAngles.y, 110);
+        }
+
+        else if (stateNum == 3)
+        {
+            slashcloneList[0].transform.position = Effect3Pos.transform.position;
+            slashcloneList[0].transform.rotation =
+            Quaternion.Euler(101, 270 + transform.rotation.eulerAngles.y, 110);
+        }
+
+        else if (stateNum == 4)
+        {
+            slashcloneList[0].transform.position = Effect4Pos.transform.position;
+            slashcloneList[0].transform.rotation =
+            Quaternion.Euler(90, 180 + transform.rotation.eulerAngles.y, 20);
+        }
 
         slashcloneList.RemoveAt(0);
         

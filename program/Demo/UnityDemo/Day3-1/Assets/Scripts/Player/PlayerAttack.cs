@@ -54,9 +54,9 @@ public class PlayerAttack : MonoBehaviour
         //avatar.SetBool("StartAttack", false);
     }
 
-    public void NormalAttackEvent()
+    public void NormalAttackEvent(int stateNum)
     {
-        StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect());
+        StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
         NormalAttack();
     }
 }
