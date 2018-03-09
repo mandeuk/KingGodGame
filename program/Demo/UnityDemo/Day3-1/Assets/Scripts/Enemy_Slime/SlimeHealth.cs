@@ -71,7 +71,7 @@ public class SlimeHealth : MonoBehaviour {
 
 
 
-    public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack)
+    public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
         try
         {
@@ -79,7 +79,8 @@ public class SlimeHealth : MonoBehaviour {
             anim.speed = 0;
             TakeDamage(damage);
             Vector3 diff = playerPosition - transform.position;
-            GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 5000f * pushBack);
+            GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 200f * pushBack);
+            StartCoroutine( GetComponent<EnemyEffect>().PlayEffect(stateNum));
         }
         catch (MissingComponentException e)
         {
@@ -88,7 +89,7 @@ public class SlimeHealth : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(.1f);
-        slimerigidBody.Sleep();
+            slimerigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
         if (!isSinking)
@@ -96,6 +97,7 @@ public class SlimeHealth : MonoBehaviour {
             slimenavMesh.speed = 1;
             anim.speed = 1;
         }
+
         yield break;
     }
 

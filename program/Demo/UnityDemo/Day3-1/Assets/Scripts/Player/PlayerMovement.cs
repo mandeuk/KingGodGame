@@ -9,20 +9,20 @@ public class PlayerMovement : MonoBehaviour {
     public float turnSpeed;
     public float moveSpeed = 1;
     private float turnSpeedTime;
+    public bool turnPosible;
 
     Vector3 movePos;
     Rigidbody rigidbody;
+    PlayerAttack playerattack;
 
     int turnDir;
     float turnAngle = 15;
-
-    Vector3 eulerAngleVelocity = new Vector3(0, 100, 0);
-
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
+        playerattack = GetComponent<PlayerAttack>();
         turnSpeedTime = turnSpeed * Time.deltaTime;
     }
 
@@ -38,35 +38,11 @@ public class PlayerMovement : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
+                    if (!playerattack.b_attacking)
+                        TurnJudgeFunc();
 
-                    if (Input.GetKey(KeyCode.A)) //Quaternion.LookRotation(new Vector3(-1, 0, 0))
-                        movePos.Set(-1, 0, 1);
+                    Turn(movePos);
 
-                    if (Input.GetKey(KeyCode.D))
-                        movePos.Set(1, 0, -1);
-
-                    if(Input.GetKey(KeyCode.W))
-                        movePos.Set(1, 0, 1);
-
-                    if(Input.GetKey(KeyCode.S))
-                        movePos.Set(-1, 0, -1);
-
-                    if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-                        movePos.Set(0, 0, 1);
-
-                    if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-                        movePos.Set(1, 0, 0);
-
-                    if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-                        movePos.Set(-1, 0, 0);
-
-                    if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-                        movePos.Set(0, 0, -1);
-
-                    if (!avatar.GetBool("Combo")) // 공격중이 아니며 키를 누르고 있을때.
-                    {
-                        Dash(movePos);
-                    }
                 }
                 else
                     StopWalking();
@@ -75,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    void Dash(Vector3 movePos)
+    void Turn(Vector3 movePos)
     {
         Vector3 movePos1 = movePos.normalized * moveSpeed * Time.deltaTime;
 
@@ -86,8 +62,36 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             rigidbody.rotation = Quaternion.LookRotation(movePos.normalized);
+            turnPosible = false;
             IsWalking();
         }
+    }
+
+    public void TurnJudgeFunc()
+    {
+        if (Input.GetKey(KeyCode.A)) //Quaternion.LookRotation(new Vector3(-1, 0, 0))
+            movePos.Set(-1, 0, 1);
+
+        if (Input.GetKey(KeyCode.D))
+            movePos.Set(1, 0, -1);
+
+        if (Input.GetKey(KeyCode.W))
+            movePos.Set(1, 0, 1);
+
+        if (Input.GetKey(KeyCode.S))
+            movePos.Set(-1, 0, -1);
+
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+            movePos.Set(0, 0, 1);
+
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+            movePos.Set(1, 0, 0);
+
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+            movePos.Set(-1, 0, 0);
+
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+            movePos.Set(0, 0, -1);
     }
 
     void IsWalking()

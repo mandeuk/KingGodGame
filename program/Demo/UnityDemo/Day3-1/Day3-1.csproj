@@ -289,13 +289,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BornMovement.cs" />
-    <Compile Include="Assets\IdleState.cs" />
+    <Compile Include="Assets\rigidBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\AttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\DashEndBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\IdleBehaviour.cs" />
+    <Compile Include="Assets\Scripts\AnimationBehaviour\IdleState.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\LastAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\RunBehaviour.cs" />
     <Compile Include="Assets\Scripts\Controller\FollowingCamera.cs" />
+    <Compile Include="Assets\Scripts\Enemy_Slime\EnemyEffect.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeAttack.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeHealth.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeMovement.cs" />
@@ -312,6 +314,7 @@
     <Compile Include="Assets\Scripts\Player\SkillTarget.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shader\NewImageEffectShader.shader" />
     <None Include="Assets\Shader\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
     <None Include="Assets\Shader\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\Shader\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />

@@ -18,15 +18,11 @@ public class LastAttackBehaviour : StateMachineBehaviour {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
 
-        if (attackTime + 0.5f > Time.time)  
-            // 이번 프레임이 시작한 시간 + 0.5초 동안 어택을 스탑하고 그다음부터 어택가능한상태로 만듬
+        if (attackTime + 0.75f > Time.time)  
+            // 이번 프레임이 시작한 시간 + 0.75초 동안 어택을 스탑하고 그다음부터 어택가능한상태로 만듬
         {
-            playerAttack.StopAttacking();
-        }
-
-        if(Mathf.Approximately(attackTime + 1.0f,Time.deltaTime))
-        {
-            playerAttack.NormalAttack();
+            animator.SetBool("Combo", false);
+            //playerAttack.StopAttacking();
         }
     }
 

@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
 
     public NormalTarget normalTarget;
 
-    public void NormalAttack()
+    public void NormalAttack(int stateNum)
     {
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
 
@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
             SlimeHealth slime = one.GetComponent<SlimeHealth>();
             if (slime != null && !slime.isSinking)
             {
-                StartCoroutine(slime.StartDamage(normalDamage, transform.position, 1f, 3f));
+                StartCoroutine(slime.StartDamage(normalDamage, transform.position, 0.5f, 3f, stateNum));
             }
         }
     }
@@ -38,8 +38,8 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-                OnAttacking();
+        if (Input.GetKey(KeyCode.K))
+            OnAttacking();
     }
 
     public void OnAttacking()
@@ -57,6 +57,6 @@ public class PlayerAttack : MonoBehaviour
     public void NormalAttackEvent(int stateNum)
     {
         StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
-        NormalAttack();
+        NormalAttack(stateNum);
     }
 }
