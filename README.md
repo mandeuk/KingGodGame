@@ -1,4 +1,5 @@
 # Counterflow
+![로고](./graphics/artwork/character/maincharacter/logo.png)
 ## 개발인원
 + 윤정훈 2012181024 - 클라이언트
 + 이인호 2012181029 - 클라이언트
@@ -26,3 +27,5 @@
 * Taiga Kanban
 * Open Broadcast Software(for Twitch API test)
 *****
+![캐릭터컨셉아트1](./graphics/artwork/character/maincharacter/raphael_concept4.png)
+![캐릭터컨셉아트2](./graphics/artwork/character/maincharacter/mainconcept1.png)
