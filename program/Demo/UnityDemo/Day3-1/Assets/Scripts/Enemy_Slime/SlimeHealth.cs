@@ -80,7 +80,8 @@ public class SlimeHealth : MonoBehaviour {
             TakeDamage(damage);
             Vector3 diff = playerPosition - transform.position;
             GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 200f * pushBack);
-            StartCoroutine( GetComponent<EnemyEffect>().PlayEffect(stateNum));
+            StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum));
+            damaged = false;
         }
         catch (MissingComponentException e)
         {
@@ -89,16 +90,17 @@ public class SlimeHealth : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(.1f);
-            slimerigidBody.Sleep();
+        slimerigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
+        
         if (!isSinking)
         {
             slimenavMesh.speed = 1;
             anim.speed = 1;
         }
-
         yield break;
+
     }
 
     // Use this for initialization
@@ -118,28 +120,20 @@ public class SlimeHealth : MonoBehaviour {
         {
             slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white, flashSpeed * Time.deltaTime));
         }
-
-        damaged = false;
+        
 
         if (isSinking)
         {
-            slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white * 200, .3f * Time.deltaTime));
-            //slimeMat.color = Color.Lerp(Color.white, Color.white * 30, Time.deltaTime);
+            
+            slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white * 40, .6f * Time.deltaTime));
         }
-
-       // 
     }
 
     void Death()
     {
         isDead = true;
-
-        //transform.GetChild(0).GetComponent<SphereCollider>().isTrigger = true;
-        StartSinking();
-    }
-
-    public void StartSinking()
-    {
+      
+        slimeMat.SetColor("_Color", Color.black * 0.2f);
         GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;

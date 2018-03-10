@@ -28,8 +28,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        //movePos = movePos.normalized * 2f * Time.deltaTime;       
-
         if (avatar)
         {
             if (rigidbody /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
@@ -42,13 +40,11 @@ public class PlayerMovement : MonoBehaviour {
                         TurnJudgeFunc();
 
                     Turn(movePos);
-
                 }
                 else
                     StopWalking();
             }
         }
-
     }
 
     void Turn(Vector3 movePos)
