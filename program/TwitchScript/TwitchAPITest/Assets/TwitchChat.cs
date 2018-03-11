@@ -17,7 +17,8 @@ public class TwitchChat : MonoBehaviour
     private StreamWriter writer;
 
     public string username, password, channelName; //외부프로그램을 사용한 IRC연결에 사용할 비밀번호는 https://twitchapps.com/tmi 이곳에서 확인할 수 있다.
-
+    public BTree bst;//투표한 아이디 저장/중복체크를 위한 트리 선언
+    public int[] vote = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };//투표 횟수를 저장하기 위한 배열 선언
 
 
     void Start()
@@ -75,7 +76,7 @@ public class TwitchChat : MonoBehaviour
             //  트위치 채팅채널에서 채팅을 입력할 경우
             //  :mandeuk!mandeuk@mandeuk.tmi.twitch.tv PRIVMSG #mandeuk :test1
             //  이와 같은문구가 전송되고 여기서 채팅을 한 사람과 채팅 내역을 뽑아내기 위해
-            //  앞쪽의 닉네임 문자열을 뽑아내기 위해 IndexOf()함수로 !의 위치를 리턴
+            //  앞쪽의 닉네임 문자열을 뽑아내기 위해 IndexOf()함수로 !의 위치를 리턴, splitPoint에 저장
             //  Substring()함수를 사용해 :mandeuk! 특수문자 사이의 mandeuk을 뽑아낸다.
             ///////////////////////////////////////////////////////////
             if (message.Contains("PRIVMSG"))//개인채팅메시지인 경우
@@ -87,6 +88,21 @@ public class TwitchChat : MonoBehaviour
                 splitPoint = message.IndexOf(":", 1);
                 message = message.Substring(splitPoint + 1);
                 print(String.Format("{0}: {1}", chatName, message));
+
+                switch(message)
+                {
+                    case "#1":
+                        vote[1] += 1;
+                        print("1번 투표수" + vote[1]);
+                        break;
+                }
+                /*
+                StringComparer stringcomparer = StringComparer.Ordinal;
+                if (stringcomparer.Equals(message, "#1"))
+                {
+                    vote[1] += 1;
+                }
+                */
             }//end of if
         }//end of if
     }// end of ReadChat()
@@ -94,11 +110,11 @@ public class TwitchChat : MonoBehaviour
 
 
     //이진트리 노드
-    public class BTNode<T>
+    public class BTNode
     {
         public String ID { get; set; }
-        public BTNode<T> Left { get; set; }
-        public BTNode<T> Right { get; set; }
+        public BTNode Left { get; set; }
+        public BTNode Right { get; set; }
 
         public BTNode(String id)
         {
@@ -106,15 +122,18 @@ public class TwitchChat : MonoBehaviour
         }
     }
     
-    public class BTree<T>
+
+
+    //이진트리
+    public class BTree
     {
-        public BTNode<T> Root { get; set; }
+        public BTNode Root { get; set; }
         
 
 
         public void DataInsert(String newid)
         {
-            BTNode<T> root = Root;
+            BTNode root = Root;
             while (true)
             {
                 int result = String.Compare(root.ID, newid);
@@ -131,11 +150,31 @@ public class TwitchChat : MonoBehaviour
                 }
                 else if (result < 0)//삽입하고자 하는 문자열이 기준 문자열보다 작을 경우
                 {
-                    root = root.Left;
+                    if (root.Left == null)
+                    {
+                        root.Left = new BTNode(newid);
+                        print("데이터 삽입을 성공하였습니다.");
+                        return;
+                    }
+                    else
+                        root = root.Left;
                 }
                 else if (result > 0)//삽입하고자 하는 문자열이 기준 문자열보다 큰 경우
                 {
-                    root = root.Right;
+                    if (root.Right == null)
+                    {
+                        root.Right = new BTNode(newid);
+                        print("데이터 삽입을 성공하였습니다.");
+                        return;
+                    }
+                    else
+                        root = root.Right;
+                }
+                else
+                {
+                    print("데이터 삽입을 실패하였습니다.");
+                    print("아이디 : " + newid);
+                    return;
                 }
             }//end of while(1)
         }//end of DataInsert()
