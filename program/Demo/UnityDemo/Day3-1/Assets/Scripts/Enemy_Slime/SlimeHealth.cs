@@ -58,19 +58,6 @@ public class SlimeHealth : MonoBehaviour {
         }
     }
 
-    private void Awake()
-    {
-        anim = transform.GetChild(0).GetComponent<Animator>();
-        slimenavMesh = GetComponent<NavMeshAgent>();
-        slimerigidBody = GetComponent<Rigidbody>();
-        currentHealth = startingHealth;
-        slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
-    }
-
-
-
-
-
     public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
         try
@@ -93,7 +80,7 @@ public class SlimeHealth : MonoBehaviour {
         slimerigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
-        
+
         if (!isSinking)
         {
             slimenavMesh.speed = 1;
@@ -103,30 +90,25 @@ public class SlimeHealth : MonoBehaviour {
 
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
+    private void Awake()
+    {
+        anim = transform.GetChild(0).GetComponent<Animator>();
+        slimenavMesh = GetComponent<NavMeshAgent>();
+        slimerigidBody = GetComponent<Rigidbody>();
+        currentHealth = startingHealth;
+        slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (damaged)
-        {
             slimeMat.SetColor("_Color", Color.black);
-            
-        }
 
         else
-        {
             slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white, flashSpeed * Time.deltaTime));
-        }
-        
 
-        if (isSinking)
-        {
-            
+        if (isSinking)            
             slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white * 40, .6f * Time.deltaTime));
-        }
     }
 
     void Death()

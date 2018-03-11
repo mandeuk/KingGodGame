@@ -22,33 +22,35 @@ public class PlayerEffect : MonoBehaviour {
 
         usedslashcloneList.Add(slashcloneList[0]);
         slashcloneList[0].SetActive(true);
+        slashcloneList[0].transform.localScale = new Vector3(1f, 1f, 1f);
 
         if (stateNum == 1)
         {
             slashcloneList[0].transform.position = Effect1Pos.transform.position;
             slashcloneList[0].transform.rotation =
-                Quaternion.Euler(90, 180 + transform.rotation.eulerAngles.y, 20);
+                Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
         }
 
         else if (stateNum == 2)
         {
             slashcloneList[0].transform.position = Effect2Pos.transform.position;
             slashcloneList[0].transform.rotation =
-                Quaternion.Euler(-110, 270 + transform.rotation.eulerAngles.y, 110);
+                Quaternion.Euler(-110-180, 270 + transform.rotation.eulerAngles.y, 110);
         }
 
         else if (stateNum == 3)
         {
             slashcloneList[0].transform.position = Effect3Pos.transform.position;
             slashcloneList[0].transform.rotation =
-                Quaternion.Euler(101, 270 + transform.rotation.eulerAngles.y, 110);
+                Quaternion.Euler(101-180, 270 + transform.rotation.eulerAngles.y, 110);
         }
 
         else if (stateNum == 4)
         {
+            slashcloneList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             slashcloneList[0].transform.position = Effect4Pos.transform.position;
             slashcloneList[0].transform.rotation =
-                Quaternion.Euler(90, 180 + transform.rotation.eulerAngles.y, 20);
+                Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
         }
 
         slashcloneList.RemoveAt(0);

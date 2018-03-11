@@ -6,40 +6,28 @@ public class EnemyEffect : MonoBehaviour {
 
     public List<GameObject> hitcloneList = new List<GameObject>();
     public List<GameObject> usedhitcloneList = new List<GameObject>();
+    GameObject raphael;
 
     public IEnumerator PlayEffect(int stateNum)
     {
         usedhitcloneList.Add(hitcloneList[0]);
         hitcloneList[0].SetActive(true);
         hitcloneList[0].transform.position = transform.position + Vector3.up*0.7f;
-        hitcloneList[0].transform.rotation = transform.rotation;
+        hitcloneList[0].transform.localScale = new Vector3(1f, 1f, 1f);
+        hitcloneList[0].transform.LookAt(raphael.transform);
+        hitcloneList[0].transform.Rotate(new Vector3(0, 0, Random.Range(-30,30)));
 
-        //if (stateNum == 1)
-        //{
-        //    hitcloneList[0].transform.rotation =
-        //        Quaternion.Euler(90, 180 + transform.rotation.eulerAngles.y, 20);
-        //}
+        if(stateNum == 2)
+        {
+            hitcloneList[0].transform.Rotate(new Vector3(0, 0, 180));
+        }
 
-        //else if (stateNum == 2)
-        //{
-        //    hitcloneList[0].transform.rotation =
-        //        Quaternion.Euler(-110, 270 + transform.rotation.eulerAngles.y, 110);
-        //}
-
-        //else if (stateNum == 3)
-        //{
-        //    hitcloneList[0].transform.rotation =
-        //        Quaternion.Euler(101, 270 + transform.rotation.eulerAngles.y, 110);
-        //}
-
-        //else if (stateNum == 4)
-        //{
-        //    hitcloneList[0].transform.rotation =
-        //        Quaternion.Euler(90, 180 + transform.rotation.eulerAngles.y, 20);
-        //}
+        if(stateNum == 4)
+        {
+            hitcloneList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
 
         hitcloneList.RemoveAt(0);
-
 
         yield return new WaitForSeconds(1f);
 
@@ -53,6 +41,7 @@ public class EnemyEffect : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        raphael = GameObject.FindWithTag("Player");
         InitEffect();
     }
 
@@ -70,7 +59,7 @@ public class EnemyEffect : MonoBehaviour {
 
     public GameObject SpawnEffect()
     {
-        GameObject effectClone = Instantiate(Resources.Load("Prefabs/SlashHit")) as GameObject;
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/SlashHitEffect")) as GameObject;
 
         return effectClone;
     }

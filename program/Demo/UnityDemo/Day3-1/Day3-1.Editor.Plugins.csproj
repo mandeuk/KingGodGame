@@ -309,6 +309,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
+    <None Include="Assets\Shader\AlphaBlendedCull.shader" />
     <None Include="Assets\Shader\AlphaBlendedForeground.shader" />
     <None Include="Assets\Shader\FaceToonShader.shader" />
     <None Include="Assets\Shader\NewImageEffectShader.shader" />
