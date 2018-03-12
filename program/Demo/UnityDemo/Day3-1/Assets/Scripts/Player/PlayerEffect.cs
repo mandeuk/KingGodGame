@@ -83,7 +83,7 @@ public class PlayerEffect : MonoBehaviour {
 
     public GameObject SpawnEffect()
     {
-        GameObject effectClone = Instantiate(Resources.Load("Prefabs/slash1")) as GameObject;
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/slash1")) as GameObject;
 
         return effectClone;
     }

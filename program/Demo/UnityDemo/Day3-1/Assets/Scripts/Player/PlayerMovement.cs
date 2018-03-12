@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     if (!playerattack.b_attacking)
                         TurnJudgeFunc();
-
+                    
                     Turn(movePos);
                 }
                 else

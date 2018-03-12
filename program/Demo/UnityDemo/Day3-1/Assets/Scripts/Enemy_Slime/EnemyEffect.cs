@@ -53,13 +53,15 @@ public class EnemyEffect : MonoBehaviour {
 
     public void InitEffect()
     {
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < 5; ++i)
             hitcloneList.Add(SpawnEffect());
     }
 
     public GameObject SpawnEffect()
     {
-        GameObject effectClone = Instantiate(Resources.Load("Prefabs/SlashHitEffect")) as GameObject;
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect")) as GameObject;
+        float randomPosX = Random.Range(-10f, 10f);
+        float randomPosZ = Random.Range(-10f, 10f);
 
         return effectClone;
     }
