@@ -14,14 +14,14 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 movePos;
     Rigidbody rigidbody;
     PlayerAttack playerattack;
-    AfterImageEffect raphaelEX;
+    //AfterImageEffect raphaelEX;
 
     int turnDir;
     float turnAngle = 15;
 
     void Awake()
     {
-        raphaelEX = GameObject.FindWithTag("Player").GetComponent<AfterImageEffect>();
+        //raphaelEX = GameObject.FindWithTag("Player").GetComponent<AfterImageEffect>();
         rigidbody = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GetComponent<PlayerAttack>();
@@ -34,8 +34,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (rigidbody /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
-                if(!raphaelEX.onVanish) // 이거 고쳐야됨
-                    rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime * avatar.GetFloat("DashForce"));
+                rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime * avatar.GetFloat("DashForce"));
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {

@@ -7,10 +7,13 @@ public class PlayerEffect : MonoBehaviour {
     public List<GameObject> slashcloneList = new List<GameObject>();
     public List<GameObject> usedslashcloneList = new List<GameObject>();
 
+    public GameObject blinkclone;
+
     public GameObject Effect1Pos;
     public GameObject Effect2Pos;
     public GameObject Effect3Pos;
     public GameObject Effect4Pos;
+    public GameObject blinkEffectPos;
 
 
     public IEnumerator PlayEffect(int stateNum)
@@ -65,8 +68,15 @@ public class PlayerEffect : MonoBehaviour {
         yield break;
     }
 
+    public void playBlinkEffect()
+    {
+        blinkclone.SetActive(true);
+        blinkclone.GetComponent<ParticleSystem>().Play();
+    }
+
     // Use this for initialization
     void Awake() {
+        blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
         InitEffect();
     }
 	

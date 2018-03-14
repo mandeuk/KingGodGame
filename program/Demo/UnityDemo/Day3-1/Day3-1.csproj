@@ -361,6 +361,7 @@
     <Compile Include="Assets\Scripts\MatContainer.cs" />
     <Compile Include="Assets\Scripts\Player\AfterImageEffect.cs" />
     <Compile Include="Assets\Scripts\Player\Effect_Destroy.cs" />
+    <Compile Include="Assets\Scripts\Player\EXMove.cs" />
     <Compile Include="Assets\Scripts\Player\NormalTarget.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerEffect.cs" />
@@ -374,6 +375,7 @@
     <None Include="Assets\Shader\AlphaBlendedCull.shader" />
     <None Include="Assets\Shader\AlphaBlendedForeground.shader" />
     <None Include="Assets\Shader\FaceToonShader.shader" />
+    <None Include="Assets\Shader\MyTransParent.shader" />
     <None Include="Assets\Shader\NewImageEffectShader.shader" />
     <None Include="Assets\Shader\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
     <None Include="Assets\Shader\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />

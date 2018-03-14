@@ -324,7 +324,15 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: 27b1b9d09b9198e41b8d6e649e18cb1b,
           type: 3}
         floatParameter: 0
-        intParameter: 2
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7898734
+        functionName: playBlinkEffect
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
         messageOptions: 0
       transformMask: []
       maskType: 3
