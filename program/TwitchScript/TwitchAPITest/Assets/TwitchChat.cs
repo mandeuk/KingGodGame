@@ -17,26 +17,31 @@ public class TwitchChat : MonoBehaviour
     private StreamWriter writer;
 
     public string username, password, channelName; //외부프로그램을 사용한 IRC연결에 사용할 비밀번호는 https://twitchapps.com/tmi 이곳에서 확인할 수 있다.
-    public BTree bst;//투표한 아이디 저장/중복체크를 위한 트리 선언
+
     public int[] vote = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };//투표 횟수를 저장하기 위한 배열 선언
+    SortedDictionary<string, string> IDList = new SortedDictionary<string, string>();//SortedDictionary를 사용해 투표한 사용자의 ID를 기록하고 이를 통해 중복체크기능 수행
 
 
+
+    /// <summary>
+    /// 함수이름 : Start()
+    /// 함수기능 : 해당 CS스크립트가 실행될 때 딱 한번 내부의 코드를 실행한다. 트위치 접속을 위해 Connect()함수가 있다.
+    /// </summary>
     void Start()
     {
-        Connect();
+        Connect();//트위치 irc서버에 접속시도
     }//end of Start()
 
 
 
     void Update()
     {
-        if (!twitchClient.Connected)
+        if (!twitchClient.Connected)//만약 TcpClient가 irc서버에 접속하지 못했을 경우 다시 접속 시도
         {
-            //만약 TcpClient가 irc서버에 접속하지 못했을 경우 다시 접속 시도
-            Connect();
+            Connect();//트위치 irc서버에 접속시도
         }
-
-        ReadChat();
+        else
+            ReadChat();//만약 irc서버에 접속을 성공했다면 채팅을 읽어들인다.
     }//end of Update()
 
 
@@ -89,97 +94,26 @@ public class TwitchChat : MonoBehaviour
                 message = message.Substring(splitPoint + 1);
                 print(String.Format("{0}: {1}", chatName, message));
 
-                switch(message)
+                if (IDList.ContainsKey(chatName))
                 {
-                    case "#1":
-                        vote[1] += 1;
-                        print("1번 투표수" + vote[1]);
-                        break;
-                }
-                /*
-                StringComparer stringcomparer = StringComparer.Ordinal;
-                if (stringcomparer.Equals(message, "#1"))
-                {
-                    vote[1] += 1;
-                }
-                */
-            }//end of if
-        }//end of if
-    }// end of ReadChat()
-
-
-
-    //이진트리 노드
-    public class BTNode
-    {
-        public String ID { get; set; }
-        public BTNode Left { get; set; }
-        public BTNode Right { get; set; }
-
-        public BTNode(String id)
-        {
-            this.ID = id;
-        }
-    }
-    
-
-
-    //이진트리
-    public class BTree
-    {
-        public BTNode Root { get; set; }
-        
-
-
-        public void DataInsert(String newid)
-        {
-            BTNode root = Root;
-            while (true)
-            {
-                int result = String.Compare(root.ID, newid);
-                if (root.ID == null)//현재 선택된 노드가 비어있을 경우
-                {
-                    print("데이터 삽입을 성공하였습니다.");
-                    root.ID = newid;
-                    return;
-                }
-                else if (result == 0)//이미 중복된 ID가 존재할 경우
-                {
-                    print("중복된 ID가 존재합니다.");
-                    return;
-                }
-                else if (result < 0)//삽입하고자 하는 문자열이 기준 문자열보다 작을 경우
-                {
-                    if (root.Left == null)
-                    {
-                        root.Left = new BTNode(newid);
-                        print("데이터 삽입을 성공하였습니다.");
-                        return;
-                    }
-                    else
-                        root = root.Left;
-                }
-                else if (result > 0)//삽입하고자 하는 문자열이 기준 문자열보다 큰 경우
-                {
-                    if (root.Right == null)
-                    {
-                        root.Right = new BTNode(newid);
-                        print("데이터 삽입을 성공하였습니다.");
-                        return;
-                    }
-                    else
-                        root = root.Right;
+                    print("중복닉네임 존재");
                 }
                 else
                 {
-                    print("데이터 삽입을 실패하였습니다.");
-                    print("아이디 : " + newid);
-                    return;
+                    IDList.Add(chatName, chatName);
+                    switch (message)
+                    {
+                        case "#1":
+                            vote[1] += 1;
+                            print("1번 투표수" + vote[1]);
+                            break;
+                        case "#2":
+                            vote[2] += 1;
+                            print("2번 투표수" + vote[2]);
+                            break;
+                    }
                 }
-            }//end of while(1)
-        }//end of DataInsert()
-    }//end of class BTree<T>
-}//end of TwitchChat : MonoBehavior
-
-
-
+            }//end of if
+        }//end of if
+    }// end of ReadChat()
+}
