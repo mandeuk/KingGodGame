@@ -288,6 +288,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\blink_dash_start.cs" />
     <Compile Include="Assets\BornMovement.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
@@ -342,6 +343,7 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\Scripts\AfterEffectMovement.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\AttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\DashEndBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\IdleBehaviour.cs" />

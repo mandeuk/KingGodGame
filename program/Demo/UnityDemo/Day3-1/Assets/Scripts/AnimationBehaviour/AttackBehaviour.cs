@@ -27,6 +27,11 @@ public class AttackBehaviour : StateMachineBehaviour {
         {
             animator.SetBool("Combo", false);
         }
+
+        //if (animator.GetBool("Dash") && animator.GetFloat("DashTiming") > 0.1)
+        //{
+        //    animator.transform.GetComponent<PlayerEffect>().playBlinkEffect();
+        //}
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114639733214955676}
   - component: {fileID: 114627320222167420}
   - component: {fileID: 114600536924041328}
+  - component: {fileID: 114959798029446262}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -60,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4934717257924642}
   - component: {fileID: 114632787966497556}
+  - component: {fileID: 114051334180328808}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -86,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504181601567458}
-  m_LocalRotation: {x: 0.33251464, y: 0.33054233, z: -0.12571456, w: 0.87428355}
-  m_LocalPosition: {x: -5, y: 8, z: -5}
+  m_LocalRotation: {x: 0.3325146, y: 0.3305424, z: -0.12571457, w: 0.87428355}
+  m_LocalPosition: {x: -5, y: 8.053, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4934717257924642}
@@ -100,7 +102,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530267699808412}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.0036087632, y: -0.004316777, z: 0.0038668737, w: 0.99997675}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -166,6 +168,17 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504181601567458}
   m_Enabled: 1
+--- !u!114 &114051334180328808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530267699808412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e8eab39bd878b4a9a7f6e033559e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114600536924041328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,15 +300,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    threshold: 1.2
-    softKnee: 0.161
-    radius: 1.59
+    threshold: 0.75
+    softKnee: 0.62
+    radius: 1.11
     intensity: 0.7
-    highQuality: 0
-    antiFlicker: 0
+    highQuality: 1
+    antiFlicker: 1
     dirtTexture: {fileID: 0}
     dirtIntensity: 2.5
   m_Shader: {fileID: 4800000, guid: e45d4f28262b04d10a075856ab5fdb5e, type: 3}
+--- !u!114 &114959798029446262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1289571110648226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
 --- !u!124 &124434307551137230
 Behaviour:
   m_ObjectHideFlags: 1

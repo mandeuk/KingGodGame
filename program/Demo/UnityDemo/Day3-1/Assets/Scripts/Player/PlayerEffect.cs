@@ -70,8 +70,11 @@ public class PlayerEffect : MonoBehaviour {
 
     public void playBlinkEffect()
     {
-        blinkclone.SetActive(true);
-        blinkclone.GetComponent<ParticleSystem>().Play();
+        if (transform.CompareTag("Player"))
+        {
+            blinkclone.SetActive(true);
+            blinkclone.GetComponent<ParticleSystem>().Play();
+        }
     }
 
     // Use this for initialization

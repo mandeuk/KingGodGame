@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void Awake()
     {
-        //raphaelEX = GameObject.FindWithTag("Player").GetComponent<AfterImageEffect>();
         rigidbody = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GetComponent<PlayerAttack>();

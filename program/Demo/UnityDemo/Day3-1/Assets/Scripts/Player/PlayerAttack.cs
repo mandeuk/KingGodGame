@@ -38,8 +38,9 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.K))
-            OnAttacking();
+        if (transform.CompareTag("Player"))
+            if (Input.GetKey(KeyCode.K))
+                OnAttacking();
     }
 
     public void OnAttacking()
@@ -56,7 +57,10 @@ public class PlayerAttack : MonoBehaviour
 
     public void NormalAttackEvent(int stateNum)
     {
-        StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
-        NormalAttack(stateNum);
+        if (transform.CompareTag("Player"))
+        {
+            StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
+            NormalAttack(stateNum);
+        }
     }
 }
