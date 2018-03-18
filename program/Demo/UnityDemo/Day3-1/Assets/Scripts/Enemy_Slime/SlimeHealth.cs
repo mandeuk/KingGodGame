@@ -60,26 +60,28 @@ public class SlimeHealth : MonoBehaviour {
 
     public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
-        try
-        {
-            slimenavMesh.speed = 0;
-            anim.speed = 0;
-            TakeDamage(damage);
-            Vector3 diff = playerPosition - transform.position;
-            GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 200f * pushBack);
-            StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum));
-            damaged = false;
-        }
-        catch (MissingComponentException e)
-        {
-            Debug.Log(e.ToString());
+        
+        float timef = Time.time;
+        slimeMat.SetColor("_Color", Color.black);
+        slimenavMesh.speed = 0;
+        anim.speed = 0;
+        TakeDamage(damage);
+        Vector3 diff = playerPosition - transform.position;
+        GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 200f * pushBack);
+        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum));
 
-        }
+        //while (timef + 0.5f > Time.time)
+        //{
+            
+        //    yield return new WaitForSeconds(0.05f);
+        //}
 
         yield return new WaitForSeconds(.1f);
         slimerigidBody.Sleep();
+        damaged = false;
 
         yield return new WaitForSeconds(delay);
+        
 
         if (!isSinking)
         {
@@ -101,11 +103,10 @@ public class SlimeHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (damaged)
-            slimeMat.SetColor("_Color", Color.black);
-
-        else
+        if (!damaged)
+        {
             slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white, flashSpeed * Time.deltaTime));
+        }
 
         if (isSinking)            
             slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white * 40, .6f * Time.deltaTime));

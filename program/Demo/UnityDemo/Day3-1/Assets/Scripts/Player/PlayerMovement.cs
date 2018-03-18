@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Turn(Vector3 movePos)
     {
-        Vector3 movePos1 = movePos.normalized * moveSpeed * Time.deltaTime;
+        //Vector3 movePos1 = movePos.normalized * moveSpeed * Time.deltaTime;
 
         turnDir = Turnjudge(transform.forward, movePos.normalized);
         if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
