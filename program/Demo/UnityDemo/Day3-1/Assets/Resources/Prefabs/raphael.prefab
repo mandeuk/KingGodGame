@@ -114,7 +114,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4462963597714758}
-  - component: {fileID: 65253081310786190}
   m_Layer: 0
   m_Name: Bip001 Spine1
   m_TagString: Untagged
@@ -1980,7 +1979,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621306360048820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.053, z: 0}
+  m_LocalPosition: {x: 0, y: 0.047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4112289804388308}
@@ -1990,9 +1989,9 @@ Transform:
   - {fileID: 4294299626651522}
   - {fileID: 4735093019494666}
   - {fileID: 4591235681051218}
-  - {fileID: 4537636623771606}
   - {fileID: 4391331991322356}
   - {fileID: 4934324775342398}
+  - {fileID: 4537636623771606}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2561,7 +2560,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4054250573869418}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4395853605865652
 Transform:
@@ -2886,7 +2885,7 @@ Transform:
   - {fileID: 4583997511692004}
   - {fileID: 4227089929274750}
   m_Father: {fileID: 4054250573869418}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4556862579688596
 Transform:
@@ -3513,7 +3512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4054250573869418}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4936757856420818
 Transform:
@@ -3815,18 +3814,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65253081310786190
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102188595367302}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.19999999, y: 0.15807332, z: 0.2723047}
-  m_Center: {x: -0.10000547, y: -0.03231359, z: -0.01003842}
 --- !u!65 &65366753557691956
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3943,6 +3930,7 @@ MonoBehaviour:
   slashcloneList: []
   usedslashcloneList: []
   blinkclone: {fileID: 0}
+  slashRingEffect: {fileID: 0}
   Effect1Pos: {fileID: 1209984848009644}
   Effect2Pos: {fileID: 1400867956271874}
   Effect3Pos: {fileID: 1407019222739700}
@@ -4034,6 +4022,13 @@ MonoBehaviour:
   - {fileID: 1503471861703592}
   - {fileID: 1049558224501784}
   - {fileID: 1501581039094090}
+  afterImageRendObjs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  EXMovePos: {fileID: 1150488304060388}
 --- !u!114 &114900993128485798
 MonoBehaviour:
   m_ObjectHideFlags: 1

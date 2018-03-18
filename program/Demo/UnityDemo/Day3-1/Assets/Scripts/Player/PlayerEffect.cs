@@ -8,6 +8,7 @@ public class PlayerEffect : MonoBehaviour {
     public List<GameObject> usedslashcloneList = new List<GameObject>();
 
     public GameObject blinkclone;
+    public GameObject slashRingEffect;
 
     public GameObject Effect1Pos;
     public GameObject Effect2Pos;
@@ -22,6 +23,12 @@ public class PlayerEffect : MonoBehaviour {
         // 이거 first 어택은 idle 다음에 읽히지 않고                                    
         // second는 아예안읽힘   state.IsName("Base Layer.attack_second")
         // 왜인지 모르겠음;;;;;;
+
+        slashRingEffect.SetActive(true);
+        slashRingEffect.transform.position =
+            new Vector3(transform.position.x, slashRingEffect.transform.position.y, transform.position.z);
+        
+        slashRingEffect.GetComponent<ParticleSystem>().Play();
 
         usedslashcloneList.Add(slashcloneList[0]);
         slashcloneList[0].SetActive(true);
@@ -80,6 +87,7 @@ public class PlayerEffect : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
+        slashRingEffect = Instantiate(Resources.Load("Prefabs/Effect/slashRingEffect")) as GameObject;
         InitEffect();
     }
 	

@@ -4,28 +4,43 @@ using UnityEngine;
 
 public class EXMove : MonoBehaviour {
     public GameObject[] rendObjs = new GameObject[5];
+    public GameObject[] afterImageRendObjs = new GameObject[5];
     public GameObject EXMovePos;
+
+    GameObject EXMoveEffect;
+    public GameObject afterImageR;
+
     float moveSpeed;
     bool onEXMove;
+    bool onEXMoveColor;
+    bool onAfterImageChange;
+    bool onAfterImageColorChange;
 
     Animator avatar;
     Rigidbody raphaelRigidbody;
+
     Material transMat;
-    Material afterImageMat;
-    List<Material> raphaelList = new List<Material>();
-    Material[,] raphaelMats = new Material[5,5];
-    Material[] changeMats;
+    //Material afterImageMat;
+
+    Material[,] raphaelMats = new Material[5, 5];    // 라파엘 매터리얼 보관해두는 변수
+    Material[,] afterImageMats = new Material[5, 5];
+
+    //Material[] changeMats = new Material[10];
 
 
     // Use this for initialization
     void Awake () {
-        onEXMove = false;
         raphaelRigidbody = transform.GetComponent<Rigidbody>();
         avatar = transform.GetComponent<Animator>();
         moveSpeed = transform.GetComponent<PlayerMovement>().moveSpeed;
 
-        afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
+        //afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
         transMat = Resources.Load("Materials/Transparent") as Material;
+
+        onEXMove = false;
+        onEXMoveColor = false;
+        onAfterImageChange = false;
+        onAfterImageColorChange = false;
 
         for (int i = 0; i < rendObjs.Length; ++i)
         {
@@ -35,15 +50,27 @@ public class EXMove : MonoBehaviour {
             }
         }
 
-        // 메터리얼을 교체하기 위한거였는데 이제 필요없음.
-        // 이제 무조건 배열안에 넣을때는 인스턴스 해서 넣기 알았지? ㅅㅂ
+        // 메터리얼을 인스턴스화 해서 저장한뒤 나중에 색깔을 빼서 쓰려고 만듬.
+        // 이제 무조건 배열안에 넣을때는 인스턴스 해서 넣기 알았지? **
+
+        for (int i = 0; i < rendObjs.Length; ++i)
+        {
+            afterImageRendObjs[i].SetActive(false);
+            for (int j = 0; j < afterImageRendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+            {
+                afterImageMats[i, j] = Instantiate(afterImageRendObjs[i].GetComponent<Renderer>().materials[j]) as Material;
+            }
+        }
+
+        // 잔상의 게임오브젝트를 다 꺼줌.
+        // 잔상의 매터리얼을 인스턴스화 해서 컬러값을 저장해놓을거임.
 
         //for (int i = 0; i < rendObjs.Length; ++i)
         //{
         //    for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
         //    {
         //        changeMats = rendObjs[i].GetComponent<Renderer>().materials;
-        //        changeMats[j] = raphaelMats[i, j];
+        //        changeMats[j] = afterImageMat;
         //        rendObjs[i].GetComponent<Renderer>().materials = changeMats;
         //    }
         //}
@@ -55,8 +82,25 @@ public class EXMove : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.L))
         {
+            onAfterImageChange = false;
+            onEXMoveColor = false;
+            onEXMove = false;
             StartCoroutine(EXMovePlay());
         }
+
+        if (onAfterImageChange)
+        {
+            for (int i = 0; i < afterImageRendObjs.Length; ++i)
+            {
+                for (int j = 0; j < afterImageRendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+                {
+                    afterImageRendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
+                            "_Color", Color.Lerp(afterImageRendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
+                            new Vector4(1, 1, 1, 0), Time.deltaTime * 7f));
+                }
+            }
+        }
+
         if (onEXMove)
         {
             for (int i = 0; i < rendObjs.Length; ++i)
@@ -64,9 +108,19 @@ public class EXMove : MonoBehaviour {
                 for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
                 {
                     rendObjs[i].SetActive(true);
+                }
+            }
+        }
+
+        if (onEXMoveColor)
+        {
+            for (int i = 0; i < rendObjs.Length; ++i)
+            {
+                for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+                {
                     rendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                         "_Color", Color.Lerp(rendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                        raphaelMats[i, j].color, Time.deltaTime * 2));
+                        raphaelMats[i, j].color, Time.deltaTime * 5f));
                 }
             }
         }
@@ -82,22 +136,39 @@ public class EXMove : MonoBehaviour {
                 rendObjs[i].GetComponent<Renderer>().materials[j].color = new Vector4(0, 0, 0, 0);
             }
         }
+
+        afterImageR.transform.position = transform.position;
+        afterImageR.GetComponent<AfterEffectMovement>().moveSpeed = 0;
+        afterImageR.GetComponent<Rigidbody>().Sleep();
+
+        for (int i = 0; i < afterImageRendObjs.Length; ++i)
+        {
+            afterImageRendObjs[i].SetActive(true);
+            for (int j = 0; j < afterImageRendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+            {
+                afterImageRendObjs[i].GetComponent<Renderer>().materials[j].color = afterImageMats[i, j].color;
+            }
+        }
+        onAfterImageChange = true;
         avatar.speed = 0;
         transform.GetComponent<PlayerMovement>().moveSpeed = 0;
         raphaelRigidbody.Sleep();
-        raphaelRigidbody.velocity = new Vector3(0,0,0);
+        raphaelRigidbody.velocity = new Vector3(0,0,0);     
 
         yield return new WaitForSeconds(.5f);
-        transform.position = EXMovePos.transform.position;
         onEXMove = true;
+        transform.position = EXMovePos.transform.position;
         transform.GetComponent<PlayerMovement>().moveSpeed = moveSpeed;
         avatar.SetTrigger("EXMoveOn");
         avatar.speed = 1;
 
-        
-
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.4f);
         onEXMove = false;
+        onEXMoveColor = true;
+
+        yield return new WaitForSeconds(1f);
+        onEXMoveColor = false;
+        onAfterImageChange = false;
 
         yield break;
 

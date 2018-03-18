@@ -286,8 +286,8 @@ GameObject:
   - component: {fileID: 4482424242960782}
   - component: {fileID: 95352907952037532}
   - component: {fileID: 54318964783581994}
-  - component: {fileID: 136809130889245922}
   - component: {fileID: 114199428422614050}
+  - component: {fileID: 114515059840721446}
   m_Layer: 0
   m_Name: raphael_afterImage
   m_TagString: AfterImage
@@ -1264,7 +1264,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4662079351515890}
-  - component: {fileID: 65685833144687772}
   m_Layer: 0
   m_Name: Bip001 Spine1
   m_TagString: Untagged
@@ -2514,7 +2513,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1187111745663468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.142}
+  m_LocalPosition: {x: 0, y: 0.128, z: -1.411}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4999137649288224}
@@ -3396,8 +3395,8 @@ Rigidbody:
   m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -3530,18 +3529,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65685833144687772
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1741008251827554}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.19999999, y: 0.15807332, z: 0.2723047}
-  m_Center: {x: -0.10000547, y: -0.03231359, z: -0.01003842}
 --- !u!65 &65823861562094184
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3641,6 +3628,7 @@ MonoBehaviour:
   turnSpeed: 500
   moveSpeed: 8
   turnPosible: 0
+  raphael: {fileID: 0}
 --- !u!114 &114414297898293614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3652,6 +3640,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2789f8d26c34f8043b16bb19784082b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114515059840721446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187111745663468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf90c6c9ccc9d548a337dba98ae723c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  b_attacking: 0
+  skillDamage: 30
+  normalTarget: {fileID: 0}
 --- !u!114 &114598499255100222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3733,19 +3735,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136809130889245922
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1187111745663468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.559826
-  m_Direction: 1
-  m_Center: {x: 0.0035154223, y: 0.8015637, z: 0}
 --- !u!137 &137162611792747156
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
