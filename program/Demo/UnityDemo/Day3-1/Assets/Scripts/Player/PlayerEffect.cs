@@ -9,6 +9,8 @@ public class PlayerEffect : MonoBehaviour {
 
     public GameObject blinkclone;
     public GameObject slashRingEffect;
+    public GameObject EXMoveSlashEffect;
+    public GameObject EXmoveVanishEffect;
 
     public GameObject Effect1Pos;
     public GameObject Effect2Pos;
@@ -24,11 +26,11 @@ public class PlayerEffect : MonoBehaviour {
         // second는 아예안읽힘   state.IsName("Base Layer.attack_second")
         // 왜인지 모르겠음;;;;;;
 
-        slashRingEffect.SetActive(true);
-        slashRingEffect.transform.position =
-            new Vector3(transform.position.x, slashRingEffect.transform.position.y, transform.position.z);
+        //slashRingEffect.SetActive(true);
+        //slashRingEffect.transform.position =
+        //    new Vector3(transform.position.x, slashRingEffect.transform.position.y, transform.position.z);
         
-        slashRingEffect.GetComponent<ParticleSystem>().Play();
+        //slashRingEffect.GetComponent<ParticleSystem>().Play();
 
         usedslashcloneList.Add(slashcloneList[0]);
         slashcloneList[0].SetActive(true);
@@ -84,10 +86,34 @@ public class PlayerEffect : MonoBehaviour {
         }
     }
 
+    public void playEXMoveSlashEffect()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            EXMoveSlashEffect.SetActive(true);
+            EXMoveSlashEffect.transform.position = transform.position + Vector3.forward * 4.5f;
+            EXMoveSlashEffect.transform.rotation = Quaternion.Euler(0, 90 + transform.rotation.eulerAngles.y, 0);
+            EXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
+    public void playEXMoveVanishEffect()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            EXmoveVanishEffect.SetActive(true);
+            EXmoveVanishEffect.transform.position = transform.position;
+            EXmoveVanishEffect.transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, 0);
+            EXmoveVanishEffect.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
     // Use this for initialization
     void Awake() {
         blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
-        slashRingEffect = Instantiate(Resources.Load("Prefabs/Effect/slashRingEffect")) as GameObject;
+        //slashRingEffect = Instantiate(Resources.Load("Prefabs/Effect/slashRingEffect")) as GameObject;
+        EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple"), blinkEffectPos.transform) as GameObject;
+        EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect"), blinkEffectPos.transform) as GameObject;
         InitEffect();
     }
 	

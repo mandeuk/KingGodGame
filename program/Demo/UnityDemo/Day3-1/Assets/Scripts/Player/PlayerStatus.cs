@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour {
 
-    public static int healthPoint;
-    public static int Energy;
-    public static int attackPower;
-    public static int attackSpeed;
-    public static int moveSpeed;
-    public static int attackRange;
-    public static int devilGage;
+    public float healthPoint;
+    public float Energy;
+    public float attackPower;
+    public float attackSpeed;
+    public float moveSpeed;
+    public float attackRange;
+    public float devilGage;
 
-    public static int Ether;
+    public float Ether;
+
+    public float gameTime;
+    public float pushBackPower;
+
+    // 게터 셋터 전부 만들어서 쓰기
+    // 다른 cs파일에서 수정하는것을 한번에 관리할 수 있게끔.
 
     private void Awake()
     {
-        healthPoint = 6;
-        Ether = 1;
-        attackPower = 3;
-        attackSpeed = 10;
-        moveSpeed = 3;
-        attackRange = 10;
-        devilGage = 300;
 
-        Ether = 0;
+    }
+
+    public float getMoveSpeed()
+    {
+        return moveSpeed;
     }
 
 

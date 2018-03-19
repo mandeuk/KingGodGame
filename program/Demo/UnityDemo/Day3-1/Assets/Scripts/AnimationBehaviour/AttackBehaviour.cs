@@ -18,6 +18,7 @@ public class AttackBehaviour : StateMachineBehaviour {
         playerattack.b_attacking = true;
         playerattack.StopAttacking();
         attackTime = Time.time;
+        //animator.speed = animator.transform.GetComponent<PlayerStatus>().attackSpeed;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

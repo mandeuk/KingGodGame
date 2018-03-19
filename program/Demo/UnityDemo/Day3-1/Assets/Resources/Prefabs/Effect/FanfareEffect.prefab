@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1197351832440044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 1.79, z: -1.994}
+  m_LocalPosition: {x: -2.7293875, y: 0, z: -0.65273213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -191,7 +191,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      maxColor: {r: 0.6691177, g: 0.6691177, b: 0.6691177, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -253,8 +253,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.15
-      minScalar: 0.05
+      scalar: 0.18
+      minScalar: 0.04
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -510,13 +510,13 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0.0024414062
+          value: -0.40100098
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.4850384
-          value: -0.93372947
+          time: 0.4862286
+          value: -0.7615493
           inSlope: -0.5125132
           outSlope: -0.5125132
           tangentMode: 0
@@ -759,8 +759,8 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 6
-        minScalar: 4
+        scalar: 7
+        minScalar: 5
         maxCurve:
           serializedVersion: 2
           m_Curve:
@@ -1364,8 +1364,8 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.061647214
-          value: 0.12648483
+          time: 0.079400815
+          value: 0.18553634
           inSlope: -0.29567346
           outSlope: -0.29567346
           tangentMode: 0

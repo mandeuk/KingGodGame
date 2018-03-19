@@ -5,9 +5,10 @@ using System.Collections;
 //[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour {
 
+    PlayerStatus raphaelStatus;
+
     protected Animator avatar;
     public float turnSpeed;
-    public float moveSpeed = 1;
     private float turnSpeedTime;
     public bool turnPosible;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Awake()
     {
+        raphaelStatus = GetComponent<PlayerStatus>();
         rigidbody = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GetComponent<PlayerAttack>();
@@ -33,7 +35,9 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (rigidbody /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
-                rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime * avatar.GetFloat("DashForce"));
+                rigidbody.MovePosition(transform.position + 
+                    transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * raphaelStatus.moveSpeed);
+                
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {

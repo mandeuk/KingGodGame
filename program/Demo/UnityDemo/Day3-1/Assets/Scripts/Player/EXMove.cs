@@ -32,7 +32,7 @@ public class EXMove : MonoBehaviour {
     void Awake () {
         raphaelRigidbody = transform.GetComponent<Rigidbody>();
         avatar = transform.GetComponent<Animator>();
-        moveSpeed = transform.GetComponent<PlayerMovement>().moveSpeed;
+        moveSpeed = transform.GetComponent<PlayerStatus>().moveSpeed;
 
         //afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
         transMat = Resources.Load("Materials/Transparent") as Material;
@@ -137,8 +137,9 @@ public class EXMove : MonoBehaviour {
             }
         }
 
+
         afterImageR.transform.position = transform.position;
-        afterImageR.GetComponent<AfterEffectMovement>().moveSpeed = 0;
+        afterImageR.GetComponent<Animator>().speed = 0;
         afterImageR.GetComponent<Rigidbody>().Sleep();
 
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
@@ -149,18 +150,25 @@ public class EXMove : MonoBehaviour {
                 afterImageRendObjs[i].GetComponent<Renderer>().materials[j].color = afterImageMats[i, j].color;
             }
         }
+
         onAfterImageChange = true;
         avatar.speed = 0;
-        transform.GetComponent<PlayerMovement>().moveSpeed = 0;
-        raphaelRigidbody.Sleep();
-        raphaelRigidbody.velocity = new Vector3(0,0,0);     
+        transform.GetComponent<PlayerStatus>().moveSpeed = 0;
+        transform.GetComponent<PlayerEffect>().playEXMoveVanishEffect();
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.15f);
+        //transform.GetComponent<PlayerEffect>().playEXMoveSlashEffect();
+        for (int i = 0; i < afterImageRendObjs.Length; ++i)
+        {
+            afterImageRendObjs[i].SetActive(false);
+        }
         onEXMove = true;
         transform.position = EXMovePos.transform.position;
-        transform.GetComponent<PlayerMovement>().moveSpeed = moveSpeed;
+        transform.GetComponent<PlayerStatus>().moveSpeed = moveSpeed;
         avatar.SetTrigger("EXMoveOn");
         avatar.speed = 1;
+        afterImageR.GetComponent<Animator>().speed = 1;
+        
 
         yield return new WaitForSeconds(.4f);
         onEXMove = false;
