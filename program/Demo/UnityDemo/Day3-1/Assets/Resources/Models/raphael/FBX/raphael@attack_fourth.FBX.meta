@@ -284,6 +284,37 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 0
+      - name: cameraFOV
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 2
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.07584235
+            value: -8
+            inSlope: 109.17716
+            outSlope: 109.17716
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.19346733
+            value: 9
+            inSlope: -77.29054
+            outSlope: -77.29054
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
       events:
       - time: 0.13930348
         functionName: NormalAttackEvent

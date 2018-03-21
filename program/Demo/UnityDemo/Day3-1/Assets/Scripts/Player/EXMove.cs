@@ -82,6 +82,7 @@ public class EXMove : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.L))
         {
+            avatar.SetTrigger("EXMoveOn");
             onAfterImageChange = false;
             onEXMoveColor = false;
             onEXMove = false;
@@ -128,6 +129,7 @@ public class EXMove : MonoBehaviour {
 
     public IEnumerator EXMovePlay()
     {
+        
         for (int i = 0; i < rendObjs.Length; ++i)
         {
             for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
@@ -151,6 +153,7 @@ public class EXMove : MonoBehaviour {
             }
         }
 
+        
         onAfterImageChange = true;
         avatar.speed = 0;
         transform.GetComponent<PlayerStatus>().moveSpeed = 0;
@@ -165,7 +168,7 @@ public class EXMove : MonoBehaviour {
         onEXMove = true;
         transform.position = EXMovePos.transform.position;
         transform.GetComponent<PlayerStatus>().moveSpeed = moveSpeed;
-        avatar.SetTrigger("EXMoveOn");
+        
         avatar.speed = 1;
         afterImageR.GetComponent<Animator>().speed = 1;
         

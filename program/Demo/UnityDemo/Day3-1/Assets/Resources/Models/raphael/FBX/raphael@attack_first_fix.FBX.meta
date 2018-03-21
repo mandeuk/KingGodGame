@@ -309,13 +309,25 @@ ModelImporter:
           curve:
           - serializedVersion: 2
             time: 0
-            value: 40
+            value: 0
             inSlope: 0
             outSlope: 0
             tangentMode: 0
           - serializedVersion: 2
+            time: 0.050251257
+            value: -2
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.09547739
+            value: 1
+            inSlope: -7.644202
+            outSlope: -7.644202
+            tangentMode: 0
+          - serializedVersion: 2
             time: 1
-            value: 40
+            value: 0
             inSlope: 0
             outSlope: 0
             tangentMode: 0

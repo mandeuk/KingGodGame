@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraEvent : MonoBehaviour {
-    Cinemachine.CinemachineVirtualCamera a;
-
+    Cinemachine.CinemachineVirtualCamera mainCamera;
+    public GameObject raphael;
 
 	// Use this for initialization
 	void Start () {
-        a = GetComponent<Cinemachine.CinemachineVirtualCamera>();
-        //StartCoroutine(cameraMove());
+        mainCamera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
-        
+        mainCamera.m_Lens.FieldOfView = raphael.GetComponent<Animator>().GetFloat("cameraFOV") + 40;
     }
     
     public IEnumerator cameraMove()
     {
         while (true)
         {
-            //a.m_Lens.FieldOfView = 20;
+            mainCamera.m_Lens.FieldOfView = raphael.GetComponent<Animator>().GetFloat("cameraFOV");
             yield return new WaitForSeconds(1.0f);
         }
-
-        //yield break;
     }
 }
