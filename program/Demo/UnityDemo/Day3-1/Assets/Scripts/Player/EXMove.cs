@@ -165,8 +165,10 @@ public class EXMove : MonoBehaviour {
         {
             afterImageRendObjs[i].SetActive(false);
         }
+        onEXMoveColor = true;
         onEXMove = true;
-        transform.position = EXMovePos.transform.position;
+        //raphaelRigidbody.MovePosition(transform.position + transform.forward);
+        transform.position += transform.forward * 3;
         transform.GetComponent<PlayerStatus>().moveSpeed = moveSpeed;
         
         avatar.speed = 1;
@@ -175,7 +177,7 @@ public class EXMove : MonoBehaviour {
 
         yield return new WaitForSeconds(.4f);
         onEXMove = false;
-        onEXMoveColor = true;
+        
 
         yield return new WaitForSeconds(1f);
         onEXMoveColor = false;

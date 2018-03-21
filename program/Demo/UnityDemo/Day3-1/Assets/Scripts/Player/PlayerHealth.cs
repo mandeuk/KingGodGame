@@ -10,14 +10,12 @@ public class PlayerHealth : MonoBehaviour {
     public AudioClip deathClip;
 
     Animator anim;
-    AudioSource playerAudio;
     PlayerMovement playerMovement;
     bool isDead;
 
 	// Use this for initialization
 	void Awake () {
         anim = GetComponent<Animator>();
-        playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         currentHealth = startHealth;
 	}
