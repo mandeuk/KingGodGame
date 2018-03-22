@@ -113,7 +113,7 @@ public class PlayerEffect : MonoBehaviour {
         blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
         //slashRingEffect = Instantiate(Resources.Load("Prefabs/Effect/slashRingEffect")) as GameObject;
         EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple"), blinkEffectPos.transform) as GameObject;
-        EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect"), blinkEffectPos.transform) as GameObject;
+        EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect")) as GameObject;
         InitEffect();
     }
 	

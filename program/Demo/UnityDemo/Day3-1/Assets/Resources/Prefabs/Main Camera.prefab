@@ -88,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504181601567458}
-  m_LocalRotation: {x: 0.33251464, y: 0.33054233, z: -0.12571456, w: 0.87428355}
-  m_LocalPosition: {x: -5, y: 8.047, z: -5}
+  m_LocalRotation: {x: 0.3325146, y: 0.33054233, z: -0.12571454, w: 0.87428355}
+  m_LocalPosition: {x: -5, y: 8.24, z: -4.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4934717257924642}
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e8eab39bd878b4a9a7f6e033559e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raphael: {fileID: 0}
 --- !u!114 &114600536924041328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,10 +196,10 @@ MonoBehaviour:
   m_LookaheadSmoothing: 10
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.17236842
+  m_ScreenX: 0.49999994
+  m_ScreenY: 0.49999967
+  m_DeadZoneWidth: 0.09576275
+  m_DeadZoneHeight: 0.18095209
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0

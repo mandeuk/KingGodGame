@@ -343,6 +343,12 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\DynamicBone\Demo\DynamicBoneDemo1.cs" />
+    <Compile Include="Assets\DynamicBone\Scripts\DynamicBone.cs" />
+    <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneCollider.cs" />
+    <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
+    <Compile Include="Assets\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
+    <Compile Include="Assets\NonAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AfterEffectMovement.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\AttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\DashEndBehaviour.cs" />
@@ -351,7 +357,6 @@
     <Compile Include="Assets\Scripts\AnimationBehaviour\LastAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\rigidBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\RunBehaviour.cs" />
-    <Compile Include="Assets\Scripts\CameraEvent.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\EnemyEffect.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeAttack.cs" />
@@ -361,6 +366,7 @@
     <Compile Include="Assets\Scripts\Item\ItemList.cs" />
     <Compile Include="Assets\Scripts\Item\Items.cs" />
     <Compile Include="Assets\Scripts\MatContainer.cs" />
+    <Compile Include="Assets\Scripts\myCameraEvent.cs" />
     <Compile Include="Assets\Scripts\Player\AfterImageEffect.cs" />
     <Compile Include="Assets\Scripts\Player\Effect_Destroy.cs" />
     <Compile Include="Assets\Scripts\Player\EXMove.cs" />
@@ -375,6 +381,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
+    <None Include="Assets\DynamicBone\ReadMe.txt" />
     <None Include="Assets\Shader\AlphaBlendedCull.shader" />
     <None Include="Assets\Shader\AlphaBlendedForeground.shader" />
     <None Include="Assets\Shader\FaceToonShader.shader" />

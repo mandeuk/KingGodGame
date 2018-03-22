@@ -23,7 +23,7 @@ public class AttackBehaviour : StateMachineBehaviour {
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        playerattack.b_attacking = true;
+        //playerattack.b_attacking = true;
         if (attackTime + 0.3f > Time.time)
         {
             animator.SetBool("Combo", false);
@@ -37,6 +37,6 @@ public class AttackBehaviour : StateMachineBehaviour {
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        playerattack.b_attacking = false;
+        //playerattack.b_attacking = false;
     }
 }

@@ -6,8 +6,6 @@ public class PlayerAttack : MonoBehaviour
 {
 
     protected Animator avatar;
-    PlayerEffect effect;
-    float f_last_attacktime;
     public bool b_attacking;
 
     public static int normalDamage = 10;

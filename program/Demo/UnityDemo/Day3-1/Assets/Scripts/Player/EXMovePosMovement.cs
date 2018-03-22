@@ -7,12 +7,7 @@ public class EXMovePosMovement : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Wall"))
-        {
-            print(Vector3.Distance(transform.position, other.transform.position));
-            //transform.position -= transform.forward;
 
-        }
     }
 
 
