@@ -94,7 +94,7 @@ public class EXMove : MonoBehaviour {
                 {
                     afterImageRendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                             "_Color", Color.Lerp(afterImageRendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                            new Vector4(1, 1, 1, 0), Time.deltaTime * 7f));
+                            new Vector4(1, 1, 1, 0), Time.deltaTime * 5f));
                 }
             }
         }
@@ -128,6 +128,7 @@ public class EXMove : MonoBehaviour {
         afterImageR.transform.position = transform.position;    // 잔상의 포지션을 라파엘의 위치로 옮김
         afterImageR.GetComponent<Animator>().speed = 0;         // 잔상의 애니메이션을 멈춤
         afterImageR.GetComponent<Rigidbody>().Sleep();          // 잔상의 물리효과를 슬립시킴.        
+        transform.GetComponent<PlayerAttack>().b_attacking = false;
 
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
@@ -141,23 +142,25 @@ public class EXMove : MonoBehaviour {
         onAfterImageChange = true;  // 잔상을 투명하게하는 update조건문. 점점 투명해짐
         avatar.speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
 
-        transform.GetComponent<PlayerStatus>().moveSpeed = 30;              // ex무브동안의 스피드 이속도로 고속이동함.
+        transform.GetComponent<PlayerStatus>().moveSpeed = 25;              // ex무브동안의 스피드 이속도로 고속이동함.
         transform.GetComponent<PlayerEffect>().playEXMoveVanishEffect();    // ex무브의 이펙트 발동
-        transform.GetComponent<PlayerAttack>().b_attacking = false;
+        
 
-        yield return new WaitForSeconds(.15f);      // ex무브의 시간인 0.15초
 
-        //transform.GetComponent<PlayerEffect>().playEXMoveSlashEffect();
 
+
+
+        yield return new WaitForSeconds(.2f);      // ex무브의 시간인 0.2초
+        
+        transform.GetComponent<PlayerEffect>().playEXmoveVanishFlowerEffect();
+        transform.GetComponent<PlayerEffect>().playBlinkEffect();
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
             afterImageRendObjs[i].SetActive(false);
         }   // 잔상은 이제 다 꺼야함.
-
         
         onEXMoveColor = true;   // 라파엘 본체의 컬러를 검정에서 원래색으로 돌려주는 업데이트를 작동
         onEXMove = false;       // ex무브는 끝.
-       
 
         for (int i = 0; i < rendObjs.Length; ++i)
         {
@@ -166,23 +169,14 @@ public class EXMove : MonoBehaviour {
                 rendObjs[i].SetActive(true);
             }
         }
-        //raphaelRigidbody.MovePosition(transform.position + transform.forward);
-        //transform.position += transform.forward * 3;
         transform.GetComponent<PlayerStatus>().moveSpeed = moveSpeed;
-        
         avatar.speed = 1;
         afterImageR.GetComponent<Animator>().speed = 1;
-        
 
-        yield return new WaitForSeconds(.4f);
-        onEXMove = false;
-        
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.8f);
         onEXMoveColor = false;
         onAfterImageChange = false;
 
         yield break;
-
     }
 }

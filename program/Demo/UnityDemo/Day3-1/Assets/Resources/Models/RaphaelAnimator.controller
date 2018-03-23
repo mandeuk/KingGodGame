@@ -137,17 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06988fb851e49db40bf86ef7ffcf73b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114242625343015584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06988fb851e49db40bf86ef7ffcf73b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114279871700191860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -889,6 +878,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: ComboTime
     m_EventTreshold: 0.1
+  - m_ConditionMode: 2
+    m_ConditionEvent: Combo
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102024087543191730}
   m_Solo: 0
@@ -943,7 +935,6 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 114979347979678304}
   - {fileID: 114981484072517026}
-  - {fileID: 114242625343015584}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1207,7 +1198,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 936, y: 72, z: 0}
+  m_AnyStatePosition: {x: 960, y: 168, z: 0}
   m_EntryPosition: {x: 12, y: 60, z: 0}
   m_ExitPosition: {x: 12, y: -36, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

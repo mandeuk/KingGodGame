@@ -11,6 +11,7 @@ public class PlayerEffect : MonoBehaviour {
     public GameObject slashRingEffect;
     public GameObject EXMoveSlashEffect;
     public GameObject EXmoveVanishEffect;
+    public GameObject EXMoveVanishFlowerEffect;
 
     public GameObject Effect1Pos;
     public GameObject Effect2Pos;
@@ -108,12 +109,24 @@ public class PlayerEffect : MonoBehaviour {
         }
     }
 
+    public void playEXmoveVanishFlowerEffect()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            EXMoveVanishFlowerEffect.SetActive(true);
+            EXMoveVanishFlowerEffect.transform.position = transform.position + Vector3.up;
+            EXMoveVanishFlowerEffect.transform.rotation = Quaternion.Euler(-142f, transform.rotation.eulerAngles.y, 0);
+            EXMoveVanishFlowerEffect.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
     // Use this for initialization
     void Awake() {
         blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
         //slashRingEffect = Instantiate(Resources.Load("Prefabs/Effect/slashRingEffect")) as GameObject;
         EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple"), blinkEffectPos.transform) as GameObject;
         EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect")) as GameObject;
+        EXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect")) as GameObject;
         InitEffect();
     }
 	

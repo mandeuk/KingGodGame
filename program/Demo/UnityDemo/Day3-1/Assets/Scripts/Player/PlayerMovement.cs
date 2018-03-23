@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    if (!playerattack.b_attacking)
+                    if (!playerattack.b_attacking && !transform.GetComponent<EXMove>().onEXMove)
                         TurnJudgeFunc();
                     
                     Turn(movePos);
@@ -62,7 +62,6 @@ public class PlayerMovement : MonoBehaviour {
         turnDir = Turnjudge(transform.forward, movePos.normalized);
         if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
             rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
-
         else
         {
             rigidbody.rotation = Quaternion.LookRotation(movePos.normalized);

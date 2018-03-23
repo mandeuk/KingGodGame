@@ -367,6 +367,7 @@
     <Compile Include="Assets\Scripts\Item\Items.cs" />
     <Compile Include="Assets\Scripts\MatContainer.cs" />
     <Compile Include="Assets\Scripts\myCameraEvent.cs" />
+    <Compile Include="Assets\Scripts\NoiseCameraEvent.cs" />
     <Compile Include="Assets\Scripts\Player\AfterImageEffect.cs" />
     <Compile Include="Assets\Scripts\Player\Effect_Destroy.cs" />
     <Compile Include="Assets\Scripts\Player\EXMove.cs" />

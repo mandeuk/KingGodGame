@@ -289,6 +289,49 @@ ModelImporter:
             outSlope: 0
             tangentMode: 0
           - serializedVersion: 2
+            time: 0.10301507
+            value: -0.8
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.2085427
+            value: 0.6
+            inSlope: -2.7788403
+            outSlope: -2.7788403
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
+      - name: DashForce
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 2
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.108040206
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.109501235
+            value: 0
+            inSlope: Infinity
+            outSlope: Infinity
+            tangentMode: 0
+          - serializedVersion: 2
             time: 1
             value: 0
             inSlope: 0

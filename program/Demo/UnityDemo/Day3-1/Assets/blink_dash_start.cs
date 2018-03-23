@@ -7,7 +7,9 @@ public class blink_dash_start : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //animator.transform.GetComponent<PlayerEffect>().playBlinkEffect();
+        if(animator.transform.GetComponent<PlayerAttack>().b_attacking)
+            animator.transform.GetComponent<PlayerEffect>().playBlinkEffect();
+        animator.transform.GetComponent<PlayerAttack>().b_attacking = false;
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

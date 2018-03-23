@@ -13,6 +13,9 @@ public class myCameraEvent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        mainCamera.m_Lens.FieldOfView = raphael.GetComponent<Animator>().GetFloat("cameraFOV") + 40;
+        if(raphael.GetComponent<PlayerAttack>().enemyInList)
+            mainCamera.m_Lens.FieldOfView = raphael.GetComponent<Animator>().GetFloat("cameraFOV") + 40;
+        else
+            mainCamera.m_Lens.FieldOfView = 40;
     }
 }
