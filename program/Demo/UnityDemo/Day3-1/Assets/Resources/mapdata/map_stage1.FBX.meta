@@ -61,6 +61,25 @@ ModelImporter:
     100106: upperwall007
     100108: upperwall008
     100110: upperwall009
+    100112: floor
+    100114: LeftDoorwall
+    100116: LeftPillar
+    100118: LeftRDoor
+    100120: LeftStained
+    100122: LefttLDoor
+    100124: LeftUnderwall
+    100126: LeftUpperwall
+    100128: LLDoorDummy
+    100130: RightDoorwall
+    100132: RightLDoor
+    100134: RightPiller
+    100136: RightRDoor
+    100138: RightStained
+    100140: RightUnderwall
+    100142: RightUpperwall
+    100144: RLDoorDummy
+    100146: RLDoorDummy 1
+    100148: RRDoorDummy
     400000: Box002
     400002: Box003
     400004: Box004
@@ -117,8 +136,33 @@ ModelImporter:
     400106: upperwall007
     400108: upperwall008
     400110: upperwall009
+    400112: floor
+    400114: LeftDoorwall
+    400116: LeftPillar
+    400118: LeftRDoor
+    400120: LeftStained
+    400122: LefttLDoor
+    400124: LeftUnderwall
+    400126: LeftUpperwall
+    400128: LLDoorDummy
+    400130: RightDoorwall
+    400132: RightLDoor
+    400134: RightPiller
+    400136: RightRDoor
+    400138: RightStained
+    400140: RightUnderwall
+    400142: RightUpperwall
+    400144: RLDoorDummy
+    400146: RLDoorDummy 1
+    400148: RRDoorDummy
     2100000: 01 - Default
     2100002: No Name
+    2100004: stainedmat
+    2100006: underwallmat
+    2100008: pillarmat
+    2100010: upperwallmat
+    2100012: floormat
+    2100014: doormat
     2300000: Box002
     2300002: Box003
     2300004: Box004
@@ -170,6 +214,21 @@ ModelImporter:
     2300096: upperwall007
     2300098: upperwall008
     2300100: upperwall009
+    2300102: floor
+    2300104: LeftDoorwall
+    2300106: LeftPillar
+    2300108: LeftRDoor
+    2300110: LeftStained
+    2300112: LefttLDoor
+    2300114: LeftUnderwall
+    2300116: LeftUpperwall
+    2300118: RightDoorwall
+    2300120: RightLDoor
+    2300122: RightPiller
+    2300124: RightRDoor
+    2300126: RightStained
+    2300128: RightUnderwall
+    2300130: RightUpperwall
     3300000: Box002
     3300002: Box003
     3300004: Box004
@@ -221,6 +280,21 @@ ModelImporter:
     3300096: upperwall007
     3300098: upperwall008
     3300100: upperwall009
+    3300102: floor
+    3300104: LeftDoorwall
+    3300106: LeftPillar
+    3300108: LeftRDoor
+    3300110: LeftStained
+    3300112: LefttLDoor
+    3300114: LeftUnderwall
+    3300116: LeftUpperwall
+    3300118: RightDoorwall
+    3300120: RightLDoor
+    3300122: RightPiller
+    3300124: RightRDoor
+    3300126: RightStained
+    3300128: RightUnderwall
+    3300130: RightUpperwall
     4300000: Plane001
     4300002: upperwall002
     4300004: stained002
@@ -272,6 +346,23 @@ ModelImporter:
     4300096: Box018
     4300098: Box019
     4300100: Box020
+    4300102: LeftStained
+    4300104: LeftUnderwall
+    4300106: LeftPillar
+    4300108: LeftUpperwall
+    4300110: floor
+    4300112: RightPiller
+    4300114: RightUpperwall
+    4300116: RightStained
+    4300118: RightUnderwall
+    4300120: LeftDoorwall
+    4300122: RightDoorwall
+    4300124: RightRDoor
+    4300126: RightLDoor
+    4300128: LefttLDoor
+    4300130: LeftRDoor
+    7400000: Take 001
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -291,14 +382,42 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -343,10 +462,10 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -24,7 +24,12 @@ public class EnemyEffect : MonoBehaviour {
 
         if(stateNum == 4)
         {
-            hitcloneList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            hitcloneList[0].transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        }
+
+        if(stateNum == 5)
+        {
+            hitcloneList[0].transform.localScale = new Vector3(2f, 2f, 2f);
         }
 
         hitcloneList.RemoveAt(0);

@@ -82,7 +82,7 @@ public class EXMove : MonoBehaviour {
             avatar.SetTrigger("EXMoveOn");
             onAfterImageChange = false;
             onEXMoveColor = false;
-            onEXMove = false;
+            onEXMove = true;
             StartCoroutine(EXMovePlay());
         }
 

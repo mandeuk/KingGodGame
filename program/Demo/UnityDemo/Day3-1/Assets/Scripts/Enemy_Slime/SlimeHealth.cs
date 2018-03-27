@@ -75,7 +75,7 @@ public class SlimeHealth : MonoBehaviour {
         yield return new WaitForSeconds(.2f);
         TakeDamage(damage);
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 700f * pushBack);
-        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum));
+        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(5));
 
         yield return new WaitForSeconds(.2f);
         slimeRigidBody.Sleep();

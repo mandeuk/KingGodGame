@@ -37,8 +37,8 @@ public class SkillTarget : MonoBehaviour {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             TurnJudgeFunc();
-            if (!transform.GetComponentInParent<EXMove>().onEXMove)
-                Turn(movePos);
+            //if (!transform.GetComponentInParent<EXMove>().onEXMove)
+            Turn(movePos);
         }
 
         for (int i = 0; i < targetList.Count; i++)
