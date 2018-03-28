@@ -3848,16 +3848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827651d7f9ffbf348857159ed78550ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoint: 6
-  Energy: 1
-  attackPower: 3
-  attackSpeed: 1
   moveSpeed: 8
-  attackRange: 0
-  devilGage: 0
-  Ether: 0
-  gameTime: 0
-  pushBackPower: 0
 --- !u!114 &114242122347341198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3992,6 +3983,7 @@ MonoBehaviour:
   enemyInList: 0
   skillDamage: 30
   normalTarget: {fileID: 114242122347341198}
+  skillTarget: {fileID: 0}
 --- !u!114 &114592107303778766
 MonoBehaviour:
   m_ObjectHideFlags: 1
