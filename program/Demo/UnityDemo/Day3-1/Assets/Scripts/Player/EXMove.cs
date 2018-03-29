@@ -9,33 +9,29 @@ public class EXMove : MonoBehaviour {
     public GameObject afterImageR;
 
     public float moveSpeed;
-    float EXMoveSpeed;
     public bool onEXMove;
     public bool onEXMoveColor;
     public bool onAfterImageChange;
 
     Animator avatar;
     Rigidbody raphaelRigidbody;
+    PlayerEffect EXEffect;
 
     Material transMat;
-    //Material afterImageMat;
 
     Material[,] raphaelMats = new Material[5, 5];    // 라파엘 매터리얼 보관해두는 변수
     Material[,] afterImageMats = new Material[5, 5];
-
-    //Material[] changeMats = new Material[10];
-
 
     // Use this for initialization
     void Awake () {
         raphaelRigidbody = GetComponent<Rigidbody>();
         avatar = transform.GetComponent<Animator>();
         moveSpeed = transform.GetComponent<PlayerStatus>().getMoveSpeed();
+        EXEffect = transform.GetComponent<PlayerEffect>();
 
         //afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
         transMat = Resources.Load("Materials/Transparent") as Material;
-
-        EXMoveSpeed = 5;
+        
         onEXMove = false;
         onEXMoveColor = false;
         onAfterImageChange = false;
@@ -82,7 +78,7 @@ public class EXMove : MonoBehaviour {
             avatar.SetTrigger("EXMoveOn");
             onAfterImageChange = false;
             onEXMoveColor = false;
-            onEXMove = true;
+            onEXMove = false;
             StartCoroutine(EXMovePlay());
         }
 
@@ -144,17 +140,20 @@ public class EXMove : MonoBehaviour {
         avatar.speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
 
         transform.GetComponent<PlayerStatus>().moveSpeed = 25;              // ex무브동안의 스피드 이속도로 고속이동함.
-        transform.GetComponent<PlayerEffect>().playEXMoveVanishEffect();    // ex무브의 이펙트 발동
-        
+        EXEffect.playEXMoveVanishEffect();    // ex무브의 이펙트 발동
+        EXEffect.playEXMoveSlashEffect();
+
+        yield return new WaitForSeconds(0.13f);
+        EXEffect.playExMoveRingEffectBack();
+
+        yield return new WaitForSeconds(.04f);
+        EXEffect.playExMoveRingEffectFront();
+
+        yield return new WaitForSeconds(.03f);      // ex무브의 시간인 0.2초
 
 
-
-
-
-        yield return new WaitForSeconds(.2f);      // ex무브의 시간인 0.2초
-        
-        transform.GetComponent<PlayerEffect>().playEXmoveVanishFlowerEffect();
-        transform.GetComponent<PlayerEffect>().playBlinkEffect();
+        EXEffect.playEXmoveVanishFlowerEffect();
+        EXEffect.playBlinkEffect();
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
             afterImageRendObjs[i].SetActive(false);

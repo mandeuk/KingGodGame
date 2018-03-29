@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class ItemRedspirit : MonoBehaviour
 {
-    public class Redspirit
-    {
-
-    }
 
     public void Effect()
     {

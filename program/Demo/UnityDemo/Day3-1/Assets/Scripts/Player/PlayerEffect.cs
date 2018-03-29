@@ -7,17 +7,20 @@ public class PlayerEffect : MonoBehaviour {
     public List<GameObject> slashcloneList = new List<GameObject>();
     public List<GameObject> usedslashcloneList = new List<GameObject>();
 
-    public GameObject blinkclone;
-    public GameObject slashRingEffect;
-    public GameObject EXMoveSlashEffect;
-    public GameObject EXmoveVanishEffect;
-    public GameObject EXMoveVanishFlowerEffect;
+    GameObject blinkclone;
+    GameObject slashRingEffect;
+    GameObject EXMoveSlashEffect;
+    GameObject EXmoveVanishEffect;
+    GameObject EXMoveVanishFlowerEffect;
+    GameObject EXMoveRingEffectBack;
+    GameObject ExMoveRingEffectFront;
 
     public GameObject Effect1Pos;
     public GameObject Effect2Pos;
     public GameObject Effect3Pos;
     public GameObject Effect4Pos;
     public GameObject blinkEffectPos;
+    public GameObject EXMovePos;
 
 
     public IEnumerator PlayEffect(int stateNum)
@@ -92,8 +95,8 @@ public class PlayerEffect : MonoBehaviour {
         if (transform.CompareTag("Player"))
         {
             EXMoveSlashEffect.SetActive(true);
-            EXMoveSlashEffect.transform.position = transform.position + Vector3.forward * 4.5f;
-            EXMoveSlashEffect.transform.rotation = Quaternion.Euler(0, 90 + transform.rotation.eulerAngles.y, 0);
+            EXMoveSlashEffect.transform.position = EXMovePos.transform.position + transform.forward * 1.4f + new Vector3(0,-0.4f,0);
+            EXMoveSlashEffect.transform.rotation = Quaternion.Euler(0, 90 + EXMovePos.transform.rotation.eulerAngles.y, 0);
             EXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
         }
     }
@@ -120,19 +123,43 @@ public class PlayerEffect : MonoBehaviour {
         }
     }
 
+    public void playExMoveRingEffectFront()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            ExMoveRingEffectFront.SetActive(true);
+            ExMoveRingEffectFront.transform.position = transform.position;
+            ExMoveRingEffectFront.transform.rotation = Quaternion.Euler(0, EXMovePos.transform.rotation.eulerAngles.y, 0);
+            ExMoveRingEffectFront.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
+    public void playExMoveRingEffectBack()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            EXMoveRingEffectBack.SetActive(true);
+            EXMoveRingEffectBack.transform.position = transform.position;
+            EXMoveRingEffectBack.transform.rotation = Quaternion.Euler(0, EXMovePos.transform.rotation.eulerAngles.y, 0);
+            EXMoveRingEffectBack.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
+
+
     // Use this for initialization
     void Awake() {
-        blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
-        //slashRingEffect = Instantiate(Resources.Load("Prefabs/Effect/slashRingEffect")) as GameObject;
-        EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple"), blinkEffectPos.transform) as GameObject;
-        EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect")) as GameObject;
-        EXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect")) as GameObject;
-        InitEffect();
-    }
-	
-	// Update is called once per frame
-	void Update () {
+        if (transform.CompareTag("Player"))
+        {
+            blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
+            EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect")) as GameObject;
+            EXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect")) as GameObject;
+            EXMoveRingEffectBack = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectBack")) as GameObject;
+            ExMoveRingEffectFront = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectFront")) as GameObject;
+            EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple")) as GameObject;
 
+            InitEffect();
+        }
     }
 
     public void InitEffect()
