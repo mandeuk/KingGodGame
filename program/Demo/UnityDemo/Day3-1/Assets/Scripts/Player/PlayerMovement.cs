@@ -46,8 +46,9 @@ public class PlayerMovement : MonoBehaviour {
                 {
                     if (!playerattack.b_attacking && !transform.GetComponent<EXMove>().onEXMove)
                         TurnJudgeFunc();
-                    
-                    Turn(movePos);
+
+                    //if (!playerattack.b_attacking && !transform.GetComponent<EXMove>().onEXMove)
+                        Turn(movePos);
                 }
                 else
                     StopWalking();

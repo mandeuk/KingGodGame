@@ -22,32 +22,6 @@ public class SlimeHealth : MonoBehaviour {
     bool damaged = false;
     bool isEXMove = false;
 
-    public void stopMoving()
-    {
-        slimeRigidBody.Sleep();
-        slimenavMesh.speed = 0;
-    }
-
-    //public void PushBack(Vector3 playerPosition, float delay, float pushBack)
-    //{
-    //    Vector3 diff = playerPosition - transform.position;
-    //    slimerigidBody.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 5000f * pushBack);
-    //    Invoke("StopMoving", .08f);
-    //}
-
-    //public void TakeDamage(int damage, Vector3 playerPosition, float delay, float pushBack)
-    //{
-    //    damaged = true;
-    //    PushBack(playerPosition, delay, pushBack);
-    //    currentHealth -= damage;
-    //    //print(currentHealth);
-
-    //    if (currentHealth <= 0 && !isDead)
-    //    {
-    //        Death();
-    //    }
-    //}
-
     public void TakeDamage(int amount)
     {
         damaged = true;
@@ -65,7 +39,7 @@ public class SlimeHealth : MonoBehaviour {
         isEXMove = true;
         slimeMat.SetColor("_Color", new Vector4(.3f,.3f,.3f,1));
         slimenavMesh.speed = 0;
-        anim.speed = 0;
+        //anim.speed = 0;
         Vector3 diff = playerPosition - transform.position;
 
         yield return new WaitForSeconds(0.4f);
@@ -84,7 +58,7 @@ public class SlimeHealth : MonoBehaviour {
         if (!isSinking)
         {
             slimenavMesh.speed = 1;
-            anim.speed = 1;
+            //anim.speed = 1;
         }
 
         yield break;
@@ -92,9 +66,10 @@ public class SlimeHealth : MonoBehaviour {
 
     public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
+        Time.timeScale = .5f;
         slimeMat.SetColor("_Color", Color.black);
         slimenavMesh.speed = 0;
-        anim.speed = 0;
+        //anim.speed = 0;
         TakeDamage(damage);
         Vector3 diff = playerPosition - transform.position;
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * pushBack);
@@ -108,13 +83,13 @@ public class SlimeHealth : MonoBehaviour {
         yield return new WaitForSeconds(.1f);
         slimeRigidBody.Sleep();
         damaged = false;
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
 
         yield return new WaitForSeconds(delay);
         if (!isSinking)
         {
             slimenavMesh.speed = 1;
-            anim.speed = 1;
+            //anim.speed = 1;
         }
         yield break;
 
@@ -122,7 +97,7 @@ public class SlimeHealth : MonoBehaviour {
 
     private void Awake()
     {
-        anim = transform.GetChild(0).GetComponent<Animator>();
+        //anim = transform.GetChild(0).GetComponent<Animator>();
         slimenavMesh = GetComponent<NavMeshAgent>();
         slimeRigidBody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
@@ -133,7 +108,7 @@ public class SlimeHealth : MonoBehaviour {
 	void Update () {
         if (!damaged)
         {
-            slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white, flashSpeed * Time.deltaTime));
+            slimeMat.SetColor("_Color", Color.Lerp(transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color"), slimeMat.GetColor("_Color"), flashSpeed * Time.deltaTime));
         }
 
         //if (!isEXMove)

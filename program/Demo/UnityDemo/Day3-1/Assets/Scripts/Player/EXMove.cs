@@ -150,8 +150,6 @@ public class EXMove : MonoBehaviour {
         EXEffect.playExMoveRingEffectFront();
 
         yield return new WaitForSeconds(.03f);      // ex무브의 시간인 0.2초
-
-
         EXEffect.playEXmoveVanishFlowerEffect();
         EXEffect.playBlinkEffect();
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
