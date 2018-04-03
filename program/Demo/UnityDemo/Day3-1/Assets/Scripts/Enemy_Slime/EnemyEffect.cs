@@ -65,8 +65,6 @@ public class EnemyEffect : MonoBehaviour {
     public GameObject SpawnEffect()
     {
         GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect")) as GameObject;
-        float randomPosX = Random.Range(-10f, 10f);
-        float randomPosZ = Random.Range(-10f, 10f);
 
         return effectClone;
     }

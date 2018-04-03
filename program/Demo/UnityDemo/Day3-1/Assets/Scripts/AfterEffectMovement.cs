@@ -10,7 +10,7 @@ public class AfterEffectMovement : MonoBehaviour {
     public bool turnPosible;
 
     Vector3 movePos;
-    Rigidbody rigidbody;
+    Rigidbody rigidBodyRaphael;
     PlayerAttack playerattack;
     public GameObject raphael;
     //AfterImageEffect raphaelEX;
@@ -21,7 +21,7 @@ public class AfterEffectMovement : MonoBehaviour {
     void Awake()
     {
         //raphaelEX = GameObject.FindWithTag("Player").GetComponent<AfterImageEffect>();
-        rigidbody = GetComponent<Rigidbody>();
+        rigidBodyRaphael = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         turnSpeedTime = turnSpeed * Time.deltaTime;
@@ -51,15 +51,13 @@ public class AfterEffectMovement : MonoBehaviour {
 
     void Turn(Vector3 movePos)
     {
-        Vector3 movePos1 = movePos.normalized * moveSpeed * Time.deltaTime;
+        //turnDir = Turnjudge(transform.forward, movePos.normalized);
+        //if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
+        //    rigidBodyRaphael.MoveRotation(rigidBodyRaphael.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
 
-        turnDir = Turnjudge(transform.forward, movePos.normalized);
-        if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
-            rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
-
-        else
+        //else
         {
-            rigidbody.rotation = Quaternion.LookRotation(movePos.normalized);
+            rigidBodyRaphael.rotation = Quaternion.LookRotation(movePos.normalized);
             turnPosible = false;
             IsWalking();
         }

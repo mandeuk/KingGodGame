@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public GameObject noiseCameraEvent;
+    public GameObject normalAttacCam;
+    public GameObject exMoveCam;
     protected Animator avatar;
     public bool b_attacking;
     public bool enemyInList = false;
@@ -21,9 +22,8 @@ public class PlayerAttack : MonoBehaviour
 
         if (targetList.Count > 0)
         {
-            StartCoroutine(noiseCameraEvent.GetComponent<NoiseCameraEvent>().cameraHitEvent());
+            StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.025f));
         }
-
 
         foreach (Collider one in targetList)
         {
@@ -38,6 +38,12 @@ public class PlayerAttack : MonoBehaviour
     public void skillAttack(int stateNum)
     {
         List<Collider> targetList = new List<Collider>(skillTarget.targetList);
+
+        if (targetList.Count > 0)
+        {
+            StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.025f));
+        }
+
         foreach (Collider one in targetList)
         {
             SlimeHealth slime = one.GetComponent<SlimeHealth>();
@@ -60,7 +66,9 @@ public class PlayerAttack : MonoBehaviour
         if (transform.CompareTag("Player"))
         {
             if (Input.GetKey(KeyCode.K))
+            {
                 OnAttacking();
+            }
 
             if (normalTarget.targetList.Count > 0)
             {
@@ -85,10 +93,9 @@ public class PlayerAttack : MonoBehaviour
 
     public void NormalAttackEvent(int stateNum)
     {
-        if (transform.CompareTag("Player"))
+        if (transform.CompareTag("Player") || b_attacking)
         {
             StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
-            //Time.timeScale = 0.5f;
             NormalAttack(stateNum);
         }
     }

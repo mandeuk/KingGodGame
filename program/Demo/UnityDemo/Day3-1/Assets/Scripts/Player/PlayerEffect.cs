@@ -33,50 +33,52 @@ public class PlayerEffect : MonoBehaviour {
         //slashRingEffect.SetActive(true);
         //slashRingEffect.transform.position =
         //    new Vector3(transform.position.x, slashRingEffect.transform.position.y, transform.position.z);
-        
+
         //slashRingEffect.GetComponent<ParticleSystem>().Play();
-
-        usedslashcloneList.Add(slashcloneList[0]);
-        slashcloneList[0].SetActive(true);
-        slashcloneList[0].transform.localScale = new Vector3(1f, 1f, 1f);
-
-        if (stateNum == 1)
+        if (GetComponent<PlayerAttack>().b_attacking)
         {
-            slashcloneList[0].transform.position = Effect1Pos.transform.position;
-            slashcloneList[0].transform.rotation =
-                Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
+            usedslashcloneList.Add(slashcloneList[0]);
+            slashcloneList[0].SetActive(true);
+            slashcloneList[0].transform.localScale = new Vector3(1f, 1f, 1f);
+
+            if (stateNum == 1)
+            {
+                slashcloneList[0].transform.position = Effect1Pos.transform.position;
+                slashcloneList[0].transform.rotation =
+                    Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
+            }
+
+            else if (stateNum == 2)
+            {
+                slashcloneList[0].transform.position = Effect2Pos.transform.position;
+                slashcloneList[0].transform.rotation =
+                    Quaternion.Euler(-110 - 180, 270 + transform.rotation.eulerAngles.y, 110);
+            }
+
+            else if (stateNum == 3)
+            {
+                slashcloneList[0].transform.position = Effect3Pos.transform.position;
+                slashcloneList[0].transform.rotation =
+                    Quaternion.Euler(101 - 180, 270 + transform.rotation.eulerAngles.y, 110);
+            }
+
+            else if (stateNum == 4)
+            {
+                slashcloneList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                slashcloneList[0].transform.position = Effect4Pos.transform.position;
+                slashcloneList[0].transform.rotation =
+                    Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
+            }
+
+            slashcloneList.RemoveAt(0);
+
+
+            yield return new WaitForSeconds(1f);
+
+            slashcloneList.Add(usedslashcloneList[0]);
+            usedslashcloneList[0].SetActive(false);
+            usedslashcloneList.RemoveAt(0);
         }
-
-        else if (stateNum == 2)
-        {
-            slashcloneList[0].transform.position = Effect2Pos.transform.position;
-            slashcloneList[0].transform.rotation =
-                Quaternion.Euler(-110-180, 270 + transform.rotation.eulerAngles.y, 110);
-        }
-
-        else if (stateNum == 3)
-        {
-            slashcloneList[0].transform.position = Effect3Pos.transform.position;
-            slashcloneList[0].transform.rotation =
-                Quaternion.Euler(101-180, 270 + transform.rotation.eulerAngles.y, 110);
-        }
-
-        else if (stateNum == 4)
-        {
-            slashcloneList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            slashcloneList[0].transform.position = Effect4Pos.transform.position;
-            slashcloneList[0].transform.rotation =
-                Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
-        }
-
-        slashcloneList.RemoveAt(0);
-        
-
-        yield return new WaitForSeconds(1f);
-
-        slashcloneList.Add(usedslashcloneList[0]);
-        usedslashcloneList[0].SetActive(false);
-        usedslashcloneList.RemoveAt(0);
 
         yield break;
     }
@@ -92,11 +94,15 @@ public class PlayerEffect : MonoBehaviour {
 
     public void playEXMoveSlashEffect()
     {
+        Vector3 EXRotation = EXMovePos.GetComponent<SkillTarget>().movePos.normalized;
+
         if (transform.CompareTag("Player"))
         {
             EXMoveSlashEffect.SetActive(true);
-            EXMoveSlashEffect.transform.position = EXMovePos.transform.position + transform.forward * 1.4f + new Vector3(0,-0.4f,0);
-            EXMoveSlashEffect.transform.rotation = Quaternion.Euler(0, 90 + EXMovePos.transform.rotation.eulerAngles.y, 0);
+            EXMoveSlashEffect.transform.position = EXMovePos.transform.position;
+            //EXMoveSlashEffect.transform.rotation = Quaternion.Euler(EXMovePos.GetComponent<SkillTarget>().movePos.normalized);
+            //EXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXMovePos.transform.right);
+            EXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXRotation);
             EXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
         }
     }

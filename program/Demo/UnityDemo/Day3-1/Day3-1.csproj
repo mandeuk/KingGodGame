@@ -289,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\blink_dash_start.cs" />
-    <Compile Include="Assets\BornMovement.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -348,7 +347,6 @@
     <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneCollider.cs" />
     <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
     <Compile Include="Assets\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
-    <Compile Include="Assets\NonAttackBehaviour.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -414,10 +412,10 @@
     <Compile Include="Assets\Scripts\MatContainer.cs" />
     <Compile Include="Assets\Scripts\myCameraEvent.cs" />
     <Compile Include="Assets\Scripts\NoiseCameraEvent.cs" />
+    <Compile Include="Assets\Scripts\NonAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\AfterImageEffect.cs" />
     <Compile Include="Assets\Scripts\Player\Effect_Destroy.cs" />
     <Compile Include="Assets\Scripts\Player\EXMove.cs" />
-    <Compile Include="Assets\Scripts\Player\EXMovePosMovement.cs" />
     <Compile Include="Assets\Scripts\Player\NormalTarget.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerEffect.cs" />

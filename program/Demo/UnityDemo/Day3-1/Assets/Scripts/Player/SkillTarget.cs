@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class SkillTarget : MonoBehaviour {
     public List<Collider> targetList;
-    Vector3 movePos;
-    private float turnSpeedTime;
+    public Vector3 movePos;
 
     int turnDir;
-    float turnAngle = 15;
 
     // Use this for initialization
     void Awake()
     {
         targetList = new List<Collider>();
-        turnSpeedTime = GetComponentInParent<PlayerMovement>().turnSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +34,7 @@ public class SkillTarget : MonoBehaviour {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             TurnJudgeFunc();
-            //if (!transform.GetComponentInParent<EXMove>().onEXMove)
+            if (!transform.GetComponentInParent<EXMove>().onEXMove)
             Turn(movePos);
         }
 
@@ -50,10 +47,8 @@ public class SkillTarget : MonoBehaviour {
         }
     }
 
-
     void Turn(Vector3 movePos)
     {
-        turnDir = Turnjudge(transform.forward, movePos.normalized);
         transform.rotation = Quaternion.LookRotation(movePos.normalized);
     }
 

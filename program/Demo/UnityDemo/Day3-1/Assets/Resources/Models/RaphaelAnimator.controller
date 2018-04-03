@@ -1046,7 +1046,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: attack_second
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101482216957339536}
@@ -1198,7 +1198,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 888, y: 156, z: 0}
+  m_AnyStatePosition: {x: 936, y: 144, z: 0}
   m_EntryPosition: {x: 12, y: 60, z: 0}
   m_ExitPosition: {x: 12, y: -36, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

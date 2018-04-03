@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool turnPosible;
 
     Vector3 movePos;
-    Rigidbody rigidbody;
+    Rigidbody rigidbodyRaphael;
     PlayerAttack playerattack;
     //AfterImageEffect raphaelEX;
 
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     void Awake()
     {
         raphaelStatus = GetComponent<PlayerStatus>();
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbodyRaphael = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GetComponent<PlayerAttack>();
         turnSpeedTime = turnSpeed * Time.deltaTime;
@@ -33,13 +33,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (avatar)
         {
-            if (rigidbody /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
+            if (rigidbodyRaphael /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
                 if (!transform.GetComponent<EXMove>().onEXMove)
-                    rigidbody.MovePosition(transform.position +
+                    rigidbodyRaphael.MovePosition(transform.position +
                         transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * raphaelStatus.getMoveSpeed());
                 else
-                    rigidbody.MovePosition(transform.position +
+                    rigidbodyRaphael.MovePosition(transform.position +
                             GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * raphaelStatus.getMoveSpeed());
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
                     if (!playerattack.b_attacking && !transform.GetComponent<EXMove>().onEXMove)
                         TurnJudgeFunc();
 
-                    //if (!playerattack.b_attacking && !transform.GetComponent<EXMove>().onEXMove)
+                    if (!transform.GetComponent<EXMove>().onEXMove)
                         Turn(movePos);
                 }
                 else
@@ -62,10 +62,10 @@ public class PlayerMovement : MonoBehaviour {
 
         turnDir = Turnjudge(transform.forward, movePos.normalized);
         if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
-            rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
+            rigidbodyRaphael.MoveRotation(rigidbodyRaphael.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
         else
         {
-            rigidbody.rotation = Quaternion.LookRotation(movePos.normalized);
+            rigidbodyRaphael.rotation = Quaternion.LookRotation(movePos.normalized);
             turnPosible = false;
             IsWalking();
         }

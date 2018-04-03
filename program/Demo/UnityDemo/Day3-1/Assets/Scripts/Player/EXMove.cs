@@ -76,6 +76,7 @@ public class EXMove : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.L))
         {
             avatar.SetTrigger("EXMoveOn");
+            avatar.SetBool("Combo", false);
             onAfterImageChange = false;
             onEXMoveColor = false;
             onEXMove = false;
@@ -142,6 +143,7 @@ public class EXMove : MonoBehaviour {
         transform.GetComponent<PlayerStatus>().moveSpeed = 25;              // ex무브동안의 스피드 이속도로 고속이동함.
         EXEffect.playEXMoveVanishEffect();    // ex무브의 이펙트 발동
         EXEffect.playEXMoveSlashEffect();
+        //transform.rotation = Quaternion.LookRotation(GetComponentInChildren<SkillTarget>().transform.forward);
 
         yield return new WaitForSeconds(0.13f);
         EXEffect.playExMoveRingEffectBack();
@@ -150,6 +152,7 @@ public class EXMove : MonoBehaviour {
         EXEffect.playExMoveRingEffectFront();
 
         yield return new WaitForSeconds(.03f);      // ex무브의 시간인 0.2초
+        transform.rotation = Quaternion.LookRotation(transform.GetComponentInChildren<SkillTarget>().movePos.normalized);
         EXEffect.playEXmoveVanishFlowerEffect();
         EXEffect.playBlinkEffect();
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
