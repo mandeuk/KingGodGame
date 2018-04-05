@@ -5,12 +5,10 @@ using UnityEngine;
 public class AttackBehaviour : StateMachineBehaviour {
     private float attackTime = 0;
     private PlayerAttack playerattack;
-    private Rigidbody rigidb;
 
     private void Awake()
     {
         playerattack = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
-        rigidb = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
     }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

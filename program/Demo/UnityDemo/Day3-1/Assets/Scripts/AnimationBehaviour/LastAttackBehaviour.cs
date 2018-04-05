@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LastAttackBehaviour : StateMachineBehaviour {
-
-    private PlayerAttack playerAttack;
+    
     private float attackTime = 0;
-    private Animator anim;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        playerAttack = animator.transform.GetComponent<PlayerAttack>();
-        anim = animator.transform.GetComponent<Animator>();
         attackTime = Time.time;
     }
 

@@ -392,6 +392,10 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Datas.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\MakerMag.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\MapMag.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\PrefabDatas.cs" />
     <Compile Include="Assets\Scripts\AfterEffectMovement.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\AttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\DashEndBehaviour.cs" />
@@ -406,6 +410,7 @@
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeHealth.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeSpawn.cs" />
+    <Compile Include="Assets\Scripts\fireFliesMovement.cs" />
     <Compile Include="Assets\Scripts\Item\ItemList.cs" />
     <Compile Include="Assets\Scripts\Item\ItemRedspirit.cs" />
     <Compile Include="Assets\Scripts\Item\Items.cs" />

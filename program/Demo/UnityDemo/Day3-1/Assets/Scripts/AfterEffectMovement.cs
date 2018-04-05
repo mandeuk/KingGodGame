@@ -6,7 +6,6 @@ public class AfterEffectMovement : MonoBehaviour {
     protected Animator avatar;
     public float turnSpeed;
     public float moveSpeed = 1;
-    private float turnSpeedTime;
     public bool turnPosible;
 
     Vector3 movePos;
@@ -24,7 +23,6 @@ public class AfterEffectMovement : MonoBehaviour {
         rigidBodyRaphael = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
-        turnSpeedTime = turnSpeed * Time.deltaTime;
     }
 
     void FixedUpdate()

@@ -373,6 +373,13 @@
     <Compile Include="Assets\PostProcessing\Editor\Utils\EditorResources.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\CommonEditorUi.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\MapDataLoad.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\MapMagEditor.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\MapMaker.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\PrefabButton.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\PrefabData.cs" />
+    <Compile Include="Assets\Resources\MapMakerV1\Sources\Editor\PrefabPlacer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />

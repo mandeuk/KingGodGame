@@ -14,23 +14,18 @@ public class EXMove : MonoBehaviour {
     public bool onAfterImageChange;
 
     Animator avatar;
-    Rigidbody raphaelRigidbody;
     PlayerEffect EXEffect;
-
-    Material transMat;
 
     Material[,] raphaelMats = new Material[5, 5];    // 라파엘 매터리얼 보관해두는 변수
     Material[,] afterImageMats = new Material[5, 5];
 
     // Use this for initialization
     void Awake () {
-        raphaelRigidbody = GetComponent<Rigidbody>();
         avatar = transform.GetComponent<Animator>();
         moveSpeed = transform.GetComponent<PlayerStatus>().getMoveSpeed();
         EXEffect = transform.GetComponent<PlayerEffect>();
 
         //afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
-        transMat = Resources.Load("Materials/Transparent") as Material;
         
         onEXMove = false;
         onEXMoveColor = false;
@@ -77,9 +72,9 @@ public class EXMove : MonoBehaviour {
         {
             avatar.SetTrigger("EXMoveOn");
             avatar.SetBool("Combo", false);
-            onAfterImageChange = false;
-            onEXMoveColor = false;
-            onEXMove = false;
+            //onAfterImageChange = false;
+            //onEXMoveColor = false;
+            //onEXMove = false;
             StartCoroutine(EXMovePlay());
         }
 
@@ -91,7 +86,7 @@ public class EXMove : MonoBehaviour {
                 {
                     afterImageRendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                             "_Color", Color.Lerp(afterImageRendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                            new Vector4(1, 1, 1, 0), Time.deltaTime * 5f));
+                            new Vector4(1, 1, 1, 0), Time.deltaTime * 3f));
                 }
             }
         }
@@ -104,7 +99,7 @@ public class EXMove : MonoBehaviour {
                 {
                     rendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                         "_Color", Color.Lerp(rendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                        raphaelMats[i, j].color, Time.deltaTime * 5f));
+                        raphaelMats[i, j].color, Time.deltaTime * 3f));
                 }
             }
         }
@@ -159,7 +154,8 @@ public class EXMove : MonoBehaviour {
         {
             afterImageRendObjs[i].SetActive(false);
         }   // 잔상은 이제 다 꺼야함.
-        
+
+
         onEXMoveColor = true;   // 라파엘 본체의 컬러를 검정에서 원래색으로 돌려주는 업데이트를 작동
         onEXMove = false;       // ex무브는 끝.
 
@@ -177,6 +173,7 @@ public class EXMove : MonoBehaviour {
         yield return new WaitForSeconds(1.8f);
         onEXMoveColor = false;
         onAfterImageChange = false;
+        print("End");
 
         yield break;
     }

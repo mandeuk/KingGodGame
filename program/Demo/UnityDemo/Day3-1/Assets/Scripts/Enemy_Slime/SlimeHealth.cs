@@ -12,6 +12,8 @@ public class SlimeHealth : MonoBehaviour {
 
     public float sinkSpeed = 1f;
 
+    Vector4 originColor;
+
     private Material slimeMat;
     private Animator anim;
     private NavMeshAgent slimenavMesh;
@@ -37,18 +39,20 @@ public class SlimeHealth : MonoBehaviour {
     {
         damaged = true;
         isEXMove = true;
-        slimeMat.SetColor("_Color", new Vector4(.3f,.3f,.3f,1));
+        slimeMat.SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
         slimenavMesh.speed = 0;
         //anim.speed = 0;
         Vector3 diff = playerPosition - transform.position;
 
         yield return new WaitForSeconds(0.4f);
-        damaged = false;
+        
         isEXMove = false;
+        
 
         yield return new WaitForSeconds(.2f);
         TakeDamage(damage);
-        GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 700f * pushBack);
+        damaged = false;
+        GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 560f * pushBack);
         StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(5));
 
         yield return new WaitForSeconds(.2f);
@@ -67,7 +71,7 @@ public class SlimeHealth : MonoBehaviour {
     public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
         Time.timeScale = .5f;
-        slimeMat.SetColor("_Color", Color.black);
+        slimeMat.SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
         slimenavMesh.speed = 0;
         //anim.speed = 0;
         TakeDamage(damage);
@@ -102,13 +106,15 @@ public class SlimeHealth : MonoBehaviour {
         slimeRigidBody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
         slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
+        originColor = slimeMat.color;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!damaged)
+        if (!damaged && !isSinking)
         {
-            slimeMat.SetColor("_Color", Color.Lerp(transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color"), slimeMat.GetColor("_Color"), flashSpeed * Time.deltaTime));
+            //slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_Color"), flashSpeed * Time.deltaTime));
+            slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), originColor, flashSpeed * Time.deltaTime));
         }
 
         //if (!isEXMove)
@@ -122,7 +128,7 @@ public class SlimeHealth : MonoBehaviour {
         }
 
         if (isSinking)            
-            slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white * 40, .6f * Time.deltaTime));
+            slimeMat.SetColor("_Color", Color.Lerp(slimeMat.GetColor("_Color"), Color.white * 3, Time.deltaTime));
     }
 
     void Death()
