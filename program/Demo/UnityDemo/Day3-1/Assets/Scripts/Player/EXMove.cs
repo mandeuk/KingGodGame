@@ -86,7 +86,7 @@ public class EXMove : MonoBehaviour {
                 {
                     afterImageRendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                             "_Color", Color.Lerp(afterImageRendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                            new Vector4(1, 1, 1, 0), Time.deltaTime * 3f));
+                            new Vector4(1, 1, 1, 0), Time.deltaTime * 3.5f));
                 }
             }
         }
@@ -152,7 +152,7 @@ public class EXMove : MonoBehaviour {
         EXEffect.playBlinkEffect();
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
-            afterImageRendObjs[i].SetActive(false);
+            //afterImageRendObjs[i].SetActive(false);
         }   // 잔상은 이제 다 꺼야함.
 
 
@@ -173,7 +173,7 @@ public class EXMove : MonoBehaviour {
         yield return new WaitForSeconds(1.8f);
         onEXMoveColor = false;
         onAfterImageChange = false;
-        print("End");
+
 
         yield break;
     }

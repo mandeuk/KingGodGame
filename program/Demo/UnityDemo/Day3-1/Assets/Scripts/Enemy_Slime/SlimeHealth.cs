@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class SlimeHealth : MonoBehaviour {
     public int startingHealth = 100;
     public int currentHealth;
+    public GameObject player;
 
     public float flashSpeed = 5f; // 맞았을때 번쩍이는 시간
     public Color flashColor = new Color(1f, 0f, 0f, 0.1f); // 맞았을때 테투리가 빨강.
@@ -23,6 +24,22 @@ public class SlimeHealth : MonoBehaviour {
     public bool isSinking = false;
     bool damaged = false;
     bool isEXMove = false;
+
+    public bool CheckBtwRapObj()
+    {
+        Vector3 diff = player.transform.position - transform.position;
+        float dist = Vector3.Distance(player.transform.position, transform.position);
+
+        RaycastHit[] colList = Physics.RaycastAll(transform.position, new Vector3(diff.x, 0f, diff.z).normalized, dist);
+
+        for (int i = 0; i < colList.Length; i++) {
+            if (colList[i].transform.CompareTag("Obstacle"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void TakeDamage(int amount)
     {
@@ -107,6 +124,7 @@ public class SlimeHealth : MonoBehaviour {
         currentHealth = startingHealth;
         slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
         originColor = slimeMat.color;
+        player = GameObject.FindWithTag("Player");
     }
 	
 	// Update is called once per frame

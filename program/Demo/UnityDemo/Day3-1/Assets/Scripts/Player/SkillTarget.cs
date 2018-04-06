@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkillTarget : MonoBehaviour {
     public List<Collider> targetList;
+    public List<Collider> anotherTargetList;
     public Vector3 movePos;
 
     int turnDir;
@@ -21,11 +22,24 @@ public class SkillTarget : MonoBehaviour {
             if (!other.GetComponent<SlimeHealth>().isSinking)
                 targetList.Add(other);
         }
+
+        if (other.CompareTag("Obstacle"))
+        {
+            anotherTargetList.Add(other);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        targetList.Remove(other);
+        if (other.CompareTag("Enemy"))
+        {
+            if (!other.GetComponent<SlimeHealth>().isSinking)
+                targetList.Remove(other);
+        }
+        if (other.CompareTag("Obstacle"))
+        {
+            anotherTargetList.Remove(other);
+        }
     }
 
     // Update is called once per frame

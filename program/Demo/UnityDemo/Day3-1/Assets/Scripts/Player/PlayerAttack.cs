@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (targetList.Count > 0)
         {
-            StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.025f));
+            StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
         }
 
         foreach (Collider one in targetList)
@@ -39,17 +39,40 @@ public class PlayerAttack : MonoBehaviour
     {
         List<Collider> targetList = new List<Collider>(skillTarget.targetList);
 
-        if (targetList.Count > 0)
-        {
-            StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.025f));
-        }
+        //foreach(Collider one in targetList)
+        //{
+        //    if (skillTarget.anotherTargetList.Count > 0)
+        //    {
+
+        //    }
+        //}
+
 
         foreach (Collider one in targetList)
         {
             SlimeHealth slime = one.GetComponent<SlimeHealth>();
             if (slime != null && !slime.isSinking)
             {
-                StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                if (skillTarget.anotherTargetList.Count > 0)
+                {
+                    if (!slime.CheckBtwRapObj())
+                    {
+                        StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                    }
+                    else
+                    {
+                        //targetList.Remove(one);
+                    }
+                }
+                else
+                {
+                    StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                }
+            }
+
+            if (targetList.Count > 0)
+            {
+                StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
         }
     }

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f1dd113bb5eed4cafc47b3a915b011, type: 3}
+  m_Name: 098
+  m_EditorClassIdentifier: 
+  MAPDATA: 20/20/1
+  PREFABDATA:
+  - 0/0/0/0/0/0/0/7_9 150/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/6_9 130/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/6_10 131/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/5_10 111/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/4_10 91/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/3_10 71/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_10 51/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_9 10/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_12 33/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_10 11/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_11 12/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_13 34/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_14 35/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_15 36/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_16 37/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_17 38/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_12 13/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_13 14/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_14 15/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_15 16/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_16 17/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_17 18/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_18 19/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_19 20/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_19 40/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_18 59/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_17 58/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_16 57/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_15 56/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_14 55/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_13 54/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_12 53/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_11 52/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_11 32/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_10 31/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_7 28/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_7 48/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_8 49/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/2_9 50/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_9 30/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/1_8 29/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_8 9/BLOCK_BLUE
+  - 0/0/0/0/0/0/0/0_7 8/BLOCK_BLUE
+  PrefabSources:
+  - {fileID: 166800, guid: fe14dbc580bb49046a5ede93d3fd3880, type: 2}

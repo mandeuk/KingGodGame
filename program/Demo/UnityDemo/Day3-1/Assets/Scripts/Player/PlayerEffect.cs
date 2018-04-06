@@ -99,7 +99,7 @@ public class PlayerEffect : MonoBehaviour {
         if (transform.CompareTag("Player"))
         {
             EXMoveSlashEffect.SetActive(true);
-            EXMoveSlashEffect.transform.position = EXMovePos.transform.position + EXRotation * 0.5f;
+            EXMoveSlashEffect.transform.position = EXMovePos.transform.position;
             //EXMoveSlashEffect.transform.rotation = Quaternion.Euler(EXMovePos.GetComponent<SkillTarget>().movePos.normalized);
             //EXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXMovePos.transform.right);
             EXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXRotation);
