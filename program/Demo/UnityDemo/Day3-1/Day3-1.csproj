@@ -410,11 +410,9 @@
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeHealth.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeSpawn.cs" />
-    <Compile Include="Assets\Scripts\fireFliesMovement.cs" />
     <Compile Include="Assets\Scripts\Item\ItemList.cs" />
     <Compile Include="Assets\Scripts\Item\ItemRedspirit.cs" />
     <Compile Include="Assets\Scripts\Item\Items.cs" />
-    <Compile Include="Assets\Scripts\MatContainer.cs" />
     <Compile Include="Assets\Scripts\myCameraEvent.cs" />
     <Compile Include="Assets\Scripts\NoiseCameraEvent.cs" />
     <Compile Include="Assets\Scripts\NonAttackBehaviour.cs" />

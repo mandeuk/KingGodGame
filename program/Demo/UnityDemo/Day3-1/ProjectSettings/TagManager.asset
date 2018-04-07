@@ -11,6 +11,7 @@ TagManager:
   - EditorTile
   - eraser
   - Obstacle
+  - EffectCamera
   layers:
   - Default
   - TransparentFX
@@ -20,11 +21,11 @@ TagManager:
   - UI
   - 
   - 
-  - TailCol
+  - Player
   - Wall
   - Obstacle
-  - 
-  - 
+  - Enemy
+  - Door
   - 
   - 
   - 

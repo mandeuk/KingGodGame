@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4057264468641174}
   - component: {fileID: 33856835553309134}
   - component: {fileID: 23831553043963022}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114914495964424252}
   - component: {fileID: 114552495430967392}
   - component: {fileID: 114770690836296238}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: highpriest
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1466667657781582}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.28, y: 1, z: 8.3}
+  m_LocalPosition: {x: 5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4057264468641174}
@@ -187,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   currentHealth: 0
+  player: {fileID: 0}
   flashSpeed: 3
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
   sinkSpeed: 1
@@ -200,7 +201,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.19431907
+  m_Radius: 0.4
   m_Height: 1.3469322
   m_Direction: 1
   m_Center: {x: 0, y: 0.8265339, z: 0.0787881}

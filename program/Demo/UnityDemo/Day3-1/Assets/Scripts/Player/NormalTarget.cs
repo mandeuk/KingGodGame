@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NormalTarget : MonoBehaviour {
     public List<Collider> targetList;
+    public List<Collider> anotherTargetList;
 
 	// Use this for initialization
 	void Awake () {
@@ -14,14 +15,27 @@ public class NormalTarget : MonoBehaviour {
     {
         if (other.CompareTag("Enemy"))
         {
-            if(!other.GetComponent<SlimeHealth>().isSinking)
+            if (!other.GetComponent<SlimeHealth>().isSinking)
                 targetList.Add(other);
+        }
+
+        if (other.CompareTag("Obstacle"))
+        {
+            anotherTargetList.Add(other);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        targetList.Remove(other);
+        if (other.CompareTag("Enemy"))
+        {
+            if (!other.GetComponent<SlimeHealth>().isSinking)
+                targetList.Remove(other);
+        }
+        if (other.CompareTag("Obstacle"))
+        {
+            anotherTargetList.Remove(other);
+        }
     }
 
     // Update is called once per frame

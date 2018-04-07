@@ -78,7 +78,7 @@ public class EXMove : MonoBehaviour {
             StartCoroutine(EXMovePlay());
         }
 
-        if (onAfterImageChange)
+        //if (onAfterImageChange)
         {
             for (int i = 0; i < afterImageRendObjs.Length; ++i)
             {
@@ -86,7 +86,7 @@ public class EXMove : MonoBehaviour {
                 {
                     afterImageRendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                             "_Color", Color.Lerp(afterImageRendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                            new Vector4(1, 1, 1, 0), Time.deltaTime * 3.5f));
+                            new Vector4(1, 1, 1, 0), Time.deltaTime * 4f));
                 }
             }
         }
@@ -99,7 +99,7 @@ public class EXMove : MonoBehaviour {
                 {
                     rendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                         "_Color", Color.Lerp(rendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                        raphaelMats[i, j].color, Time.deltaTime * 3f));
+                        raphaelMats[i, j].color, Time.deltaTime * 3.5f));
                 }
             }
         }
@@ -108,6 +108,7 @@ public class EXMove : MonoBehaviour {
     public IEnumerator EXMovePlay()
     {
         onEXMove = true;    // ex무브가 시작.
+        onEXMoveColor = false;
         transform.GetComponent<PlayerAttack>().skillAttack(4);
         for (int i = 0; i < rendObjs.Length; ++i)
         {
@@ -142,9 +143,11 @@ public class EXMove : MonoBehaviour {
 
         yield return new WaitForSeconds(0.13f);
         EXEffect.playExMoveRingEffectBack();
+        onEXMoveColor = false;
 
         yield return new WaitForSeconds(.04f);
         EXEffect.playExMoveRingEffectFront();
+        onEXMoveColor = false;
 
         yield return new WaitForSeconds(.03f);      // ex무브의 시간인 0.2초
         transform.rotation = Quaternion.LookRotation(transform.GetComponentInChildren<SkillTarget>().movePos.normalized);
@@ -152,9 +155,8 @@ public class EXMove : MonoBehaviour {
         EXEffect.playBlinkEffect();
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
-            //afterImageRendObjs[i].SetActive(false);
-        }   // 잔상은 이제 다 꺼야함.
-
+            afterImageRendObjs[i].SetActive(false);
+        }   // 잔상은 이제 다 꺼야함. -> 필요없을듯 어짜피 알아서
 
         onEXMoveColor = true;   // 라파엘 본체의 컬러를 검정에서 원래색으로 돌려주는 업데이트를 작동
         onEXMove = false;       // ex무브는 끝.

@@ -19,18 +19,51 @@ public class PlayerAttack : MonoBehaviour
     public void NormalAttack(int stateNum)
     {
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
+        List<Collider> realTargetList = new List<Collider>();
 
-        if (targetList.Count > 0)
+        if (normalTarget.anotherTargetList.Count > 0)
         {
-            StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
-        }
-
-        foreach (Collider one in targetList)
-        {
-            SlimeHealth slime = one.GetComponent<SlimeHealth>();
-            if (slime != null && !slime.isSinking)
+            foreach (Collider one in targetList)
             {
-                StartCoroutine(slime.StartDamage(normalDamage, transform.position, 0.5f, 3f, stateNum));
+                if (normalTarget.anotherTargetList.Count > 0)
+                {
+                    if (!one.GetComponent<SlimeHealth>().CheckBtwRapObj())
+                    {
+                        realTargetList.Add(one);
+                    }
+                }
+            }
+
+            if (realTargetList.Count > 0)
+            {
+                StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+            }
+
+            foreach (Collider one in realTargetList)
+            {
+                SlimeHealth slime = one.GetComponent<SlimeHealth>();
+                if (slime != null && !slime.isSinking)
+                {
+                    StartCoroutine(slime.StartDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                }
+            }
+
+        }   //장애물이 있을경우 장애물 뒤에있는 놈들은 리스트에서 제거하는 조건문.
+
+        else
+        {
+            if (targetList.Count > 0)
+            {
+                StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+            }
+
+            foreach (Collider one in targetList)
+            {
+                SlimeHealth slime = one.GetComponent<SlimeHealth>();
+                if (slime != null && !slime.isSinking)
+                {
+                    StartCoroutine(slime.StartDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                }
             }
         }
     }
@@ -38,41 +71,51 @@ public class PlayerAttack : MonoBehaviour
     public void skillAttack(int stateNum)
     {
         List<Collider> targetList = new List<Collider>(skillTarget.targetList);
+        List<Collider> realTargetList = new List<Collider>();
 
-        //foreach(Collider one in targetList)
-        //{
-        //    if (skillTarget.anotherTargetList.Count > 0)
-        //    {
-
-        //    }
-        //}
-
-
-        foreach (Collider one in targetList)
+        if (skillTarget.anotherTargetList.Count > 0)
         {
-            SlimeHealth slime = one.GetComponent<SlimeHealth>();
-            if (slime != null && !slime.isSinking)
+            foreach (Collider one in targetList)
             {
                 if (skillTarget.anotherTargetList.Count > 0)
                 {
-                    if (!slime.CheckBtwRapObj())
+                    if (!one.GetComponent<SlimeHealth>().CheckBtwRapObj())
                     {
-                        StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
-                    }
-                    else
-                    {
-                        //targetList.Remove(one);
+                        realTargetList.Add(one);
                     }
                 }
-                else
+            }
+
+            if (realTargetList.Count > 0)
+            {
+                StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+            }
+
+            foreach (Collider one in realTargetList)
+            {
+                SlimeHealth slime = one.GetComponent<SlimeHealth>();
+                if (slime != null && !slime.isSinking)
                 {
                     StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
                 }
             }
 
+        }   //장애물이 있을경우 장애물 뒤에있는 놈들은 리스트에서 제거하는 조건문.
+
+        else
+        {
             if (targetList.Count > 0)
             {
                 StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+            }
+
+            foreach (Collider one in targetList)
+            {
+                SlimeHealth slime = one.GetComponent<SlimeHealth>();
+                if (slime != null && !slime.isSinking)
+                {
+                    StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                }
             }
         }
     }

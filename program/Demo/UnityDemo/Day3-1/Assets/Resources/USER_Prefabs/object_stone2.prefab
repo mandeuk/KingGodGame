@@ -22,11 +22,12 @@ GameObject:
   - component: {fileID: 33189600708093338}
   - component: {fileID: 23394841601332640}
   - component: {fileID: 208102856823450494}
-  m_Layer: 0
+  - component: {fileID: 65179968593132506}
+  m_Layer: 10
   m_Name: object_stone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4532878774703336
@@ -35,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575938920558502}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.77, y: 0, z: -0.0075048828}
+  m_LocalRotation: {x: -0, y: 0.64944804, z: -0, w: 0.76040596}
+  m_LocalPosition: {x: -1.27, y: 0.23925814, z: -3.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1575938920558502}
   m_Mesh: {fileID: 4300000, guid: 21126c3bbf1024747909d6b764053fd3, type: 3}
+--- !u!65 &65179968593132506
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575938920558502}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.4264725, z: 1.6}
+  m_Center: {x: -0.015255242, y: 0.6452927, z: -0.05072635}
 --- !u!208 &208102856823450494
 NavMeshObstacle:
   m_ObjectHideFlags: 1
