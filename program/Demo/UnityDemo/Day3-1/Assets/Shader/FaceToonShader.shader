@@ -23,7 +23,7 @@
 		lightDir = normalize(lightDir);
 #endif
 
-		half d = dot(s.Normal, lightDir)*0.3 + 0.7;
+		half d = dot(s.Normal, lightDir)*0.28 + 0.72;
 		half3 ramp = tex2D(_Ramp, float2(d,d)).rgb;
 
 		half4 c;

@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 33780966952053516}
   - component: {fileID: 23478240368884358}
   - component: {fileID: 208738168917897244}
-  m_Layer: 10
+  - component: {fileID: 65972580822868202}
+  m_Layer: 9
   m_Name: objectPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967294
   m_IsActive: 1
 --- !u!4 &4150293150759090
 Transform:
@@ -35,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262759813599354}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.276302, y: 0.17141509, z: -1.8797197}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3000002, y: 1, z: 3.8000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,16 +55,16 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4cbff0537d12a2040beb9820bca464fd, type: 3}
+  - {fileID: 2100000, guid: e0b06bcc94fe90841a75c74b5c45241f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262759813599354}
   m_Mesh: {fileID: 4300000, guid: 4cbff0537d12a2040beb9820bca464fd, type: 3}
+--- !u!65 &65972580822868202
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262759813599354}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4172151, y: 4.8978457, z: 1.4172151}
+  m_Center: {x: -0.0024960935, y: 2.4488223, z: 0.002496034}
 --- !u!208 &208738168917897244
 NavMeshObstacle:
   m_ObjectHideFlags: 1

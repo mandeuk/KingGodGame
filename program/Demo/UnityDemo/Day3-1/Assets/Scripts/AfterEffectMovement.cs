@@ -40,7 +40,7 @@ public class AfterEffectMovement : MonoBehaviour {
             }
             else
                 StopWalking();
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetKey(KeyCode.J))
             {
                 avatar.SetBool("Combo", true);
             }

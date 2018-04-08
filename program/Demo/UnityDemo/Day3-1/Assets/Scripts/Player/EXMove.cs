@@ -68,7 +68,7 @@ public class EXMove : MonoBehaviour {
     }
 
     void Update () {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             avatar.SetTrigger("EXMoveOn");
             avatar.SetBool("Combo", false);
@@ -136,20 +136,25 @@ public class EXMove : MonoBehaviour {
         onAfterImageChange = true;  // 잔상을 투명하게하는 update조건문. 점점 투명해짐
         avatar.speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
 
-        transform.GetComponent<PlayerStatus>().moveSpeed = 25;              // ex무브동안의 스피드 이속도로 고속이동함.
+        transform.GetComponent<PlayerStatus>().moveSpeed = 1;
         EXEffect.playEXMoveVanishEffect();    // ex무브의 이펙트 발동
         EXEffect.playEXMoveSlashEffect();
         //transform.rotation = Quaternion.LookRotation(GetComponentInChildren<SkillTarget>().transform.forward);
 
         yield return new WaitForSeconds(0.13f);
-        EXEffect.playExMoveRingEffectBack();
+        transform.GetComponent<PlayerStatus>().moveSpeed = calcDistObj() * 7;              // ex무브동안의 스피드 이속도로 고속이동함.
+        
         onEXMoveColor = false;
 
-        yield return new WaitForSeconds(.04f);
+        yield return new WaitForSeconds(.02f);
+        EXEffect.playExMoveRingEffectBack();
+
+        yield return new WaitForSeconds(.02f);
         EXEffect.playExMoveRingEffectFront();
         onEXMoveColor = false;
 
         yield return new WaitForSeconds(.03f);      // ex무브의 시간인 0.2초
+        onEXMove = false;
         transform.rotation = Quaternion.LookRotation(transform.GetComponentInChildren<SkillTarget>().movePos.normalized);
         EXEffect.playEXmoveVanishFlowerEffect();
         EXEffect.playBlinkEffect();
@@ -159,7 +164,6 @@ public class EXMove : MonoBehaviour {
         }   // 잔상은 이제 다 꺼야함. -> 필요없을듯 어짜피 알아서
 
         onEXMoveColor = true;   // 라파엘 본체의 컬러를 검정에서 원래색으로 돌려주는 업데이트를 작동
-        onEXMove = false;       // ex무브는 끝.
 
         for (int i = 0; i < rendObjs.Length; ++i)
         {
@@ -176,7 +180,20 @@ public class EXMove : MonoBehaviour {
         onEXMoveColor = false;
         onAfterImageChange = false;
 
-
         yield break;
+    }
+
+    float calcDistObj()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position + transform.up / 2, transform.forward, out hit, 7, 1 << 9))
+        {
+            return hit.distance;
+        }
+        else
+        {
+            return 7;
+        }
     }
 }

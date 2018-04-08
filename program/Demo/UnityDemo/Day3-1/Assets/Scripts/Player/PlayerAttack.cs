@@ -8,7 +8,6 @@ public class PlayerAttack : MonoBehaviour
     public GameObject exMoveCam;
     protected Animator avatar;
     public bool b_attacking;
-    public bool enemyInList = false;
 
     public static int normalDamage = 10;
     public int skillDamage = 30;
@@ -129,19 +128,12 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.CompareTag("Player"))
+        //if (transform.CompareTag("Player"))
         {
-            if (Input.GetKey(KeyCode.K))
+            if (Input.GetKey(KeyCode.J))
             {
                 OnAttacking();
             }
-
-            if (normalTarget.targetList.Count > 0)
-            {
-                enemyInList = true;
-            }
-            else
-                enemyInList = false;
         }
     }
 

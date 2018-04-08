@@ -159,5 +159,9 @@ public class SlimeHealth : MonoBehaviour {
         isSinking = true;
 
         Destroy(gameObject, .8f);
+
+        //몬스터사망 후 아이템 생성
+        //ItemManager itmmgr = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        //itmmgr.SpawnItem();
     }
 }

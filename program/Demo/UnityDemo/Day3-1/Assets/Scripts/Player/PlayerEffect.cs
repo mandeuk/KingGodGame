@@ -14,6 +14,7 @@ public class PlayerEffect : MonoBehaviour {
     GameObject EXMoveVanishFlowerEffect;
     GameObject EXMoveRingEffectBack;
     GameObject ExMoveRingEffectFront;
+    GameObject explosionAttackEffect;
 
     public GameObject Effect1Pos;
     public GameObject Effect2Pos;
@@ -151,6 +152,17 @@ public class PlayerEffect : MonoBehaviour {
         }
     }
 
+    public void playExplosionAttackEffect()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            explosionAttackEffect.SetActive(true);
+            explosionAttackEffect.transform.position = transform.position;
+            explosionAttackEffect.transform.rotation = Quaternion.Euler(0, EXMovePos.transform.rotation.eulerAngles.y, 0);
+            explosionAttackEffect.GetComponent<ParticleSystem>().Play();
+        }
+    }
+
 
 
     // Use this for initialization
@@ -163,6 +175,7 @@ public class PlayerEffect : MonoBehaviour {
             EXMoveRingEffectBack = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectBack")) as GameObject;
             ExMoveRingEffectFront = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectFront")) as GameObject;
             EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple")) as GameObject;
+            explosionAttackEffect = Instantiate(Resources.Load("Prefabs/Effect/ExplosionAttackEffect")) as GameObject;
 
             InitEffect();
         }
