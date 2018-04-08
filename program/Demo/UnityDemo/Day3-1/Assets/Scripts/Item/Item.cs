@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Items : MonoBehaviour {
-
-    public class Item
-    {
-        int itemNum;
-        Vector3 itemPos;
-    }
-
+public class Item : MonoBehaviour {
+    
 	// Use this for initialization
 	void Start () {
 		
@@ -22,7 +16,5 @@ public class Items : MonoBehaviour {
 
     public void Effect()
     {
-        PlayerAttack.normalDamage += 10;
-        gameObject.SetActive(false);
     }
 }
