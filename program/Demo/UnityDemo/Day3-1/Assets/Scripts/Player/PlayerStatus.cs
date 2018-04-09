@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour {
+    public static PlayerStatus instance;
 
     public static float healthPoint;
     public static float Energy;
@@ -22,7 +23,7 @@ public class PlayerStatus : MonoBehaviour {
 
     private void Awake()
     {
-
+        instance = this;
     }
 
     public float getMoveSpeed()

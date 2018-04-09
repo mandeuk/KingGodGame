@@ -1141,8 +1141,8 @@ GameObject:
   - component: {fileID: 114157850725593528}
   - component: {fileID: 114592107303778766}
   - component: {fileID: 114271447035371046}
+  - component: {fileID: 114382869310897490}
   - component: {fileID: 136292139454888762}
-  - component: {fileID: 65864156118721098}
   m_Layer: 8
   m_Name: raphael
   m_TagString: Player
@@ -1989,7 +1989,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621306360048820}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.91711086, z: -0, w: 0.39863238}
   m_LocalPosition: {x: 0, y: 0.044, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2007,7 +2007,7 @@ Transform:
   - {fileID: 4168494693391604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -133.015, z: 0}
 --- !u!4 &4060982613413930
 Transform:
   m_ObjectHideFlags: 1
@@ -2171,7 +2171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995107285026322}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3.308, z: -0}
+  m_LocalPosition: {x: 0, y: 1.9, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4054250573869418}
@@ -3826,18 +3826,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5, z: 6}
   m_Center: {x: 0, y: 0, z: 3}
---- !u!65 &65864156118721098
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1621306360048820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &95263794775530838
 Animator:
   serializedVersion: 3
@@ -3865,8 +3853,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.6265242, g: 0.6068339, b: 0.6764706, a: 1}
-  m_Intensity: 4.52
-  m_Range: 9
+  m_Intensity: 3.16
+  m_Range: 8
   m_SpotAngle: 105.4
   m_CookieSize: 10
   m_Shadows:
@@ -3886,7 +3874,7 @@ Light:
     m_Bits: 4294964991
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 4.77
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -4031,6 +4019,17 @@ MonoBehaviour:
   m_DistantDisable: 0
   m_ReferenceObject: {fileID: 0}
   m_DistanceToObject: 20
+--- !u!114 &114382869310897490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621306360048820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5f3f86940547049bf75991aee4434c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114508462228039918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4059,7 +4058,6 @@ MonoBehaviour:
   normalAttacCam: {fileID: 0}
   exMoveCam: {fileID: 0}
   b_attacking: 0
-  enemyInList: 0
   skillDamage: 30
   normalTarget: {fileID: 114242122347341198}
   skillTarget: {fileID: 114508462228039918}

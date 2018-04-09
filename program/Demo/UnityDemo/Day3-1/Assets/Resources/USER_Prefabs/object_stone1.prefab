@@ -23,12 +23,12 @@ GameObject:
   - component: {fileID: 23328770549036636}
   - component: {fileID: 208254247072559310}
   - component: {fileID: 136541171562866082}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: object_stone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4167181804684322
 Transform:
@@ -36,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1679654512079400}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.1, y: 0.21218853, z: -1.6824908}
+  m_LocalRotation: {x: -0, y: 0.61566144, z: -0, w: -0.7880108}
+  m_LocalPosition: {x: 12.8, y: 1, z: 11.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.3
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

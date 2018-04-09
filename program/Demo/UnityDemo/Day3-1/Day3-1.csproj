@@ -288,7 +288,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\blink_dash_start.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -404,6 +403,7 @@
     <Compile Include="Assets\Scripts\AnimationBehaviour\LastAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\rigidBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\RunBehaviour.cs" />
+    <Compile Include="Assets\Scripts\blink_dash_start.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\EnemyEffect.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\Enemy_Slime\SlimeAttack.cs" />
