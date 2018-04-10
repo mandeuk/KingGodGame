@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEffect : MonoBehaviour {
+    public static PlayerEffect instance;
     
     public List<GameObject> slashcloneList = new List<GameObject>();
     public List<GameObject> usedslashcloneList = new List<GameObject>();
@@ -101,8 +102,6 @@ public class PlayerEffect : MonoBehaviour {
         {
             EXMoveSlashEffect.SetActive(true);
             EXMoveSlashEffect.transform.position = EXMovePos.transform.position + EXRotation * 0.5f;
-            //EXMoveSlashEffect.transform.rotation = Quaternion.Euler(EXMovePos.GetComponent<SkillTarget>().movePos.normalized);
-            //EXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXMovePos.transform.right);
             EXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXRotation);
             EXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
         }
@@ -163,10 +162,9 @@ public class PlayerEffect : MonoBehaviour {
         }
     }
 
-
-
-    // Use this for initialization
     void Awake() {
+        instance = this;
+
         if (transform.CompareTag("Player"))
         {
             blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;

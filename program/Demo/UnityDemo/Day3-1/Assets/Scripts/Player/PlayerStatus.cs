@@ -5,18 +5,17 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour {
     public static PlayerStatus instance;
 
-    public static float healthPoint;
-    public static float Energy;
-    public static float attackPower;
-    public static float attackSpeed;
-    public float moveSpeed;
-    public static float attackRange;
-    public static float devilGage;
+    public float healthPoint    { set; get; }
+    public float Energy         { set; get; }
+    public float attackPower    { set; get; }
+    public float attackSpeed    { set; get; }
+    public float attackRange    { set; get; }
+    public float devilGage      { set; get; }
+    public float moveSpeed      { get; set; }
+    public float Ether          { set; get; }
 
-    public static float Ether;
-
-    public static float gameTime;
-    public static float pushBackPower;
+    public float gameTime       { set; get; }
+    public float pushBackPower  { set; get; }
 
     // 게터 셋터 전부 만들어서 쓰기
     // 다른 cs파일에서 수정하는것을 한번에 관리할 수 있게끔.
@@ -24,21 +23,14 @@ public class PlayerStatus : MonoBehaviour {
     private void Awake()
     {
         instance = this;
+
+        healthPoint = 3;
+        Energy = 10;
+        attackPower = 10;
+        attackSpeed = 1;
+        attackRange = 1;
+        devilGage = 30;
+        moveSpeed = 8;
+        Ether = 10;
     }
-
-    public float getMoveSpeed()
-    {
-        return moveSpeed;
-    }
-
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

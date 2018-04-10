@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour {
+    public static ItemManager instance;
+
     public List<GameObject> itemList = new List<GameObject>(); //아이템풀 역할을 할 리스트 선언
     public List<GameObject> useditemList = new List<GameObject>(); //맵에 스폰한 아이템을 저장할 리스트 선언
 
     private void Awake()
     {
+        instance = this;
+
         for (int i = 0; i < 10; ++i)
         {
             itemList.Add(GenerateItem());//Item을 생성해서 넣어야 함

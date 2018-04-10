@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void Awake()
     {
-        raphaelStatus = GetComponent<PlayerStatus>();
         rigidbodyRaphael = GetComponent<Rigidbody>();
         avatar = GetComponent<Animator>();
         playerattack = GetComponent<PlayerAttack>();
@@ -37,10 +36,10 @@ public class PlayerMovement : MonoBehaviour {
             {
                 if (!transform.GetComponent<EXMove>().onEXMove)
                     rigidbodyRaphael.MovePosition(transform.position +
-                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * raphaelStatus.getMoveSpeed());
+                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerStatus.instance.moveSpeed);
                 else
                     rigidbodyRaphael.MovePosition(transform.position +
-                            GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * raphaelStatus.getMoveSpeed());
+                            GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * PlayerStatus.instance.moveSpeed);
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {

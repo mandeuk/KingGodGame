@@ -8,7 +8,6 @@ public class ExplosionAttack : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         playerEffect = transform.GetComponent<PlayerEffect>();
-
     }
 	
 	// Update is called once per frame

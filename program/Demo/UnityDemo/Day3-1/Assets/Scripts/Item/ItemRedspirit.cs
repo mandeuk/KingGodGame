@@ -9,6 +9,6 @@ public class ItemRedspirit : MonoBehaviour
 
     public void Effect()
     {
-        PlayerStatus.healthPoint += 0.5f;
+        PlayerStatus.instance.healthPoint += 0.5f;
     }
 }

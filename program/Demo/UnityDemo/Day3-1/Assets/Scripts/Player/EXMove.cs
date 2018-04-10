@@ -22,8 +22,8 @@ public class EXMove : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         avatar = transform.GetComponent<Animator>();
-        moveSpeed = transform.GetComponent<PlayerStatus>().getMoveSpeed();
-        EXEffect = transform.GetComponent<PlayerEffect>();
+        moveSpeed = PlayerStatus.instance.moveSpeed;
+        EXEffect = PlayerEffect.instance;
 
         //afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
         
