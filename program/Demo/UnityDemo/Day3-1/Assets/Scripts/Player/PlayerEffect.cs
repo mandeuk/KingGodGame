@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEffect : MonoBehaviour {
-    public static PlayerEffect instance;
+    public static PlayerEffect instance = null;
+    public GameObject SpawnCloneList;
     
-    public List<GameObject> slashcloneList = new List<GameObject>();
-    public List<GameObject> usedslashcloneList = new List<GameObject>();
+    List<GameObject> slashcloneList = new List<GameObject>();
+    List<GameObject> usedslashcloneList = new List<GameObject>();
 
     GameObject blinkclone;
     GameObject slashRingEffect;
@@ -168,12 +169,12 @@ public class PlayerEffect : MonoBehaviour {
         if (transform.CompareTag("Player"))
         {
             blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
-            EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect")) as GameObject;
-            EXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect")) as GameObject;
-            EXMoveRingEffectBack = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectBack")) as GameObject;
-            ExMoveRingEffectFront = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectFront")) as GameObject;
-            EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple")) as GameObject;
-            explosionAttackEffect = Instantiate(Resources.Load("Prefabs/Effect/ExplosionAttackEffect")) as GameObject;
+            EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect"), SpawnCloneList.transform) as GameObject;
+            EXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect"), SpawnCloneList.transform) as GameObject;
+            EXMoveRingEffectBack = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectBack"), SpawnCloneList.transform) as GameObject;
+            ExMoveRingEffectFront = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectFront"), SpawnCloneList.transform) as GameObject;
+            EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple"), SpawnCloneList.transform) as GameObject;
+            explosionAttackEffect = Instantiate(Resources.Load("Prefabs/Effect/ExplosionAttackEffect"), SpawnCloneList.transform) as GameObject;
 
             InitEffect();
         }
@@ -187,7 +188,7 @@ public class PlayerEffect : MonoBehaviour {
 
     public GameObject SpawnEffect()
     {
-        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/slash1")) as GameObject;
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/slash1"), SpawnCloneList.transform) as GameObject;
 
         return effectClone;
     }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyEffect : MonoBehaviour {
+    public static EnemyEffect instance = null;
 
-    public List<GameObject> hitcloneList = new List<GameObject>();
-    public List<GameObject> usedhitcloneList = new List<GameObject>();
+    List<GameObject> hitcloneList = new List<GameObject>();
+    List<GameObject> usedhitcloneList = new List<GameObject>();
     GameObject raphael;
 
     public IEnumerator PlayEffect(int stateNum)
@@ -46,14 +47,9 @@ public class EnemyEffect : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        instance = this;
         raphael = GameObject.FindWithTag("Player");
         InitEffect();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void InitEffect()

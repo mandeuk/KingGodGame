@@ -23,7 +23,7 @@ public class EXMove : MonoBehaviour {
     void Awake () {
         avatar = transform.GetComponent<Animator>();
         moveSpeed = PlayerStatus.instance.moveSpeed;
-        EXEffect = PlayerEffect.instance;
+        EXEffect = GetComponent<PlayerEffect>();
 
         //afterImageMat = Resources.Load("Materials/AfterImageEffectMat") as Material;
         
@@ -91,7 +91,7 @@ public class EXMove : MonoBehaviour {
             }
         }
 
-        if (onEXMoveColor)  
+        //if (onEXMoveColor)
         {
             for (int i = 0; i < rendObjs.Length; ++i)
             {

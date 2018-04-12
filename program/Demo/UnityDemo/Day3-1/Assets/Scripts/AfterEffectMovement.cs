@@ -14,9 +14,6 @@ public class AfterEffectMovement : MonoBehaviour {
     public GameObject raphael;
     //AfterImageEffect raphaelEX;
 
-    int turnDir;
-    float turnAngle = 15;
-
     void Awake()
     {
         //raphaelEX = GameObject.FindWithTag("Player").GetComponent<AfterImageEffect>();

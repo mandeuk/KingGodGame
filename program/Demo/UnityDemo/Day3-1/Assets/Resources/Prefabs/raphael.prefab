@@ -1989,8 +1989,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621306360048820}
-  m_LocalRotation: {x: -0, y: -0.91711086, z: -0, w: 0.39863238}
-  m_LocalPosition: {x: 0, y: 0.044, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.897, y: 0, z: -1.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4112289804388308}
@@ -2007,7 +2007,7 @@ Transform:
   - {fileID: 4168494693391604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -133.015, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4060982613413930
 Transform:
   m_ObjectHideFlags: 1
@@ -2075,7 +2075,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1478728397378818}
   m_LocalRotation: {x: -0.50000036, y: 0.49999964, z: 0.49999964, w: 0.50000036}
-  m_LocalPosition: {x: -0, y: 0.82, z: 0}
+  m_LocalPosition: {x: -0.006, y: 0.869, z: 0.007}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_Children:
   - {fileID: 4269124508141784}
@@ -2171,7 +2171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995107285026322}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.9, z: -0}
+  m_LocalPosition: {x: 0, y: 2.55, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4054250573869418}
@@ -3852,9 +3852,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.6265242, g: 0.6068339, b: 0.6764706, a: 1}
-  m_Intensity: 3.16
-  m_Range: 8
+  m_Color: {r: 0.5433547, g: 0.52535677, b: 0.5808823, a: 1}
+  m_Intensity: 1.98
+  m_Range: 9
   m_SpotAngle: 105.4
   m_CookieSize: 10
   m_Shadows:
@@ -3871,10 +3871,10 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294964991
+    m_Bits: 4294963967
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0
+  m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -3915,7 +3915,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827651d7f9ffbf348857159ed78550ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
 --- !u!114 &114242122347341198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3940,8 +3939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slashcloneList: []
-  usedslashcloneList: []
+  SpawnCloneList: {fileID: 0}
   Effect1Pos: {fileID: 1209984848009644}
   Effect2Pos: {fileID: 1400867956271874}
   Effect3Pos: {fileID: 1407019222739700}

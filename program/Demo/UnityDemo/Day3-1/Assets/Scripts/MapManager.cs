@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
 		

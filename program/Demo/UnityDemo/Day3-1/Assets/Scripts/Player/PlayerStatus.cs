@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour {
-    public static PlayerStatus instance;
+    public static PlayerStatus instance = null;
 
     public float healthPoint    { set; get; }
     public float Energy         { set; get; }
