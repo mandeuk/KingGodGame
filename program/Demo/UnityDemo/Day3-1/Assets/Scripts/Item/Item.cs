@@ -12,12 +12,21 @@ public class Item : MonoBehaviour {
         ItemType = Random.Range(1, 2);
 	}
 
+
+
+    // 함수이름 : void ItemEffect()
+    // 기능 : 획득한 아이템의 효과를 적용하는 함수, ItemManager와 PlayerStatus에 접근합니다.
     public void ItemEffect()
     {
-        PlayerAttack.normalDamage += 10;
-        ItemMgr.GetComponent<ItemManager>().GetItem(gameObject);//GameObject ItemManager속 ItemManager 스크립트를 불러와 GetItem()함수 호출
+        //PlayerAttack.normalDamage += 10;
+        PlayerStatus.instance.attackPower += 10;
+        ItemManager.Instance.GetItem(gameObject);
     }
 
+
+
+    // 함수이름 : void OnTriggerEnter(Collider other)
+    // 기능 : 아이템과 충돌한 물체가 Player일 경우 아이템을 획득하도록 하는 기능을 가지고 있습니다
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
