@@ -405,19 +405,18 @@
     <Compile Include="Assets\Scripts\AnimationBehaviour\NonAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\rigidBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\RunBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Slime\EnemyEffect.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Slime\EnemySpawn.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Slime\SlimeAttack.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Slime\SlimeHealth.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Slime\SlimeMovement.cs" />
-    <Compile Include="Assets\Scripts\Enemy_Slime\SlimeSpawn.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyEffect.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
+    <Compile Include="Assets\Scripts\Enemy\SlimeAttack.cs" />
+    <Compile Include="Assets\Scripts\Enemy\SlimeHealth.cs" />
+    <Compile Include="Assets\Scripts\Enemy\SlimeMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemy\SlimeSpawn.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
-    <Compile Include="Assets\Scripts\Item\ItemList.cs" />
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
-    <Compile Include="Assets\Scripts\Item\ItemRedspirit.cs" />
-    <Compile Include="Assets\Scripts\Item\Items.cs" />
     <Compile Include="Assets\Scripts\Item\UIText.cs" />
-    <Compile Include="Assets\Scripts\MapManager.cs" />
+    <Compile Include="Assets\Scripts\Map\ObstacleData.cs" />
+    <Compile Include="Assets\Scripts\Map\RoomData.cs" />
+    <Compile Include="Assets\Scripts\Map\RoomSpawn.cs" />
     <Compile Include="Assets\Scripts\myCameraEvent.cs" />
     <Compile Include="Assets\Scripts\NoiseCameraEvent.cs" />
     <Compile Include="Assets\Scripts\Player\EXMove.cs" />
@@ -429,7 +428,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\Player\SkillTarget.cs" />
-    <Compile Include="Assets\Scripts\RoomSpawn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
