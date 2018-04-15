@@ -8,12 +8,11 @@ TagManager:
   - Item
   - AfterImage
   - Wall
-  - EditorTile
-  - eraser
   - Obstacle
   - EffectCamera
   - mapClearCol
   - GlobalLight
+  - EnemySpawn
   layers:
   - Default
   - TransparentFX
