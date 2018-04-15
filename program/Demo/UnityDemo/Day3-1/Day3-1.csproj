@@ -415,8 +415,10 @@
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\UIText.cs" />
     <Compile Include="Assets\Scripts\Map\ObstacleData.cs" />
+    <Compile Include="Assets\Scripts\Map\RoomColManager.cs" />
     <Compile Include="Assets\Scripts\Map\RoomData.cs" />
     <Compile Include="Assets\Scripts\Map\RoomSpawn.cs" />
+    <Compile Include="Assets\Scripts\Map\StageManager.cs" />
     <Compile Include="Assets\Scripts\myCameraEvent.cs" />
     <Compile Include="Assets\Scripts\NoiseCameraEvent.cs" />
     <Compile Include="Assets\Scripts\Player\EXMove.cs" />
