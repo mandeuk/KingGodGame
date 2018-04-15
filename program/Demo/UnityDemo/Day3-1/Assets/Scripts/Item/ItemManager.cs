@@ -55,16 +55,18 @@ public class ItemManager : MonoBehaviour {
 
     // 함수이름 : void SpawnItem()
     // 기능 : 생성한 아이템이 저장된 아이템풀에서 아이템을 꺼내 맵에 배치한다.
-    public void SpawnItem()
+    public void SpawnItem(Vector3 itempos)
     {
         //아이템풀에 남아있는 아이템이 없을 경우 추가로 생성
         if(itemList.Count == 0)
             itemList.Add(GenerateItem());
 
         useditemList.Add(itemList[0]);//지도에 스폰된 아이템을 useditemList에 추가
-        
+
         //스폰시킬 아이템의 좌표 설정 및 오브젝트 활성화
-        itemList[0].transform.SetPositionAndRotation(new Vector3(Random.Range(-10, 10),1, Random.Range(-10, 10)),new Quaternion(0,0,0,1));
+        //itemList[0].transform.SetPositionAndRotation(new Vector3(Random.Range(-10, 10),1, Random.Range(-10, 10)),new Quaternion(0,0,0,1));
+        itempos.y += 0.7f;//아이템이 땅바닥에 박히지 않게 하기 위한 y값 증가
+        itemList[0].transform.SetPositionAndRotation(itempos, new Quaternion(0, 0, 0, 1));
         itemList[0].SetActive(true);
 
         //아이템풀에서 삭제

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObstacleData : MonoBehaviour {
     public List<GameObject> EnemyClones = new List<GameObject>();
-    
 
 	// Use this for initialization
 	void Awake () {
@@ -13,17 +12,12 @@ public class ObstacleData : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(EnemyClones.Count < 1)
-        {
-            transform.parent.GetComponentInChildren<RoomData>().RoomClear();
-        }
-
         for (int i = 0; i < EnemyClones.Count; i++)
         {
             if (EnemyClones[i].GetComponent<SlimeHealth>().isSinking)
             {
                 EnemyClones.Remove(EnemyClones[i]);
-            }
+            }   // 사망여부 판단.
         }
     }
 }

@@ -16,7 +16,7 @@ public class Item : MonoBehaviour {
 
     // 함수이름 : void ItemEffect()
     // 기능 : 획득한 아이템의 효과를 적용하는 함수, ItemManager와 PlayerStatus에 접근합니다.
-    public void ItemEffect()
+    private void ItemEffect()
     {
         //PlayerAttack.normalDamage += 10;
         PlayerStatus.instance.attackPower += 10;

@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class SlimeHealth : MonoBehaviour {
-    public int startingHealth = 100;
-    public int currentHealth;
+    public float startingHealth = 100;
+    public float currentHealth;
     public GameObject player;
 
     public float flashSpeed = 5f; // 맞았을때 번쩍이는 시간
@@ -41,7 +41,7 @@ public class SlimeHealth : MonoBehaviour {
         return false;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         damaged = true;
         currentHealth -= amount;
@@ -52,7 +52,7 @@ public class SlimeHealth : MonoBehaviour {
         }
     }
 
-    public IEnumerator StartSkillDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
+    public IEnumerator StartSkillDamage(float damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
         damaged = true;
         isEXMove = true;
@@ -85,7 +85,7 @@ public class SlimeHealth : MonoBehaviour {
         yield break;
     }
 
-    public IEnumerator StartDamage(int damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
+    public IEnumerator StartDamage(float damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
         Time.timeScale = .5f;
         slimeMat.SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
@@ -156,11 +156,11 @@ public class SlimeHealth : MonoBehaviour {
         GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;
-
-        Destroy(gameObject, .8f);
+        
 
         //몬스터사망 후 아이템 생성
-        //ItemManager itmmgr = GameObject.Find("ItemManager").GetComponent<ItemManager>();
-        //itmmgr.SpawnItem();
+        //ItemManager.Instance.SpawnItem(gameObject.transform.position);
+
+        Destroy(gameObject, .8f);
     }
 }
