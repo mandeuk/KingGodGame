@@ -414,6 +414,7 @@
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\UIText.cs" />
+    <Compile Include="Assets\Scripts\Map\DoorCol.cs" />
     <Compile Include="Assets\Scripts\Map\ObstacleData.cs" />
     <Compile Include="Assets\Scripts\Map\RoomColManager.cs" />
     <Compile Include="Assets\Scripts\Map\RoomData.cs" />

@@ -17,6 +17,11 @@ public class RoomColManager : MonoBehaviour {
         
     }
 
+    private void Update()
+    {
+
+    }
+
     public void LeftDoorOpen()
     {
         leftWallCol.SetActive(false);
@@ -34,5 +39,23 @@ public class RoomColManager : MonoBehaviour {
         backWallCol.SetActive(false);
     }
 
-
+    public void JudgePlayerInNextRoom()
+    {
+        if (leftDoorCol.GetComponent<DoorCol>().playerInDoor)
+        {
+            print("LeftIn");
+        }
+        else if (rightDoorCol.GetComponent<DoorCol>().playerInDoor)
+        {
+            print("rightIn");
+        }
+        else if (frontDoorCol.GetComponent<DoorCol>().playerInDoor)
+        {
+            print("FrontIn");
+        }
+        else if (backDoorCol.GetComponent<DoorCol>().playerInDoor)
+        {
+            print("BackIn");
+        }
+    }
 }
