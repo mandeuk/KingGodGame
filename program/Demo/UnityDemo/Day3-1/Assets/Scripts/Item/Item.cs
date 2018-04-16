@@ -3,20 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour {
-    GameObject ItemMgr;
-    int ItemType;
+    int itemType;
 
 	// Use this for initialization
 	void Awake () {
-        ItemMgr = GameObject.Find("ItemManager");//ItemManager는 오직 하나이기 때문에 GameObject.Find로 Hierarchy목록에서 찾아서 가져온다.
-        ItemType = Random.Range(1, 2);
-	}
+        itemType = Random.Range(1, 2);
+        ParticleSystem.MainModule myPMain;
+        myPMain = gameObject.GetComponent<ParticleSystem>().main;
+        switch (itemType)
+        {
+            case 1:
+                myPMain.startColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+                break;
+            case 2:
+                myPMain.startColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+                break;
+        }
+        
+    }
 
 
 
     // 함수이름 : void ItemEffect()
     // 기능 : 획득한 아이템의 효과를 적용하는 함수, ItemManager와 PlayerStatus에 접근합니다.
-    public void ItemEffect()
+    private void ItemEffect()
     {
         //PlayerAttack.normalDamage += 10;
         PlayerStatus.instance.attackPower += 10;
