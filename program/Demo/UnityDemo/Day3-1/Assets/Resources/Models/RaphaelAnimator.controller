@@ -1035,10 +1035,10 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: a854dd311071db64fbf483f0993c9f7c, type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: ColliderMove_Dashing
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: ColliderMove_Dashing
 --- !u!1102 &1102588914893260340
 AnimatorState:
   serializedVersion: 5

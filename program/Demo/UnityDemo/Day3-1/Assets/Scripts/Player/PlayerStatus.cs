@@ -35,7 +35,7 @@ public class PlayerStatus : MonoBehaviour {
 
         healthPoint = 3;
         Energy = 10;
-        attackPower = 10;
+        attackPower = 30;
         attackSpeed = 1;
         attackRange = 1;
         devilGage = 30;

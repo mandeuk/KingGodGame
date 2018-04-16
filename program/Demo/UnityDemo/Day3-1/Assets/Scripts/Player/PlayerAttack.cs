@@ -8,10 +8,7 @@ public class PlayerAttack : MonoBehaviour
     public GameObject exMoveCam;
     protected Animator avatar;
     public bool b_attacking;
-
-    public static int normalDamage = 10;
-    public int skillDamage = 30;
-
+    
     public NormalTarget normalTarget;
     public SkillTarget skillTarget;
 
@@ -43,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
                 SlimeHealth slime = one.GetComponent<SlimeHealth>();
                 if (slime != null && !slime.isSinking)
                 {
-                    StartCoroutine(slime.StartDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(slime.StartDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
                 }
             }
 
@@ -61,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
                 SlimeHealth slime = one.GetComponent<SlimeHealth>();
                 if (slime != null && !slime.isSinking)
                 {
-                    StartCoroutine(slime.StartDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(slime.StartDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
                 }
             }
         }
@@ -95,7 +92,7 @@ public class PlayerAttack : MonoBehaviour
                 SlimeHealth slime = one.GetComponent<SlimeHealth>();
                 if (slime != null && !slime.isSinking)
                 {
-                    StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(slime.StartSkillDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
                 }
             }
 
@@ -113,7 +110,7 @@ public class PlayerAttack : MonoBehaviour
                 SlimeHealth slime = one.GetComponent<SlimeHealth>();
                 if (slime != null && !slime.isSinking)
                 {
-                    StartCoroutine(slime.StartSkillDamage(normalDamage, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(slime.StartSkillDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
                 }
             }
         }
