@@ -405,6 +405,7 @@
     <Compile Include="Assets\Scripts\AnimationBehaviour\NonAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\rigidBehaviour.cs" />
     <Compile Include="Assets\Scripts\AnimationBehaviour\RunBehaviour.cs" />
+    <Compile Include="Assets\Scripts\CameraFadeInOut.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyEffect.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\Enemy\SlimeAttack.cs" />
@@ -415,6 +416,7 @@
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\UIText.cs" />
     <Compile Include="Assets\Scripts\Map\DoorCol.cs" />
+    <Compile Include="Assets\Scripts\Map\FluidFireAction.cs" />
     <Compile Include="Assets\Scripts\Map\ObstacleData.cs" />
     <Compile Include="Assets\Scripts\Map\RoomColManager.cs" />
     <Compile Include="Assets\Scripts\Map\RoomData.cs" />

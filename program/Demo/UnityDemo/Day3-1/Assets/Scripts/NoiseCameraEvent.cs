@@ -7,7 +7,7 @@ public class NoiseCameraEvent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        mainCamera = GameObject.FindWithTag("MainCamera");
+        mainCamera = GameObject.FindWithTag("MainVirtualCamera");
     }
 	
 	// Update is called once per frame

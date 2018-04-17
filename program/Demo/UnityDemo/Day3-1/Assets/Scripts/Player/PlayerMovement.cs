@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
     public float turnSpeed;
     private float turnSpeedTime;
     public bool turnPosible;
+    public bool moveRoom = false;
 
     Vector3 movePos;
     Rigidbody rigidbodyRaphael;
@@ -30,8 +31,9 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (avatar)
+        if (!moveRoom)
         {
+            
             if (rigidbodyRaphael /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
                 if (!transform.GetComponent<EXMove>().onEXMove)
@@ -53,6 +55,8 @@ public class PlayerMovement : MonoBehaviour {
                     StopWalking();
             }
         }
+        else
+            StopWalking();
     }
 
     void Turn(Vector3 movePos)

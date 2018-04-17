@@ -17,6 +17,14 @@ public class RoomColManager : MonoBehaviour {
         
     }
 
+    private void Start()
+    {
+        leftDoorCol.GetComponent<DoorCol>().doorType = 0;
+        frontDoorCol.GetComponent<DoorCol>().doorType = 1;
+        rightDoorCol.GetComponent<DoorCol>().doorType = 2;
+        backDoorCol.GetComponent<DoorCol>().doorType = 3;
+    }
+
     private void Update()
     {
 
