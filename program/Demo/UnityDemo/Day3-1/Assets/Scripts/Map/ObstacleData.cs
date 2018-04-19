@@ -14,7 +14,7 @@ public class ObstacleData : MonoBehaviour {
 	void Update () {
         for (int i = 0; i < EnemyClones.Count; i++)
         {
-            if (EnemyClones[i].GetComponent<SlimeHealth>().isSinking)
+            if (EnemyClones[i].GetComponent<Enemyhealth>().isDead)
             {
                 EnemyClones.Remove(EnemyClones[i]);
             }   // 사망여부 판단.

@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (normalTarget.anotherTargetList.Count > 0)
                 {
-                    if (!one.GetComponent<SlimeHealth>().CheckBtwRapObj())
+                    if (!one.GetComponent<Enemyhealth>().CheckBtwRapObj())
                     {
                         realTargetList.Add(one);
                     }
@@ -37,10 +37,10 @@ public class PlayerAttack : MonoBehaviour
 
             foreach (Collider one in realTargetList)
             {
-                SlimeHealth slime = one.GetComponent<SlimeHealth>();
-                if (slime != null && !slime.isSinking)
+                Enemyhealth enemy = one.GetComponent<Enemyhealth>();
+                if (enemy != null && !enemy.isDead)
                 {
-                    StartCoroutine(slime.StartDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.1f, 5f, stateNum));
                 }
             }
 
@@ -55,10 +55,10 @@ public class PlayerAttack : MonoBehaviour
 
             foreach (Collider one in targetList)
             {
-                SlimeHealth slime = one.GetComponent<SlimeHealth>();
-                if (slime != null && !slime.isSinking)
+                Enemyhealth enemy = one.GetComponent<Enemyhealth>();
+                if (enemy != null && !enemy.isDead)
                 {
-                    StartCoroutine(slime.StartDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.1f, 5f, stateNum));
                 }
             }
         }
@@ -75,7 +75,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (skillTarget.anotherTargetList.Count > 0)
                 {
-                    if (!one.GetComponent<SlimeHealth>().CheckBtwRapObj())
+                    if (!one.GetComponent<Enemyhealth>().CheckBtwRapObj())
                     {
                         realTargetList.Add(one);
                     }
@@ -89,10 +89,10 @@ public class PlayerAttack : MonoBehaviour
 
             foreach (Collider one in realTargetList)
             {
-                SlimeHealth slime = one.GetComponent<SlimeHealth>();
-                if (slime != null && !slime.isSinking)
+                Enemyhealth enemy = one.GetComponent<Enemyhealth>();
+                if (enemy != null && !enemy.isDead)
                 {
-                    StartCoroutine(slime.StartSkillDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(enemy.SkillDamaged(PlayerStatus.instance.attackPower, transform.position, 0.5f, 10f, stateNum));
                 }
             }
 
@@ -107,10 +107,10 @@ public class PlayerAttack : MonoBehaviour
 
             foreach (Collider one in targetList)
             {
-                SlimeHealth slime = one.GetComponent<SlimeHealth>();
-                if (slime != null && !slime.isSinking)
+                Enemyhealth enemy = one.GetComponent<Enemyhealth>();
+                if (enemy != null && !enemy.isDead)
                 {
-                    StartCoroutine(slime.StartSkillDamage(PlayerStatus.instance.attackPower, transform.position, 0.3f, 3f, stateNum));
+                    StartCoroutine(enemy.SkillDamaged(PlayerStatus.instance.attackPower, transform.position, 0.5f, 10f, stateNum));
                 }
             }
         }

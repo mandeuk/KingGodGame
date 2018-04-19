@@ -36,13 +36,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4682026514016706}
-  - component: {fileID: 195791643291926818}
   - component: {fileID: 95654974788390308}
-  - component: {fileID: 136026663278981112}
   - component: {fileID: 54928658851853810}
-  - component: {fileID: 114914495964424252}
+  - component: {fileID: 136026663278981112}
   - component: {fileID: 114552495430967392}
   - component: {fileID: 114770690836296238}
+  - component: {fileID: 114050865101314160}
   m_Layer: 11
   m_Name: highpriest
   m_TagString: Enemy
@@ -150,6 +149,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114050865101314160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466667657781582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73cde74587687f4691b24876abd833e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  flashSpeed: 5
+  player: {fileID: 0}
+  isDead: 0
+  damaged: 0
 --- !u!114 &114552495430967392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,24 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af305b9df0f787c49bff7a7b526e6815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114914495964424252
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1466667657781582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e496243ddf68061448433bace3f2e54e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  currentHealth: 0
-  player: {fileID: 0}
-  flashSpeed: 3
-  flashColor: {r: 1, g: 0, b: 0, a: 0.1}
-  sinkSpeed: 1
-  isSinking: 0
 --- !u!136 &136026663278981112
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -203,24 +200,3 @@ CapsuleCollider:
   m_Height: 1.3469322
   m_Direction: 1
   m_Center: {x: 0, y: 0.8265339, z: 0.0787881}
---- !u!195 &195791643291926818
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1466667657781582}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 1
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.5
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3

@@ -15,7 +15,7 @@ public class NormalTarget : MonoBehaviour {
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!other.GetComponent<SlimeHealth>().isSinking)
+            if (!other.GetComponent<Enemyhealth>().isDead)
                 targetList.Add(other);
         }
 
@@ -29,7 +29,7 @@ public class NormalTarget : MonoBehaviour {
     {
         if (other.CompareTag("Enemy"))
         {
-            if (!other.GetComponent<SlimeHealth>().isSinking)
+            if (!other.GetComponent<Enemyhealth>().isDead)
                 targetList.Remove(other);
         }
         if (other.CompareTag("Obstacle"))
@@ -42,7 +42,7 @@ public class NormalTarget : MonoBehaviour {
     void Update () {
         for(int i = 0; i<targetList.Count; i++)
         {
-            if (targetList[i].GetComponent<SlimeHealth>().isSinking)
+            if (targetList[i].GetComponent<Enemyhealth>().isDead)
             {
                 targetList.Remove(targetList[i]);
             }

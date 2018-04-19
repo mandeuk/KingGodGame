@@ -12,8 +12,11 @@ public class EnemySpawn : MonoBehaviour {
 
         for (int i = 0; i < transform.childCount; i++)
         {
+            //if (transform.GetChild(i).tag == "EnemySpawn")
+             //   InitHighPriest(transform.GetChild(i).transform.position);
+
             if (transform.GetChild(i).tag == "EnemySpawn")
-                InitHighPriest(transform.GetChild(i).transform.position);
+                InitWraith(transform.GetChild(i).transform.position);
         }
     }
 
@@ -26,6 +29,19 @@ public class EnemySpawn : MonoBehaviour {
     {
         GameObject enemyClone = Instantiate(Resources.Load("Prefabs/Enemy/highpriest"),transform) as GameObject;
         enemyClone.transform.position = pos + Vector3.up*1.1f;
+
+        return enemyClone;
+    }
+
+    public void InitWraith(Vector3 pos)
+    {
+        enemyCloneList.Add(spawnWraith(pos));
+    }
+
+    public  GameObject spawnWraith(Vector3 pos)
+    {
+        GameObject enemyClone = Instantiate(Resources.Load("Prefabs/Enemy/wraith"), transform) as GameObject;
+        enemyClone.transform.position = pos + Vector3.up * 1.1f;
 
         return enemyClone;
     }

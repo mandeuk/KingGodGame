@@ -9,15 +9,11 @@ public class SlimeHealth : MonoBehaviour {
     public GameObject player;
 
     public float flashSpeed = 5f; // 맞았을때 번쩍이는 시간
-    public Color flashColor = new Color(1f, 0f, 0f, 0.1f); // 맞았을때 테투리가 빨강.
-
-    public float sinkSpeed = 1f;
 
     Vector4 originColor;
 
     private Material slimeMat;
     private Animator anim;
-    private NavMeshAgent slimenavMesh;
     private Rigidbody slimeRigidBody;
 
     bool isDead = false;
@@ -57,7 +53,6 @@ public class SlimeHealth : MonoBehaviour {
         damaged = true;
         isEXMove = true;
         slimeMat.SetColor("_Color", new Vector4(.1f, .1f, .1f, 1));
-        slimenavMesh.speed = 0;
         //anim.speed = 0;
         Vector3 diff = playerPosition - transform.position;
 
@@ -76,11 +71,6 @@ public class SlimeHealth : MonoBehaviour {
         slimeRigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
-        if (!isSinking)
-        {
-            slimenavMesh.speed = 1;
-            //anim.speed = 1;
-        }
 
         yield break;
     }
@@ -89,7 +79,6 @@ public class SlimeHealth : MonoBehaviour {
     {
         Time.timeScale = .5f;
         slimeMat.SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
-        slimenavMesh.speed = 0;
         //anim.speed = 0;
         TakeDamage(damage);
         Vector3 diff = playerPosition - transform.position;
@@ -109,7 +98,6 @@ public class SlimeHealth : MonoBehaviour {
         yield return new WaitForSeconds(delay);
         if (!isSinking)
         {
-            slimenavMesh.speed = 1;
             //anim.speed = 1;
         }
         yield break;
@@ -119,7 +107,6 @@ public class SlimeHealth : MonoBehaviour {
     private void Awake()
     {
         //anim = transform.GetChild(0).GetComponent<Animator>();
-        slimenavMesh = GetComponent<NavMeshAgent>();
         slimeRigidBody = GetComponent<Rigidbody>();
         currentHealth = startingHealth;
         slimeMat = transform.GetChild(0).GetComponent<Renderer>().material;
@@ -152,8 +139,6 @@ public class SlimeHealth : MonoBehaviour {
     void Death()
     {
         isDead = true;
-      
-        GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;
         

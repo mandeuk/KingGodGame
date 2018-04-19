@@ -6,11 +6,18 @@ public class RoomSpawn : MonoBehaviour {
 
     public GameObject[,] mapDataArray = new GameObject[9, 9];
 
-    public int[,] mapSpawnArray = new int[9, 9];
+    public int[,] mapSpawnArray = new int[9, 9] {   {2,1,1,0,0,0,0,0,0 },
+                                                    {1,1,1,0,0,0,0,0,0 },
+                                                    {0,0,1,1,0,0,0,0,0 },
+                                                    {0,0,1,0,0,0,0,0,0 },
+                                                    {0,0,1,0,0,0,0,0,0 },
+                                                    {0,0,0,0,0,0,0,0,0 },
+                                                    {0,0,0,0,0,0,0,0,0 },
+                                                    {0,0,0,0,0,0,0,0,0 },
+                                                    {0,0,0,0,0,0,0,0,0 }};
 
     // Use this for initialization
     void Awake() {
-        mapSpawnArray = StageManager.instance.mapSpawnArray;
         SpawnRoom();
     }
 
