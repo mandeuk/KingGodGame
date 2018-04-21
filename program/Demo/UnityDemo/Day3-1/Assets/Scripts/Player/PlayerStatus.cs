@@ -11,7 +11,7 @@ public class PlayerStatus : MonoBehaviour {
     public float attackSpeed    { set; get; }
     public float attackRange    { set; get; }
     public float devilGage      { set; get; }
-    public float moveSpeed      { get; set; }
+    public float moveSpeed      { set; get; }
     public float Ether          { set; get; }
 
     public float gameTime       { set; get; }

@@ -19,7 +19,6 @@ public class Item : MonoBehaviour {
                 myPMain.startColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
                 break;
         }
-        
     }
 
 

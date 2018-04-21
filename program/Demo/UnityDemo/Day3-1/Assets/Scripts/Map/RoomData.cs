@@ -1,16 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RoomData : MonoBehaviour {
-    enum State
-    {
-        Wait,
-        Start,
-        Open
-    }
-    State roomState = State.Wait;
-
     public bool isClear;
     public bool playerIn;
     public int x, y;
@@ -32,7 +25,7 @@ public class RoomData : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         cameraFade = GameObject.FindWithTag("MainCamera");
-        player = PlayerStatus.instance.transform;
+        player = GameObject.FindWithTag("Player").transform;
         isClear = false;
         playerIn = false;
         //meshs.SetActive(false);
@@ -48,12 +41,11 @@ public class RoomData : MonoBehaviour {
 
     // Update is called once per frame
     // 이거 꼭 업데이트에서 불러야할까? 매프레임 이렇게..???? 후우..
+
     void Update () {
         // 룸의 상태를 판단. 
         if (playerIn)
         {
-            //meshs.SetActive(true);  // 프레임을 잡아 먹으려나..? 따로 함수를 만들어서 한번만  호출되게 할까..?
-
             // 클리어가 되어있지 않고 플레이어가 들어온 상태 -> 룸 Start
             if (!isClear)
             {
@@ -74,7 +66,8 @@ public class RoomData : MonoBehaviour {
         isClear = true;
 
         // 문이 열려야함
-        transform.GetComponent<Animator>().SetBool("DoorOpen", true);
+        if (transform.GetComponent<Animator>().enabled)
+            transform.GetComponent<Animator>().SetBool("DoorOpen", true);
         JudgeFluidFireOpen();
 
         // 콜라이더가 바뀌어야함
@@ -84,19 +77,20 @@ public class RoomData : MonoBehaviour {
     // 룸에 플레이어가 들어왔을때 시작하는 상태에서 호출
     public void RoomStart()
     {
-        transform.GetComponent<Animator>().SetBool("DoorOpen", false);
+        if(transform.GetComponent<Animator>().enabled)
+            transform.GetComponent<Animator>().SetBool("DoorOpen", false);
+        for (int i = 0; i < EnemyClones.Count; i++) {
+            EnemyClones[i].GetComponent<EnemyMovement>().startMove();
+        }
     }
 
     // 룸이 스폰되고 플레이어가 진입전의 상태에서 호출
     public void RoomWait()
     {
-        transform.GetComponent<Animator>().SetBool("DoorOpen", true);
-    }
-
-    // 룸이 클리어 된 상태면 플레이어가 있건 없건  Room은 Open임. 그때 호출.
-    public void RoomOpen()
-    {
-
+        for (int i = 0; i < EnemyClones.Count; i++)
+        {
+            EnemyClones[i].GetComponent<EnemyMovement>().stopMove();
+        }
     }
 
     public IEnumerator RoomMove(int doorType)
@@ -110,6 +104,7 @@ public class RoomData : MonoBehaviour {
         cameraFade.transform.GetChild(2).gameObject.SetActive(false);
 
         yield return new WaitForSeconds(0.8f);
+
         playerGoNextRoom(doorType);
         cameraFade.transform.position = player.transform.position;
         cameraFade.transform.GetChild(0).gameObject.SetActive(true);

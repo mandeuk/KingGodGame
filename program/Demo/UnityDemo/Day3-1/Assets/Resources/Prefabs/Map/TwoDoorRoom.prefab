@@ -1054,6 +1054,7 @@ GameObject:
   - component: {fileID: 4939048909815026}
   - component: {fileID: 95904442004585144}
   - component: {fileID: 114403255386613278}
+  - component: {fileID: 114135535683845806}
   m_Layer: 10
   m_Name: TwoDoorRoom
   m_TagString: Untagged
@@ -3093,6 +3094,34 @@ MonoBehaviour:
   close:
   - {fileID: 1739914906133254}
   - {fileID: 1839735116227262}
+--- !u!114 &114135535683845806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1817836209847194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 1
+  m_VoxelSize: 0.2
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 23800000, guid: 8258164dbb2797d43b09759f4c318414, type: 2}
 --- !u!114 &114198069487145106
 MonoBehaviour:
   m_ObjectHideFlags: 1

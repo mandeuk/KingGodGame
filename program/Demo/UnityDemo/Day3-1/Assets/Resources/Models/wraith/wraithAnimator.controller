@@ -8,7 +8,13 @@ AnimatorController:
   m_Name: wraithAnimator
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Damaged
+  - m_Name: Damaged1
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Damaged2
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -120,7 +126,10 @@ AnimatorStateTransition:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Damaged1
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102555180787125580}
   m_Solo: 0
@@ -276,7 +285,10 @@ AnimatorStateTransition:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Damaged2
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102623593959295484}
   m_Solo: 0
@@ -522,10 +534,10 @@ AnimatorStateMachine:
     m_Position: {x: 60, y: 384, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102623593959295484}
-    m_Position: {x: 252, y: -12, z: 0}
+    m_Position: {x: 336, y: -36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102555180787125580}
-    m_Position: {x: 228, y: -96, z: 0}
+    m_Position: {x: 96, y: -36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102338063763090640}
     m_Position: {x: 564, y: 228, z: 0}
@@ -536,7 +548,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 36, y: -48, z: 0}
+  m_AnyStatePosition: {x: 240, y: -120, z: 0}
   m_EntryPosition: {x: 12, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

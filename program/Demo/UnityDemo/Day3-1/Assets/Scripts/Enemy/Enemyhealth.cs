@@ -11,19 +11,21 @@ public class Enemyhealth : MonoBehaviour {
     public GameObject player;
 
     Material[] enemyMat;
+    public Material transMat;
     Color[] enemyMatOrigColor;
     Animator enemyAnim;
     Rigidbody enemyRigidBody;
+    EnemyMovement enemyMove;
 
     public bool isDead = false;
     public bool damaged = false;
-    bool isExMove = false;
    
 
     // Use this for initialization
     void Awake () {
         enemyMat = new Material[GetComponentsInChildren<Renderer>().Length];
         enemyMatOrigColor = new Color[GetComponentsInChildren<Renderer>().Length];
+        enemyMove = GetComponent<EnemyMovement>();
 
         for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
         {
@@ -45,11 +47,6 @@ public class Enemyhealth : MonoBehaviour {
         currentHealth = startingHealth;
         player = GameObject.FindWithTag("Player");
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     // 적과 플레이어 사이에 장애물이 있는지 체크함.
 
@@ -74,6 +71,8 @@ public class Enemyhealth : MonoBehaviour {
     {
         damaged = true;
         currentHealth -= amount;
+        enemyAnim.SetTrigger("Damaged" + Random.Range(1, 3));
+
 
         if (currentHealth <= 0 && !isDead)
         {
@@ -84,22 +83,29 @@ public class Enemyhealth : MonoBehaviour {
     void Death()
     {
         isDead = true;
-        enemyRigidBody.isKinematic = true;
+        //enemyRigidBody.isKinematic = true;
+        enemyMove.stopMove();
+        enemyAnim.speed = 0.5f;
+
+        StopCoroutine(ColorChange());
         StartCoroutine(ColorChangeDie());
 
         //몬스터사망 후 아이템 생성
-        //ItemManager.Instance.SpawnItem(gameObject.transform.position);
+        ItemManager.Instance.SpawnItem(gameObject.transform.position);
 
         Destroy(gameObject, .8f);
     }
 
     public IEnumerator NormalDamaged(float damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
-        //Time.timeScale = .5f;
+        enemyMove.stopMove();
         TakeDamage(damage);
-        for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
+        if (!isDead)
         {
-            enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
+            for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
+            {
+                enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
+            }
         }
         Vector3 diff = playerPosition - transform.position;
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * pushBack);
@@ -110,26 +116,37 @@ public class Enemyhealth : MonoBehaviour {
         {
             enemyRigidBody.Sleep();
             StartCoroutine(ColorChange());
+            enemyMove.startMove();
         }
         damaged = false;
-        //Time.timeScale = 1;
+        
         yield break;
     }
 
     public IEnumerator SkillDamaged(float damage, Vector3 playerPosition, float delay, float pushBack, int stateNum)
     {
         damaged = true;
+        enemyMove.stopMove();
         //isExMove = true;
+
         for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
         {
-            enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
+            enemyMat[i].SetColor("_Color", new Vector4(.4f, .4f, .4f, 1));
         }
+
         enemyAnim.speed = 0;
         Vector3 diff = playerPosition - transform.position;
         enemyRigidBody.Sleep();
 
         yield return new WaitForSeconds(delay);
         TakeDamage(damage);
+        if (!isDead)
+        {
+            for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
+            {
+                enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
+            }
+        }
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 560f * pushBack);
         StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(5));
 
@@ -139,8 +156,10 @@ public class Enemyhealth : MonoBehaviour {
         {
             enemyAnim.speed = 1;
             StartCoroutine(ColorChange());
+            enemyMove.startMove();
         }
         damaged = false;
+        
         yield break;
     }
 
@@ -154,6 +173,7 @@ public class Enemyhealth : MonoBehaviour {
             {
                 enemyMat[i].SetColor("_Color", Color.Lerp(enemyMat[i].GetColor("_Color"), enemyMatOrigColor[i], flashSpeed * Time.deltaTime));
             }
+            yield return new WaitForEndOfFrame();
         }
 
         yield break;
@@ -167,8 +187,9 @@ public class Enemyhealth : MonoBehaviour {
             timer += Time.deltaTime;
             for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
             {
-                enemyMat[i].SetColor("_Color", Color.Lerp(enemyMat[i].GetColor("_Color"), Color.white * 3, Time.deltaTime * flashSpeed * 3));
+                enemyMat[i].SetColor("_Color", Color.Lerp(enemyMat[i].GetColor("_Color"), Color.white * 10, Time.deltaTime));
             }
+            yield return new WaitForFixedUpdate();
         }
 
         yield break;

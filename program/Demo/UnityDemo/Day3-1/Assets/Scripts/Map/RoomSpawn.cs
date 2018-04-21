@@ -116,7 +116,7 @@ public class RoomSpawn : MonoBehaviour {
 
     GameObject spawnNoDoorRoom()
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/TwoDoorRoom"), transform) as GameObject;
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/NoDoorRoom"), transform) as GameObject;
 
         return roomClone;
     }

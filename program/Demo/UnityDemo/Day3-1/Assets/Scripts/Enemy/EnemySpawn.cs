@@ -1,28 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawn : MonoBehaviour {
-    List<GameObject> enemyCloneList;
-
     // Use this for initialization
-    void Awake()
+    // Start로 생성해줘야 빌드할때 네비메쉬가 생긴 후에 몬스터 배치가됨.
+    
+    private void Awake()
     {
-        enemyCloneList = transform.GetComponent<ObstacleData>().EnemyClones;
 
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            //if (transform.GetChild(i).tag == "EnemySpawn")
-             //   InitHighPriest(transform.GetChild(i).transform.position);
-
-            if (transform.GetChild(i).tag == "EnemySpawn")
-                InitWraith(transform.GetChild(i).transform.position);
-        }
     }
 
-    public void InitHighPriest(Vector3 pos)
+    void Start()
     {
-        enemyCloneList.Add(spawnHighpriest(pos));
+
     }
 
     public GameObject spawnHighpriest(Vector3 pos)
@@ -33,15 +25,10 @@ public class EnemySpawn : MonoBehaviour {
         return enemyClone;
     }
 
-    public void InitWraith(Vector3 pos)
-    {
-        enemyCloneList.Add(spawnWraith(pos));
-    }
-
-    public  GameObject spawnWraith(Vector3 pos)
+    public  GameObject spawnWraith()
     {
         GameObject enemyClone = Instantiate(Resources.Load("Prefabs/Enemy/wraith"), transform) as GameObject;
-        enemyClone.transform.position = pos + Vector3.up * 1.1f;
+        enemyClone.transform.position = Vector3.up * 1.3f;
 
         return enemyClone;
     }

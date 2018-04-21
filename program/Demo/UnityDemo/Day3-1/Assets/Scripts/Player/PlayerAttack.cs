@@ -40,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
                 Enemyhealth enemy = one.GetComponent<Enemyhealth>();
                 if (enemy != null && !enemy.isDead)
                 {
-                    StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.1f, 5f, stateNum));
+                    StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.2f, 5f, stateNum));
                 }
             }
 
@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
                 Enemyhealth enemy = one.GetComponent<Enemyhealth>();
                 if (enemy != null && !enemy.isDead)
                 {
-                    StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.1f, 5f, stateNum));
+                    StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.2f, 5f, stateNum));
                 }
             }
         }
