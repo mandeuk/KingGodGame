@@ -8,6 +8,8 @@ public class ItemManager : MonoBehaviour {
     public List<GameObject> itemList = new List<GameObject>(); //아이템풀 역할을 할 리스트 선언
     public List<GameObject> useditemList = new List<GameObject>(); //맵에 스폰한 아이템을 저장할 리스트 선언
 
+    public GameObject ItemCloneList;
+
     public static ItemManager Instance
     {
         get
@@ -29,14 +31,12 @@ public class ItemManager : MonoBehaviour {
             instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
             DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
-
-
+        
         //빈 아이템을 미리 생성해서 메모리를 미리 확보해놓습니다.
         for (int i = 0; i < 10; ++i)
         {
             itemList.Add(GenerateItem());//Item을 생성해서 넣어야 함
         }
-        
     }
 
 
@@ -45,7 +45,7 @@ public class ItemManager : MonoBehaviour {
     // 기능 : 아이템을 생성하지만, 바로 맵에 배치하지 않고 메모리에 공간만 확보하는 기능
     public GameObject GenerateItem()
     {
-        GameObject cloneItem = Instantiate(Resources.Load("Prefabs/Item")) as GameObject;//Items 생성
+        GameObject cloneItem = Instantiate(Resources.Load("Prefabs/Item"), ItemCloneList.transform) as GameObject;//Items 생성
         cloneItem.SetActive(false);
 
         return cloneItem;

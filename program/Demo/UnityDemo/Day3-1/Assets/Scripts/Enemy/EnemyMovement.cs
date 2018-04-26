@@ -6,21 +6,40 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour {
     GameObject player;
     NavMeshAgent nav;
-    float speed = 2;
-    float angleSpeed = 200;
+    Animator anim;
+    EnemyStatus status;
+
+    public bool playerIn;
 
     // Use this for initialization
     void Awake()
     {
         player = GameObject.FindWithTag("Player").gameObject;
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        status = GetComponent<EnemyStatus>();
+        nav.speed = 0;
+        nav.angularSpeed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (nav.enabled)
+        if (nav.enabled && playerIn)
+        {
             nav.destination = player.transform.position;
+
+            if (Vector3.Distance(player.transform.position, transform.position) > status.attackRange)
+            {
+                nav.speed = GetComponent<EnemyStatus>().moveSpeed;
+                anim.SetBool("Walk", true);
+            }
+            else
+            {
+                nav.speed = 0;
+                anim.SetBool("Walk", false);
+            }
+        }
     }
 
 
@@ -32,7 +51,12 @@ public class EnemyMovement : MonoBehaviour {
 
     public void startMove()
     {
-        nav.speed = speed;
-        nav.angularSpeed = angleSpeed;
+        nav.speed = GetComponent<EnemyStatus>().moveSpeed;
+        nav.angularSpeed = GetComponent<EnemyStatus>().angleSpeed;
+    }
+
+    public void StopWalk()
+    {
+        nav.speed = 0;
     }
 }

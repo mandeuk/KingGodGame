@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
-    public int startHealth = 3;
-    public int currentHealth;
+    public float startHealth = PlayerStatus.instance.healthPoint;
+    public float currentHealth;
     public Image damageImage;
     public AudioClip deathClip;
 
@@ -45,5 +45,16 @@ public class PlayerHealth : MonoBehaviour {
 
         anim.SetTrigger("Die");
         playerMovement.enabled = false;
+    }
+
+    public void PlayerDamaged()
+    {
+        
+    }
+
+    public IEnumerator PlayerColorChange()
+    {
+
+        yield break;
     }
 }

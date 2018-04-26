@@ -6,18 +6,11 @@ public class RoomSpawn : MonoBehaviour {
 
     public GameObject[,] mapDataArray = new GameObject[9, 9];
 
-    public int[,] mapSpawnArray = new int[9, 9] {   {2,1,0,0,0,0,0,0,0 },
-                                                    {1,1,1,0,0,0,0,0,0 },
-                                                    {0,0,1,1,1,0,0,0,0 },
-                                                    {0,0,1,0,0,0,0,0,0 },
-                                                    {0,0,1,1,0,0,0,0,0 },
-                                                    {0,0,0,3,0,0,0,0,0 },
-                                                    {0,0,0,0,0,0,0,0,0 },
-                                                    {0,0,0,0,0,0,0,0,0 },
-                                                    {0,0,0,0,0,0,0,0,0 }};
+    public int[,] mapSpawnArray = new int[9, 9];
 
     // Use this for initialization
     void Awake() {
+        mapSpawnArray = StageManager.instance.mapSpawnArray;
         SpawnRoom();
     }
 
@@ -120,40 +113,6 @@ public class RoomSpawn : MonoBehaviour {
 
     void spawnObstacle(Transform parent)
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/ObstaclesTypeAllPath_1"), parent) as GameObject;
-    }
-
-    void judgeRoomArray(int i , int j)
-    {
-        if (mapSpawnArray[i, j] > 0)
-        {
-            GameObject roomsParentObj = SpawnEmptyRoom();
-
-            if (mapSpawnArray[i + 1, j] != 0 && mapSpawnArray[i, j + 1] != 0)
-            {
-                spawnTwoDoorRoom(roomsParentObj.transform);
-                spawnObstacle(roomsParentObj.transform);
-                mapDataArray[i, j] = roomsParentObj;
-            }
-            else if (mapSpawnArray[i + 1, j] != 0 && mapSpawnArray[i, j + 1] == 0)
-            {
-                spawnRightDoorRoom(roomsParentObj.transform);
-                spawnObstacle(roomsParentObj.transform);
-                mapDataArray[i, j] = roomsParentObj;
-            }
-            else if (mapSpawnArray[i + 1, j] == 0 && mapSpawnArray[i, j + 1] != 0)
-            {
-                spawnLeftDoorRoom(roomsParentObj.transform);
-                spawnObstacle(roomsParentObj.transform);
-                mapDataArray[i, j] = roomsParentObj;
-            }
-            else
-            {
-                spawnNoDoorRoom(roomsParentObj.transform);
-                spawnObstacle(roomsParentObj.transform);
-                mapDataArray[i, j] = roomsParentObj;
-            }
-            mapDataArray[i, j].transform.position = new Vector3(i * 40, 0, j * 40);
-        }
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPathObstacles_1"), parent) as GameObject;
     }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class RoomData : MonoBehaviour {
+    public enum roomState : int
+    {
+
+    }
     public bool isClear;
     public bool playerIn;
     public int x, y;
@@ -24,18 +28,22 @@ public class RoomData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        RoomWait();
         cameraFade = GameObject.FindWithTag("MainCamera");
         player = GameObject.FindWithTag("Player").transform;
         isClear = false;
         playerIn = false;
         //meshs.SetActive(false);
+        EnemyClones = transform.parent.GetComponentInChildren<ObstacleData>().EnemyClones;
+    }
+    private void OnEnable()
+    {
+       
     }
 
     private void Start()
     {
-        EnemyClones = transform.GetComponentInChildren<ObstacleData>().EnemyClones;
         mapSpawnArray = StageManager.instance.mapSpawnArray;
-        RoomWait();
         JudgeFluidFire();
     }
 
@@ -49,8 +57,6 @@ public class RoomData : MonoBehaviour {
             // 클리어가 되어있지 않고 플레이어가 들어온 상태 -> 룸 Start
             if (!isClear)
             {
-                RoomStart();
-
                 // 클리어 여부 판단.
                 if (EnemyClones.Count < 1)
                 {
@@ -77,10 +83,16 @@ public class RoomData : MonoBehaviour {
     // 룸에 플레이어가 들어왔을때 시작하는 상태에서 호출
     public void RoomStart()
     {
-        if(transform.GetComponent<Animator>().enabled)
-            transform.GetComponent<Animator>().SetBool("DoorOpen", false);
-        for (int i = 0; i < EnemyClones.Count; i++) {
-            EnemyClones[i].GetComponent<EnemyMovement>().startMove();
+        playerIn = true;
+        if (!isClear)
+        {
+            if (transform.GetComponent<Animator>().enabled)
+                transform.GetComponent<Animator>().SetBool("DoorOpen", false);
+            for (int i = 0; i < EnemyClones.Count; i++)
+            {
+                EnemyClones[i].GetComponent<EnemyMovement>().startMove();
+                EnemyClones[i].GetComponent<EnemyMovement>().playerIn = true;
+            }
         }
     }
 
@@ -90,6 +102,7 @@ public class RoomData : MonoBehaviour {
         for (int i = 0; i < EnemyClones.Count; i++)
         {
             EnemyClones[i].GetComponent<EnemyMovement>().stopMove();
+            EnemyClones[i].GetComponent<EnemyMovement>().playerIn = false;
         }
     }
 
@@ -124,19 +137,19 @@ public class RoomData : MonoBehaviour {
     {
         if (mapSpawnArray[y, x + 1] > 0)
         {
-            GetComponentInChildren<RoomColManager>().LeftDoorOpen();
+            transform.parent.GetComponentInChildren<RoomColManager>().LeftDoorOpen();
         }
         if (mapSpawnArray[y, x - 1] > 0)
         {
-            GetComponentInChildren<RoomColManager>().RightDoorOpen();
+            transform.parent.GetComponentInChildren<RoomColManager>().RightDoorOpen();
         }
         if (mapSpawnArray[y + 1, x] > 0)
         {
-            GetComponentInChildren<RoomColManager>().FrontDoorOpen();
+            transform.parent.GetComponentInChildren<RoomColManager>().FrontDoorOpen();
         }
         if (mapSpawnArray[y - 1, x] > 0)
         {
-            GetComponentInChildren<RoomColManager>().BackDoorOpen();
+            transform.parent.GetComponentInChildren<RoomColManager>().BackDoorOpen();
         }
     }
 
@@ -226,6 +239,7 @@ public class RoomData : MonoBehaviour {
             player.position 
                 = RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().roomPos[doorType + 2].transform.position;
             RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().playerIn = true;
+            RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().RoomStart();
             playerIn = false;
         }
         else if (doorType == 1)
@@ -233,6 +247,7 @@ public class RoomData : MonoBehaviour {
             player.position
                 = RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().roomPos[doorType + 2].transform.position;
             RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().playerIn = true;
+            RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().RoomStart();
             playerIn = false;
         }
         else if (doorType == 2)
@@ -240,6 +255,7 @@ public class RoomData : MonoBehaviour {
             player.position
                 = RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().roomPos[doorType - 2].transform.position;
             RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().playerIn = true;
+            RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().RoomStart();
             playerIn = false;
         }
         else if (doorType == 3)
@@ -247,9 +263,8 @@ public class RoomData : MonoBehaviour {
             player.position
                 = RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().roomPos[doorType - 2].transform.position;
             RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().playerIn = true;
+            RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().RoomStart();
             playerIn = false;
         }
-
-
     }
 }

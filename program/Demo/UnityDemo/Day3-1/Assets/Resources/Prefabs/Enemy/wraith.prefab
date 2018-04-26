@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 114895828229803340}
   - component: {fileID: 114061956864888590}
   - component: {fileID: 114632911424875104}
+  - component: {fileID: 114909570599149618}
   m_Layer: 11
   m_Name: wraith
   m_TagString: Enemy
@@ -1367,6 +1368,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac68d861c04f5824aa5496ec42111969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114909570599149618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686057448938930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02f409564bbfe047af5f8e6755b8a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoint: 100
+  attackPower: 1
+  attackRange: 6
+  moveSpeed: 2
+  angleSpeed: 200
 --- !u!136 &136812276756468556
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1574,9 +1591,9 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 6
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0

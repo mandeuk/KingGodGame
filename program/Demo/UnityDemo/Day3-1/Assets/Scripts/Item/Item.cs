@@ -8,12 +8,15 @@ public class Item : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         itemType = Random.Range(1, 9);
+        
+    }
+
+    void Start()
+    {
         ParticleSystem.MainModule myPMain;
         myPMain = gameObject.GetComponent<ParticleSystem>().main;
         myPMain.startColor = Itemtable.Instance.SetItemColor(itemType);
     }
-
-
 
     // 함수이름 : void ItemEffect()
     // 기능 : 획득한 아이템의 효과를 적용하는 함수, ItemManager와 PlayerStatus에 접근합니다.
@@ -22,7 +25,6 @@ public class Item : MonoBehaviour {
         //PlayerStatus.instance.attackPower += 10;
         Itemtable.Instance.ApplyItem(itemType);
         ItemManager.Instance.GetItem(gameObject);
-        
     }
 
 

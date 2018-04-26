@@ -175,7 +175,7 @@ public class PlayerEffect : MonoBehaviour {
             ExMoveRingEffectFront = Instantiate(Resources.Load("Prefabs/Effect/EXMoveRingEffectFront"), SpawnCloneList.transform) as GameObject;
             EXMoveSlashEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveSlashEffectSimple"), SpawnCloneList.transform) as GameObject;
             explosionAttackEffect = Instantiate(Resources.Load("Prefabs/Effect/ExplosionAttackEffect"), SpawnCloneList.transform) as GameObject;
-
+            
             InitEffect();
         }
     }

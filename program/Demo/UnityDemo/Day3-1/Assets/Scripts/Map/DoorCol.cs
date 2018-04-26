@@ -11,7 +11,7 @@ public class DoorCol : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             playerInDoor = true;
-            StartCoroutine(GetComponentInParent<RoomData>().RoomMove(doorType));
+            StartCoroutine(transform.parent.parent.GetComponentInChildren<RoomData>().RoomMove(doorType));
         }
     }
 
