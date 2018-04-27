@@ -108,7 +108,7 @@ public class Enemyhealth : MonoBehaviour {
         }
         Vector3 diff = playerPosition - transform.position;
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * pushBack);
-        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum));
+        StartCoroutine(EnemyEffect.instance.PlayEffect(stateNum, this.gameObject));
 
         yield return new WaitForSeconds(delay);
         if (!isDead)
@@ -147,7 +147,8 @@ public class Enemyhealth : MonoBehaviour {
             }
         }
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 560f * pushBack);
-        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(5));
+
+        StartCoroutine(EnemyEffect.instance.PlayEffect(5,this.gameObject));
 
         yield return new WaitForSeconds(.2f);
         enemyRigidBody.Sleep();

@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (nav.enabled && playerIn)
+        if (nav.enabled && playerIn && !GetComponent<WraithAttack>().attacking)
         {
             nav.destination = player.transform.position;
 
@@ -59,4 +59,5 @@ public class EnemyMovement : MonoBehaviour {
     {
         nav.speed = 0;
     }
+
 }

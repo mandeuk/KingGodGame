@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
-    public float startHealth = PlayerStatus.instance.healthPoint;
+    public float startHealth;
     public float currentHealth;
-    public Image damageImage;
     public AudioClip deathClip;
 
     Animator anim;
@@ -17,6 +16,7 @@ public class PlayerHealth : MonoBehaviour {
 	void Awake () {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        startHealth = PlayerStatus.instance.healthPoint;
         currentHealth = startHealth;
 	}
 	
@@ -49,12 +49,7 @@ public class PlayerHealth : MonoBehaviour {
 
     public void PlayerDamaged()
     {
-        
-    }
-
-    public IEnumerator PlayerColorChange()
-    {
-
-        yield break;
+        StopCoroutine(PlayerColorChange.instance.ColorChange());
+        StartCoroutine(PlayerColorChange.instance.ColorChange());
     }
 }

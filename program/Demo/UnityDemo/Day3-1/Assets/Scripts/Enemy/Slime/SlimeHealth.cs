@@ -65,7 +65,7 @@ public class SlimeHealth : MonoBehaviour {
         TakeDamage(damage);
         damaged = false;
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 560f * pushBack);
-        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(5));
+        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(5,this.gameObject));
 
         yield return new WaitForSeconds(.2f);
         slimeRigidBody.Sleep();
@@ -83,7 +83,7 @@ public class SlimeHealth : MonoBehaviour {
         TakeDamage(damage);
         Vector3 diff = playerPosition - transform.position;
         GetComponent<Rigidbody>().AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * pushBack);
-        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum));
+        StartCoroutine(GetComponent<EnemyEffect>().PlayEffect(stateNum,this.gameObject));
 
         //while (timef + 0.5f > Time.time)
         //{

@@ -420,7 +420,11 @@
     <Compile Include="Assets\Scripts\Enemy\Slime\SlimeHealth.cs" />
     <Compile Include="Assets\Scripts\Enemy\Slime\SlimeMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy\Slime\SlimeSpawn.cs" />
+    <Compile Include="Assets\Scripts\Enemy\wraith\WraitAttackBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemy\wraith\WraithAttack.cs" />
+    <Compile Include="Assets\Scripts\Enemy\wraith\WraithBullet.cs" />
+    <Compile Include="Assets\Scripts\Enemy\wraith\WraithEffect.cs" />
+    <Compile Include="Assets\Scripts\EnemyEffectVanishingProcess.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\Itemtable.cs" />
@@ -439,6 +443,7 @@
     <Compile Include="Assets\Scripts\Player\ExplosionAttack.cs" />
     <Compile Include="Assets\Scripts\Player\NormalTarget.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerColorChange.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />

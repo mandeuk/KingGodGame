@@ -5,15 +5,16 @@ using UnityEngine;
 public class EnemyEffect : MonoBehaviour {
     public static EnemyEffect instance = null;
 
-    List<GameObject> hitcloneList = new List<GameObject>();
-    List<GameObject> usedhitcloneList = new List<GameObject>();
+    public List<GameObject> hitcloneList = new List<GameObject>();
+    public List<GameObject> usedhitcloneList = new List<GameObject>();
+    public GameObject spawnCloneList;
     GameObject raphael;
 
-    public IEnumerator PlayEffect(int stateNum)
+    public IEnumerator PlayEffect(int stateNum , GameObject enemy)
     {
         usedhitcloneList.Add(hitcloneList[0]);
         hitcloneList[0].SetActive(true);
-        hitcloneList[0].transform.position = transform.position + Vector3.up*0.7f;
+        hitcloneList[0].transform.position = enemy.transform.position + Vector3.up*0.7f;
         hitcloneList[0].transform.localScale = new Vector3(1f, 1f, 1f);
         hitcloneList[0].transform.LookAt(raphael.transform);
         hitcloneList[0].transform.Rotate(new Vector3(0, 0, Random.Range(-30,30)));
@@ -34,14 +35,14 @@ public class EnemyEffect : MonoBehaviour {
         }
 
         hitcloneList.RemoveAt(0);
-
-        yield return new WaitForSeconds(1f);
-
-        hitcloneList.Add(usedhitcloneList[0]);
-        usedhitcloneList[0].SetActive(false);
-        usedhitcloneList.RemoveAt(0);
-
         yield break;
+    }
+
+    public void effectVanishing(GameObject effect)
+    {
+        effect.SetActive(false);
+        hitcloneList.Add(effect);
+        usedhitcloneList.Remove(effect);
     }
 
     // Use this for initialization
@@ -54,13 +55,13 @@ public class EnemyEffect : MonoBehaviour {
 
     public void InitEffect()
     {
-        for (int i = 0; i < 5; ++i)
+        for (int i = 0; i < 10; ++i)
             hitcloneList.Add(SpawnEffect());
     }
 
     public GameObject SpawnEffect()
     {
-        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect")) as GameObject;
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect") , spawnCloneList.transform) as GameObject;
 
         return effectClone;
     }

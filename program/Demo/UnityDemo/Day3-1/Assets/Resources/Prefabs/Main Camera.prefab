@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 114277160566627634}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 114491133798100146}
   m_Layer: 0
   m_Name: Cam
-  m_TagString: MainCamera
+  m_TagString: MainVirtualCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4934413564424824}
   - component: {fileID: 33019192347287502}
   - component: {fileID: 23087796168313894}
+  - component: {fileID: 114950836127004210}
   m_Layer: 0
   m_Name: FadeInOutObj
   m_TagString: Untagged
@@ -183,8 +184,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404549677338698}
-  m_LocalRotation: {x: 0.0000008046626, y: 0.0000009536742, z: -0.00000090152014,
-    w: 1}
+  m_LocalRotation: {x: 0.0000005364418, y: 0.000027507544, z: -0.000025190413, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1.0000002}
   m_Children:
@@ -211,7 +211,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649152109912792}
-  m_LocalRotation: {x: 0.000000834465, y: 0.0000014007092, z: -0.0000014230609, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
   m_Children:
@@ -239,7 +239,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1595878733043420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 5.52}
+  m_LocalPosition: {x: 0, y: -0, z: 5.44}
   m_LocalScale: {x: 7.8, y: 4.5, z: 0}
   m_Children: []
   m_Father: {fileID: 4749935749121026}
@@ -278,8 +278,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504181601567458}
-  m_LocalRotation: {x: 0.33691216, y: 0.34060058, z: -0.13224131, w: 0.8677521}
-  m_LocalPosition: {x: -7.06, y: 8, z: -5.7}
+  m_LocalRotation: {x: 0.33691213, y: 0.34060082, z: -0.13224119, w: 0.867752}
+  m_LocalPosition: {x: -5, y: 8, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4482144698559892}
@@ -297,7 +297,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1647161638847254}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0, z: 3.8}
+  m_LocalPosition: {x: -0, y: 0, z: 0.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4749935749121026}
@@ -555,15 +555,15 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    neutralBlackIn: 0.062
-    neutralWhiteIn: 7.5
+    neutralBlackIn: 0.027
+    neutralWhiteIn: 8.3
     neutralBlackOut: -0.004
-    neutralWhiteOut: 4.5
-    neutralWhiteLevel: 8.1
+    neutralWhiteOut: 5.46
+    neutralWhiteLevel: 8
     neutralWhiteClip: 5.1
   m_ColorGrading:
-    enabled: 1
-    precision: 16
+    enabled: 0
+    precision: 32
     colorWheels:
       shadows: {r: 1, g: 0.9999, b: 0.9999, a: 1}
       midtones: {r: 1, g: 0.9999, b: 0.9999, a: 1}
@@ -572,18 +572,18 @@ MonoBehaviour:
       temperatureShift: 0
       tint: 0
       hue: 0
-      saturation: 0.91
-      vibrance: 0.2
-      value: 3.39
+      saturation: 1.12
+      vibrance: 0.1
+      value: 1.2
       contrast: 1.07
       gain: 1.07
       gamma: 1
     channelMixer:
-      currentChannel: 1
+      currentChannel: 2
       channels:
       - {x: 1, y: 0, z: 0}
       - {x: 0, y: 1, z: 0}
-      - {x: 0, y: 0, z: 1}
+      - {x: 0, y: 0, z: 0.96}
     curves:
       master:
         serializedVersion: 2
@@ -650,7 +650,7 @@ MonoBehaviour:
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: 1
+          value: 0.8389816
           inSlope: 1
           outSlope: 1
           tangentMode: 0
@@ -972,6 +972,17 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
+--- !u!114 &114950836127004210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647161638847254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c228f799faa02c2439dbfe8f7f8b494c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124434307551137230
 Behaviour:
   m_ObjectHideFlags: 1

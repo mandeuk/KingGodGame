@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour {
     protected Animator avatar;
     public float turnSpeed;
     private float turnSpeedTime;
-    public bool turnPosible;
     public bool moveRoom = false;
 
     Vector3 movePos;
@@ -69,7 +68,6 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             rigidbodyRaphael.rotation = Quaternion.LookRotation(movePos.normalized);
-            turnPosible = false;
             IsWalking();
         }
     }
