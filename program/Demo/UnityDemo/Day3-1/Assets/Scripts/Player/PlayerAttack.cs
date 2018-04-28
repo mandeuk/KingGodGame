@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public void NormalAttack(int stateNum)
     {
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
+        List<Collider> enemyBulletList = new List<Collider>(normalTarget.enemyBulletList);
         List<Collider> realTargetList = new List<Collider>();
 
         if (normalTarget.anotherTargetList.Count > 0)
@@ -60,6 +61,15 @@ public class PlayerAttack : MonoBehaviour
                 {
                     StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.2f, 5f, stateNum));
                 }
+            }
+        }
+
+        if(enemyBulletList.Count > 0)
+        {
+            foreach (Collider one in enemyBulletList)
+            {
+                WraithEffect.instance.BulletHit(one.gameObject);
+                one.GetComponent<WraithBullet>().onFire = false;
             }
         }
     }
@@ -151,7 +161,9 @@ public class PlayerAttack : MonoBehaviour
         if (transform.CompareTag("Player") || b_attacking)
         {
             StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
+            transform.GetComponent<PlayerEffect>().PlayBlackWaveEffect(stateNum);
             NormalAttack(stateNum);
+
         }
     }
 }

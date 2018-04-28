@@ -84,7 +84,7 @@ public class WraithAttack : MonoBehaviour {
 
     public void FireBullet()
     {
-        StartCoroutine(WraithEffect.instance.FireBulletCoroutain(this.gameObject));
+        WraithEffect.instance.FireBullet(this.gameObject);
     }
     
 }

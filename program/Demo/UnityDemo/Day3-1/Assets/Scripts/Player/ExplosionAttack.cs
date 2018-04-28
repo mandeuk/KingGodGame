@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class ExplosionAttack : MonoBehaviour {
     PlayerEffect playerEffect;
+    Animator anim;
 
 	// Use this for initialization
 	void Awake () {
-        playerEffect = transform.GetComponent<PlayerEffect>();
+        playerEffect = GetComponent<PlayerEffect>();
+        anim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            playerEffect.playExplosionAttackEffect();
+            //playerEffect.playExplosionAttackEffect();
+            anim.SetTrigger("ChargeAttack");
         }
 	}
 }

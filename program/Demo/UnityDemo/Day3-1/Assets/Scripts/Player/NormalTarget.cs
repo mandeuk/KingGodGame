@@ -5,6 +5,7 @@ using UnityEngine;
 public class NormalTarget : MonoBehaviour {
     public List<Collider> targetList;
     public List<Collider> anotherTargetList;
+    public List<Collider> enemyBulletList;
 
 	// Use this for initialization
 	void Awake () {
@@ -17,6 +18,11 @@ public class NormalTarget : MonoBehaviour {
         {
             if (!other.GetComponent<Enemyhealth>().isDead)
                 targetList.Add(other);
+        }
+
+        if (other.CompareTag("EnemyBullet"))
+        {
+            enemyBulletList.Add(other);
         }
 
         if (other.CompareTag("Obstacle"))
@@ -36,6 +42,11 @@ public class NormalTarget : MonoBehaviour {
         {
             anotherTargetList.Remove(other);
         }
+        if (other.CompareTag("EnemyBullet"))
+        {
+            enemyBulletList.Remove(other);
+        }
+
     }
 
     // Update is called once per frame
@@ -45,6 +56,14 @@ public class NormalTarget : MonoBehaviour {
             if (targetList[i].GetComponent<Enemyhealth>().isDead)
             {
                 targetList.Remove(targetList[i]);
+            }
+        }
+
+        for (int i = 0; i < enemyBulletList.Count; i++)
+        {
+            if (!enemyBulletList[i].GetComponent<WraithBullet>().onFire)
+            {
+                enemyBulletList.Remove(enemyBulletList[i]);
             }
         }
     }

@@ -108,6 +108,7 @@ public class EXMove : MonoBehaviour {
     public IEnumerator EXMovePlay()
     {
         onEXMove = true;    // ex무브가 시작.
+        PlayerHealth.instance.invincibilty = true;
         onEXMoveColor = false;
         transform.GetComponent<PlayerAttack>().skillAttack(4);
         for (int i = 0; i < rendObjs.Length; ++i)
@@ -175,6 +176,7 @@ public class EXMove : MonoBehaviour {
         transform.GetComponent<PlayerStatus>().moveSpeed = moveSpeed;
         avatar.speed = 1;
         afterImageR.GetComponent<Animator>().speed = 1;
+        PlayerHealth.instance.invincibilty = false;
 
         yield return new WaitForSeconds(1.8f);
         onEXMoveColor = false;

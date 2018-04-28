@@ -4,16 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
+    public static PlayerHealth instance = null;
     public float startHealth;
     public float currentHealth;
-    public AudioClip deathClip;
+
 
     Animator anim;
     PlayerMovement playerMovement;
     bool isDead;
+    public bool superArmor;
+    public bool invincibilty;
 
 	// Use this for initialization
 	void Awake () {
+        instance = this;
+        superArmor = false;
+        invincibilty = false;
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         startHealth = PlayerStatus.instance.healthPoint;
@@ -47,9 +53,18 @@ public class PlayerHealth : MonoBehaviour {
         playerMovement.enabled = false;
     }
 
-    public void PlayerDamaged()
+    public void PlayerDamaged(GameObject Hit)
     {
-        StopCoroutine(PlayerColorChange.instance.ColorChange());
-        StartCoroutine(PlayerColorChange.instance.ColorChange());
+        if (!invincibilty)
+        {
+            StopCoroutine(PlayerColorChange.instance.ColorChange());
+            StartCoroutine(PlayerColorChange.instance.ColorChange());
+            if (!superArmor)
+            {
+                GetComponent<Rigidbody>().AddForce(Hit.transform.forward * 6000);
+            }
+            //TakeDamage(1);
+            print("맞음");
+        }
     }
 }

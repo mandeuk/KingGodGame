@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayerEffect : MonoBehaviour {
     public static PlayerEffect instance = null;
     public GameObject SpawnCloneList;
-    
+
     List<GameObject> slashcloneList = new List<GameObject>();
     List<GameObject> usedslashcloneList = new List<GameObject>();
+
+    List<GameObject> blackWaveEffectList = new List<GameObject>();
+    List<GameObject> usedBlackWaveEffectList = new List<GameObject>();
 
     GameObject blinkclone;
     GameObject slashRingEffect;
@@ -84,6 +87,55 @@ public class PlayerEffect : MonoBehaviour {
         }
 
         yield break;
+    }
+
+    public void PlayBlackWaveEffect(int stateNum)
+    {
+        if (GetComponent<PlayerAttack>().b_attacking)
+        {
+            usedBlackWaveEffectList.Add(blackWaveEffectList[0]);
+            blackWaveEffectList[0].SetActive(true);
+            blackWaveEffectList[0].transform.localScale = new Vector3(1f, 1f, 1f);
+
+            if (stateNum == 1)
+            {
+                blackWaveEffectList[0].transform.position = Effect1Pos.transform.position;
+                blackWaveEffectList[0].transform.rotation =
+                    Quaternion.Euler(0, transform.rotation.eulerAngles.y, 20);
+            }
+
+            else if (stateNum == 2)
+            {
+                blackWaveEffectList[0].transform.position = Effect2Pos.transform.position;
+                blackWaveEffectList[0].transform.rotation =
+                    Quaternion.Euler(0, transform.rotation.eulerAngles.y, -20);
+            }
+
+            else if (stateNum == 3)
+            {
+                blackWaveEffectList[0].transform.position = Effect3Pos.transform.position;
+                blackWaveEffectList[0].transform.rotation =
+                    Quaternion.Euler(0, transform.rotation.eulerAngles.y, 20);
+            }
+
+            else if (stateNum == 4)
+            {
+                //blackWaveEffectList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                blackWaveEffectList[0].transform.position = Effect4Pos.transform.position;
+                blackWaveEffectList[0].transform.rotation =
+                    Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            }
+            blackWaveEffectList[0].GetComponent<Rigidbody>().AddForce(transform.forward * 800);
+            blackWaveEffectList.RemoveAt(0);
+        }
+    }
+
+    public void BlackWaveEffectVanising(GameObject effect)
+    {
+        effect.GetComponent<Rigidbody>().Sleep();
+        effect.SetActive(false);
+        blackWaveEffectList.Add(effect);
+        usedBlackWaveEffectList.Remove(effect);
     }
 
     public void playBlinkEffect()
@@ -164,10 +216,9 @@ public class PlayerEffect : MonoBehaviour {
     }
 
     void Awake() {
-        instance = this;
-
         if (transform.CompareTag("Player"))
         {
+            instance = this;
             blinkclone = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
             EXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect"), SpawnCloneList.transform) as GameObject;
             EXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect"), SpawnCloneList.transform) as GameObject;
@@ -177,6 +228,8 @@ public class PlayerEffect : MonoBehaviour {
             explosionAttackEffect = Instantiate(Resources.Load("Prefabs/Effect/ExplosionAttackEffect"), SpawnCloneList.transform) as GameObject;
             
             InitEffect();
+
+            InitBlackWaveEffect();
         }
     }
 
@@ -186,9 +239,22 @@ public class PlayerEffect : MonoBehaviour {
             slashcloneList.Add(SpawnEffect());
     }
 
+    public void InitBlackWaveEffect()
+    {
+        for(int i = 0; i < 10; ++i)
+            blackWaveEffectList.Add(SpawnBlackWaveEffect());
+    }
+
     public GameObject SpawnEffect()
     {
         GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/slash1"), SpawnCloneList.transform) as GameObject;
+
+        return effectClone;
+    }
+
+    public GameObject SpawnBlackWaveEffect()
+    {
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/BlackWave"), SpawnCloneList.transform) as GameObject;
 
         return effectClone;
     }
