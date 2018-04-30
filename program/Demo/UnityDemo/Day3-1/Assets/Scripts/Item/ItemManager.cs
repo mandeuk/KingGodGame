@@ -32,6 +32,11 @@ public class ItemManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
         
+        
+    }
+
+    private void Start()
+    {
         //빈 아이템을 미리 생성해서 메모리를 미리 확보해놓습니다.
         for (int i = 0; i < 10; ++i)
         {

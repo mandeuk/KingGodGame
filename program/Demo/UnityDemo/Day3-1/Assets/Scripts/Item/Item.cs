@@ -4,18 +4,42 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
     public int itemType;
+    public bool magnetic = false;
+    public float magneticspeed;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
         itemType = Random.Range(1, 9);
-        
+        ParticleSystem.MainModule myPMain;
+        myPMain = gameObject.GetComponent<ParticleSystem>().main;
+        myPMain.startColor = Itemtable.Instance.SetItemColor(itemType);
+        magneticspeed = 1.0f;
+        magnetic = false;
     }
 
     void Start()
     {
-        ParticleSystem.MainModule myPMain;
-        myPMain = gameObject.GetComponent<ParticleSystem>().main;
-        myPMain.startColor = Itemtable.Instance.SetItemColor(itemType);
+        
+    }
+
+    private void Update()
+    {
+        if(magnetic)
+        {
+            Vector3 playerpos = PlayerStatus.instance.transform.position;
+            playerpos.y = 1.0f;
+            Vector3 movevector = (playerpos - this.gameObject.transform.position).normalized;//플레이어 방향으로 정규화(normalized)된 벡터를 저장(길이 1.0)
+            //this.gameObject.transform.position += movevector * (Time.deltaTime * magneticspeed);
+
+            this.gameObject.GetComponent<Rigidbody>().AddForce(movevector * magneticspeed);
+            //this.gameObject.GetComponent<Rigidbody>().AddRelativeForce(movevector);
+            //this.gameObject.transform.up = movevector;
+
+            if (magneticspeed < 100.0f)
+            {
+                magneticspeed += (Time.deltaTime*10);
+            }
+        }
     }
 
     // 함수이름 : void ItemEffect()
@@ -37,7 +61,13 @@ public class Item : MonoBehaviour {
         {
             ItemEffect();
             gameObject.SetActive(false);//충돌한 Item 오브젝트를 비활성화
+            magnetic = false;
             //Debug.Log("Compare tag item.cs 충돌!");
+        }
+        if(other.CompareTag("ItemMagnet"))
+        {
+            magnetic = true;
+            Debug.Log("아이템.cs에서 체크");
         }
     }
 }

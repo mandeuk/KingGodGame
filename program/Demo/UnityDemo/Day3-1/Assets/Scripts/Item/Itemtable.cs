@@ -43,7 +43,7 @@ public class Itemtable : MonoBehaviour {
         colorGreenSpirit   = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         colorBlueSpirit    = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         colorWhiteSpirit   = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        colorBlackSpirit   = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        colorBlackSpirit   = new Color(0.1f, 0.1f, 0.1f, 1.0f);
         colorVioletSpirit  = new Color(0.9f, 0.5f, 0.9f, 1.0f);
         colorRainbowSpirit = new Color(0.0f, 1.0f, 1.0f, 1.0f);
     }
