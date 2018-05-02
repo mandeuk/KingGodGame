@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
     public static PlayerHealth instance = null;
@@ -11,7 +12,7 @@ public class PlayerHealth : MonoBehaviour {
 
     Animator anim;
     PlayerMovement playerMovement;
-    bool isDead;
+    public bool isDead;
     public bool superArmor;
     public bool invincibilty;
 
@@ -41,7 +42,7 @@ public class PlayerHealth : MonoBehaviour {
         }
         else
         {
-            anim.SetTrigger("Damage");
+            //anim.SetTrigger("Damage");
         }
     }
 
@@ -50,12 +51,23 @@ public class PlayerHealth : MonoBehaviour {
         isDead = true;
 
         anim.SetTrigger("Die");
-        playerMovement.enabled = false;
+        transform.GetComponent<PlayerMovement>().enabled = false;
+        transform.GetComponent<PlayerHealth>().enabled = false;
+        transform.GetComponent<PlayerAttack>().enabled = false;
+        transform.GetComponent<Rigidbody>().isKinematic = true;
+        transform.GetComponent<Collider>().isTrigger = true;
+
+        Invoke("loadScene", 5);
+    }
+
+    void loadScene()
+    {
+        SceneManager.LoadScene("Game_Junghoon");
     }
 
     public void PlayerDamaged(GameObject Hit)
     {
-        if (!invincibilty)
+        if (!invincibilty && !isDead)
         {
             StopCoroutine(PlayerColorChange.instance.ColorChange());
             StartCoroutine(PlayerColorChange.instance.ColorChange());
@@ -63,7 +75,7 @@ public class PlayerHealth : MonoBehaviour {
             {
                 GetComponent<Rigidbody>().AddForce(Hit.transform.forward * 6000);
             }
-            //TakeDamage(1);
+            TakeDamage(1);
             print("맞음");
         }
     }

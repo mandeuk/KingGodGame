@@ -7,7 +7,7 @@ public class PlayerItemList : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        LotusOfAbyss();
+        LotusOfAbyss(); // 임의로 발동되게 함.
     }
 	
 	// Update is called once per frame
@@ -21,5 +21,6 @@ public class PlayerItemList : MonoBehaviour {
     public void LotusOfAbyss()
     {
         GetComponent<PlayerEffect>().InitBlackWaveEffect();
+        GetComponent<PlayerAttack>().lotusOn = true;
     }
 }

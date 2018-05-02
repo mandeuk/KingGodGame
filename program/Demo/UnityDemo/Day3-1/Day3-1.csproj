@@ -425,11 +425,13 @@
     <Compile Include="Assets\Scripts\Enemy\wraith\WraithBullet.cs" />
     <Compile Include="Assets\Scripts\Enemy\wraith\WraithEffect.cs" />
     <Compile Include="Assets\Scripts\EnemyEffectVanishingProcess.cs" />
+    <Compile Include="Assets\Scripts\EXMoveCam.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\Itemtable.cs" />
     <Compile Include="Assets\Scripts\Item\LotusOfAbyss.cs" />
     <Compile Include="Assets\Scripts\Item\UIText.cs" />
+    <Compile Include="Assets\Scripts\MainCameraEvent.cs" />
     <Compile Include="Assets\Scripts\Map\DoorCol.cs" />
     <Compile Include="Assets\Scripts\Map\FluidFireAction.cs" />
     <Compile Include="Assets\Scripts\Map\ObstacleData.cs" />
@@ -451,7 +453,8 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\Player\SkillTarget.cs" />
-    <Compile Include="Assets\Scripts\Twitch\TwitchAPI.cs" />
+    <Compile Include="Assets\Scripts\Twitch\TwitchChat.cs" />
+    <Compile Include="Assets\Scripts\Twitch\VoteButton.cs" />
     <Compile Include="Assets\Scripts\WraithAttackHitVanishingProcess.cs" />
   </ItemGroup>
   <ItemGroup>

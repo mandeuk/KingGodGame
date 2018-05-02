@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class RoomData : MonoBehaviour {
-    public enum roomState : int
-    {
-
-    }
     public bool isClear;
     public bool playerIn;
     public int x, y;
@@ -28,23 +24,16 @@ public class RoomData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        print(EnemyClones.Count);
         cameraFade = GameObject.FindWithTag("MainCamera");
         player = GameObject.FindWithTag("Player").transform;
         isClear = false;
         playerIn = false;
         //meshs.SetActive(false);
-        
-    }
-    private void OnEnable()
-    {
-       
     }
 
     private void Start()
     {
         EnemyClones = transform.GetComponentInChildren<ObstacleData>().EnemyClones;
-        
         mapSpawnArray = StageManager.instance.mapSpawnArray;
         RoomWait();
         JudgeFluidFire();
@@ -86,23 +75,24 @@ public class RoomData : MonoBehaviour {
     // 룸에 플레이어가 들어왔을때 시작하는 상태에서 호출
     public void RoomStart()
     {
+        
         print(EnemyClones.Count);
+
         playerIn = true;
-        if (!isClear)
-        {
-            if (transform.GetComponent<Animator>().enabled)
-                transform.GetComponent<Animator>().SetBool("DoorOpen", false);
-            for (int i = 0; i < EnemyClones.Count; i++)
-            {
-                EnemyClones[i].GetComponent<NavMeshAgent>().enabled = true;
-                EnemyClones[i].GetComponent<EnemyMovement>().startMove();
-            }
+        print(playerIn);
+        if (transform.GetComponent<Animator>().enabled)
+            transform.GetComponent<Animator>().SetBool("DoorOpen", false);
+        for (int i = 0; i < EnemyClones.Count; i++) {
+            EnemyClones[i].GetComponent<NavMeshAgent>().enabled = true;
+            EnemyClones[i].GetComponent<EnemyMovement>().startMove();
         }
     }
 
     // 룸이 스폰되고 플레이어가 진입전의 상태에서 호출
     public void RoomWait()
     {
+        if (transform.GetComponent<Animator>().enabled)
+            transform.GetComponent<Animator>().SetBool("DoorOpen", true);
         for (int i = 0; i < EnemyClones.Count; i++)
         {
             EnemyClones[i].GetComponent<EnemyMovement>().stopMove();
@@ -259,7 +249,7 @@ public class RoomData : MonoBehaviour {
             player.position
                 = RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().roomPos[doorType - 2].transform.position;
             RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().playerIn = true;
-            RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().RoomStart();
+            RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().RoomStart();
             playerIn = false;
         }
         else if (doorType == 3)
@@ -270,5 +260,7 @@ public class RoomData : MonoBehaviour {
             RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().RoomStart();
             playerIn = false;
         }
+
+
     }
 }

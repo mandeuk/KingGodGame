@@ -91,6 +91,7 @@ public class Enemyhealth : MonoBehaviour {
         StartCoroutine(ColorChangeDie());
 
         //몬스터사망 후 아이템 생성
+        //ItemManager.Instance.SpawnItem(gameObject.transform.position);
 
         Destroy(gameObject, .8f);
     }

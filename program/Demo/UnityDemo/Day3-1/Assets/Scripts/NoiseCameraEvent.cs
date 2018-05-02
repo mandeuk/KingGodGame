@@ -22,11 +22,17 @@ public class NoiseCameraEvent : MonoBehaviour {
         Time.timeScale = 0.5f;
 
         yield return new WaitForSeconds(time);
-        mainCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1000;
+
+        mainCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1200;
         transform.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 900;
         Time.timeScale = 1;
-        mainCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1000;
 
         yield break;
+    }
+
+    public void CameraCamTurning()
+    {
+        mainCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1200;
+        transform.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 900;
     }
 }

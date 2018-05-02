@@ -63,7 +63,7 @@ public class PlayerEffect : MonoBehaviour {
 
             else if (stateNum == 3)
             {
-                slashcloneList[0].transform.position = Effect3Pos.transform.position;
+                slashcloneList[0].transform.position = Effect3Pos.transform.position;                
                 slashcloneList[0].transform.rotation =
                     Quaternion.Euler(101 - 180, 270 + transform.rotation.eulerAngles.y, 110);
             }
@@ -99,33 +99,34 @@ public class PlayerEffect : MonoBehaviour {
 
             if (stateNum == 1)
             {
-                blackWaveEffectList[0].transform.position = Effect1Pos.transform.position;
+                blackWaveEffectList[0].transform.position = Effect1Pos.transform.position - transform.forward * 1.5f;
+                
                 blackWaveEffectList[0].transform.rotation =
-                    Quaternion.Euler(0, transform.rotation.eulerAngles.y, 20);
+                    Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             }
 
             else if (stateNum == 2)
             {
-                blackWaveEffectList[0].transform.position = Effect2Pos.transform.position;
+                blackWaveEffectList[0].transform.position = Effect2Pos.transform.position - transform.forward * 1.5f;
                 blackWaveEffectList[0].transform.rotation =
                     Quaternion.Euler(0, transform.rotation.eulerAngles.y, -20);
             }
 
             else if (stateNum == 3)
             {
-                blackWaveEffectList[0].transform.position = Effect3Pos.transform.position;
+                blackWaveEffectList[0].transform.position = Effect3Pos.transform.position - transform.forward * 1.5f;
                 blackWaveEffectList[0].transform.rotation =
                     Quaternion.Euler(0, transform.rotation.eulerAngles.y, 20);
             }
 
             else if (stateNum == 4)
             {
-                //blackWaveEffectList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                blackWaveEffectList[0].transform.position = Effect4Pos.transform.position;
+                blackWaveEffectList[0].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                blackWaveEffectList[0].transform.position = Effect4Pos.transform.position - transform.forward * 1.5f;
                 blackWaveEffectList[0].transform.rotation =
                     Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             }
-            blackWaveEffectList[0].GetComponent<Rigidbody>().AddForce(transform.forward * 800);
+            blackWaveEffectList[0].GetComponent<Rigidbody>().AddForce(transform.forward * 700);
             blackWaveEffectList.RemoveAt(0);
         }
     }

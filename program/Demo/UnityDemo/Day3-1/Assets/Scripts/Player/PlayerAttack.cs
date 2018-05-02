@@ -8,7 +8,9 @@ public class PlayerAttack : MonoBehaviour
     public GameObject exMoveCam;
     protected Animator avatar;
     public bool b_attacking;
-    
+    public bool lotusOn = false;
+
+
     public NormalTarget normalTarget;
     public SkillTarget skillTarget;
 
@@ -51,6 +53,8 @@ public class PlayerAttack : MonoBehaviour
         {
             if (targetList.Count > 0)
             {
+                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
+                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
                 StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
 
@@ -94,7 +98,11 @@ public class PlayerAttack : MonoBehaviour
 
             if (realTargetList.Count > 0)
             {
-                StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
+                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
+                //exMoveCam.GetComponent<EXMoveCam>().CameraCamTurning();
+                StartCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(targetList.Count * 0.02f));
+                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
 
             foreach (Collider one in realTargetList)
@@ -112,7 +120,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (targetList.Count > 0)
             {
-                StartCoroutine(exMoveCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
+                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
+                //exMoveCam.GetComponent<EXMoveCam>().CameraCamTurning();
+                StartCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(targetList.Count * 0.02f));
+                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
 
             foreach (Collider one in targetList)
@@ -135,12 +147,9 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (transform.CompareTag("Player"))
+        if (Input.GetKey(KeyCode.J))
         {
-            if (Input.GetKey(KeyCode.J))
-            {
-                OnAttacking();
-            }
+            OnAttacking();
         }
     }
 
@@ -161,9 +170,17 @@ public class PlayerAttack : MonoBehaviour
         if (transform.CompareTag("Player") || b_attacking)
         {
             StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
-            transform.GetComponent<PlayerEffect>().PlayBlackWaveEffect(stateNum);
             NormalAttack(stateNum);
 
+            if (lotusOn) {
+                //transform.GetComponent<PlayerEffect>().PlayBlackWaveEffect(stateNum);
+
+                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
+                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
+                //exMoveCam.GetComponent<EXMoveCam>().CameraCamTurning();
+                //StartCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
+                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
+            }
         }
     }
 }

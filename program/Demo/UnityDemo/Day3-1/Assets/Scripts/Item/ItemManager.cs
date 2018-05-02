@@ -70,10 +70,12 @@ public class ItemManager : MonoBehaviour {
 
         //스폰시킬 아이템의 좌표 설정 및 오브젝트 활성화
         //itemList[0].transform.SetPositionAndRotation(new Vector3(Random.Range(-10, 10),1, Random.Range(-10, 10)),new Quaternion(0,0,0,1));
-        itempos.y += 0.7f;//아이템이 땅바닥에 박히지 않게 하기 위한 y값 증가
+        itempos.y += 1.7f;//아이템이 땅바닥에 박히지 않게 하기 위한 y값 증가
         itemList[0].transform.SetPositionAndRotation(itempos, new Quaternion(0, 0, 0, 1));
         
         itemList[0].SetActive(true);
+
+        itemList[0].GetComponent<Rigidbody>().AddForce(new Vector3(0, 500.0f, 0));
 
         //아이템풀에서 삭제
         itemList.Remove(itemList[0]);//지도에 스폰된 아이템을 itemList에서 삭제

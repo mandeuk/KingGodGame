@@ -8,7 +8,8 @@ public class LotusOfAbyss : MonoBehaviour {
     {
         if (other.CompareTag("Enemy"))
         {
-            StartCoroutine(other.GetComponent<Enemyhealth>().NormalDamaged(30,transform.position,0.2f,4f,1));
+            if(!other.GetComponent<Enemyhealth>().isDead)
+                StartCoroutine(other.GetComponent<Enemyhealth>().NormalDamaged(30,transform.position,0.2f,4f,1));
         }
     }
 
@@ -19,7 +20,7 @@ public class LotusOfAbyss : MonoBehaviour {
 
     public IEnumerator VanishingEffect()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
         PlayerStatus.instance.GetComponent<PlayerEffect>().BlackWaveEffectVanising(this.gameObject);
 
         yield break;
