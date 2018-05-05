@@ -28,13 +28,13 @@ public class Itemtable : MonoBehaviour {
         //아이템매니저를 싱글턴 오브젝트로 만들어 씬이 변경되어도 삭제되지 않고 살아서 아이템을 관리하도록 해줍니다.
         if (instance)//인스턴스가 생성되어있는가?
         {
-            DestroyImmediate(gameObject);//생성되어있다면 중복되지 않도록 삭제
+            //DestroyImmediate(gameObject);//생성되어있다면 중복되지 않도록 삭제
             return;
         }
         else//인스턴스가 null일 때
         {
             instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
-            DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
+            //DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
 
         colorRedSpirit     = new Color(1.0f, 0.0f, 0.0f, 1.0f);

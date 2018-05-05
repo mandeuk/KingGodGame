@@ -442,6 +442,7 @@
     <Compile Include="Assets\Scripts\Map\StageManager.cs" />
     <Compile Include="Assets\Scripts\myCameraEvent.cs" />
     <Compile Include="Assets\Scripts\NoiseCameraEvent.cs" />
+    <Compile Include="Assets\Scripts\Player\ChargeAttackTarget.cs" />
     <Compile Include="Assets\Scripts\Player\EXMove.cs" />
     <Compile Include="Assets\Scripts\Player\ExplosionAttack.cs" />
     <Compile Include="Assets\Scripts\Player\NormalTarget.cs" />

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerItemList : MonoBehaviour {
     public List<GameObject> itemList = new List<GameObject>();
+    public GameObject auraEffect;
 
 	// Use this for initialization
 	void Awake () {
-        LotusOfAbyss(); // 임의로 발동되게 함.
+        //LotusOfAbyss(); // 임의로 발동되게 함.
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            LotusOfAbyss();
+        }
 	}
 
     // 일단 함수로 두고
@@ -20,7 +24,9 @@ public class PlayerItemList : MonoBehaviour {
     // 먹었을때 apply가 적용되던가.
     public void LotusOfAbyss()
     {
+        GetComponent<PlayerEffect>().ChangeSlashEffectBlackWave();
         GetComponent<PlayerEffect>().InitBlackWaveEffect();
         GetComponent<PlayerAttack>().lotusOn = true;
+        auraEffect.SetActive(true);
     }
 }

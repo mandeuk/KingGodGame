@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
 
     public NormalTarget normalTarget;
     public SkillTarget skillTarget;
+    public ChargeAttackTarget chargeAttackTarget;
 
     public void NormalAttack(int stateNum)
     {
@@ -138,9 +139,24 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void ChargeAttack()
+    {
+        List<Collider> targetList = new List<Collider>(chargeAttackTarget.targetList);
+
+        foreach (Collider one in targetList)
+        {
+            Enemyhealth enemy = one.GetComponent<Enemyhealth>();
+            if (enemy != null && !enemy.isDead)
+            {
+                StartCoroutine(enemy.NormalDamaged(PlayerStatus.instance.attackPower, transform.position, 0.2f, 10f, 1));
+            }
+        }
+    }
+
     // Use this for initialization
     void Awake()
     {
+        lotusOn = false;
         avatar = GetComponent<Animator>();
     }
 
@@ -173,7 +189,7 @@ public class PlayerAttack : MonoBehaviour
             NormalAttack(stateNum);
 
             if (lotusOn) {
-                //transform.GetComponent<PlayerEffect>().PlayBlackWaveEffect(stateNum);
+                transform.GetComponent<PlayerEffect>().PlayBlackWaveEffect(stateNum);
 
                 //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
                 //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
@@ -182,5 +198,10 @@ public class PlayerAttack : MonoBehaviour
                 //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
             }
         }
+    }
+    
+    public void ChargeAttackEvent()
+    {
+        
     }
 }

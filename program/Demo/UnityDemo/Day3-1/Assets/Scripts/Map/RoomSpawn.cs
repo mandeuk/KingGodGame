@@ -236,7 +236,7 @@ public class RoomSpawn : MonoBehaviour {
 
     GameObject spawnObstacle(Transform parent)
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPathObstacles_1"), parent) as GameObject;
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPathObstacles_2"), parent) as GameObject;
 
         return roomClone;
     }

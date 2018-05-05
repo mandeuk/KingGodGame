@@ -237,7 +237,19 @@ public class PlayerEffect : MonoBehaviour {
     public void InitEffect()
     {
         for (int i = 0; i < 10; ++i)
-            slashcloneList.Add(SpawnEffect());
+        {
+            slashcloneList.Add(SpawnSlashEffect());
+        }
+    }
+
+    public void ChangeSlashEffectBlackWave()
+    {
+        for (int i = 0; i < 10; ++i)
+        {
+            slashcloneList.RemoveAt(0);
+            //slashcloneList.RemoveAll(slashcloneList);
+            slashcloneList.Add(SpawnSlashEffect2());
+        }
     }
 
     public void InitBlackWaveEffect()
@@ -246,9 +258,16 @@ public class PlayerEffect : MonoBehaviour {
             blackWaveEffectList.Add(SpawnBlackWaveEffect());
     }
 
-    public GameObject SpawnEffect()
+    public GameObject SpawnSlashEffect()
     {
         GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/slash1"), SpawnCloneList.transform) as GameObject;
+
+        return effectClone;
+    }
+
+    public GameObject SpawnSlashEffect2()
+    {
+        GameObject effectClone = Instantiate(Resources.Load("Prefabs/Effect/slash2"), SpawnCloneList.transform) as GameObject;
 
         return effectClone;
     }

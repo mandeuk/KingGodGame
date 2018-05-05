@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 23478240368884358}
   - component: {fileID: 208738168917897244}
   - component: {fileID: 65972580822868202}
-  m_Layer: 9
+  - component: {fileID: 114047711191933326}
+  m_Layer: 13
   m_Name: objectPillar
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -96,13 +97,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4172151, y: 4.8978457, z: 1.4172151}
   m_Center: {x: -0.0024960935, y: 2.4488223, z: 0.002496034}
+--- !u!114 &114047711191933326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262759813599354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.4, y: 5, z: 1.4}
+  m_Center: {x: 0, y: 2.45, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!208 &208738168917897244
 NavMeshObstacle:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262759813599354}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.70900005, y: 2.4490001, z: 0.70900005}

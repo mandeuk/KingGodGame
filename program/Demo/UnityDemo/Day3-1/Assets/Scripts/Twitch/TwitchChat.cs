@@ -44,13 +44,13 @@ public class TwitchChat : MonoBehaviour
         //싱글턴 관련 코드
         if (instance)//인스턴스가 생성되어있는가?
         {
-            DestroyImmediate(gameObject);//생성되어있다면 중복되지 않도록 삭제
+            //DestroyImmediate(gameObject);//생성되어있다면 중복되지 않도록 삭제
             return;
         }
         else//인스턴스가 null일 때
         {
             instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
-            DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
+            //DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
         
         Connect();//트위치 irc서버에 접속시도

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionAttack : MonoBehaviour {
-    PlayerEffect playerEffect;
     Animator anim;
 
 	// Use this for initialization
 	void Awake () {
-        playerEffect = GetComponent<PlayerEffect>();
         anim = GetComponent<Animator>();
     }
 	
@@ -16,8 +14,13 @@ public class ExplosionAttack : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //playerEffect.playExplosionAttackEffect();
             anim.SetTrigger("ChargeAttack");
+            anim.SetBool("ChargeAttackB", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.L))
+        {
+            anim.SetBool("ChargeAttackB",false);
         }
 	}
 }

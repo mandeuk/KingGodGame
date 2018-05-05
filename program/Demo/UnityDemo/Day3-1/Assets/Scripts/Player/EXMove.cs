@@ -193,6 +193,11 @@ public class EXMove : MonoBehaviour {
         {
             return hit.distance;
         }
+
+        else if (Physics.Raycast(transform.position + transform.up / 2, transform.forward, out hit, 7, 1 << 13))
+        {
+            return hit.distance;
+        }
         else
         {
             return 7;

@@ -278,12 +278,45 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
+      curves:
+      - name: ChargeGage
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 2
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.4365089
+            value: 1
+            inSlope: Infinity
+            outSlope: Infinity
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
       events:
       - time: 0.7211394
         functionName: playExplosionAttackEffect
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7197802
+        functionName: ChargeAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ddf90c6c9ccc9d548a337dba98ae723c,
           type: 3}
         floatParameter: 0
         intParameter: 0
