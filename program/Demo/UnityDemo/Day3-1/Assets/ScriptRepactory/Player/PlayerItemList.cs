@@ -17,7 +17,6 @@ public class PlayerItemList : MonoBehaviour {
         GetComponent<PlayerEffect>().ChangeSlashEffectBlackWave();
         GetComponent<PlayerEffect>().InitBlackWaveEffect();
         
-        GetComponent<PlayerAttack>().lotusOn = true;
         auraEffect.SetActive(true);
         LotusGetEffect.SetActive(true);
         LotusGetEffect.GetComponent<ParticleSystem>().Play();

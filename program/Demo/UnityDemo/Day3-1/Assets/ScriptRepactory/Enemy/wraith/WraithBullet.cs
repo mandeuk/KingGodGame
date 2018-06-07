@@ -8,11 +8,6 @@ public class WraithBullet : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            if (!other.transform.GetComponent<PlayerHealth>().isDead && !other.transform.GetComponent<PlayerHealth>().invincibility)
-            {
-                other.transform.GetComponent<PlayerHealth>().PlayerDamaged(this.gameObject);
-                WraithEffect.instance.BulletHit(this.gameObject);
-            }
             onFire = false;
         }
 

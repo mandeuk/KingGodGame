@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
     public float energy, attackSpeed, attackRange, devilGage, etere;
-    public bool ;
+    public bool isExmove, isChargeAttack;
 
     protected override void Init()
     {
@@ -29,10 +29,15 @@ public class PlayerBase : ObjectBase {
         attackSpeed =   1;
         attackRange =   1;
         moveSpeed =     8;
-        pushBack  =     50;
+        pushBack  =     5;
         energy =        3;
         etere =         0;
         devilGage =     30;
+
+        isExmove = false;
+        isChargeAttack = false;
+        GetComponent<Animator>().enabled = true;
+        GetComponent<EXMove>().enabled = true;
     }
 
     public override void Attack()
@@ -46,6 +51,16 @@ public class PlayerBase : ObjectBase {
     }
 
     public override void Dead()
+    {
+
+    }
+
+    public void ExMoveAttack()
+    {
+        GetComponent<PlayerAttack>().skillAttack(4);
+    }
+
+    public void ChargeAttack()
     {
 
     }

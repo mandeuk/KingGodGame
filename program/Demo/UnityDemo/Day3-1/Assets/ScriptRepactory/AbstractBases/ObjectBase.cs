@@ -19,5 +19,5 @@ public abstract class ObjectBase : MonoBehaviour {
 
     public abstract void Dead();
     public abstract void Damaged(DamageNode damageNode);
-    public abstract void Attack();    
+    public abstract void Attack();
 }

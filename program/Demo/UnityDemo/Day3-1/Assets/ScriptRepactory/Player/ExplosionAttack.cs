@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class ExplosionAttack : MonoBehaviour {
     Animator anim;
-    PlayerHealth isPlayerDeath;
     EXMove isPlayerEXMove;
     public GameObject noiseCamera;
-    public bool isChargeAttack;
+    PlayerBase playerEntity;
 
 	// Use this for initialization
 	void Awake () {
+        playerEntity = PlayerBase.instance;
         anim = GetComponent<Animator>();
-        isPlayerDeath = GetComponent<PlayerHealth>();
-        isPlayerEXMove = GetComponent<EXMove>();
-        isChargeAttack = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isPlayerEXMove.onEXMove && !isChargeAttack)
+        if (!playerEntity.isExmove && !playerEntity.isChargeAttack)
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
@@ -29,13 +26,13 @@ public class ExplosionAttack : MonoBehaviour {
                     anim.SetBool("ChargeAttackB", true);
                 }
             }
-
-            if (Input.GetKeyUp(KeyCode.L))
-            {
-                anim.SetBool("ChargeAttackB", false);
-            }
         }
-	}
+
+        if (Input.GetKeyUp(KeyCode.L))
+        {
+            anim.SetBool("ChargeAttackB", false);
+        }
+    }
 
     public void ChargeAttackCameraEvent(float time)
     {

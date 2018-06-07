@@ -22,7 +22,7 @@ public class EnemyAttack : AttackBase {
     }
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
         Init();
     }
 

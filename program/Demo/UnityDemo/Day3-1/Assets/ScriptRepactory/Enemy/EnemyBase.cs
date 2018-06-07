@@ -11,7 +11,7 @@ public class EnemyBase : ObjectBase {
     {
         base.Init();
         isAgro = false;
-        player = PlayerStatus.instance.gameObject;
+        player = PlayerBase.instance.gameObject;
         StartCoroutine(FindPlayer());
     }
 

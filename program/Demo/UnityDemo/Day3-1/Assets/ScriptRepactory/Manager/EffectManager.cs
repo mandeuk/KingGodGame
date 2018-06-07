@@ -268,7 +268,7 @@ public class EffectManager : MonoBehaviour {
                 + caller.transform.up * .759f
                 + caller.transform.forward * .649f;
             effectClone.transform.rotation =
-                Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
+                Quaternion.Euler(-90, 180 + caller.transform.rotation.eulerAngles.y, 205);
         }
 
         else if (stateNum == 2)
@@ -278,7 +278,7 @@ public class EffectManager : MonoBehaviour {
                 + caller.transform.up * 0.861f
                 + caller.transform.forward * 0.373f;
             effectClone.transform.rotation =
-                Quaternion.Euler(-110 - 180, 270 + transform.rotation.eulerAngles.y, 110);
+                Quaternion.Euler(-110 - 180, 270 + caller.transform.rotation.eulerAngles.y, 110);
         }
 
         else if (stateNum == 3)
@@ -288,7 +288,7 @@ public class EffectManager : MonoBehaviour {
                 + caller.transform.up * 0.88f
                 + caller.transform.forward * 0.283f;
             effectClone.transform.rotation =
-                Quaternion.Euler(101 - 180, 270 + transform.rotation.eulerAngles.y, 110);
+                Quaternion.Euler(101 - 180, 270 + caller.transform.rotation.eulerAngles.y, 110);
         }
 
         else if (stateNum == 4)
@@ -299,7 +299,7 @@ public class EffectManager : MonoBehaviour {
                 + caller.transform.up * 0.922f
                 + caller.transform.forward * 0.323f;
             effectClone.transform.rotation =
-                Quaternion.Euler(-90, 180 + transform.rotation.eulerAngles.y, 205);
+                Quaternion.Euler(-90, 180 + caller.transform.rotation.eulerAngles.y, 205);
         }
 
         effectClone.SetActive(true);

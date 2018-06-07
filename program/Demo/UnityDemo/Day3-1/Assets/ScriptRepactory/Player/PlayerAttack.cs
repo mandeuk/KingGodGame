@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class PlayerAttack : AttackBase
 {
+    PlayerBase playerEntity;
     public GameObject normalAttacCam;
     public GameObject exMoveCam;
     protected Animator avatar;
-    public bool b_attacking;
-    public bool lotusOn = false;
-
+    //public bool b_attacking;
 
     public NormalTarget normalTarget;
     public SkillTarget skillTarget;
     public ChargeAttackTarget chargeAttackTarget;
+
+    void Awake()
+    {
+        avatar = GetComponent<Animator>();
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+    }
 
     public void NormalAttack(int stateNum)
     {
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
         List<Collider> enemyBulletList = new List<Collider>(normalTarget.enemyBulletList);
         List<Collider> realTargetList = new List<Collider>();
-
-        //DamageNode damageNode = new DamageNode(PlayerStatus.instance.attackPower, PlayerStatus.instance.gameObject, 0.2f, 5, stateNum);
 
         if (normalTarget.anotherTargetList.Count > 0)
         {
@@ -55,8 +63,6 @@ public class PlayerAttack : AttackBase
         {
             if (targetList.Count > 0)
             {
-                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
-                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
                 StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
 
@@ -100,11 +106,7 @@ public class PlayerAttack : AttackBase
 
             if (realTargetList.Count > 0)
             {
-                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
-                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
-                //exMoveCam.GetComponent<EXMoveCam>().CameraCamTurning();
                 StartCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(targetList.Count * 0.02f));
-                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
 
             foreach (Collider one in realTargetList)
@@ -121,11 +123,8 @@ public class PlayerAttack : AttackBase
         {
             if (targetList.Count > 0)
             {
-                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
-                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
-                //exMoveCam.GetComponent<EXMoveCam>().CameraCamTurning();
+
                 StartCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(targetList.Count * 0.02f));
-                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
             }
 
             foreach (Collider one in targetList)
@@ -165,12 +164,6 @@ public class PlayerAttack : AttackBase
     }
 
     // Use this for initialization
-    void Awake()
-    {
-        lotusOn = false;
-        avatar = GetComponent<Animator>();
-        Init();
-    }
 
     // Update is called once per frame
     void Update()
@@ -184,31 +177,19 @@ public class PlayerAttack : AttackBase
     public void OnAttacking()
     {
         avatar.SetBool("Combo", true);
-        //avatar.SetBool("StartAttack",true);
     }
 
     public void StopAttacking()
     {
         avatar.SetBool("Combo", false);
-        //avatar.SetBool("StartAttack", false);
     }
 
     public void NormalAttackEvent(int stateNum)
     {
-        if (transform.CompareTag("Player") || b_attacking)
+        if (transform.CompareTag("Player") || playerEntity.isAttack)
         {
-            StartCoroutine(transform.GetComponent<PlayerEffect>().PlayEffect(stateNum));
+            EffectManager.instance.PlayEffect(gameObject, stateNum, EffectManager.instance.playPlayerAttackEffect);
             NormalAttack(stateNum);
-
-            if (lotusOn) {
-                transform.GetComponent<PlayerEffect>().PlayBlackWaveEffect(stateNum);
-
-                //StopCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
-                //StopCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
-                //exMoveCam.GetComponent<EXMoveCam>().CameraCamTurning();
-                //StartCoroutine(exMoveCam.GetComponent<EXMoveCam>().cameraHitEvent(0.02f));
-                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(0.02f));
-            }
         }
     }
     
@@ -222,8 +203,5 @@ public class PlayerAttack : AttackBase
 
         //throw new System.NotImplementedException();
     }
-    protected override void Init()
-    {
-        base.Init();
-    }
+
 }

@@ -6,6 +6,7 @@ public class SkillTarget : MonoBehaviour {
     public List<Collider> targetList;
     public List<Collider> anotherTargetList;
     public Vector3 movePos;
+    PlayerBase playerEntity;
 
     int turnDir;
 
@@ -13,6 +14,7 @@ public class SkillTarget : MonoBehaviour {
     void Awake()
     {
         targetList = new List<Collider>();
+        playerEntity = PlayerBase.instance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,8 +51,8 @@ public class SkillTarget : MonoBehaviour {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             TurnJudgeFunc();
-            if (!transform.GetComponentInParent<EXMove>().onEXMove)
-            Turn(movePos);
+            if (!playerEntity.isExmove)
+                Turn(movePos);
         }
 
         for (int i = 0; i < targetList.Count; i++)

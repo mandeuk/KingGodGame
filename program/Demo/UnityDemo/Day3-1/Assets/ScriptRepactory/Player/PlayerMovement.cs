@@ -4,50 +4,54 @@ using System.Collections;
 
 //[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MoveBase {
+    PlayerBase playerEntity;
 
-    PlayerStatus raphaelStatus;
-
-    protected Animator avatar;
+    Animator avatar;
     public float turnSpeed;
     private float turnSpeedTime;
     public bool moveRoom = false;
 
     public Vector3 movePos;
-    Rigidbody rigidbodyRaphael;
-    PlayerAttack playerattack;
     //AfterImageEffect raphaelEX;
 
     int turnDir;
     float turnAngle = 17;
 
+    protected override void Init()
+    {
+        base.Init();
+        playerEntity = entity as PlayerBase;
+        avatar = GetComponent<Animator>();
+        turnSpeedTime = turnSpeed * Time.deltaTime;
+
+        movePos = new Vector3(1, 0, 0);
+        
+    }
+
     void Awake()
     {
-        movePos = new Vector3(1, 0, 0);
-        rigidbodyRaphael = GetComponent<Rigidbody>();
-        avatar = GetComponent<Animator>();
-        playerattack = GetComponent<PlayerAttack>();
-        turnSpeedTime = turnSpeed * Time.deltaTime;
+        Init();
     }
 
     void FixedUpdate()
     {
         if (!moveRoom)
         {
-            if (rigidbodyRaphael /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
+            if (rigid /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
-                if (!transform.GetComponent<EXMove>().onEXMove)
-                    rigidbodyRaphael.MovePosition(transform.position +
+                if (!playerEntity.isExmove)
+                    rigid.MovePosition(transform.position +
                         transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerStatus.instance.moveSpeed);
                 else
-                    rigidbodyRaphael.MovePosition(transform.position +
+                    rigid.MovePosition(transform.position +
                             GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * PlayerStatus.instance.moveSpeed);
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    if (!playerattack.b_attacking && !transform.GetComponent<EXMove>().onEXMove)
+                    if (!playerEntity.isAttack && !playerEntity.isExmove)
                         TurnJudgeFunc();
 
-                    if (!transform.GetComponent<EXMove>().onEXMove)
+                    if (!playerEntity.isExmove)
                         Turn(movePos);
                 }
                 else
@@ -60,14 +64,15 @@ public class PlayerMovement : MoveBase {
 
     void Turn(Vector3 movePos)
     {
-        //Vector3 movePos1 = movePos.normalized * moveSpeed * Time.deltaTime;
-
         turnDir = Turnjudge(transform.forward, movePos.normalized);
         if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
-            rigidbodyRaphael.MoveRotation(rigidbodyRaphael.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
+        {
+            rigid.MoveRotation(rigid.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
+            playerEntity.isTurn = true;
+        }
         else
         {
-            rigidbodyRaphael.rotation = Quaternion.LookRotation(movePos.normalized);
+            rigid.rotation = Quaternion.LookRotation(movePos.normalized);
             IsWalking();
         }
     }
@@ -102,11 +107,13 @@ public class PlayerMovement : MoveBase {
     void IsWalking()
     {
         avatar.SetBool("Dash", true);
+        playerEntity.isMove = true;
     }
 
     void StopWalking()
     {
         avatar.SetBool("Dash", false);
+        playerEntity.isMove = false;
     }
 
     public void DashEndForce()
