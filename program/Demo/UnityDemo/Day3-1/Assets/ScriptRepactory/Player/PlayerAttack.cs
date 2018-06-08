@@ -16,13 +16,14 @@ public class PlayerAttack : AttackBase
 
     void Awake()
     {
-        avatar = GetComponent<Animator>();
         Init();
     }
 
     protected override void Init()
     {
         base.Init();
+        playerEntity = GetComponent<ObjectBase>() as PlayerBase;
+        avatar = GetComponent<Animator>();
     }
 
     public void NormalAttack(int stateNum)

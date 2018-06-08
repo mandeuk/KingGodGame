@@ -55,7 +55,7 @@ public class PlayerStatus : MonoBehaviour {
         transform.GetComponent<PlayerMovement>().enabled = true;
         transform.GetComponent<PlayerHealth>().enabled = true;
         transform.GetComponent<PlayerAttack>().enabled = true;
-        transform.GetComponent<EXMove>().enabled = true;
+        //transform.GetComponent<EXMove>().enabled = true;
         transform.GetComponent<ExplosionAttack>().enabled = true;
         //transform.GetComponent<Rigidbody>().isKinematic = false;
         transform.GetComponent<Collider>().isTrigger = false;
@@ -66,7 +66,7 @@ public class PlayerStatus : MonoBehaviour {
         transform.GetComponent<PlayerMovement>().enabled = false;
         transform.GetComponent<PlayerHealth>().enabled = false;
         transform.GetComponent<PlayerAttack>().enabled = false;
-        transform.GetComponent<EXMove>().enabled = false;
+        //transform.GetComponent<EXMove>().enabled = false;
         transform.GetComponent<ExplosionAttack>().enabled = false;
         //transform.GetComponent<Rigidbody>().isKinematic = true;
         transform.GetComponent<Collider>().isTrigger = true;

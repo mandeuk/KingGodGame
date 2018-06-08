@@ -16,20 +16,15 @@ public class EXMove : AttackBase {
 
     protected override void Init()
     {
-        playerEntity = entity as PlayerBase;
-        damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack, 4);
-
-        avatar = transform.GetComponent<Animator>();
+        base.Init();
+        print("EXMove Init");
+        playerEntity = GetComponent<ObjectBase>() as PlayerBase;
+        avatar = GetComponent<Animator>();
         moveSpeed = playerEntity.moveSpeed;
         EXEffect = GetComponent<PlayerEffect>();
     }
 
     private void Awake()
-    {
-        this.enabled = false;
-    }
-
-    private void OnEnable()
     {
         Init();
 
@@ -41,6 +36,11 @@ public class EXMove : AttackBase {
                 afterImageMats[i, j] = Instantiate(afterImageRendObjs[i].GetComponent<Renderer>().materials[j]) as Material;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+
     }
 
     // Use this for initialization
@@ -76,15 +76,17 @@ public class EXMove : AttackBase {
     void Update () {
         if (Input.GetKeyDown(KeyCode.K))
         {
+
             avatar.SetTrigger("EXMoveOn");
             avatar.SetBool("Combo", false);
             StartCoroutine(EXMovePlay());
-            print("123");
         }
     }
 
     public IEnumerator EXMovePlay()
     {
+        damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack, 4);
+
         playerEntity.isExmove = true;    // ex무브가 시작.
         playerEntity.isInvincibility = true;
         playerEntity.ExMoveAttack();
@@ -138,7 +140,7 @@ public class EXMove : AttackBase {
         PlayerColorChange.instance.PlayerAppear();
         StartCoroutine(PlayerColorChange.instance.ColorChange());
 
-        transform.GetComponent<PlayerStatus>().moveSpeed = moveSpeed;
+        playerEntity.moveSpeed = moveSpeed;
         avatar.speed = 1;
         afterImageR.GetComponent<Animator>().speed = 1;
         playerEntity.isInvincibility = false;

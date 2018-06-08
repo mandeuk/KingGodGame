@@ -11,7 +11,7 @@ public class EnemyAttack : AttackBase {
     protected override void Init()
     {
         base.Init();
-        enemyEntity = entity as EnemyBase;
+        enemyEntity = GetComponent<ObjectBase>() as EnemyBase;
         player = enemyEntity.player;
         anim = GetComponent<Animator>();
     }

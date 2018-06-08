@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionAttack : MonoBehaviour {
+public class ExplosionAttack : AttackBase {
     Animator anim;
     EXMove isPlayerEXMove;
     public GameObject noiseCamera;
@@ -10,12 +10,18 @@ public class ExplosionAttack : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        playerEntity = PlayerBase.instance;
+        Init();
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+        playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         anim = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (!playerEntity.isExmove && !playerEntity.isChargeAttack)
         {
             if (Input.GetKeyDown(KeyCode.L))
@@ -41,7 +47,12 @@ public class ExplosionAttack : MonoBehaviour {
 
     public void UseEnergy()
     {
-        PlayerStatus.instance.Energy -= 1;
+        PlayerBase.instance.energy -= 1;
         PlaySceneUIManager.instance.ChangeEnergyAmountText();
+    }
+
+    public override void NormalAttack()
+    {
+
     }
 }

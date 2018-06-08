@@ -70,7 +70,7 @@ public class WraithEffect : MonoBehaviour {
         for (int i = 0; i < 30; i++)
         {
             bulletList.Add(SpawnBullet());
-            bulletHitList.Add(SpawnBulletHit());
+            //bulletHitList.Add(SpawnBulletHit());
         }
     }
 

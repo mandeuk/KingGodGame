@@ -41,10 +41,10 @@ public class PlayerMovement : MoveBase {
             {
                 if (!playerEntity.isExmove)
                     rigid.MovePosition(transform.position +
-                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerStatus.instance.moveSpeed);
+                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerBase.instance.moveSpeed);
                 else
                     rigid.MovePosition(transform.position +
-                            GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * PlayerStatus.instance.moveSpeed);
+                            GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * PlayerBase.instance.moveSpeed);
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
