@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198804690638038856}
   - component: {fileID: 199846858512775116}
   m_Layer: 0
-  m_Name: FluidFire
+  m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648721780146860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.529}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4987153740489188}
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1792181407775706}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.595, y: 4.326, z: 14.879}
+  m_LocalPosition: {x: -0.65, y: 0.149, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4736588265913036}
@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.41911763, g: 0.41911763, b: 0.41911763, a: 1}
+      maxColor: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1096,9 +1096,9 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 12143
-        atime2: 36623
-        atime3: 45875
+        atime1: 8674
+        atime2: 29684
+        atime3: 46838
         atime4: 59174
         atime5: 0
         atime6: 0
@@ -3538,7 +3538,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -718407266
+  randomSeed: 431720848
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3628,7 +3628,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.41960788, g: 0.41960788, b: 0.41960788, a: 1}
+      maxColor: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4502,9 +4502,9 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 10987
-        atime2: 38743
-        atime3: 47031
+        atime1: 6554
+        atime2: 29105
+        atime3: 46260
         atime4: 59367
         atime5: 0
         atime6: 0

@@ -55,7 +55,7 @@ public class PlayerStatus : MonoBehaviour {
         transform.GetComponent<PlayerMovement>().enabled = true;
         transform.GetComponent<PlayerHealth>().enabled = true;
         transform.GetComponent<PlayerAttack>().enabled = true;
-        //transform.GetComponent<EXMove>().enabled = true;
+        transform.GetComponent<EXMove>().enabled = true;
         transform.GetComponent<ExplosionAttack>().enabled = true;
         //transform.GetComponent<Rigidbody>().isKinematic = false;
         transform.GetComponent<Collider>().isTrigger = false;
@@ -78,7 +78,7 @@ public class PlayerStatus : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
         PlayerColorChange.instance.PlayerAppear();
-        GetComponent<PlayerEffect>().playEXmoveVanishFlowerEffect();
+        EffectManager.instance.PlayEffect(gameObject, EffectManager.instance.playEXmoveVanishFlowerEffect);
         GetComponent<Animator>().SetTrigger("roomMove");
 
         yield break;

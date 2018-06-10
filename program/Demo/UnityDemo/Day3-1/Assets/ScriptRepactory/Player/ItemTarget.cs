@@ -20,7 +20,7 @@ public class ItemTarget : MonoBehaviour {
     void Awake()
     {
         targetList = new List<Collider>();
-        player = PlayerStatus.instance.gameObject;
+        player = PlayerBase.instance.gameObject;
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class ItemTarget : MonoBehaviour {
         //wind.SetActive(true);
 
         yield return new WaitForSeconds(1f);
-        PlayerStatus.instance.etere += 4;
+        PlayerBase.instance.etere += 4;
         PlaySceneUIManager.instance.ChangeEterAmountText();
         other.GetComponent<ParticleSystem>().Stop();
         EnergyManager.instance.ReturnEtere(other);

@@ -15,7 +15,7 @@ public class EffectManager : MonoBehaviour {
     //              동시호출이 없어 단발성으로 사용하는 경우에는 오브젝트 풀링이 필요없으므로
     //              void를 사용하여 함수만 호출하여 이펙트만 재생해줌.
     public delegate IEnumerator EffectIEnumeratorMethod(GameObject caller, int type);
-    public delegate void EffectVoidMethod(GameObject caller, int type);
+    public delegate void EffectVoidMethod(GameObject caller);
 
     // public static void PlayEffect(effectKind effectMethod, GameObject caller) 요게 안됨 왜지.. static 문제인듯..
     // 함수 기능 :  이펙트를 재생시켜줌
@@ -28,9 +28,9 @@ public class EffectManager : MonoBehaviour {
         StartCoroutine(effectMethod(caller, type));
     }
 
-    public void PlayEffect(GameObject caller, int type, EffectVoidMethod effectMethod)
+    public void PlayEffect(GameObject caller, EffectVoidMethod effectMethod)
     {
-        effectMethod(caller, type);
+        effectMethod(caller);
     }
     
     //-------------------enemy-------------------//
@@ -52,7 +52,7 @@ public class EffectManager : MonoBehaviour {
     List<GameObject> playerAttackEffects = new List<GameObject>();
     List<GameObject> playerUsedAttackEffects = new List<GameObject>();
 
-    GameObject playerSwordBlinkEffect;
+    public GameObject playerSwordBlinkEffect; // 외부에서 직접 넣어주기 위해서 퍼블릭으로 작성.
 
     GameObject playerEXMoveSlashEffect;
     GameObject playerEXmoveVanishEffect;
@@ -67,19 +67,17 @@ public class EffectManager : MonoBehaviour {
     GameObject playerEnergyApplyEffect;
     GameObject playerEtereApplyEffect;
 
-    public GameObject blinkEffectPos;
-
     GameObject raphael;
 
     void Awake() {
         instance = this;
-        raphael = PlayerStatus.instance.gameObject;
-        DeleInit();
+        raphael = PlayerBase.instance.gameObject;
+        //DeleInit();
         SpawnInit();
-
     }
 
     // 함수 기능 : 델리게이트 초기화
+    // 왜 안해줘도 됨?;;;; 뭔데이거?;;
     protected void DeleInit()
     {
         EffectIEnumeratorMethod PlayEnemyWraithWorriorDeadEffect
@@ -93,6 +91,9 @@ public class EffectManager : MonoBehaviour {
 
         EffectIEnumeratorMethod PlayPlayerAttackEffect
             = new EffectIEnumeratorMethod(playPlayerAttackEffect);
+
+        EffectVoidMethod PlayplayerSwordBlinkEffect
+            = new EffectVoidMethod(playplayerSwordBlinkEffect);
 
         EffectVoidMethod PlayEXMoveSlashEffect
             = new EffectVoidMethod(playEXMoveSlashEffect);
@@ -120,7 +121,7 @@ public class EffectManager : MonoBehaviour {
 
     protected void SpawnInit()
     {
-        playerSwordBlinkEffect = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), transform) as GameObject;
+        //playerSwordBlinkEffect = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
 
         playerEXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect"), transform) as GameObject;
         playerEXMoveVanishFlowerEffect = Instantiate(Resources.Load("Prefabs/Effect/VanishFlowerEffect"), transform) as GameObject;
@@ -263,6 +264,7 @@ public class EffectManager : MonoBehaviour {
 
         if (stateNum == 1)
         {
+            effectClone.transform.localScale = new Vector3(1f, 1f, 1f);
             effectClone.transform.position = caller.transform.position
                 + caller.transform.right * -0.397f
                 + caller.transform.up * .759f
@@ -273,6 +275,7 @@ public class EffectManager : MonoBehaviour {
 
         else if (stateNum == 2)
         {
+            effectClone.transform.localScale = new Vector3(1f, 1f, 1f);
             effectClone.transform.position = caller.transform.position
                 + caller.transform.right * -0.098f
                 + caller.transform.up * 0.861f
@@ -283,6 +286,7 @@ public class EffectManager : MonoBehaviour {
 
         else if (stateNum == 3)
         {
+            effectClone.transform.localScale = new Vector3(1f, 1f, 1f);
             effectClone.transform.position = caller.transform.position
                 + caller.transform.right * -0.18f
                 + caller.transform.up * 0.88f
@@ -306,7 +310,7 @@ public class EffectManager : MonoBehaviour {
         playerUsedAttackEffects.Add(effectClone);
         playerAttackEffects.Remove(effectClone);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.6f);
 
         effectClone.SetActive(false);
         playerAttackEffects.Add(effectClone);
@@ -315,13 +319,13 @@ public class EffectManager : MonoBehaviour {
         yield break;
     }
 
-    public void playplayerSwordBlinkEffect(GameObject caller, int stateNum)
+    public void playplayerSwordBlinkEffect(GameObject caller)
     {
         playerSwordBlinkEffect.SetActive(true);
         playerSwordBlinkEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEXMoveSlashEffect(GameObject caller, int type)
+    public void playEXMoveSlashEffect(GameObject caller)
     {
         Vector3 EXPos = caller.GetComponent<PlayerMovement>().movePos.normalized;
 
@@ -331,7 +335,7 @@ public class EffectManager : MonoBehaviour {
         playerEXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEXMoveVanishEffect(GameObject caller, int type)
+    public void playEXMoveVanishEffect(GameObject caller)
     {
         playerEXmoveVanishEffect.SetActive(true);
         playerEXmoveVanishEffect.transform.position = caller.transform.position;
@@ -339,7 +343,7 @@ public class EffectManager : MonoBehaviour {
         playerEXmoveVanishEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEXmoveVanishFlowerEffect(GameObject caller, int type)
+    public void playEXmoveVanishFlowerEffect(GameObject caller)
     {
         playerEXMoveVanishFlowerEffect.SetActive(true);
         playerEXMoveVanishFlowerEffect.transform.position = caller.transform.position + Vector3.up;
@@ -347,7 +351,7 @@ public class EffectManager : MonoBehaviour {
         playerEXMoveVanishFlowerEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playExMoveRingEffectFront(GameObject caller, int type)
+    public void playExMoveRingEffectFront(GameObject caller)
     {
         Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
 
@@ -357,7 +361,7 @@ public class EffectManager : MonoBehaviour {
         playerExMoveRingEffectFront.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playExMoveRingEffectBack(GameObject caller, int type)
+    public void playExMoveRingEffectBack(GameObject caller)
     {
         Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
 
@@ -367,7 +371,7 @@ public class EffectManager : MonoBehaviour {
         playerEXMoveRingEffectBack.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playChargeAttackEffect(GameObject caller, int type)
+    public void playChargeAttackEffect(GameObject caller)
     {
         playerChargeAttackEffect.SetActive(false);
         playerChargeAttackEffect.SetActive(true);
@@ -376,7 +380,7 @@ public class EffectManager : MonoBehaviour {
         playerChargeAttackEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playplayerChargingEffect(GameObject caller, int type)
+    public void playplayerChargingEffect(GameObject caller)
     {
         playerChargingEffect.SetActive(false);
         playerChargingEffect.SetActive(true);
@@ -384,7 +388,7 @@ public class EffectManager : MonoBehaviour {
         playerChargingEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playChargeAttackEndEffect(GameObject caller, int type)
+    public void playChargeAttackEndEffect(GameObject caller)
     {
         playerChargeAttackEffect.SetActive(false);
         playerChargeEndEffect.SetActive(false);
@@ -393,7 +397,7 @@ public class EffectManager : MonoBehaviour {
         playerChargeEndEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEnergyApplyEffect(GameObject caller, int type)
+    public void playEnergyApplyEffect(GameObject caller)
     {
         playerEnergyApplyEffect.SetActive(false);
         playerEnergyApplyEffect.SetActive(true);
@@ -401,9 +405,8 @@ public class EffectManager : MonoBehaviour {
         playerEnergyApplyEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEtereApplyEffect(GameObject caller, int type)
+    public void playEtereApplyEffect(GameObject caller)
     {
-        playerEtereApplyEffect.SetActive(false);
         playerEtereApplyEffect.SetActive(false);
         playerEtereApplyEffect.SetActive(true);
         playerEtereApplyEffect.transform.position = caller.transform.position;

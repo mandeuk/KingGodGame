@@ -8,7 +8,6 @@ public class PlayerAttack : AttackBase
     public GameObject normalAttacCam;
     public GameObject exMoveCam;
     protected Animator avatar;
-    //public bool b_attacking;
 
     public NormalTarget normalTarget;
     public SkillTarget skillTarget;
@@ -31,6 +30,8 @@ public class PlayerAttack : AttackBase
         List<Collider> targetList = new List<Collider>(normalTarget.targetList);
         List<Collider> enemyBulletList = new List<Collider>(normalTarget.enemyBulletList);
         List<Collider> realTargetList = new List<Collider>();
+        DamageNode damageNode =
+            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack, stateNum);
 
         if (normalTarget.anotherTargetList.Count > 0)
         {
@@ -91,6 +92,8 @@ public class PlayerAttack : AttackBase
     {
         List<Collider> targetList = new List<Collider>(skillTarget.targetList);
         List<Collider> realTargetList = new List<Collider>();
+        DamageNode damageNode =
+            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack + 20, 4);
 
         if (skillTarget.anotherTargetList.Count > 0)
         {
@@ -143,7 +146,8 @@ public class PlayerAttack : AttackBase
     {
         List<Collider> targetList = new List<Collider>(chargeAttackTarget.targetList);
         List<Collider> enemyBulletList = new List<Collider>(chargeAttackTarget.enemyBulletList);
-        DamageNode damageNode = new DamageNode(PlayerStatus.instance.attackPower, PlayerStatus.instance.gameObject, 0.2f, 5, 1);
+        DamageNode damageNode =
+            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack + 50, 4);
 
         foreach (Collider one in targetList)
         {
@@ -163,10 +167,7 @@ public class PlayerAttack : AttackBase
             }
         }
     }
-
-    // Use this for initialization
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetKey(KeyCode.J))
@@ -175,23 +176,20 @@ public class PlayerAttack : AttackBase
         }
     }
 
-    public void OnAttacking()
+    public virtual void OnAttacking()
     {
         avatar.SetBool("Combo", true);
     }
 
-    public void StopAttacking()
+    public virtual void StopAttacking()
     {
         avatar.SetBool("Combo", false);
     }
 
-    public void NormalAttackEvent(int stateNum)
+    public virtual void NormalAttackEvent(int stateNum)
     {
-        if (transform.CompareTag("Player") || playerEntity.isAttack)
-        {
-            EffectManager.instance.PlayEffect(gameObject, stateNum, EffectManager.instance.playPlayerAttackEffect);
-            NormalAttack(stateNum);
-        }
+        EffectManager.instance.PlayEffect(gameObject, stateNum, EffectManager.instance.playPlayerAttackEffect);
+        NormalAttack(stateNum);
     }
     
     public void ChargeAttackEvent()
@@ -201,8 +199,7 @@ public class PlayerAttack : AttackBase
 
     public override void NormalAttack()
     {
-
-        //throw new System.NotImplementedException();
+        
     }
 
 }

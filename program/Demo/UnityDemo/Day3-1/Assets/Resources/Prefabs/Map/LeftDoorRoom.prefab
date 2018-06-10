@@ -222,6 +222,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1096570618567598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4199023742714480}
+  - component: {fileID: 114977230292573146}
+  m_Layer: 0
+  m_Name: LoacalNavMeshArea (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1109337071895086
 GameObject:
   m_ObjectHideFlags: 1
@@ -266,7 +282,6 @@ GameObject:
   - component: {fileID: 4885965854593288}
   - component: {fileID: 95265577549488648}
   - component: {fileID: 114590734292588412}
-  - component: {fileID: 114280162762951030}
   m_Layer: 10
   m_Name: LeftDoorRoom
   m_TagString: Untagged
@@ -669,6 +684,7 @@ GameObject:
   - component: {fileID: 33846903930529696}
   - component: {fileID: 23573753156818274}
   - component: {fileID: 65368203459099004}
+  - component: {fileID: 114397868998752682}
   m_Layer: 9
   m_Name: floor
   m_TagString: Untagged
@@ -1371,6 +1387,19 @@ Transform:
   - {fileID: 4883768348795266}
   m_Father: {fileID: 4679530554964390}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4199023742714480
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096570618567598}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4885965854593288}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4222567377575994
 Transform:
@@ -2159,6 +2188,7 @@ Transform:
   - {fileID: 4679530554964390}
   - {fileID: 4796278144945988}
   - {fileID: 4772180782812076}
+  - {fileID: 4199023742714480}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2803,34 +2833,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114280162762951030
+--- !u!114 &114397868998752682
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1123128369610758}
+  m_GameObject: {fileID: 1487109766925486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967039
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.2
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: e5b4d8c5617ae554b99e96743c59e43d, type: 2}
 --- !u!114 &114516687782809384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2927,6 +2940,19 @@ MonoBehaviour:
   close:
   - {fileID: 1566106344320496}
   - {fileID: 1893638775764818}
+--- !u!114 &114977230292573146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096570618567598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01bd1d4cbc6883643aed1010df4b1b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Tracked: {fileID: 0}
+  m_Size: {x: 50, y: 20, z: 50}
 --- !u!198 &198024719860413878
 ParticleSystem:
   m_ObjectHideFlags: 1

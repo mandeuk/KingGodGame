@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33192927784316342}
   - component: {fileID: 23740523745424758}
   - component: {fileID: 65397295538299170}
+  - component: {fileID: 114634059894004420}
   m_Layer: 9
   m_Name: floor
   m_TagString: Untagged
@@ -931,6 +932,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1792549258136152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4153091744603088}
+  - component: {fileID: 114841346477550428}
+  m_Layer: 0
+  m_Name: LoacalNavMeshArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1796980163140522
 GameObject:
   m_ObjectHideFlags: 1
@@ -975,7 +992,6 @@ GameObject:
   - component: {fileID: 4841910570479918}
   - component: {fileID: 95574800078922952}
   - component: {fileID: 114151019137283232}
-  - component: {fileID: 114253748868786200}
   m_Layer: 10
   m_Name: RightDoorRoom
   m_TagString: Untagged
@@ -1332,6 +1348,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4923957133156904}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4153091744603088
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792549258136152}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4841910570479918}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4160217768280980
 Transform:
@@ -2014,6 +2043,7 @@ Transform:
   - {fileID: 4806653125104412}
   - {fileID: 4017565164901754}
   - {fileID: 4366155669219452}
+  - {fileID: 4153091744603088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2848,34 +2878,6 @@ MonoBehaviour:
   - {fileID: 1409035832784724}
   - {fileID: 1632315152398292}
   EnemyClones: []
---- !u!114 &114253748868786200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1835566982974386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967039
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.2
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: f59e207731c21e84bbabdc885f613f8b, type: 2}
 --- !u!114 &114323875573191134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2910,6 +2912,30 @@ MonoBehaviour:
   close:
   - {fileID: 1643737676402384}
   - {fileID: 1812015663866148}
+--- !u!114 &114634059894004420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020021709133746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114841346477550428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792549258136152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01bd1d4cbc6883643aed1010df4b1b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Tracked: {fileID: 0}
+  m_Size: {x: 50, y: 20, z: 50}
 --- !u!114 &114921386613213222
 MonoBehaviour:
   m_ObjectHideFlags: 1

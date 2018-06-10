@@ -21,15 +21,14 @@ GameObject:
   - component: {fileID: 4167181804684322}
   - component: {fileID: 33478441720550462}
   - component: {fileID: 23328770549036636}
-  - component: {fileID: 208254247072559310}
   - component: {fileID: 136541171562866082}
-  - component: {fileID: 114508573507584820}
+  - component: {fileID: 114386727461573066}
   m_Layer: 13
   m_Name: object_stone1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 40
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4167181804684322
 Transform:
@@ -38,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1679654512079400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1679654512079400}
   m_Mesh: {fileID: 4300000, guid: 7dd3bc48f913f4549a88c44e737f4ef5, type: 3}
---- !u!114 &114508573507584820
+--- !u!114 &114386727461573066
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93,13 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1679654512079400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!136 &136541171562866082
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -113,18 +108,3 @@ CapsuleCollider:
   m_Height: 0.9983308
   m_Direction: 1
   m_Center: {x: 0.012195917, y: 0.4582915, z: 0.03407574}
---- !u!208 &208254247072559310
-NavMeshObstacle:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1679654512079400}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.703, y: 0.499, z: 0.69200003}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 0.45800003, z: 0.034}
-  m_TimeToStationary: 0.5

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: R_Body
-  m_Shader: {fileID: 4800000, guid: 054a31a99d11e49d110086ba44295342, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3639ac0d1b78f0d42ac2f0986f1d356e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -58,6 +58,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: c6ffdb90681f73f468b41d4294022199, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: c6ffdb90681f73f468b41d4294022199, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ToonShade:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -81,8 +85,16 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - _outLineThickness: 0.01
+    - _rimPow: 10
+    - _shadow1Range: 0
+    - _shadow2Range: 0.288
     m_Colors:
-    - _Color: {r: 0.42647058, g: 0.42647058, b: 0.42647058, a: 1}
+    - _Color: {r: 0.44852942, g: 0.43863538, b: 0.43863538, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.17957285, g: 0.17863323, b: 0.20588237, a: 1}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _outLineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _rimColor: {r: 0, g: 0.2965517, b: 1, a: 0}
+    - _shadow1Color: {r: 0.46323532, g: 0.46323532, b: 0.46323532, a: 0}
+    - _shadow2Color: {r: 0.43382135, g: 0.41441396, b: 0.53676474, a: 0}

@@ -290,7 +290,7 @@ ModelImporter:
             outSlope: 0
             tangentMode: 0
           - serializedVersion: 2
-            time: 0.4365089
+            time: 0.33214283
             value: 1
             inSlope: Infinity
             outSlope: Infinity
@@ -304,8 +304,157 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 0
+      - name: PlayerYPos
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 2
+            time: 0
+            value: 1.2699847
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.39870617
+            value: 1.2606091
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.43447414
+            value: 0.20253488
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.5037947
+            value: 2.8
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.6299479
+            value: 3.0070622
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.71887124
+            value: 0.49998474
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.7409796
+            value: 1.2818357
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.99877554
+            value: 1.2699847
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
+      - name: ChargeAnimSpeed
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 2
+            time: 0
+            value: 0.7
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.43540668
+            value: 0.7
+            inSlope: Infinity
+            outSlope: Infinity
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.6220096
+            value: 0.5
+            inSlope: Infinity
+            outSlope: Infinity
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
+      - name: ChargeEnd
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 2
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.33214286
+            value: 1
+            inSlope: Infinity
+            outSlope: Infinity
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 0.7619047
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          - serializedVersion: 2
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 0
       events:
-      - time: 0.7211394
+      - time: 0.09761904
+        functionName: playChargeAttackChargeEffect
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
+          type: 3}
+        floatParameter: 0.06
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.36027628
+        functionName: UseEnergy
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: da5f3f86940547049bf75991aee4434c,
+          type: 3}
+        floatParameter: 0.06
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.36554793
+        functionName: playChargeAttackEndEffect
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
+          type: 3}
+        floatParameter: 0.06
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4285714
+        functionName: InvincibilityOn
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 081d871d9df9ac542af1b5ffd6e944f7,
+          type: 3}
+        floatParameter: 0.06
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7289114
         functionName: playExplosionAttackEffect
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 525f8fddd97aad64c88e5916fe0e8f88,
@@ -313,12 +462,28 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7197802
+      - time: 0.7301429
         functionName: ChargeAttack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: ddf90c6c9ccc9d548a337dba98ae723c,
           type: 3}
         floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7304584
+        functionName: ChargeAttackCameraEvent
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: da5f3f86940547049bf75991aee4434c,
+          type: 3}
+        floatParameter: 0.06
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7607021
+        functionName: InvincibilityOff
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 081d871d9df9ac542af1b5ffd6e944f7,
+          type: 3}
+        floatParameter: 0.06
         intParameter: 0
         messageOptions: 0
       transformMask: []

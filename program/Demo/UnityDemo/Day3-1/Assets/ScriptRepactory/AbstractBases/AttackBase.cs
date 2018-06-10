@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class AttackBase : MonoBehaviour{
     protected ObjectBase entity;
     protected DamageNode damageNode;
+    protected Rigidbody rigid;
 
     private void Awake()
     {
@@ -13,11 +14,9 @@ public abstract class AttackBase : MonoBehaviour{
 
     protected virtual void Init()
     {
-        while (entity)
-        {
-            entity = GetComponent<ObjectBase>();
-            damageNode = new DamageNode(entity.attackPower, entity.gameObject, 0.2f, entity.pushBack, 1);
-        }
+        entity = GetComponent<ObjectBase>();
+        rigid = GetComponent<Rigidbody>();
+        damageNode = new DamageNode(entity.attackPower, entity.gameObject, 0.2f, entity.pushBack, 1);
     }
 
     public abstract void NormalAttack();

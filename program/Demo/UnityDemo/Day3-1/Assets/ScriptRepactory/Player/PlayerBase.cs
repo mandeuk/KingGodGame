@@ -9,7 +9,6 @@ public class PlayerBase : ObjectBase {
 
     protected override void Init()
     {
-        print("PlayerBase Init");
         if (instance)//인스턴스가 생성되어있는가?
         {
             DestroyImmediate(gameObject);//생성되어있다면 중복되지 않도록 삭제
@@ -37,9 +36,6 @@ public class PlayerBase : ObjectBase {
 
         isExmove = false;
         isChargeAttack = false;
-        GetComponent<Animator>().enabled = true;
-        GetComponent<EXMove>().enabled = true;
-        
     }
 
     public override void Attack()
@@ -65,6 +61,28 @@ public class PlayerBase : ObjectBase {
     public void ChargeAttack()
     {
 
+    }
+
+    public void PlayerEnable()
+    {
+        transform.GetComponent<PlayerMovement>().enabled = true;
+        transform.GetComponent<PlayerHealth>().enabled = true;
+        transform.GetComponent<PlayerAttack>().enabled = true;
+        transform.GetComponent<EXMove>().enabled = true;
+        transform.GetComponent<ExplosionAttack>().enabled = true;
+        //transform.GetComponent<Rigidbody>().isKinematic = false;
+        transform.GetComponent<Collider>().isTrigger = false;
+    }
+
+    public void PlayerDisable()
+    {
+        transform.GetComponent<PlayerMovement>().enabled = false;
+        transform.GetComponent<PlayerHealth>().enabled = false;
+        transform.GetComponent<PlayerAttack>().enabled = false;
+        transform.GetComponent<EXMove>().enabled = false;
+        transform.GetComponent<ExplosionAttack>().enabled = false;
+        //transform.GetComponent<Rigidbody>().isKinematic = true;
+        transform.GetComponent<Collider>().isTrigger = true;
     }
 
     // Use this for initialization

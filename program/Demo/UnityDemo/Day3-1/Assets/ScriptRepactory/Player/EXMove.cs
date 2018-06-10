@@ -10,18 +10,19 @@ public class EXMove : AttackBase {
 
     public float moveSpeed;
     Animator avatar;
-    PlayerEffect EXEffect;
+    EffectManager effect;
+    //PlayerEffect EXEffect;
     
     Material[,] afterImageMats = new Material[5, 5];
 
     protected override void Init()
     {
         base.Init();
-        print("EXMove Init");
         playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         avatar = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody>();
         moveSpeed = playerEntity.moveSpeed;
-        EXEffect = GetComponent<PlayerEffect>();
+        effect = EffectManager.instance;
     }
 
     private void Awake()
@@ -36,11 +37,6 @@ public class EXMove : AttackBase {
                 afterImageMats[i, j] = Instantiate(afterImageRendObjs[i].GetComponent<Renderer>().materials[j]) as Material;
             }
         }
-    }
-
-    private void OnEnable()
-    {
-
     }
 
     // Use this for initialization
@@ -94,8 +90,8 @@ public class EXMove : AttackBase {
 
 
         afterImageR.transform.position = transform.position;    // 잔상의 포지션을 라파엘의 위치로 옮김
-        afterImageR.GetComponent<Animator>().speed = 0;         // 잔상의 애니메이션을 멈춤
-        afterImageR.GetComponent<Rigidbody>().Sleep();          // 잔상의 물리효과를 슬립시킴.        
+        avatar.speed = 0;         // 잔상의 애니메이션을 멈춤
+        rigid.Sleep();          // 잔상의 물리효과를 슬립시킴.        
 
         playerEntity.isAttack = false;
 
@@ -110,27 +106,27 @@ public class EXMove : AttackBase {
         
         avatar.speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
 
-        playerEntity.moveSpeed = 1;
-        EXEffect.playEXMoveVanishEffect();    // ex무브의 이펙트 발동
-        EXEffect.playEXMoveSlashEffect();
+        playerEntity.moveSpeed = 0;
+        effect.PlayEffect(gameObject, effect.playEXMoveVanishEffect);
+        effect.PlayEffect(gameObject, effect.playEXMoveSlashEffect);
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 7;              // ex무브동안의 스피드 이속도로 고속이동함.
 
-        yield return new WaitForSeconds(.02f);
-        EXEffect.playExMoveRingEffectBack();
+        yield return new WaitForSeconds(.05f);
+        effect.PlayEffect(gameObject, effect.playExMoveRingEffectBack);
 
         yield return new WaitForSeconds(.02f);
-        EXEffect.playExMoveRingEffectFront();
+        effect.PlayEffect(gameObject, effect.playExMoveRingEffectFront);
 
-        yield return new WaitForSeconds(.03f);      // ex무브의 시간인 0.2초
+        yield return new WaitForSeconds(.02f);      // ex무브의 시간인 0.2초
         playerEntity.isExmove = false;
         // 캐릭터가 보는방향을 ex무브가 보았던 방향으로 바꿈
         transform.rotation = Quaternion.LookRotation(transform.GetComponentInChildren<SkillTarget>().movePos.normalized);
         transform.GetComponentInChildren<SkillTarget>().transform.rotation
             = Quaternion.LookRotation(transform.forward);
-        EXEffect.playEXmoveVanishFlowerEffect();
-        EXEffect.playBlinkEffect();
+        effect.PlayEffect(gameObject, effect.playEXmoveVanishFlowerEffect);
+        effect.PlayEffect(gameObject, effect.playplayerSwordBlinkEffect);
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
             afterImageRendObjs[i].SetActive(false);

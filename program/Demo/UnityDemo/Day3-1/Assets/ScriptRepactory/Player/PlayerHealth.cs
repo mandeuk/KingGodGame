@@ -11,7 +11,6 @@ public class PlayerHealth : HealthBase {
 	// Use this for initialization
 	void Awake () {
         Init();
-
     }    
 
     public override void TakeDamage(DamageNode damageNode)
@@ -35,7 +34,7 @@ public class PlayerHealth : HealthBase {
         base.Death();
 
         anim.SetTrigger("Die");
-        PlayerStatus.instance.PlayerDisable();
+        PlayerBase.instance.PlayerDisable();
 
         Invoke("CameraFadeOut", 2);
         Invoke("loadScene", 6);
@@ -44,8 +43,9 @@ public class PlayerHealth : HealthBase {
     protected override void Init()
     {
         base.Init();
+        playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         anim = GetComponent<Animator>();
-        playerEntity = entity as PlayerBase;
+        rigid = GetComponent<Rigidbody>();
     }
 
     void CameraFadeOut()
@@ -61,10 +61,5 @@ public class PlayerHealth : HealthBase {
     void loadMenuScene()
     {
         SceneManager.LoadScene("GameIntromenu");
-    }
-
-    public void PlayerDamaged(GameObject Hit)
-    {
-
     }
 }

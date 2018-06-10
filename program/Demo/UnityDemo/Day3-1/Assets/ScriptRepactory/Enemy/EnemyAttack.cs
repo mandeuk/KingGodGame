@@ -14,6 +14,26 @@ public class EnemyAttack : AttackBase {
         enemyEntity = GetComponent<ObjectBase>() as EnemyBase;
         player = enemyEntity.player;
         anim = GetComponent<Animator>();
+        damageNode = new DamageNode(enemyEntity.attackPower, enemyEntity.gameObject, 0.2f, enemyEntity.pushBack, 1);
+    }
+
+    protected virtual void AttackUpdate()
+    {
+        if (enemyEntity.isAgro)
+        {
+            if (!enemyEntity.isAttack)
+                Turn();
+
+            if (Vector3.Distance(player.transform.position, transform.position) < enemyEntity.attackDistance
+                && !enemyEntity.isTurn)
+            {
+                StartAttack();
+            }
+            else
+            {
+                StopAttack();
+            }
+        }
     }
 
     public override void NormalAttack()
@@ -28,13 +48,13 @@ public class EnemyAttack : AttackBase {
 
     public void StartAttack()
     {
-        entity.isAttack = true;
+        enemyEntity.isAttack = true;
         anim.SetBool("Attack", true);
     }
 
     public void StopAttack()
     {
-        entity.isAttack = false;
+        enemyEntity.isAttack = false;
         anim.SetBool("Attack", false);
     }
 
@@ -49,7 +69,7 @@ public class EnemyAttack : AttackBase {
 
         turnDir = Turnjudge(forwardVec.normalized, diff.normalized);
 
-        if (Vector3.Angle(forwardVec.normalized, diff.normalized) > 10.0f)
+        if (Vector3.Angle(forwardVec.normalized, diff.normalized) > 20.0f)
         {
             enemyEntity.isTurn = true;
             if (!enemyEntity.isAttack)

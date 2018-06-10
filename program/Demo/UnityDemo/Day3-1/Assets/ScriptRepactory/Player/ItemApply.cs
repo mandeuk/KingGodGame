@@ -10,7 +10,7 @@ public class ItemApply : MonoBehaviour {
         {
             PlayerEffect.instance.playEnergyApplyEffect();
             EnergyManager.instance.returnEnergy(collision.gameObject);
-            PlayerStatus.instance.Energy += 1;
+            PlayerBase.instance.energy += 1;
             PlaySceneUIManager.instance.ChangeEnergyAmountText();
         }
     }

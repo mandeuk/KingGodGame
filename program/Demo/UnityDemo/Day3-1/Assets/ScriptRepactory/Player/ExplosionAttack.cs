@@ -26,7 +26,7 @@ public class ExplosionAttack : AttackBase {
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                if (PlayerStatus.instance.Energy > 0)
+                if (PlayerBase.instance.energy > 0)
                 {
                     anim.SetTrigger("ChargeAttack");
                     anim.SetBool("ChargeAttackB", true);

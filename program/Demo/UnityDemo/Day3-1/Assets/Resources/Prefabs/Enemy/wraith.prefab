@@ -518,13 +518,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4632471744085954}
   - component: {fileID: 195023312533447500}
+  - component: {fileID: 114625846035425782}
   - component: {fileID: 95528325055560330}
   - component: {fileID: 54656973556038228}
   - component: {fileID: 136812276756468556}
-  - component: {fileID: 114061956864888590}
   - component: {fileID: 114632911424875104}
-  - component: {fileID: 114909570599149618}
-  - component: {fileID: 114081713711922656}
+  - component: {fileID: 114038473850740914}
   m_Layer: 11
   m_Name: wraith
   m_TagString: Enemy
@@ -717,7 +716,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184195033216736}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.425, z: 0}
   m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_Children:
   - {fileID: 4208420994182974}
@@ -938,7 +937,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686057448938930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.245}
+  m_LocalPosition: {x: 1.268, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4076011557063194}
@@ -1329,7 +1328,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114061956864888590
+--- !u!114 &114038473850740914
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1337,30 +1336,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 1686057448938930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73cde74587687f4691b24876abd833e, type: 3}
+  m_Script: {fileID: 11500000, guid: 97b71d138f5851847a41fc2cd338091e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
-  flashSpeed: 5
-  player: {fileID: 0}
-  transMat: {fileID: 0}
+  flashSpeed: 2
+--- !u!114 &114625846035425782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686057448938930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296c96aba5cbcf2498781ad733412e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
+  attackPower: 0
+  moveSpeed: 0
+  pushBack: 0
   isDead: 0
-  damaged: 0
---- !u!114 &114081713711922656
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686057448938930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54dbad403d34f664fa81a9fea42935cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletList: []
-  firedBulletList: []
-  attacking: 0
-  turning: 0
+  isAttack: 0
+  isMove: 0
+  isDamaged: 0
+  isTurn: 0
+  isSuperArmor: 0
+  isInvincibility: 0
+  attackDistance: 0
+  stopDistance: 0
+  findDistance: 0
+  turnSpeed: 0
+  isAgro: 0
+  player: {fileID: 0}
+  bulletSpeed: 0
 --- !u!114 &114632911424875104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1373,22 +1382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIn: 0
---- !u!114 &114909570599149618
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686057448938930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b02f409564bbfe047af5f8e6755b8a8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoint: 100
-  attackPower: 1
-  attackRange: 6
-  moveSpeed: 2
-  angleSpeed: 200
 --- !u!136 &136812276756468556
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1398,7 +1391,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 0.5
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
@@ -1591,7 +1584,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1686057448938930}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.6
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50

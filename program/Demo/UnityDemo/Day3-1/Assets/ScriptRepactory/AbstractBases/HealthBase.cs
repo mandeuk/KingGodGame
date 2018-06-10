@@ -21,7 +21,6 @@ public class HealthBase : MonoBehaviour {
     public virtual void TakeDamage(DamageNode damageNode)
     {
         entity.isDamaged = true;
-
         
         Vector3 diff = damageNode.attacker.transform.position - transform.position;
         rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);

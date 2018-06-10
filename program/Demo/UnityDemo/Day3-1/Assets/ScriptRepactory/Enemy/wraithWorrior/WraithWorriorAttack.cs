@@ -19,7 +19,7 @@ public class WraithWorriorAttack : MonoBehaviour {
         attacking = false;
         turning = false;
 
-        player = PlayerStatus.instance.gameObject;
+        player = PlayerBase.instance.gameObject;
         anim = GetComponent<Animator>();
         status = GetComponent<EnemyStatus>();        
     }

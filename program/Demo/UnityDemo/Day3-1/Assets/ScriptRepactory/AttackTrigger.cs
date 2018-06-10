@@ -22,11 +22,11 @@ public class DamageNode
 
 public enum Target
 {
-    player,
-    enemy,
-    bullet,
-    obstacle,
-    other
+    Player,
+    Enemy,
+    Bullet,
+    Obstacle,
+    Other
 }
 
 public class AttackTrigger : MonoBehaviour {
@@ -35,20 +35,18 @@ public class AttackTrigger : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.tag.Equals(target.ToString()))
+        if (!other.CompareTag(target.ToString()))
             return;
-        
+
         ObjectBase objectBase = other.GetComponent<ObjectBase>();
         objectBase.Damaged(damageNode);
-
         // 이펙트 재생도..?
         // 이펙트를 타격, 피격, 허공 이펙트를 해야겠다.
         // 여기다가는 타격이펙트를 재생.
-
     }
 
     // Use this for initialization
     void Awake () {
-		
-	}
+        
+    }
 }
