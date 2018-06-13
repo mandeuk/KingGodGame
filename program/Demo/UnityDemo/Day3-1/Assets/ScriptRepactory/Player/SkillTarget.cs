@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillTarget : MonoBehaviour {
-    public List<Collider> targetList;
-    public List<Collider> anotherTargetList;
+    public List<Collider> targetList = new List<Collider>();
+    public List<Collider> anotherTargetList = new List<Collider>();
     public Vector3 movePos;
     PlayerBase playerEntity;
 
@@ -13,8 +13,8 @@ public class SkillTarget : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        targetList = new List<Collider>();
         playerEntity = PlayerBase.instance;
+        movePos = playerEntity.transform.forward;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,7 +51,7 @@ public class SkillTarget : MonoBehaviour {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
             TurnJudgeFunc();
-            if (!playerEntity.isExmove)
+            if (!playerEntity.isExmove && !playerEntity.isDodge)
                 Turn(movePos);
         }
 

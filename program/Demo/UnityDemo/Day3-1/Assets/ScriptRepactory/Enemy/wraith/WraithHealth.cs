@@ -17,7 +17,7 @@ public class WraithHealth : Enemyhealth {
     public override void TakeDamage(DamageNode damageNode)
     {
         base.TakeDamage(damageNode);
-        EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyHitEffect);
+        EffectManager.instance.PlayEffect(gameObject, damageNode.AttackType, EffectManager.instance.playEnemyHitEffect);
     }
 
     public override void DeadEffect()

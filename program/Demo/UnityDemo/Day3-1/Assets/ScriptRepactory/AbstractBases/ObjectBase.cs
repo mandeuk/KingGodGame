@@ -20,4 +20,14 @@ public abstract class ObjectBase : MonoBehaviour {
     public abstract void Dead();
     public abstract void Damaged(DamageNode damageNode);
     public abstract void Attack();
+
+    public virtual void InvincibilityOn()
+    {
+        isInvincibility = true;
+    }
+
+    public virtual void InvincibilityOff()
+    {
+        isInvincibility = false;
+    }
 }

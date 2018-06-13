@@ -12,6 +12,7 @@ public class PlayerMovement : MoveBase {
     public bool moveRoom = false;
 
     public Vector3 movePos;
+    public Transform skillMovePos;
     //AfterImageEffect raphaelEX;
 
     int turnDir;
@@ -20,12 +21,11 @@ public class PlayerMovement : MoveBase {
     protected override void Init()
     {
         base.Init();
-        playerEntity = entity as PlayerBase;
+        playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         avatar = GetComponent<Animator>();
         turnSpeedTime = turnSpeed * Time.deltaTime;
-
-        movePos = new Vector3(1, 0, 0);
-        
+        skillMovePos = GetComponentInChildren<SkillTarget>().transform;
+        movePos = transform.forward;
     }
 
     void Awake()
@@ -39,19 +39,22 @@ public class PlayerMovement : MoveBase {
         {
             if (rigid /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
-                if (!playerEntity.isExmove)
+                if (playerEntity.isDodge)
                     rigid.MovePosition(transform.position +
-                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerBase.instance.moveSpeed);
+                        skillMovePos.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerBase.instance.moveSpeed);
+                else if  (playerEntity.isExmove)
+                    rigid.MovePosition(transform.position +
+                        skillMovePos.forward * Time.deltaTime * PlayerBase.instance.moveSpeed);
                 else
                     rigid.MovePosition(transform.position +
-                            GetComponentInChildren<SkillTarget>().transform.forward * Time.deltaTime * PlayerBase.instance.moveSpeed);
-
+                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerBase.instance.moveSpeed);
+                
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    if (!playerEntity.isAttack && !playerEntity.isExmove)
+                    if (!playerEntity.isAttack && !playerEntity.isExmove && !playerEntity.isChargeAttack && (avatar.GetFloat("DodgeTiming") < 0.1f))
                         TurnJudgeFunc();
 
-                    if (!playerEntity.isExmove)
+                    if (!playerEntity.isExmove && !playerEntity.isChargeAttack && (avatar.GetFloat("DodgeTiming") < 0.1f))
                         Turn(movePos);
                 }
                 else
@@ -70,6 +73,7 @@ public class PlayerMovement : MoveBase {
             rigid.MoveRotation(rigid.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
             playerEntity.isTurn = true;
         }
+
         else
         {
             rigid.rotation = Quaternion.LookRotation(movePos.normalized);

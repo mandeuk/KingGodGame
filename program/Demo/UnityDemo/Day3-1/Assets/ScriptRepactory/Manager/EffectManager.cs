@@ -330,7 +330,7 @@ public class EffectManager : MonoBehaviour {
         Vector3 EXPos = caller.GetComponent<PlayerMovement>().movePos.normalized;
 
         playerEXMoveSlashEffect.SetActive(true);
-        playerEXMoveSlashEffect.transform.position = caller.transform.position + EXPos * 0.5f;
+        playerEXMoveSlashEffect.transform.position = caller.transform.position + EXPos * 0.5f + Vector3.up;
         playerEXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXPos);
         playerEXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
     }
@@ -338,7 +338,7 @@ public class EffectManager : MonoBehaviour {
     public void playEXMoveVanishEffect(GameObject caller)
     {
         playerEXmoveVanishEffect.SetActive(true);
-        playerEXmoveVanishEffect.transform.position = caller.transform.position;
+        playerEXmoveVanishEffect.transform.position = caller.transform.position + Vector3.up;
         playerEXmoveVanishEffect.transform.rotation = Quaternion.Euler(-90, caller.transform.rotation.eulerAngles.y, 0);
         playerEXmoveVanishEffect.GetComponent<ParticleSystem>().Play();
     }
@@ -366,7 +366,7 @@ public class EffectManager : MonoBehaviour {
         Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
 
         playerEXMoveRingEffectBack.SetActive(true);
-        playerEXMoveRingEffectBack.transform.position = caller.transform.position;
+        playerEXMoveRingEffectBack.transform.position = caller.transform.position + Vector3.up;
         playerEXMoveRingEffectBack.transform.rotation = Quaternion.Euler(0, ExRotation.eulerAngles.y, 0);
         playerEXMoveRingEffectBack.GetComponent<ParticleSystem>().Play();
     }
@@ -390,6 +390,7 @@ public class EffectManager : MonoBehaviour {
 
     public void playChargeAttackEndEffect(GameObject caller)
     {
+        playerChargingEffect.SetActive(false);
         playerChargeAttackEffect.SetActive(false);
         playerChargeEndEffect.SetActive(false);
         playerChargeEndEffect.SetActive(true);

@@ -14,9 +14,6 @@ public class PlayerItemList : MonoBehaviour {
     // 먹었을때 apply가 적용되던가.
     public void LotusOfAbyss()
     {
-        GetComponent<PlayerEffect>().ChangeSlashEffectBlackWave();
-        GetComponent<PlayerEffect>().InitBlackWaveEffect();
-        
         auraEffect.SetActive(true);
         LotusGetEffect.SetActive(true);
         LotusGetEffect.GetComponent<ParticleSystem>().Play();

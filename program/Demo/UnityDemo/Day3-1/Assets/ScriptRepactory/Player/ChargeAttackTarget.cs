@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChargeAttackTarget : MonoBehaviour {
-    public List<Collider> targetList;
+    public List<Collider> targetList = new List<Collider>();
     public List<Collider> enemyBulletList = new List<Collider>();
     public List<Collider> anotherTargetList = new List<Collider>();
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("EnemyWorrior"))
+        if (other.CompareTag("Enemy"))
         {
             if (!other.GetComponent<ObjectBase>().isDead)
                 targetList.Add(other);
@@ -28,7 +28,6 @@ public class ChargeAttackTarget : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        targetList = new List<Collider>();
     }
 	
 	// Update is called once per frame

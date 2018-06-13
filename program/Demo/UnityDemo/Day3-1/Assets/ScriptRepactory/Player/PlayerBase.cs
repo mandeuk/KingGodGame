@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
     public float energy, attackSpeed, attackRange, devilGage, etere;
-    public bool isExmove, isChargeAttack;
+    public bool isExmove, isChargeAttack, isDodge;
 
     protected override void Init()
     {
@@ -36,6 +36,7 @@ public class PlayerBase : ObjectBase {
 
         isExmove = false;
         isChargeAttack = false;
+        isDodge = false;
     }
 
     public override void Attack()

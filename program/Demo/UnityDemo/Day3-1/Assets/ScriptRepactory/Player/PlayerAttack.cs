@@ -170,9 +170,12 @@ public class PlayerAttack : AttackBase
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (!playerEntity.isExmove && !playerEntity.isChargeAttack)
         {
-            OnAttacking();
+            if (Input.GetKey(KeyCode.J))
+            {
+                OnAttacking();
+            }
         }
     }
 
@@ -188,8 +191,11 @@ public class PlayerAttack : AttackBase
 
     public virtual void NormalAttackEvent(int stateNum)
     {
-        EffectManager.instance.PlayEffect(gameObject, stateNum, EffectManager.instance.playPlayerAttackEffect);
-        NormalAttack(stateNum);
+        if (playerEntity.isAttack)  // 중간에 ex무브나 다른 상태로 빠지면 발동안되게끔..
+        {
+            EffectManager.instance.PlayEffect(gameObject, stateNum, EffectManager.instance.playPlayerAttackEffect);
+            NormalAttack(stateNum);
+        }
     }
     
     public void ChargeAttackEvent()

@@ -8,7 +8,7 @@ public class ItemApply : MonoBehaviour {
     {
         if (collision.transform.CompareTag("Energy"))
         {
-            PlayerEffect.instance.playEnergyApplyEffect();
+            EffectManager.instance.playEnergyApplyEffect(gameObject);
             EnergyManager.instance.returnEnergy(collision.gameObject);
             PlayerBase.instance.energy += 1;
             PlaySceneUIManager.instance.ChangeEnergyAmountText();

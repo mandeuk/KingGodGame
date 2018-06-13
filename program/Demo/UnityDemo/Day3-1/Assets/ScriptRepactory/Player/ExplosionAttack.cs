@@ -28,15 +28,24 @@ public class ExplosionAttack : AttackBase {
             {
                 if (PlayerBase.instance.energy > 0)
                 {
+                    playerEntity.isChargeAttack = true;
                     anim.SetTrigger("ChargeAttack");
                     anim.SetBool("ChargeAttackB", true);
+                }
+
+                else
+                {
+                    anim.SetTrigger("Dodge");
                 }
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.L))
+        if (playerEntity.isChargeAttack)
         {
-            anim.SetBool("ChargeAttackB", false);
+            if (Input.GetKeyUp(KeyCode.L))
+            {
+                anim.SetBool("ChargeAttackB", false);
+            }
         }
     }
 

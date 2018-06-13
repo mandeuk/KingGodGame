@@ -70,27 +70,30 @@ public class EXMove : AttackBase {
     }
 
     void Update () {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (!playerEntity.isDodge && !playerEntity.isChargeAttack)
         {
-
-            avatar.SetTrigger("EXMoveOn");
-            avatar.SetBool("Combo", false);
-            StartCoroutine(EXMovePlay());
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                avatar.SetTrigger("EXMoveOn");
+                avatar.SetBool("Combo", false);
+                StartCoroutine(EXMovePlay());
+            }
         }
     }
 
     public IEnumerator EXMovePlay()
     {
         damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack, 4);
+        avatar.speed = 0;         // 잔상의 애니메이션을 멈춤
 
         playerEntity.isExmove = true;    // ex무브가 시작.
+        playerEntity.isAttack = false;
         playerEntity.isInvincibility = true;
         playerEntity.ExMoveAttack();
         PlayerColorChange.instance.PlayerDisappear();   // 라파엘의 보이는 매터리얼들을 다 끔. 그리고 색을 어둡게 바꿈.
 
 
         afterImageR.transform.position = transform.position;    // 잔상의 포지션을 라파엘의 위치로 옮김
-        avatar.speed = 0;         // 잔상의 애니메이션을 멈춤
         rigid.Sleep();          // 잔상의 물리효과를 슬립시킴.        
 
         playerEntity.isAttack = false;
@@ -104,7 +107,7 @@ public class EXMove : AttackBase {
             }
         }   // 잔상의 보이는 매터리얼을 다 킴. 잔상의 색깔을 빈 오브젝트인 afterImageMets 에 다 저장함.
         
-        avatar.speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
+        afterImageR.GetComponent<Animator>().speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
 
         playerEntity.moveSpeed = 0;
         effect.PlayEffect(gameObject, effect.playEXMoveVanishEffect);
@@ -112,6 +115,7 @@ public class EXMove : AttackBase {
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 7;              // ex무브동안의 스피드 이속도로 고속이동함.
+        print(calcDistObj() * 7);       // 검사용 코드. 
 
         yield return new WaitForSeconds(.05f);
         effect.PlayEffect(gameObject, effect.playExMoveRingEffectBack);
@@ -126,7 +130,7 @@ public class EXMove : AttackBase {
         transform.GetComponentInChildren<SkillTarget>().transform.rotation
             = Quaternion.LookRotation(transform.forward);
         effect.PlayEffect(gameObject, effect.playEXmoveVanishFlowerEffect);
-        effect.PlayEffect(gameObject, effect.playplayerSwordBlinkEffect);
+        //effect.PlayEffect(gameObject, effect.playplayerSwordBlinkEffect);
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {
             afterImageRendObjs[i].SetActive(false);
@@ -134,6 +138,7 @@ public class EXMove : AttackBase {
         
 
         PlayerColorChange.instance.PlayerAppear();
+        rigid.Sleep();
         StartCoroutine(PlayerColorChange.instance.ColorChange());
 
         playerEntity.moveSpeed = moveSpeed;
