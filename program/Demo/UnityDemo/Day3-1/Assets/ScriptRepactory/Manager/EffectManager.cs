@@ -78,7 +78,7 @@ public class EffectManager : MonoBehaviour {
 
     // 함수 기능 : 델리게이트 초기화
     // 왜 안해줘도 됨?;;;; 뭔데이거?;;
-    protected void DeleInit()
+    /*protected void DeleInit()
     {
         EffectIEnumeratorMethod PlayEnemyWraithWorriorDeadEffect
             = new EffectIEnumeratorMethod(playEnemyWraithWorriorDeadEffect);
@@ -117,7 +117,7 @@ public class EffectManager : MonoBehaviour {
             = new EffectVoidMethod(playEnergyApplyEffect);
         EffectVoidMethod PlayEtereApplyEffect
             = new EffectVoidMethod(playEtereApplyEffect);
-    }
+    }*/
 
     protected void SpawnInit()
     {
@@ -356,7 +356,7 @@ public class EffectManager : MonoBehaviour {
         Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
 
         playerExMoveRingEffectFront.SetActive(true);
-        playerExMoveRingEffectFront.transform.position = caller.transform.position;
+        playerExMoveRingEffectFront.transform.position = caller.transform.position + Vector3.up;
         playerExMoveRingEffectFront.transform.rotation = Quaternion.Euler(0, ExRotation.eulerAngles.y, 0);
         playerExMoveRingEffectFront.GetComponent<ParticleSystem>().Play();
     }

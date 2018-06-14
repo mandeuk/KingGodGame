@@ -22,6 +22,6 @@ public class AttackBehaviour : StateMachineBehaviour {
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        animator.GetComponent<ObjectBase>().isAttack = false;
+        //animator.GetComponent<ObjectBase>().isAttack = false;
     }
 }

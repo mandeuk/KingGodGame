@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
-    public float energy, attackSpeed, attackRange, devilGage, etere;
+    public float energy, attackSpeed, attackRange, devilGage, etere, tendency;
     public bool isExmove, isChargeAttack, isDodge;
+
+    Animator anim;
+    Rigidbody rigid;
+    
+    void Awake()
+    {
+        Init();
+    }
 
     protected override void Init()
     {
@@ -21,49 +29,47 @@ public class PlayerBase : ObjectBase {
         }
 
         base.Init();
+
+        maxHP =         5;      // 맥스 hp
+        curHP =         5;      // 현재 hp
+        attackPower =   30;     // 공격력
+        attackSpeed =   1;      // 공격속도
+        attackRange =   1;      // 공격 범위
+        moveSpeed =     8;      // 이동 속도
+        pushBack  =     5;      // 넉백을 주는 힘
+        energy =        3;      // 에너지
+        etere =         0;      // 에테르
+        devilGage =     30;     // 폭주 게이지 100이되면 죽음.
+        tendency =      0;      // 성향. 구원,타락 수치로 성향이 높아지고 낮아진다.
+
         isInvincibility = false;
-
-        maxHP =         5;
-        curHP =         5;
-        attackPower =   30;
-        attackSpeed =   1;
-        attackRange =   1;
-        moveSpeed =     8;
-        pushBack  =     5;
-        energy =        3;
-        etere =         0;
-        devilGage =     30;
-
         isExmove = false;
         isChargeAttack = false;
         isDodge = false;
+
+        anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody>();
+
+        anim.SetFloat("AttackSpeed", attackSpeed);
+        anim.SetFloat("MoveSpeed", moveSpeed / 8);
     }
 
     public override void Attack()
     {
         
     }
-
+    public void ExMoveAttack()
+    {
+        
+    }
     public override void Damaged(DamageNode damageNode)
     {
         GetComponent<PlayerHealth>().Damaged(damageNode);
     }
-
     public override void Dead()
     {
 
     }
-
-    public void ExMoveAttack()
-    {
-        GetComponent<PlayerAttack>().skillAttack(4);
-    }
-
-    public void ChargeAttack()
-    {
-
-    }
-
     public void PlayerEnable()
     {
         transform.GetComponent<PlayerMovement>().enabled = true;
@@ -74,7 +80,6 @@ public class PlayerBase : ObjectBase {
         //transform.GetComponent<Rigidbody>().isKinematic = false;
         transform.GetComponent<Collider>().isTrigger = false;
     }
-
     public void PlayerDisable()
     {
         transform.GetComponent<PlayerMovement>().enabled = false;
@@ -86,8 +91,168 @@ public class PlayerBase : ObjectBase {
         transform.GetComponent<Collider>().isTrigger = true;
     }
 
-    // Use this for initialization
-    void Awake () {
-        Init();
-	}
+    // 함수 기능 :  스텟을 관리하는 델리게이트 선언
+    public delegate void StatName(float amount, bool up);
+
+    // 함수 기능 :  스탯을 올리고 내리고를 여기서 처리함.
+    //              예를들어 hp가 올라가고 내려가고를 cur/ MAX 구분할것 없이
+    //              이곳 함수에서 올라가면 올라간대로 내려가면 내려간대로 처리함.
+    public void ChangeStatus(float amount, bool up, StatName status)
+    {
+        status(amount, up);
+    }
+
+    public void MaxHP(float amount, bool up)
+    {
+        if (up)
+        {
+            if ((int)maxHP < 14)
+            {
+                maxHP += amount;
+                curHP += amount;
+            }
+        }
+        else
+        {
+            if ((int)maxHP > 1)
+            {
+                maxHP -= amount;
+                curHP -= amount;
+            }
+        }
+        PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
+    }
+
+    public void CurHP(float amount, bool up)
+    {
+        if (up)
+        {
+            if((int)curHP > (int)maxHP)
+            {
+                curHP += amount;
+            }
+        }
+        else
+        {
+            if((int)curHP < 1)
+            {
+                Dead();
+            }
+        }
+        PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
+    }
+
+    public void AttackPower(float amount, bool up)
+    {
+        if (up)
+        {
+            attackPower += amount;
+        }
+        else
+        {
+            attackPower -= amount;
+        }
+    }
+
+    public void AttackSpeed(float amount, bool up)
+    {
+        if (up)
+        {
+            attackSpeed += amount;
+        }
+        else
+        {
+            attackSpeed -= amount;            
+        }
+        anim.SetFloat("AttackSpeed", attackSpeed);
+    }
+
+    public void AttackRange(float amount, bool up)
+    {
+        if (up)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    public void MoveSpeed(float amount, bool up)
+    {
+        if (up)
+        {
+            moveSpeed += amount;
+        }
+        else
+        {
+            moveSpeed -= amount;
+        }
+        anim.SetFloat("MoveSpeed", moveSpeed / 8);
+    }
+
+    public void PushBack(float amount, bool up)
+    {
+        if (up)
+        {
+            pushBack += amount;
+        }
+        else
+        {
+            pushBack -= amount;
+        }
+    }
+
+    public void Energy(float amount, bool up)
+    {
+        if (up)
+        {
+            energy += amount;
+        }
+        else
+        {
+            energy -= amount;
+        }
+    }
+
+    public void Etere(float amount, bool up)
+    {
+        if (up)
+        {
+            etere += amount;
+        }
+        else
+        {
+            etere -= amount;
+        }
+    }
+
+    public void DevilGage(float amount, bool up)
+    {
+        if (up)
+        {
+            devilGage += amount;
+        }
+        else
+        {
+            devilGage -= amount;
+        }
+
+
+    }
+
+    public void Tedency(float amount, bool up)
+    {
+        if (up)
+        {
+            tendency += amount;
+        }
+        else
+        {
+            tendency -= amount;
+        }
+
+        // 텐덴시에 따라서 나눠줘야함. bool로 나누든..
+    }
 }

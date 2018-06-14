@@ -35,19 +35,19 @@ public class PlayerMovement : MoveBase {
 
     void FixedUpdate()
     {
-        if (!moveRoom)
+        if (!moveRoom)  // 이거 나중에 playerDisable 이거 함수때 어짜피 끌꺼니까 고려하고 지울생각하셈.
         {
             if (rigid /*&& !avatar.GetBool("StartAttack")*/) // 여기다가 키입력을 두니까 공격도중 속도가 안떨어짐 그래서 일일히넣음...
             {
                 if (playerEntity.isDodge)
                     rigid.MovePosition(transform.position +
-                        skillMovePos.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerBase.instance.moveSpeed);
+                        skillMovePos.forward * Time.deltaTime * avatar.GetFloat("DashForce") * playerEntity.moveSpeed);
                 else if  (playerEntity.isExmove)
                     rigid.MovePosition(transform.position +
-                        skillMovePos.forward * Time.deltaTime * PlayerBase.instance.moveSpeed);
+                        skillMovePos.forward * Time.deltaTime * playerEntity.moveSpeed);
                 else
                     rigid.MovePosition(transform.position +
-                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * PlayerBase.instance.moveSpeed);
+                        transform.forward * Time.deltaTime * avatar.GetFloat("DashForce") * playerEntity.moveSpeed);
                 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {

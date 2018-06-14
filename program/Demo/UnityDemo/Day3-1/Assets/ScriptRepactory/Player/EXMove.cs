@@ -108,13 +108,12 @@ public class EXMove : AttackBase {
         }   // 잔상의 보이는 매터리얼을 다 킴. 잔상의 색깔을 빈 오브젝트인 afterImageMets 에 다 저장함.
         
         afterImageR.GetComponent<Animator>().speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
-
         playerEntity.moveSpeed = 0;
         effect.PlayEffect(gameObject, effect.playEXMoveVanishEffect);
         effect.PlayEffect(gameObject, effect.playEXMoveSlashEffect);
 
         yield return new WaitForSeconds(0.13f);
-        playerEntity.moveSpeed = calcDistObj() * 7;              // ex무브동안의 스피드 이속도로 고속이동함.
+        playerEntity.moveSpeed = calcDistObj() * 6;              // ex무브동안의 스피드 이속도로 고속이동함.
         print(calcDistObj() * 7);       // 검사용 코드. 
 
         yield return new WaitForSeconds(.05f);
