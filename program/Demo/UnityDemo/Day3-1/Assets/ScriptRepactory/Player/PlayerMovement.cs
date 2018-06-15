@@ -120,11 +120,6 @@ public class PlayerMovement : MoveBase {
         playerEntity.isMove = false;
     }
 
-    public void DashEndForce()
-    {
-        //rigidbody.AddForce(transform.forward.normalized * 400);
-    }
-
     public int Turnjudge(Vector3 forward, Vector3 dir)
     {
         if (Vector3.Cross(forward, dir).y > 0)

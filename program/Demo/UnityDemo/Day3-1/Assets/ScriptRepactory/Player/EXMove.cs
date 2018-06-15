@@ -11,6 +11,7 @@ public class EXMove : AttackBase {
     public float moveSpeed;
     Animator avatar;
     EffectManager effect;
+    GameObject skillTarget;
     //PlayerEffect EXEffect;
     
     Material[,] afterImageMats = new Material[5, 5];
@@ -23,6 +24,7 @@ public class EXMove : AttackBase {
         rigid = GetComponent<Rigidbody>();
         moveSpeed = playerEntity.moveSpeed;
         effect = EffectManager.instance;
+        skillTarget = GetComponentInChildren<SkillTarget>().gameObject;
     }
 
     private void Awake()
@@ -90,6 +92,7 @@ public class EXMove : AttackBase {
         playerEntity.isAttack = false;
         playerEntity.isInvincibility = true;
         playerEntity.ExMoveAttack();
+        //PlayerBase.instance.GetComponent<Rigidbody>().rotation = skillTarget.transform.rotation;
         PlayerColorChange.instance.PlayerDisappear();   // 라파엘의 보이는 매터리얼들을 다 끔. 그리고 색을 어둡게 바꿈.
 
 
@@ -109,18 +112,18 @@ public class EXMove : AttackBase {
         
         afterImageR.GetComponent<Animator>().speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
         playerEntity.moveSpeed = 0;
-        effect.PlayEffect(gameObject, effect.playEXMoveVanishEffect);
-        effect.PlayEffect(gameObject, effect.playEXMoveSlashEffect);
+        EffectManager.PlayEffect(skillTarget, EffectManager.playEXMoveVanishEffect);
+        EffectManager.PlayEffect(skillTarget, EffectManager.playEXMoveSlashEffect);
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 6;              // ex무브동안의 스피드 이속도로 고속이동함.
         print(calcDistObj() * 7);       // 검사용 코드. 
 
         yield return new WaitForSeconds(.05f);
-        effect.PlayEffect(gameObject, effect.playExMoveRingEffectBack);
+        EffectManager.PlayEffect(gameObject, EffectManager.playExMoveRingEffectBack);
 
         yield return new WaitForSeconds(.02f);
-        effect.PlayEffect(gameObject, effect.playExMoveRingEffectFront);
+        EffectManager.PlayEffect(gameObject, EffectManager.playExMoveRingEffectFront);
 
         yield return new WaitForSeconds(.02f);      // ex무브의 시간인 0.2초
         playerEntity.isExmove = false;
@@ -128,7 +131,7 @@ public class EXMove : AttackBase {
         transform.rotation = Quaternion.LookRotation(transform.GetComponentInChildren<SkillTarget>().movePos.normalized);
         transform.GetComponentInChildren<SkillTarget>().transform.rotation
             = Quaternion.LookRotation(transform.forward);
-        effect.PlayEffect(gameObject, effect.playEXmoveVanishFlowerEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.playEXmoveVanishFlowerEffect);
         //effect.PlayEffect(gameObject, effect.playplayerSwordBlinkEffect);
         for (int i = 0; i < afterImageRendObjs.Length; ++i)
         {

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class blink_dash_start : StateMachineBehaviour {
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (animator.GetComponent<ObjectBase>().isAttack)
-            EffectManager.instance.PlayEffect(animator.gameObject, EffectManager.instance.playplayerSwordBlinkEffect);
+            EffectManager.PlayEffect(animator.gameObject, EffectManager.instance.playplayerSwordBlinkEffect);
         animator.GetComponent<ObjectBase>().isAttack = false;
     }
 

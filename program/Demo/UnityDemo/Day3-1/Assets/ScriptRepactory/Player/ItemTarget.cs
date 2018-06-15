@@ -55,7 +55,7 @@ public class ItemTarget : MonoBehaviour {
         PlaySceneUIManager.instance.ChangeEterAmountText();
         other.GetComponent<ParticleSystem>().Stop();
         EnergyManager.instance.ReturnEtere(other);
-        EffectManager.instance.PlayEffect(gameObject, EffectManager.instance.playEtereApplyEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.playEtereApplyEffect);
         yield break;
     }
 }

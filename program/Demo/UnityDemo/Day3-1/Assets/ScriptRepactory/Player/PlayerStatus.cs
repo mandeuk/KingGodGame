@@ -78,7 +78,7 @@ public class PlayerStatus : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
         PlayerColorChange.instance.PlayerAppear();
-        EffectManager.instance.PlayEffect(gameObject, EffectManager.instance.playEXmoveVanishFlowerEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.playEXmoveVanishFlowerEffect);
         GetComponent<Animator>().SetTrigger("roomMove");
 
         yield break;

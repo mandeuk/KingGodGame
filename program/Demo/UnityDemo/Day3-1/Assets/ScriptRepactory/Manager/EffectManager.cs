@@ -28,7 +28,7 @@ public class EffectManager : MonoBehaviour {
         StartCoroutine(effectMethod(caller, type));
     }
 
-    public void PlayEffect(GameObject caller, EffectVoidMethod effectMethod)
+    public static void PlayEffect(GameObject caller, EffectVoidMethod effectMethod)
     {
         effectMethod(caller);
     }
@@ -54,18 +54,18 @@ public class EffectManager : MonoBehaviour {
 
     public GameObject playerSwordBlinkEffect; // 외부에서 직접 넣어주기 위해서 퍼블릭으로 작성.
 
-    GameObject playerEXMoveSlashEffect;
-    GameObject playerEXmoveVanishEffect;
-    GameObject playerEXMoveVanishFlowerEffect;
-    GameObject playerEXMoveRingEffectBack;
-    GameObject playerExMoveRingEffectFront;
+    static GameObject playerEXMoveSlashEffect;
+    static GameObject playerEXmoveVanishEffect;
+    static GameObject playerEXMoveVanishFlowerEffect;
+    static GameObject playerEXMoveRingEffectBack;
+    static GameObject playerExMoveRingEffectFront;
 
-    GameObject playerChargeAttackEffect;
+    static GameObject playerChargeAttackEffect;
     public GameObject playerChargingEffect; // 외부에서(chargeAttack FBX 마지막) 꺼줘야해서 public으로 선언.
-    GameObject playerChargeEndEffect;
+    static GameObject playerChargeEndEffect;
 
-    GameObject playerEnergyApplyEffect;
-    GameObject playerEtereApplyEffect;
+    static GameObject playerEnergyApplyEffect;
+    static GameObject playerEtereApplyEffect;
 
     GameObject raphael;
 
@@ -78,7 +78,7 @@ public class EffectManager : MonoBehaviour {
 
     // 함수 기능 : 델리게이트 초기화
     // 왜 안해줘도 됨?;;;; 뭔데이거?;;
-    /*protected void DeleInit()
+    protected void DeleInit()
     {
         EffectIEnumeratorMethod PlayEnemyWraithWorriorDeadEffect
             = new EffectIEnumeratorMethod(playEnemyWraithWorriorDeadEffect);
@@ -117,7 +117,7 @@ public class EffectManager : MonoBehaviour {
             = new EffectVoidMethod(playEnergyApplyEffect);
         EffectVoidMethod PlayEtereApplyEffect
             = new EffectVoidMethod(playEtereApplyEffect);
-    }*/
+    }
 
     protected void SpawnInit()
     {
@@ -325,7 +325,7 @@ public class EffectManager : MonoBehaviour {
         playerSwordBlinkEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEXMoveSlashEffect(GameObject caller)
+    public static void playEXMoveSlashEffect(GameObject caller)
     {
         Vector3 EXPos = caller.GetComponent<PlayerMovement>().movePos.normalized;
 
@@ -335,7 +335,7 @@ public class EffectManager : MonoBehaviour {
         playerEXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEXMoveVanishEffect(GameObject caller)
+    public static void playEXMoveVanishEffect(GameObject caller)
     {
         playerEXmoveVanishEffect.SetActive(true);
         playerEXmoveVanishEffect.transform.position = caller.transform.position + Vector3.up;
@@ -343,7 +343,7 @@ public class EffectManager : MonoBehaviour {
         playerEXmoveVanishEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEXmoveVanishFlowerEffect(GameObject caller)
+    public static void playEXmoveVanishFlowerEffect(GameObject caller)
     {
         playerEXMoveVanishFlowerEffect.SetActive(true);
         playerEXMoveVanishFlowerEffect.transform.position = caller.transform.position + Vector3.up;
@@ -351,7 +351,7 @@ public class EffectManager : MonoBehaviour {
         playerEXMoveVanishFlowerEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playExMoveRingEffectFront(GameObject caller)
+    public static void playExMoveRingEffectFront(GameObject caller)
     {
         Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
 
@@ -361,7 +361,7 @@ public class EffectManager : MonoBehaviour {
         playerExMoveRingEffectFront.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playExMoveRingEffectBack(GameObject caller)
+    public static void playExMoveRingEffectBack(GameObject caller)
     {
         Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
 
@@ -371,7 +371,7 @@ public class EffectManager : MonoBehaviour {
         playerEXMoveRingEffectBack.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playChargeAttackEffect(GameObject caller)
+    public static void playChargeAttackEffect(GameObject caller)
     {
         playerChargeAttackEffect.SetActive(false);
         playerChargeAttackEffect.SetActive(true);
@@ -398,7 +398,7 @@ public class EffectManager : MonoBehaviour {
         playerChargeEndEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEnergyApplyEffect(GameObject caller)
+    public static void playEnergyApplyEffect(GameObject caller)
     {
         playerEnergyApplyEffect.SetActive(false);
         playerEnergyApplyEffect.SetActive(true);
@@ -406,7 +406,7 @@ public class EffectManager : MonoBehaviour {
         playerEnergyApplyEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playEtereApplyEffect(GameObject caller)
+    public static void playEtereApplyEffect(GameObject caller)
     {
         playerEtereApplyEffect.SetActive(false);
         playerEtereApplyEffect.SetActive(true);

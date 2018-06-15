@@ -3,30 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEffect : MonoBehaviour
-{
-    EffectManager effect;
-    
+{    
     public virtual void playBlinkEffect()
     {
-        effect.PlayEffect(gameObject, effect.playplayerSwordBlinkEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.instance.playplayerSwordBlinkEffect);
     }
     
     public virtual void playExplosionAttackEffect()
     {
-        effect.PlayEffect(gameObject, effect.playChargeAttackEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.playChargeAttackEffect);
     }
 
     public virtual void playChargeAttackChargeEffect()
     {
-        effect.PlayEffect(gameObject, effect.playplayerChargingEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.instance.playplayerChargingEffect);
     }
     public virtual void playChargeAttackEndEffect()
     {
-        effect.PlayEffect(gameObject, effect.playChargeAttackEndEffect);
-    }
-
-    void Awake()
-    {
-        effect = EffectManager.instance;        
+        EffectManager.PlayEffect(gameObject, EffectManager.instance.playChargeAttackEndEffect);
     }
 }

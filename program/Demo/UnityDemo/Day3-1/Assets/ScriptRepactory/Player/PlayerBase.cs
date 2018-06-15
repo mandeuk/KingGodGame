@@ -2,9 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Status
+{
+    MAXHP,
+    CURHP,
+    ATTACKPOWER,
+    ATTACKSPEED,
+    ATTACKRANGE,
+    MOVESPEED,
+    PUSHBACK,
+    ENERGY,
+    ETERE,
+    DEVILGAGE,
+    STANCE
+}
+
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
-    public float energy, attackSpeed, attackRange, devilGage, etere, tendency;
+    public float energy, attackSpeed, attackRange, devilGage, etere, stance;
     public bool isExmove, isChargeAttack, isDodge;
 
     Animator anim;
@@ -40,7 +55,7 @@ public class PlayerBase : ObjectBase {
         energy =        3;      // 에너지
         etere =         0;      // 에테르
         devilGage =     30;     // 폭주 게이지 100이되면 죽음.
-        tendency =      0;      // 성향. 구원,타락 수치로 성향이 높아지고 낮아진다.
+        stance =        0;      // 성향. 구원,타락 수치로 성향이 높아지고 낮아진다.
 
         isInvincibility = false;
         isExmove = false;
@@ -92,21 +107,54 @@ public class PlayerBase : ObjectBase {
     }
 
     // 함수 기능 :  스텟을 관리하는 델리게이트 선언
-    public delegate void StatName(float amount, bool up);
+    public delegate void SetStat(float amount, bool up);
 
     // 함수 기능 :  스탯을 올리고 내리고를 여기서 처리함.
     //              예를들어 hp가 올라가고 내려가고를 cur/ MAX 구분할것 없이
     //              이곳 함수에서 올라가면 올라간대로 내려가면 내려간대로 처리함.
-    public void ChangeStatus(float amount, bool up, StatName status)
+    public void SetStatus(float amount, bool up, SetStat status)
     {
         status(amount, up);
+    }
+
+    // 함수 기능 :  스탯의 정보를 가져감. 한꺼번에 관리하고 일관성 있게 하려면 필요하긴 할듯
+    //              일단 불편하기도하고 안쓸거임. 일관성있게 하려면 델리게이트까지 동원하는게 좋을듯.
+    public float GetStatus(Status stat)
+    {
+        switch (stat)
+        {
+            case Status.ATTACKPOWER:
+                return attackPower;
+            case Status.ATTACKRANGE:
+                return attackRange;
+            case Status.ATTACKSPEED:
+                return attackSpeed;
+            case Status.CURHP:
+                return curHP;
+            case Status.DEVILGAGE:
+                return devilGage;
+            case Status.ENERGY:
+                return energy;
+            case Status.ETERE:
+                return etere;
+            case Status.MAXHP:
+                return maxHP;
+            case Status.MOVESPEED:
+                return moveSpeed;
+            case Status.PUSHBACK:
+                return pushBack;
+            case Status.STANCE:
+                return stance;
+            default:
+                return 0;
+        }
     }
 
     public void MaxHP(float amount, bool up)
     {
         if (up)
         {
-            if ((int)maxHP < 14)
+            if ((int)maxHP < 14)    // 최대체력(14)보다 클경우
             {
                 maxHP += amount;
                 curHP += amount;
@@ -114,7 +162,7 @@ public class PlayerBase : ObjectBase {
         }
         else
         {
-            if ((int)maxHP > 1)
+            if ((int)maxHP > 1)     // 최소체력(1)보다 작을경우
             {
                 maxHP -= amount;
                 curHP -= amount;
@@ -122,7 +170,7 @@ public class PlayerBase : ObjectBase {
         }
         PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
     }
-
+    
     public void CurHP(float amount, bool up)
     {
         if (up)
@@ -242,17 +290,17 @@ public class PlayerBase : ObjectBase {
 
     }
 
-    public void Tedency(float amount, bool up)
+    public void Stance(float amount, bool up)
     {
         if (up)
         {
-            tendency += amount;
+            stance += amount;
         }
         else
         {
-            tendency -= amount;
+            stance -= amount;
         }
 
-        // 텐덴시에 따라서 나눠줘야함. bool로 나누든..
+        // 스텐스에 따라서 나눠줘야함. bool로 나누든..
     }
 }
