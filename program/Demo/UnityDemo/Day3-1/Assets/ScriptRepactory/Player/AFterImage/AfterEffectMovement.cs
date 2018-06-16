@@ -25,10 +25,11 @@ public class AfterEffectMovement : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
             {
-                if (!playerEntity.isAttack)
+                if (!playerEntity.isExmove && !playerEntity.isDodge && !playerEntity.isAttack)
+                {
                     TurnJudgeFunc();
-
-                Turn(movePos);
+                    Turn(movePos);
+                }
             }
             else
                 StopWalking();

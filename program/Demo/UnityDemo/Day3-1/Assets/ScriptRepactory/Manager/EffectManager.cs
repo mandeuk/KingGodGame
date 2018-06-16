@@ -64,6 +64,8 @@ public class EffectManager : MonoBehaviour {
     public GameObject playerChargingEffect; // 외부에서(chargeAttack FBX 마지막) 꺼줘야해서 public으로 선언.
     static GameObject playerChargeEndEffect;
 
+    public GameObject playerDodgeDustEffect;
+
     static GameObject playerEnergyApplyEffect;
     static GameObject playerEtereApplyEffect;
 
@@ -91,10 +93,7 @@ public class EffectManager : MonoBehaviour {
 
         EffectIEnumeratorMethod PlayPlayerAttackEffect
             = new EffectIEnumeratorMethod(playPlayerAttackEffect);
-
-        EffectVoidMethod PlayplayerSwordBlinkEffect
-            = new EffectVoidMethod(playplayerSwordBlinkEffect);
-
+        
         EffectVoidMethod PlayEXMoveSlashEffect
             = new EffectVoidMethod(playEXMoveSlashEffect);
         EffectVoidMethod PlayEXMoveVanishEffect
@@ -319,18 +318,24 @@ public class EffectManager : MonoBehaviour {
         yield break;
     }
 
-    public void playplayerSwordBlinkEffect(GameObject caller)
+    public void playplayerSwordBlinkEffect()
     {
         playerSwordBlinkEffect.SetActive(true);
         playerSwordBlinkEffect.GetComponent<ParticleSystem>().Play();
     }
 
+    public void playDodgeDustEffect()
+    {
+        playerDodgeDustEffect.SetActive(true);
+        playerDodgeDustEffect.GetComponent<ParticleSystem>().Play();
+    }
+
     public static void playEXMoveSlashEffect(GameObject caller)
     {
-        Vector3 EXPos = caller.GetComponent<PlayerMovement>().movePos.normalized;
+        Vector3 EXPos = caller.GetComponentInChildren<SkillTarget>().movePos.normalized;
 
         playerEXMoveSlashEffect.SetActive(true);
-        playerEXMoveSlashEffect.transform.position = caller.transform.position + EXPos * 0.5f + Vector3.up;
+        playerEXMoveSlashEffect.transform.position = caller.transform.position + EXPos * 2f + Vector3.up;
         playerEXMoveSlashEffect.transform.rotation = Quaternion.LookRotation(EXPos);
         playerEXMoveSlashEffect.GetComponent<ParticleSystem>().Play();
     }
@@ -353,7 +358,7 @@ public class EffectManager : MonoBehaviour {
 
     public static void playExMoveRingEffectFront(GameObject caller)
     {
-        Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
+        Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponentInChildren<SkillTarget>().movePos.normalized);
 
         playerExMoveRingEffectFront.SetActive(true);
         playerExMoveRingEffectFront.transform.position = caller.transform.position + Vector3.up;
@@ -363,7 +368,7 @@ public class EffectManager : MonoBehaviour {
 
     public static void playExMoveRingEffectBack(GameObject caller)
     {
-        Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponent<PlayerMovement>().movePos.normalized);
+        Quaternion ExRotation = Quaternion.LookRotation(caller.GetComponentInChildren<SkillTarget>().movePos.normalized);
 
         playerEXMoveRingEffectBack.SetActive(true);
         playerEXMoveRingEffectBack.transform.position = caller.transform.position + Vector3.up;

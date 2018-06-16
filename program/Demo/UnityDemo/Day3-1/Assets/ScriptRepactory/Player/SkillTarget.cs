@@ -33,7 +33,7 @@ public class SkillTarget : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("EnemyWorrior"))
+        if (other.CompareTag("Enemy"))
         {
             if (!other.GetComponent<ObjectBase>().isDead)
                 targetList.Remove(other);
@@ -50,9 +50,11 @@ public class SkillTarget : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         {
-            TurnJudgeFunc();
             if (!playerEntity.isExmove && !playerEntity.isDodge)
+            {
+                TurnJudgeFunc();
                 Turn(movePos);
+            }
         }
 
         for (int i = 0; i < targetList.Count; i++)

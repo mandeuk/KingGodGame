@@ -92,7 +92,7 @@ public class EXMove : AttackBase {
         playerEntity.isAttack = false;
         playerEntity.isInvincibility = true;
         playerEntity.ExMoveAttack();
-        //PlayerBase.instance.GetComponent<Rigidbody>().rotation = skillTarget.transform.rotation;
+        PlayerBase.instance.GetComponent<Rigidbody>().rotation = skillTarget.transform.rotation;
         PlayerColorChange.instance.PlayerDisappear();   // 라파엘의 보이는 매터리얼들을 다 끔. 그리고 색을 어둡게 바꿈.
 
 
@@ -112,8 +112,8 @@ public class EXMove : AttackBase {
         
         afterImageR.GetComponent<Animator>().speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
         playerEntity.moveSpeed = 0;
-        EffectManager.PlayEffect(skillTarget, EffectManager.playEXMoveVanishEffect);
-        EffectManager.PlayEffect(skillTarget, EffectManager.playEXMoveSlashEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.playEXMoveVanishEffect);
+        EffectManager.PlayEffect(gameObject, EffectManager.playEXMoveSlashEffect);
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 6;              // ex무브동안의 스피드 이속도로 고속이동함.
@@ -126,7 +126,7 @@ public class EXMove : AttackBase {
         EffectManager.PlayEffect(gameObject, EffectManager.playExMoveRingEffectFront);
 
         yield return new WaitForSeconds(.02f);      // ex무브의 시간인 0.2초
-        playerEntity.isExmove = false;
+        
         // 캐릭터가 보는방향을 ex무브가 보았던 방향으로 바꿈
         transform.rotation = Quaternion.LookRotation(transform.GetComponentInChildren<SkillTarget>().movePos.normalized);
         transform.GetComponentInChildren<SkillTarget>().transform.rotation
@@ -147,6 +147,7 @@ public class EXMove : AttackBase {
         avatar.speed = 1;
         afterImageR.GetComponent<Animator>().speed = 1;
         playerEntity.isInvincibility = false;
+        playerEntity.isExmove = false;
         yield break;
     }
 

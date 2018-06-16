@@ -6,7 +6,7 @@ public class PlayerEffect : MonoBehaviour
 {    
     public virtual void playBlinkEffect()
     {
-        EffectManager.PlayEffect(gameObject, EffectManager.instance.playplayerSwordBlinkEffect);
+        EffectManager.instance.playplayerSwordBlinkEffect();
     }
     
     public virtual void playExplosionAttackEffect()

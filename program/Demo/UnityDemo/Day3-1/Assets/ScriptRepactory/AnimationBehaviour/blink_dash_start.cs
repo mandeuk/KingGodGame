@@ -8,7 +8,7 @@ public class blink_dash_start : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (animator.GetComponent<ObjectBase>().isAttack)
-            EffectManager.PlayEffect(animator.gameObject, EffectManager.instance.playplayerSwordBlinkEffect);
+            EffectManager.instance.playplayerSwordBlinkEffect();
         animator.GetComponent<ObjectBase>().isAttack = false;
     }
 
