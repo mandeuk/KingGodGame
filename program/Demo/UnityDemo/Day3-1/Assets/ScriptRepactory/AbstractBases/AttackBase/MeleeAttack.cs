@@ -14,7 +14,7 @@ public class MeleeAttack : EnemyAttack {
     // 새로 new도 못하고 오버라이딩도 힘듬..
     // 할수는 있겠지만 지금은 어려워서 구현 할 수 없음.
     void Update () {
-        base.AttackUpdate();
+        //base.AttackUpdate();
     }
 
     protected override void Init()

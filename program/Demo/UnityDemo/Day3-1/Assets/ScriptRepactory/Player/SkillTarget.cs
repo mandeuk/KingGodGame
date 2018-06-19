@@ -8,8 +8,6 @@ public class SkillTarget : MonoBehaviour {
     public Vector3 movePos;
     PlayerBase playerEntity;
 
-    int turnDir;
-
     // Use this for initialization
     void Awake()
     {

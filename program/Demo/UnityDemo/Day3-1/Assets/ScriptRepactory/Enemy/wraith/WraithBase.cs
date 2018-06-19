@@ -14,7 +14,7 @@ public class WraithBase : EnemyBase {
 
         base.attackPower = 1;
         base.attackDistance = 6;
-        base.stopDistance = 6;
+        base.stopDistance = 5;
         base.findDistance = 10;
     }
 
