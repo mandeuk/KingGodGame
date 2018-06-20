@@ -18,11 +18,9 @@ public class NormalTarget : MonoBehaviour {
         {
             if (!other.GetComponent<EnemyBase>().isDead)
             {
-                //other.GetComponent<EnemyBase>().Damaged();
                 targetList.Add(other);
             }
         }
-
 
         if (other.CompareTag("EnemyBullet"))
         {

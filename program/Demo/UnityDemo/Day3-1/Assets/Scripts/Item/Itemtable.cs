@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Itemtable : MonoBehaviour {
@@ -14,7 +15,7 @@ public class Itemtable : MonoBehaviour {
     Color colorBlackSpirit;
     Color colorVioletSpirit;
     Color colorRainbowSpirit;
-
+    
     public static Itemtable Instance
     {
         get
@@ -22,7 +23,7 @@ public class Itemtable : MonoBehaviour {
             return instance;
         }
     }
-
+    
     // Use this for initialization
     void Awake () {
         //아이템매니저를 싱글턴 오브젝트로 만들어 씬이 변경되어도 삭제되지 않고 살아서 아이템을 관리하도록 해줍니다.
@@ -36,16 +37,16 @@ public class Itemtable : MonoBehaviour {
             instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
             //DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
-
+        
         colorRedSpirit     = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         colorOrangeSpirit  = new Color(1.0f, 0.7f, 0.0f, 1.0f);
         colorYellowSpirit  = new Color(1.0f, 1.0f, 0.0f, 1.0f);
         colorGreenSpirit   = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         colorBlueSpirit    = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         colorWhiteSpirit   = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        colorBlackSpirit   = new Color(0.1f, 0.1f, 0.1f, 1.0f);
+        //colorBlackSpirit   = new Color(0.1f, 0.1f, 0.1f, 1.0f);
         colorVioletSpirit  = new Color(0.9f, 0.5f, 0.9f, 1.0f);
-        colorRainbowSpirit = new Color(0.0f, 1.0f, 1.0f, 1.0f);
+        //colorRainbowSpirit = new Color(0.0f, 1.0f, 1.0f, 1.0f);
     }
    
 
@@ -57,36 +58,37 @@ public class Itemtable : MonoBehaviour {
     public Color SetItemColor(int itemType)
     {
         Color itemColor = colorRedSpirit;//default값
-
+        
+        
         switch(itemType)
         {
-            case 1:
+            case 0:
                 itemColor = colorRedSpirit;
                 break;
-            case 2:
+            case 1:
                 itemColor = colorOrangeSpirit;
                 break;
-            case 3:
+            case 2:
                 itemColor = colorYellowSpirit;
                 break;
-            case 4:
+            case 3:
                 itemColor = colorGreenSpirit;
                 break;
-            case 5:
+            case 4:
                 itemColor = colorBlueSpirit;
                 break;
-            case 6:
+            case 5:
                 itemColor = colorWhiteSpirit;
                 break;
-            case 7:
-                itemColor = colorBlackSpirit;
-                break;
-            case 8:
+            //case 7:
+            //    itemColor = colorBlackSpirit;
+            //    break;
+            case 6:
                 itemColor = colorVioletSpirit;
                 break;
-            case 9:
-                itemColor = colorRainbowSpirit;
-                break;
+            //case 8:
+            //    itemColor = colorRainbowSpirit;
+            //    break;
         }
 
         return itemColor;
@@ -96,60 +98,61 @@ public class Itemtable : MonoBehaviour {
     {
         switch(itemType)
         {
-            case 1:
+            case 0:
                 RedSpiritApply();
                 break;
-            case 2:
+            case 1:
                 OrangeSpiritApply();
                 break;
-            case 3:
+            case 2:
                 YellowSpiritApply();
                 break;
-            case 4:
+            case 3:
                 GreenSpiritApply();
                 break;
-            case 5:
+            case 4:
                 BlueSpiritApply();
                 break;
-            case 6:
+            case 5:
                 WhiteSpiritApply();
                 break;
-            case 7:
-                BlackSpiritApply();
-                break;
-            case 8:
+            //case 7:
+            //    BlackSpiritApply();
+            //    break;
+            case 6:
                 VioletSpiritApply();
                 break;
-            case 9:
-                RainbowSpiritApply();
-                break;
+            //case 8:
+            //    RainbowSpiritApply();
+            //    break;
         }
     }
 
     void RedSpiritApply()
     {
-        PlayerStatus.instance.healthPoint += 0.5f;
+        GetMaxHP(1.0f);
+        PlaySceneUIManager.instance.UpdateHPUI();
     }
 
     void OrangeSpiritApply()
     {
-        PlayerStatus.instance.attackPower += 1.0f;
+        PlayerBase.instance.attackPower += 1.0f;
     }
 
     void YellowSpiritApply()
     {
-        PlayerStatus.instance.attackSpeed += 1.0f;
+        PlayerBase.instance.attackSpeed += 1.0f;
     }
 
     void GreenSpiritApply()
     {
-        PlayerStatus.instance.attackPower += 0.5f;
-        PlayerStatus.instance.attackSpeed += 0.5f;
+        PlayerBase.instance.attackPower += 0.5f;
+        PlayerBase.instance.attackSpeed += 0.5f;
     }
 
     void BlueSpiritApply()
     {
-        PlayerStatus.instance.moveSpeed += 0.5f;
+        PlayerBase.instance.moveSpeed += 0.5f;
     }
 
     void WhiteSpiritApply()
@@ -158,20 +161,49 @@ public class Itemtable : MonoBehaviour {
 
     void BlackSpiritApply()
     {
-        PlayerStatus.instance.devilGage += 6.0f;
+        PlayerBase.instance.devilGage += 6.0f;
     }
 
     void VioletSpiritApply()
     {
-        PlayerStatus.instance.attackRange += 0.1f;
+        PlayerBase.instance.attackRange += 0.1f;
     }
 
     void RainbowSpiritApply()
     {
-        PlayerStatus.instance.healthPoint += 0.5f;
-        PlayerStatus.instance.attackPower += 1.0f;
-        PlayerStatus.instance.attackSpeed += 1.0f;
-        PlayerStatus.instance.moveSpeed += 0.5f;
-        PlayerStatus.instance.attackRange += 0.1f;
+        GetMaxHP(1.0f);
+        PlayerBase.instance.attackPower += 1.0f;
+        PlayerBase.instance.attackSpeed += 1.0f;
+        PlayerBase.instance.moveSpeed += 0.5f;
+        PlayerBase.instance.attackRange += 0.1f;
+    }
+
+
+    void GetMaxHP(float getHP)
+    {
+        PlayerBase.instance.maxHP += getHP;
+        if (PlayerBase.instance.maxHP > 10)
+            PlayerBase.instance.maxHP = 10;
+        PlayerBase.instance.curHP += getHP;
+        if (PlayerBase.instance.curHP > PlayerBase.instance.maxHP)
+            PlayerBase.instance.curHP = PlayerBase.instance.maxHP;
+    }
+
+    public String GetItemName(int itemtype)
+    {
+        switch(itemtype)
+        {
+            case 0: return "RedSpirit";
+            case 1: return "OrangeSpirit";
+            case 2: return "YellowSpirit";
+            case 3: return "GreenSpirit";
+            case 4: return "BlueSpirit";
+            case 5: return "WhiteSpirit";
+            //case 6: return "BlackSpirit";
+            case 6: return "VioletSpirit";
+            //case 8: return "RainbowSpirit";
+        }
+
+        return "ERROR";
     }
 }

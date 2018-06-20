@@ -14,9 +14,14 @@ public class ObstacleData : MonoBehaviour {
             {
                 InitWraith();
             }
+
+            if(transform.GetChild(i).tag == "WorriorSpawn")
+            {
+                InitWraithWorrior();
+            }
         }
     }
-
+    
     private void Start()
     {
         int j = 0;
@@ -30,13 +35,24 @@ public class ObstacleData : MonoBehaviour {
                 j++;
             }
         }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).tag == "WorriorSpawn")
+            {
+                EnemyClones[j].GetComponent<NavMeshAgent>().enabled = false;
+                EnemyClones[j].transform.position = transform.GetChild(i).transform.position;
+                EnemyClones[j].GetComponent<NavMeshAgent>().enabled = true;
+                j++;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update () {
         for (int i = 0; i < EnemyClones.Count; i++)
         {
-            if (EnemyClones[i].GetComponent<Enemyhealth>().isDead)
+            if (EnemyClones[i].GetComponent<ObjectBase>().isDead)
             {
                 EnemyClones.Remove(EnemyClones[i]);
             }   // 사망여부 판단.
@@ -48,16 +64,8 @@ public class ObstacleData : MonoBehaviour {
         EnemyClones.Add(transform.GetComponent<EnemySpawn>().spawnWraith());
     }
 
-    public void SetPosition()
+    public void InitWraithWorrior()
     {
-        int j = 0;
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            if (transform.GetChild(i).tag == "EnemySpawn")
-            {
-                EnemyClones[j].transform.position = transform.GetChild(i).transform.position;
-                j++;
-            }
-        }
+        EnemyClones.Add(transform.GetComponent<EnemySpawn>().SpawnWraithWorrior());
     }
 }

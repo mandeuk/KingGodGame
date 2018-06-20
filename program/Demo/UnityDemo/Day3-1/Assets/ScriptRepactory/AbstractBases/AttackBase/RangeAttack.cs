@@ -11,19 +11,17 @@ public class RangeAttack : EnemyAttack {
     List<GameObject> firedBulletList = new List<GameObject>();
 
 
+
     // Use this for initialization
     void Awake () {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     protected override void Init()
     {
         base.Init();
+
         InitBullet();
     }
 
@@ -35,6 +33,7 @@ public class RangeAttack : EnemyAttack {
     public void Fire()
     {
         GameObject bullet = bulletList[0];
+        bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
 
         firedBulletList.Add(bullet);
         bulletList.RemoveAt(0);
@@ -42,6 +41,7 @@ public class RangeAttack : EnemyAttack {
         bullet.SetActive(true);
         bullet.transform.position = transform.transform.position + transform.up * 0.5f;
         bullet.transform.rotation = transform.transform.rotation;
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 200);
     }
 
     public void BulletHit(GameObject hitBullet)
@@ -58,6 +58,7 @@ public class RangeAttack : EnemyAttack {
         {
             GameObject bulletClone = Instantiate(bullet, transform) as GameObject;
             bulletClone.GetComponent<AttackTrigger>().damageNode = damageNode;
+            bulletClone.GetComponent<BulletBase>().Attacker = gameObject;
             bulletList.Add(bulletClone);
         }
     }

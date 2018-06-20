@@ -2,40 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WraithBullet : MonoBehaviour {
-    public bool onFire;
+public class WraithBullet : BulletBase {
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("mapClearCol"))
         {
-            onFire = false;
-        }
-
-        if (other.CompareTag("mapClearCol"))
-        {
-            WraithEffect.instance.BulletHit(this.gameObject);
-            onFire = false;
+            BulletHit();
         }
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
 
     private void OnEnable()
     {
         StartCoroutine(VanishingEffect());
-        onFire = true;
+        Init();
     }
-    
 
+    // 함수 기능 :  5초뒤에 사라지게 함.
     public IEnumerator VanishingEffect()
     {
         yield return new WaitForSeconds(5.0f);
-        WraithEffect.instance.BulletHit(this.gameObject);
-        onFire = false;
+        BulletHit();
 
         yield break;
+    }
+
+    public override void Init()
+    {
+        base.Init();
+    }
+
+    public override void BulletHit()
+    {
+        base.BulletHit();
+
+        EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
     }
 }

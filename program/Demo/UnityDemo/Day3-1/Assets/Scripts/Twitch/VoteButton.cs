@@ -16,9 +16,11 @@ public class VoteButton : MonoBehaviour {
 
     public void VoteStartFunction()
     {
-        //print("투표버튼 클릭");
         if (TwitchChat.Instance.votestart)
+        {
             TwitchChat.Instance.StopVote();
+            TwitchChat.Instance.DeleteVoteTextAll();
+        }
         else
             TwitchChat.Instance.StartVote();
     }

@@ -9,8 +9,6 @@ public class EnemyMovement : MoveBase {
     NavMeshAgent nav;
     Animator anim;
 
-    public bool playerIn;
-
     // Use this for initialization
     void Start()
     {
@@ -22,13 +20,11 @@ public class EnemyMovement : MoveBase {
         base.Init();
         enemyEntity = entity as EnemyBase;
         player = enemyEntity.player;
-        //player = PlayerStatus.instance.gameObject;
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveUpdate()
     {
         if (enemyEntity.isAgro)
         {
@@ -38,7 +34,6 @@ public class EnemyMovement : MoveBase {
 
                 if (Vector3.Distance(player.transform.position, transform.position) > enemyEntity.attackDistance)
                 {
-                    
                     StartMove();
                 }
                 else

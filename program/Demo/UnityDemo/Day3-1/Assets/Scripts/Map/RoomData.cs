@@ -4,15 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class RoomData : MonoBehaviour {
-    public enum roomState : int
-    {
-
-    }
     public bool isClear;
     public bool playerIn;
-    public int x, y;
-
-    public GameObject meshs;
+    public int x, y, roomNumber;
+    
     public GameObject fadeCamera;
     public GameObject[] roomPos = new GameObject[4];
     Transform player;
@@ -28,14 +23,14 @@ public class RoomData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        RoomWait();
+        //RoomWait();
         cameraFade = GameObject.FindWithTag("MainCamera");
         player = GameObject.FindWithTag("Player").transform;
         isClear = false;
         playerIn = false;
-        //meshs.SetActive(false);
         EnemyClones = transform.parent.GetComponentInChildren<ObstacleData>().EnemyClones;
     }
+
     private void OnEnable()
     {
        
@@ -49,7 +44,6 @@ public class RoomData : MonoBehaviour {
 
     // Update is called once per frame
     // 이거 꼭 업데이트에서 불러야할까? 매프레임 이렇게..???? 후우..
-
     void Update () {
         // 룸의 상태를 판단. 
         if (playerIn)
@@ -78,6 +72,12 @@ public class RoomData : MonoBehaviour {
 
         // 콜라이더가 바뀌어야함
         JudgeRoomDoorOpen();
+
+        if(mapSpawnArray[y,x] == 5)
+        {
+            GameObject lotus = EnergyManager.instance.SpawnLotus();
+            lotus.transform.position = transform.position + Vector3.up * 3.6f;
+        }
     }
 
     // 룸에 플레이어가 들어왔을때 시작하는 상태에서 호출
@@ -88,23 +88,26 @@ public class RoomData : MonoBehaviour {
         {
             if (transform.GetComponent<Animator>().enabled)
                 transform.GetComponent<Animator>().SetBool("DoorOpen", false);
-            for (int i = 0; i < EnemyClones.Count; i++)
-            {
-                EnemyClones[i].GetComponent<EnemyMovement>().startMove();
-                EnemyClones[i].GetComponent<EnemyMovement>().playerIn = true;
-            }
         }
     }
 
     // 룸이 스폰되고 플레이어가 진입전의 상태에서 호출
-    public void RoomWait()
-    {
-        for (int i = 0; i < EnemyClones.Count; i++)
-        {
-            EnemyClones[i].GetComponent<EnemyMovement>().stopMove();
-            EnemyClones[i].GetComponent<EnemyMovement>().playerIn = false;
-        }
-    }
+    //public void RoomWait()
+    //{
+    //    for (int i = 0; i < EnemyClones.Count; i++)
+    //    {
+    //        if (EnemyClones[i].CompareTag("Enemy"))
+    //        {
+    //            //EnemyClones[i].GetComponent<EnemyMovement>().StopMove();
+    //            //EnemyClones[i].GetComponent<EnemyMovement>().playerIn = false;
+    //        }
+    //        if (EnemyClones[i].CompareTag("EnemyWorrior"))
+    //        {
+    //            //EnemyClones[i].GetComponent<WraithWorriorMovement>().stopMove();
+    //            //EnemyClones[i].GetComponent<WraithWorriorMovement>().playerIn = false;
+    //        }
+    //    }
+    //}
 
     public IEnumerator RoomMove(int doorType)
     {
@@ -130,6 +133,7 @@ public class RoomData : MonoBehaviour {
         yield return new WaitForSeconds(0.8f);
         playerIn = false;
         player.GetComponent<PlayerMovement>().moveRoom = false;
+        transform.parent.gameObject.SetActive(false); // 마지막으로 내가 잇었던 방의 active를 꺼줌
         yield break;
     }
 
@@ -236,35 +240,48 @@ public class RoomData : MonoBehaviour {
     {
         if(doorType == 0)
         {
+            RoomSpawn.mapDataArray[y, x + 1].transform.parent.gameObject.SetActive(true);
+
             player.position 
                 = RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().roomPos[doorType + 2].transform.position;
             RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().playerIn = true;
             RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().RoomStart();
-            playerIn = false;
+
+            StormCloudPosition.instance.transform.position = RoomSpawn.mapDataArray[y, x + 1].transform.position - Vector3.up * 8;
         }
         else if (doorType == 1)
         {
+            RoomSpawn.mapDataArray[y + 1, x].transform.parent.gameObject.SetActive(true);
+
             player.position
                 = RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().roomPos[doorType + 2].transform.position;
             RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().playerIn = true;
             RoomSpawn.mapDataArray[y + 1, x].GetComponent<RoomData>().RoomStart();
-            playerIn = false;
+
+            StormCloudPosition.instance.transform.position = RoomSpawn.mapDataArray[y + 1, x].transform.position - Vector3.up * 8;
         }
         else if (doorType == 2)
         {
+            RoomSpawn.mapDataArray[y, x - 1].transform.parent.gameObject.SetActive(true);
+
             player.position
                 = RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().roomPos[doorType - 2].transform.position;
             RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().playerIn = true;
             RoomSpawn.mapDataArray[y, x - 1].GetComponent<RoomData>().RoomStart();
-            playerIn = false;
+
+            StormCloudPosition.instance.transform.position = RoomSpawn.mapDataArray[y, x - 1].transform.position - Vector3.up * 8;
         }
         else if (doorType == 3)
         {
+            RoomSpawn.mapDataArray[y - 1, x].transform.parent.gameObject.SetActive(true);
+
             player.position
                 = RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().roomPos[doorType - 2].transform.position;
             RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().playerIn = true;
             RoomSpawn.mapDataArray[y - 1, x].GetComponent<RoomData>().RoomStart();
-            playerIn = false;
+
+            StormCloudPosition.instance.transform.position = RoomSpawn.mapDataArray[y - 1, x].transform.position - Vector3.up * 8;
         }
+        playerIn = false;
     }
 }

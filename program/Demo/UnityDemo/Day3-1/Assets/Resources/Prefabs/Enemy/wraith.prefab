@@ -522,7 +522,8 @@ GameObject:
   - component: {fileID: 95528325055560330}
   - component: {fileID: 54656973556038228}
   - component: {fileID: 136812276756468556}
-  - component: {fileID: 114632911424875104}
+  - component: {fileID: 114537865499199556}
+  - component: {fileID: 114257084358986688}
   - component: {fileID: 114038473850740914}
   m_Layer: 11
   m_Name: wraith
@@ -937,7 +938,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686057448938930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.268, y: 0, z: 0}
+  m_LocalPosition: {x: 2.66, y: 0, z: 0.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4076011557063194}
@@ -1340,6 +1341,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashSpeed: 2
+--- !u!114 &114257084358986688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686057448938930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbad403d34f664fa81a9fea42935cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1550701965506302, guid: 84c75cfb658e4ce4f9997a12a4881eb6, type: 2}
+  bulletList: []
+  firedBulletList: []
+--- !u!114 &114537865499199556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686057448938930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582140309fcf83447a902ba8bb152329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114625846035425782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1370,18 +1396,6 @@ MonoBehaviour:
   isAgro: 0
   player: {fileID: 0}
   bulletSpeed: 0
---- !u!114 &114632911424875104
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686057448938930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d4bcf4f285b0df4a8fd1c7f9dfce823, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIn: 0
 --- !u!136 &136812276756468556
 CapsuleCollider:
   m_ObjectHideFlags: 1

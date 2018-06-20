@@ -76,14 +76,14 @@ public class WraithEffect : MonoBehaviour {
 
     GameObject SpawnBullet()
     {
-        GameObject bulletClone = Instantiate(Resources.Load("Prefabs/WraithAttackBall"), spawnCloneList.transform) as GameObject;
+        GameObject bulletClone = Instantiate(Resources.Load("Prefabs/Enemy/WraithAttackBall"), spawnCloneList.transform) as GameObject;
 
         return bulletClone;
     }
 
     GameObject SpawnBulletHit()
     {
-        GameObject bulletClone = Instantiate(Resources.Load("Prefabs/WraithAttackHit"), spawnCloneList.transform) as GameObject;
+        GameObject bulletClone = Instantiate(Resources.Load("Prefabs/Effect/WraithBulletAttackHit"), spawnCloneList.transform) as GameObject;
 
         return bulletClone;
     }

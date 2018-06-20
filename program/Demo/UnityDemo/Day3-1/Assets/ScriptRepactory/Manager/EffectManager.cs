@@ -46,7 +46,11 @@ public class EffectManager : MonoBehaviour {
 
     List<GameObject> enemyWraithWorriorAttackEffects = new List<GameObject>();
     List<GameObject> enemyUsedWraithWorriorAttackEffects = new List<GameObject>();
-    
+
+    List<GameObject> enemyWraithBulletHitEffects = new List<GameObject>();
+    List<GameObject> enemyUsedWraithBulletHitEffects = new List<GameObject>();
+
+
     //-------------------player-------------------//
 
     List<GameObject> playerAttackEffects = new List<GameObject>();
@@ -139,6 +143,7 @@ public class EffectManager : MonoBehaviour {
         for (int i = 0; i < 40; ++i)
         {
             GameObject slashHitEffectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect"), transform) as GameObject;
+
             enemyHitEffects.Add(slashHitEffectClone);
         }
 
@@ -147,10 +152,13 @@ public class EffectManager : MonoBehaviour {
             GameObject wraithDeadEffectClone = Instantiate(Resources.Load("Prefabs/Effect/WraithDeadEffect"), transform) as GameObject;
             GameObject wraithWorriorDeadEffectClone = Instantiate(Resources.Load("Prefabs/Effect/WraithWorriorDeadEffect"), transform) as GameObject;
             GameObject wraithWorriorAttackEffectClone = Instantiate(Resources.Load("Prefabs/Effect/WraithWorriorAttackEffect"), transform) as GameObject;
+            GameObject wraithBulletHitEffect = Instantiate(Resources.Load("Prefabs/Effect/WraithBulletAttackHit"), transform) as GameObject;
 
             enemyWraithDeadEffects.Add(wraithDeadEffectClone);
             enemyWraithWorriorDeadEffects.Add(wraithWorriorDeadEffectClone);
             enemyWraithWorriorAttackEffects.Add(wraithWorriorAttackEffectClone);
+            enemyWraithBulletHitEffects.Add(wraithBulletHitEffect);
+
         }
 
         for (int i = 0; i<10; ++i)
@@ -241,9 +249,7 @@ public class EffectManager : MonoBehaviour {
 
         effectclone.SetActive(true);
         effectclone.GetComponent<ParticleSystem>().Play();
-        effectclone.transform.rotation = Quaternion.Euler(0, caller.transform.rotation.eulerAngles.y, 0);
         effectclone.transform.position = caller.transform.position + Vector3.up * 0.5f;
-
 
         enemyUsedWraithWorriorAttackEffects.Add(effectclone);
         enemyWraithWorriorAttackEffects.RemoveAt(0);
@@ -252,6 +258,26 @@ public class EffectManager : MonoBehaviour {
         effectclone.SetActive(false);
         enemyWraithWorriorAttackEffects.Add(effectclone);
         enemyUsedWraithWorriorAttackEffects.Remove(effectclone);
+
+        yield break;
+    }
+
+    public IEnumerator playEnemyWraithBulletHitEffect(GameObject caller, int stateNum)
+    {
+        GameObject effectclone = enemyWraithBulletHitEffects[0];
+
+        effectclone.SetActive(true);
+        effectclone.GetComponent<ParticleSystem>().Play();
+        effectclone.transform.position = caller.transform.position;
+
+
+        enemyUsedWraithBulletHitEffects.Add(effectclone);
+        enemyWraithBulletHitEffects.RemoveAt(0);
+
+        yield return new WaitForSeconds(1.0f);
+        effectclone.SetActive(false);
+        enemyWraithBulletHitEffects.Add(effectclone);
+        enemyUsedWraithBulletHitEffects.Remove(effectclone);
 
 
         yield break;

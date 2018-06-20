@@ -14,6 +14,6 @@ public class UIText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        powertext.text = "Pow" + PlayerStatus.instance.attackPower;
+        powertext.text = "Pow" + PlayerBase.instance.attackPower;
 	}
 }

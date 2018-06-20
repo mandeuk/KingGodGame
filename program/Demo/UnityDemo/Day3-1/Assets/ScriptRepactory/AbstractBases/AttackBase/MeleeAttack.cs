@@ -25,7 +25,8 @@ public class MeleeAttack : EnemyAttack {
 
     public override void NormalAttack()
     {
-        StartCoroutine(damageOn());
+        attackAtrea.GetComponent<AttackTrigger>().damageNode = damageNode;
+        StartCoroutine(damageOn());       
     }
 
     IEnumerator damageOn()

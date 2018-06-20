@@ -16,18 +16,13 @@ public class RoomColManager : MonoBehaviour {
     void Awake () {
         
     }
-
+     
     private void Start()
     {
         leftDoorCol.GetComponent<DoorCol>().doorType = 0;
         frontDoorCol.GetComponent<DoorCol>().doorType = 1;
         rightDoorCol.GetComponent<DoorCol>().doorType = 2;
         backDoorCol.GetComponent<DoorCol>().doorType = 3;
-    }
-
-    private void Update()
-    {
-
     }
 
     public void LeftDoorOpen()
@@ -47,23 +42,23 @@ public class RoomColManager : MonoBehaviour {
         backWallCol.SetActive(false);
     }
 
-    public void JudgePlayerInNextRoom()
-    {
-        if (leftDoorCol.GetComponent<DoorCol>().playerInDoor)
-        {
-            print("LeftIn");
-        }
-        else if (rightDoorCol.GetComponent<DoorCol>().playerInDoor)
-        {
-            print("rightIn");
-        }
-        else if (frontDoorCol.GetComponent<DoorCol>().playerInDoor)
-        {
-            print("FrontIn");
-        }
-        else if (backDoorCol.GetComponent<DoorCol>().playerInDoor)
-        {
-            print("BackIn");
-        }
-    }
+    //public void JudgePlayerInNextRoom()
+    //{
+    //    if (leftDoorCol.GetComponent<DoorCol>().playerInDoor)
+    //    {
+    //        print("LeftIn");
+    //    }
+    //    else if (rightDoorCol.GetComponent<DoorCol>().playerInDoor)
+    //    {
+    //        print("rightIn");
+    //    }
+    //    else if (frontDoorCol.GetComponent<DoorCol>().playerInDoor)
+    //    {
+    //        print("FrontIn");
+    //    }
+    //    else if (backDoorCol.GetComponent<DoorCol>().playerInDoor)
+    //    {
+    //        print("BackIn");
+    //    }
+    //}
 }

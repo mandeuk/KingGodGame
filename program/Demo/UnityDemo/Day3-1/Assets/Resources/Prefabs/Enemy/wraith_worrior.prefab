@@ -275,14 +275,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4607075142833728}
-  - component: {fileID: 95752672976424848}
   - component: {fileID: 114626062552400146}
+  - component: {fileID: 95752672976424848}
   - component: {fileID: 54454958310746636}
   - component: {fileID: 136270116692551712}
   - component: {fileID: 195056885042291466}
-  - component: {fileID: 114186171767901410}
-  - component: {fileID: 114950747455891398}
   - component: {fileID: 114600918774067000}
+  - component: {fileID: 114250301231077338}
+  - component: {fileID: 114796595576682486}
   m_Layer: 11
   m_Name: wraith_worrior
   m_TagString: Enemy
@@ -1081,7 +1081,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544000042770890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.52, y: 0, z: 7.01}
+  m_LocalPosition: {x: 0.02, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4745793502769548}
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: 0
---- !u!114 &114186171767901410
+--- !u!114 &114250301231077338
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1322,7 +1322,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1544000042770890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f8328b3524042479cdb290e8529060, type: 3}
+  m_Script: {fileID: 11500000, guid: 6303599815e4ba7409f4635249750ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackAtrea: {fileID: 1911732552185118}
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   turnSpeed: 0
   isAgro: 0
   player: {fileID: 0}
---- !u!114 &114950747455891398
+--- !u!114 &114796595576682486
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1375,10 +1375,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1544000042770890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d4bcf4f285b0df4a8fd1c7f9dfce823, type: 3}
+  m_Script: {fileID: 11500000, guid: 672e9b6513b482d418a223512cbcecac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIn: 0
 --- !u!135 &135473944196809960
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1543,7 +1542,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544000042770890}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 2
