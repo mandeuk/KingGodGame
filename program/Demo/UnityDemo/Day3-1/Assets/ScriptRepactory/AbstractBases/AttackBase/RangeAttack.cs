@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RangeAttack : EnemyAttack {
     public GameObject bullet;
+    public GameObject cloneSpawnObject;
     [SerializeField]
     List<GameObject> bulletList = new List<GameObject>();
     [SerializeField]
@@ -26,7 +27,7 @@ public class RangeAttack : EnemyAttack {
     }
 
     public override void NormalAttack()
-    {
+    {        
         Fire();
     }
 
@@ -41,7 +42,8 @@ public class RangeAttack : EnemyAttack {
         bullet.SetActive(true);
         bullet.transform.position = transform.transform.position + transform.up * 0.5f;
         bullet.transform.rotation = transform.transform.rotation;
-        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 200);
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 80);
+        print("attack");
     }
 
     public void BulletHit(GameObject hitBullet)
@@ -56,7 +58,7 @@ public class RangeAttack : EnemyAttack {
     {
         for(int i = 0; i < 3; i++)
         {
-            GameObject bulletClone = Instantiate(bullet, transform) as GameObject;
+            GameObject bulletClone = Instantiate(bullet, cloneSpawnObject.transform) as GameObject;
             bulletClone.GetComponent<AttackTrigger>().damageNode = damageNode;
             bulletClone.GetComponent<BulletBase>().Attacker = gameObject;
             bulletList.Add(bulletClone);

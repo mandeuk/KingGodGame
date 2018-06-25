@@ -1353,6 +1353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1550701965506302, guid: 84c75cfb658e4ce4f9997a12a4881eb6, type: 2}
+  cloneSpawnObject: {fileID: 0}
   bulletList: []
   firedBulletList: []
 --- !u!114 &114537865499199556
@@ -1596,7 +1597,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686057448938930}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 2

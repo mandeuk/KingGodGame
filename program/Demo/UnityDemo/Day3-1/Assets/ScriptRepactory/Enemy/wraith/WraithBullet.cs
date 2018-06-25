@@ -37,5 +37,6 @@ public class WraithBullet : BulletBase {
         base.BulletHit();
 
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
+        Attacker.GetComponent<RangeAttack>().BulletHit(gameObject);
     }
 }
