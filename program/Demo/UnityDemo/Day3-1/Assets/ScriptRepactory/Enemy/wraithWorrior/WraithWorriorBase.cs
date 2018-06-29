@@ -12,10 +12,10 @@ public class WraithWorriorBase : EnemyBase {
         base.moveSpeed = 2;
         base.pushBack = 10;
 
-        base.attackPower = 1;
-        base.attackDistance = 1.2f;
-        base.stopDistance = 1;
-        base.findDistance = 4;
+        base.attackPower = 1f;
+        base.attackDistance = 1.7f;
+        base.stopDistance = 1f;
+        base.findDistance = 4f;
     }
     
     // 코루틴이 포함되어 있어서 enable에서 이니셜라이즈를 해줘야함.

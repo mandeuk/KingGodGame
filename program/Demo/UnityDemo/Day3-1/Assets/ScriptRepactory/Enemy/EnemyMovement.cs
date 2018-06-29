@@ -32,7 +32,7 @@ public class EnemyMovement : MoveBase {
             {
                 nav.destination = player.transform.position;
 
-                if (Vector3.Distance(player.transform.position, transform.position) > enemyEntity.attackDistance)
+                if (Vector3.Distance(player.transform.position, transform.position) > enemyEntity.stopDistance)
                 {
                     StartMove();
                 }

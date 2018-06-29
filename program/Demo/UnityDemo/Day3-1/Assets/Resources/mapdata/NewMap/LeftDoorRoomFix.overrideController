@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: LeftDoorRoomFix
+  m_Controller: {fileID: 9100000, guid: 1d26bb10c3b598f4e80709c84f49b98f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 149551c91bbe0204293ce938e468eb31, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: dfd0c9a6925655540b22070f22a1ed42, type: 3}

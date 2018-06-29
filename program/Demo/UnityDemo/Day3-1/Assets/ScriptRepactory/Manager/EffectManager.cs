@@ -226,19 +226,19 @@ public class EffectManager : MonoBehaviour {
     public IEnumerator playEnemyWraithDeadEffect(GameObject caller, int type)
     {
         Vector3 pos = caller.transform.position;
-        GameObject effectclone = enemyWraithWorriorDeadEffects[0];
+        GameObject effectclone = enemyWraithDeadEffects[0];
 
         effectclone.SetActive(true);
         effectclone.GetComponent<ParticleSystem>().Play();
         effectclone.transform.position = pos + Vector3.up * 0.5f;
 
-        enemyUsedWraithWorriorDeadEffects.Add(effectclone);
-        enemyWraithWorriorDeadEffects.RemoveAt(0);
+        enemyUsedWraithDeadEffects.Add(effectclone);
+        enemyWraithDeadEffects.RemoveAt(0);
 
         yield return new WaitForSeconds(1.0f);
         effectclone.SetActive(false);
-        enemyWraithWorriorDeadEffects.Add(effectclone);
-        enemyUsedWraithWorriorDeadEffects.Remove(effectclone);
+        enemyWraithDeadEffects.Add(effectclone);
+        enemyUsedWraithDeadEffects.Remove(effectclone);
 
         yield break;
     }

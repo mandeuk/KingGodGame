@@ -11,14 +11,6 @@ public class RangeAttack : EnemyAttack {
     [SerializeField]
     List<GameObject> firedBulletList = new List<GameObject>();
 
-
-
-    // Use this for initialization
-    void Awake () {
-		
-	}
-	
-
     protected override void Init()
     {
         base.Init();
@@ -56,7 +48,8 @@ public class RangeAttack : EnemyAttack {
 
     public void InitBullet()
     {
-        for(int i = 0; i < 3; i++)
+        cloneSpawnObject = GameObject.FindWithTag("ClonesObject");
+        for (int i = 0; i < 3; i++)
         {
             GameObject bulletClone = Instantiate(bullet, cloneSpawnObject.transform) as GameObject;
             bulletClone.GetComponent<AttackTrigger>().damageNode = damageNode;

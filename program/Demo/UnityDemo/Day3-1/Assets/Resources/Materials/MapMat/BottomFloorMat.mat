@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Floor
-  m_Shader: {fileID: 4800000, guid: 054a31a99d11e49d110086ba44295342, type: 3}
+  m_Name: BottomFloorMat
+  m_Shader: {fileID: 4800000, guid: 43ce4b24396d20845a317f3b4e16d1c1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 35767350c4a026e4f99773609efb31a4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3d7c2d4415f1c984fad9832a4c60ed20, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,19 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: 4a056241e2722dc46a7262a8e7073fd9, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _RampTex:
-        m_Texture: {fileID: 2800000, guid: eadfb9124cfb39642a27a6ced53551f1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ToonShade:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1d1a40e783b65874ca95ff3e9b1e2e69, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -81,23 +69,14 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Outline: 0.003
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _outLineThickness: 0
-    - _rimPow: 10
-    - _shadow1Range: 1
-    - _shadow2Range: 0.701
+    - _rimPow: 0
     m_Colors:
-    - _Color: {r: 0.3897059, g: 0.3897059, b: 0.3897059, a: 1}
+    - _Color: {r: 0.43382353, g: 0.43382353, b: 0.43382353, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _outLineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _rimColor: {r: 1, g: 1, b: 1, a: 0}
-    - _shadow1Color: {r: 0.6764706, g: 0.6764706, b: 0.6764706, a: 0}
-    - _shadow2Color: {r: 0, g: 0, b: 0, a: 0}
+    - _rimColor: {r: 0, g: 0, b: 0, a: 0}

@@ -9,7 +9,7 @@ public class EnemyAttack : AttackBase {
     protected GameObject Target;
 
     protected override void Init()
-    {
+    { 
         base.Init();
         enemyEntity = GetComponent<ObjectBase>() as EnemyBase;
         player = enemyEntity.player;
@@ -25,7 +25,7 @@ public class EnemyAttack : AttackBase {
                 Turn();
 
             if (Vector3.Distance(player.transform.position, transform.position) < enemyEntity.attackDistance
-                && !enemyEntity.isTurn)
+                /*&& !enemyEntity.isTurn*/)
             {
                 StartAttack();
             }
@@ -69,7 +69,7 @@ public class EnemyAttack : AttackBase {
 
         turnDir = Turnjudge(forwardVec.normalized, diff.normalized);
 
-        if (Vector3.Angle(forwardVec.normalized, diff.normalized) > 20.0f)
+        if (Vector3.Angle(forwardVec.normalized, diff.normalized) > 16.0f)
         {
             enemyEntity.isTurn = true;
             if (!enemyEntity.isAttack)

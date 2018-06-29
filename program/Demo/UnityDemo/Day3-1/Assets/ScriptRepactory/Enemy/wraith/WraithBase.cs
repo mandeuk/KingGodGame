@@ -18,10 +18,8 @@ public class WraithBase : EnemyBase {
         base.findDistance = 10;
     }
 
-	// Use this for initialization
-	void Awake () {
+    private void OnEnable()
+    {
         Init();
     }
-	
-	// Update is called once per frame
 }
