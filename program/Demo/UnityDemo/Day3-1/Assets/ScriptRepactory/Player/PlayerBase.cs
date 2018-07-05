@@ -19,6 +19,7 @@ public enum Status
 
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
+    PlayerStatus playerStatus;
     public float energy, attackSpeed, attackRange, devilGage, etere, stance;
     public bool isExmove, isChargeAttack, isDodge;
 
@@ -32,31 +33,22 @@ public class PlayerBase : ObjectBase {
 
     protected override void Init()
     {
-        if (instance)//인스턴스가 생성되어있는가?
-        {
-            DestroyImmediate(gameObject);//생성되어있다면 중복되지 않도록 삭제
-            return;
-        }
-
-        else//인스턴스가 null일 때
-        {
-            instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
-            DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
-        }
+        instance = this;
 
         base.Init();
+        playerStatus = GameManager.PlayerStatusLoad();
 
-        maxHP =         5;      // 맥스 hp
-        curHP =         5;      // 현재 hp
-        attackPower =   30;     // 공격력
-        attackSpeed =   1;      // 공격속도
-        attackRange =   1;      // 공격 범위
-        moveSpeed =     8;      // 이동 속도
-        pushBack  =     5;      // 넉백을 주는 힘
-        energy =        3;      // 에너지
-        etere =         0;      // 에테르
-        devilGage =     30;     // 폭주 게이지 100이되면 죽음.
-        stance =        0;      // 성향. 구원,타락 수치로 성향이 높아지고 낮아진다.
+        maxHP = playerStatus.maxHP;      // 맥스 hp
+        curHP = playerStatus.curHP;      // 현재 hp
+        attackPower = playerStatus.attackPower;     // 공격력
+        attackSpeed = playerStatus.attackSpeed;      // 공격속도
+        attackRange = playerStatus.attackRange;      // 공격 범위
+        moveSpeed = playerStatus.moveSpeed;      // 이동 속도
+        pushBack  = playerStatus.pushBack;      // 넉백을 주는 힘
+        energy = playerStatus.energy;      // 에너지
+        etere = playerStatus.etere;      // 에테르
+        devilGage = playerStatus.devilGage;     // 폭주 게이지 100이되면 죽음.
+        stance = playerStatus.stance;      // 성향. 구원,타락 수치로 성향이 높아지고 낮아진다.
 
         isInvincibility = false;
         isExmove = false;
@@ -106,6 +98,17 @@ public class PlayerBase : ObjectBase {
         //transform.GetComponent<Rigidbody>().isKinematic = true;
         transform.GetComponent<Collider>().isTrigger = true;
     }
+    public IEnumerator PlayerActSceneStart()
+    {
+        PlayerColorChange.instance.PlayerDisappear();
+
+        yield return new WaitForSeconds(2f);
+        PlayerColorChange.instance.PlayerAppear();
+        EffectManager.PlayEffect(gameObject, EffectManager.playEXmoveVanishFlowerEffect);
+        GetComponent<Animator>().SetTrigger("roomMove");
+
+        yield break;
+    }
 
     // 함수 기능 :  스텟을 관리하는 델리게이트 선언
     public delegate void SetStat(float amount, bool up);
@@ -116,6 +119,7 @@ public class PlayerBase : ObjectBase {
     public void SetStatus(float amount, bool up, SetStat status)
     {
         status(amount, up);
+        GameManager.PlayerStatusSave();
     }
 
     // 함수 기능 :  스탯의 정보를 가져감. 한꺼번에 관리하고 일관성 있게 하려면 필요하긴 할듯

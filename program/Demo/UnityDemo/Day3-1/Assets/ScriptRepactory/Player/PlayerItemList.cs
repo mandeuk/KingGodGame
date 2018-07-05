@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerItemList : MonoBehaviour {
+public partial class PlayerItemList : MonoBehaviour {
 
     public List<GameObject> itemList = new List<GameObject>();
     public GameObject auraEffect;

@@ -37,7 +37,7 @@ public class PlayerHealth : HealthBase {
         PlayerBase.instance.PlayerDisable();
 
         Invoke("CameraFadeOut", 2);
-        Invoke("loadScene", 6);
+        Invoke("loadMenuScene", 6);
     }
 
     protected override void Init()
@@ -55,7 +55,7 @@ public class PlayerHealth : HealthBase {
 
     void loadScene()
     {
-        SceneManager.LoadScene("Game_Junghoon");
+        SceneManager.LoadScene("Game_Stage1");
     }
 
     void loadMenuScene()

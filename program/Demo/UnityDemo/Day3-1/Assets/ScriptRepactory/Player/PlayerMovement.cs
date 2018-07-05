@@ -23,9 +23,12 @@ public class PlayerMovement : MoveBase {
         base.Init();
         playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         avatar = GetComponent<Animator>();
-        turnSpeedTime = turnSpeed * Time.deltaTime;
+        turnSpeedTime = 450 * Time.deltaTime;
+        //turnSpeedTime = 10;
         skillMovePos = GetComponentInChildren<SkillTarget>().transform;
         movePos = transform.forward;
+        rigid.rotation = Quaternion.LookRotation(Vector3.right);
+        transform.rotation = Quaternion.LookRotation(Vector3.right);
     }
 
     void Awake()
@@ -77,6 +80,7 @@ public class PlayerMovement : MoveBase {
         else
         {
             rigid.rotation = Quaternion.LookRotation(movePos.normalized);
+            playerEntity.isTurn = false;
             IsWalking();
         }
     }
