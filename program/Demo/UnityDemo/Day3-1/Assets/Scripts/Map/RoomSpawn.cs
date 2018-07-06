@@ -182,7 +182,7 @@ public class RoomSpawn : MonoBehaviour {
 
                         else
                         {
-                            obstacleObjAngle = Quaternion.Euler(0, 0, 0);
+                            obstacleObjAngle = Quaternion.Euler(0, 90 * Random.Range(1,5), 0);
                             spawnAllPathObstacle(roomsParentObj.transform).transform.SetPositionAndRotation(
                                roomPos + Vector3.down, obstacleObjAngle);
                         }
@@ -233,37 +233,30 @@ public class RoomSpawn : MonoBehaviour {
         }
     }
 
-    GameObject SpawnEmptyRoom(Transform parent)
-    {
-        GameObject roomsParentObj = Instantiate(Resources.Load("Prefabs/Map/EmptyRoom"), parent) as GameObject;
-
-        return roomsParentObj;
-    }
-
     GameObject spawnTwoDoorRoom(Transform parent)
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/TwoDoorRoom"), parent) as GameObject;
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Stage1Wall/TwoDoorRoomFix"), parent) as GameObject;
 
         return roomClone;
     }
 
     GameObject spawnLeftDoorRoom(Transform parent)
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/LeftDoorRoom"), parent) as GameObject;
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Stage1Wall/LeftDoorRoomFix"), parent) as GameObject;
 
         return roomClone;
     }
 
     GameObject spawnRightDoorRoom(Transform parent)
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/RightDoorRoom"), parent) as GameObject;
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Stage1Wall/RightDoorRoomFix"), parent) as GameObject;
 
         return roomClone;
     }
 
     GameObject spawnNoDoorRoom(Transform parent)
     {
-        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/NoDoorRoom"), parent) as GameObject;
+        GameObject roomClone = Instantiate(Resources.Load("Prefabs/Map/Stage1Wall/NoDoorRoomFix"), parent) as GameObject;
 
         return roomClone;
     }
@@ -289,7 +282,7 @@ public class RoomSpawn : MonoBehaviour {
         {
             i++;
         }
-        if (Random.Range(1, 3) == 1)
+        if (!(Random.Range(1, 4) == 1))
         {
             roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPath_" + Random.Range(1, i).ToString()), parent) as GameObject;
         }
@@ -308,7 +301,7 @@ public class RoomSpawn : MonoBehaviour {
         {
             i++;
         }
-        if (Random.Range(1, 3) == 1)
+        if (!(Random.Range(1, 4) == 1))
         {
             roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPath_" + Random.Range(1, i).ToString()), parent) as GameObject;
         }
@@ -328,7 +321,7 @@ public class RoomSpawn : MonoBehaviour {
             i++;
         }
 
-        if (Random.Range(1, 3) == 1)
+        if (!(Random.Range(1, 4) == 1))
         {
             roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPath_" + Random.Range(1, i).ToString()), parent) as GameObject;
         }
@@ -347,7 +340,7 @@ public class RoomSpawn : MonoBehaviour {
         {
             i++;
         }
-        if (Random.Range(1, 3) == 1)
+        if (!(Random.Range(1, 4) == 1))
         {
             roomClone = Instantiate(Resources.Load("Prefabs/Map/Obstacles/AllPath_" + Random.Range(1, i).ToString()), parent) as GameObject;
         }

@@ -7,13 +7,11 @@ public class PlayerMovement : MoveBase {
     PlayerBase playerEntity;
 
     Animator avatar;
-    public float turnSpeed;
-    private float turnSpeedTime;
+    float turnSpeed;
     public bool moveRoom = false;
 
     public Vector3 movePos;
     public Transform skillMovePos;
-    //AfterImageEffect raphaelEX;
 
     int turnDir;
     float turnAngle = 17;
@@ -23,12 +21,11 @@ public class PlayerMovement : MoveBase {
         base.Init();
         playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         avatar = GetComponent<Animator>();
-        turnSpeedTime = 450 * Time.deltaTime;
-        //turnSpeedTime = 10;
         skillMovePos = GetComponentInChildren<SkillTarget>().transform;
         movePos = transform.forward;
         rigid.rotation = Quaternion.LookRotation(Vector3.right);
         transform.rotation = Quaternion.LookRotation(Vector3.right);
+        turnSpeed = 10;
     }
 
     void Awake()
@@ -57,7 +54,8 @@ public class PlayerMovement : MoveBase {
                     if (!playerEntity.isAttack && !playerEntity.isExmove && !playerEntity.isChargeAttack && (avatar.GetFloat("DodgeTiming") < 0.1f))
                         TurnJudgeFunc();
 
-                    if (!playerEntity.isExmove && !playerEntity.isChargeAttack && (avatar.GetFloat("DodgeTiming") < 0.1f))
+                    if (!playerEntity.isExmove /*&& !playerEntity.isChargeAttack*/
+                        && (avatar.GetFloat("DodgeTiming") < 0.1f))
                         Turn(movePos);
                 }
                 else
@@ -73,7 +71,7 @@ public class PlayerMovement : MoveBase {
         turnDir = Turnjudge(transform.forward, movePos.normalized);
         if (Vector3.Angle(transform.forward, movePos.normalized) > turnAngle)
         {
-            rigid.MoveRotation(rigid.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeedTime * 100, 0) * Time.deltaTime));
+            rigid.MoveRotation(rigid.rotation * Quaternion.Euler(new Vector3(0, turnDir * turnSpeed * 100, 0) * Time.deltaTime));
             playerEntity.isTurn = true;
         }
 

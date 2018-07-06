@@ -25,7 +25,7 @@ public class EnemyAttack : AttackBase {
                 Turn();
 
             if (Vector3.Distance(player.transform.position, transform.position) < enemyEntity.attackDistance
-                /*&& !enemyEntity.isTurn*/)
+                && !enemyEntity.isTurn)
             {
                 StartAttack();
             }

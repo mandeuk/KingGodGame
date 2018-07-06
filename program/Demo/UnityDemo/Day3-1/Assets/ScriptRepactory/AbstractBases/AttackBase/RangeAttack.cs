@@ -23,10 +23,11 @@ public class RangeAttack : EnemyAttack {
         Fire();
     }
 
-    public void Fire()
+    public virtual void Fire()
     {
         GameObject bullet = bulletList[0];
         bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
+        bullet.GetComponent<BulletBase>().Attacker = gameObject;
 
         firedBulletList.Add(bullet);
         bulletList.RemoveAt(0);
@@ -35,7 +36,6 @@ public class RangeAttack : EnemyAttack {
         bullet.transform.position = transform.transform.position + transform.up * 0.5f;
         bullet.transform.rotation = transform.transform.rotation;
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 80);
-        print("attack");
     }
 
     public void BulletHit(GameObject hitBullet)
@@ -48,13 +48,15 @@ public class RangeAttack : EnemyAttack {
 
     public void InitBullet()
     {
-        cloneSpawnObject = GameObject.FindWithTag("ClonesObject");
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject bulletClone = Instantiate(bullet, cloneSpawnObject.transform) as GameObject;
-            bulletClone.GetComponent<AttackTrigger>().damageNode = damageNode;
-            bulletClone.GetComponent<BulletBase>().Attacker = gameObject;
-            bulletList.Add(bulletClone);
-        }
+        bulletList = EffectManager.instance.enemyWraithBullets;
+        firedBulletList = EffectManager.instance.enemyUsedWraithBullets;
+        //cloneSpawnObject = GameObject.FindWithTag("ClonesObject");
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    GameObject bulletClone = Instantiate(bullet, cloneSpawnObject.transform) as GameObject;
+        //    bulletClone.GetComponent<AttackTrigger>().damageNode = damageNode;
+        //    bulletClone.GetComponent<BulletBase>().Attacker = gameObject;
+        //    bulletList.Add(bulletClone);
+        //}
     }
 }

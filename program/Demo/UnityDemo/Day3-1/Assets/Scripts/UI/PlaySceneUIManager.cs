@@ -40,7 +40,6 @@ public class PlaySceneUIManager : MonoBehaviour {
         nonheartimg = Resources.Load("Image/UI/nonheart_icon", typeof(Sprite)) as Sprite;
 
 
-
         fadeimgcolor.r = 0;
         fadeimgcolor.b = 0;
         fadeimgcolor.g = 0;
@@ -68,9 +67,6 @@ public class PlaySceneUIManager : MonoBehaviour {
         leftcharacterimg = GameObject.Find("LeftCharacterImg");
         leftcharacterimg.SetActive(false);
         dialogUI.SetActive(false);
-        
-        
-
 
         ChangeEnergyAmountText();
         ChangeEterAmountText();
@@ -106,8 +102,6 @@ public class PlaySceneUIManager : MonoBehaviour {
 
                 //캐릭터가 움직일 수 있게
                 PlayerBase.instance.PlayerEnable();
-                
-                
             }
         }
     }
@@ -119,13 +113,13 @@ public class PlaySceneUIManager : MonoBehaviour {
             if (loop < (int)PlayerBase.instance.maxHP)
             {
                 hpList[loop].SetActive(true);
-                //hpillusionList[loop].SetActive(true);
+                hpillusionList[loop].SetActive(true);
                 //hpillusionList[loop].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 1);
             }
             else
             {
                 hpList[loop].SetActive(false);
-                //hpillusionList[loop].SetActive(false);
+                hpillusionList[loop].SetActive(false);
                 //hpillusionList[loop].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
             }
         }
@@ -248,7 +242,7 @@ public class PlaySceneUIManager : MonoBehaviour {
     IEnumerator FadeOut()
     {
         //HideUI();
-        twitchbutton.SetActive(false);//게임종료할대만 호출되는 Enumerator라 선언해놓은상태
+        //twitchbutton.SetActive(false);//게임종료할대만 호출되는 Enumerator라 선언해놓은상태
 
         yield return new WaitForSeconds(0.2f);
 

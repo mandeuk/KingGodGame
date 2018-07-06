@@ -28,7 +28,7 @@ public class RoomData : MonoBehaviour {
         player = GameObject.FindWithTag("Player").transform;
         isClear = false;
         playerIn = false;
-        EnemyClones = transform.parent.GetComponentInChildren<ObstacleData>().EnemyClones;
+        EnemyClones = transform.parent.GetComponentInChildren<ObstacleData>().EnemyClones;        
     }
 
     private void OnEnable()

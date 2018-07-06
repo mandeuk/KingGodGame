@@ -6,7 +6,13 @@ public class WraithBullet : BulletBase {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("mapClearCol"))
+        if (other.CompareTag("Player"))
+        {
+            if(!other.GetComponent<PlayerBase>().isDead && !other.GetComponent<PlayerBase>().isInvincibility)
+            BulletHit();
+        }
+
+        if (other.CompareTag("mapClearCol"))
         {
             BulletHit();
         }
@@ -37,6 +43,6 @@ public class WraithBullet : BulletBase {
         base.BulletHit();
 
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
-        Attacker.GetComponent<RangeAttack>().BulletHit(gameObject);
+        EffectManager.instance.WraithBulletHit(gameObject);
     }
 }

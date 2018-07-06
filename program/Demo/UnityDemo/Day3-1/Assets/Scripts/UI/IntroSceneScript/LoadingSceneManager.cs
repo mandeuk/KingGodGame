@@ -39,7 +39,7 @@ public class LoadingSceneManager : MonoBehaviour {
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
-        SceneManager.LoadScene("Game_Junghoon");
+        SceneManager.LoadScene("Game_Stage1");
     }
 
     IEnumerator FadeIn()

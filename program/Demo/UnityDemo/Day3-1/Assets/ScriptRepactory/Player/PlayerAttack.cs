@@ -147,7 +147,7 @@ public class PlayerAttack : AttackBase
         List<Collider> targetList = new List<Collider>(chargeAttackTarget.targetList);
         List<Collider> enemyBulletList = new List<Collider>(chargeAttackTarget.enemyBulletList);
         DamageNode damageNode =
-            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack + 50, 4);
+            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack + 5, 4);
 
         foreach (Collider one in targetList)
         {

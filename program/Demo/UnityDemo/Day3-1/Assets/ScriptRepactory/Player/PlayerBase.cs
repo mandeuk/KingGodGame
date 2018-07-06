@@ -119,7 +119,7 @@ public class PlayerBase : ObjectBase {
     public void SetStatus(float amount, bool up, SetStat status)
     {
         status(amount, up);
-        GameManager.PlayerStatusSave();
+        GameManager.PlayerStatusSave(playerStatus);
     }
 
     // 함수 기능 :  스탯의 정보를 가져감. 한꺼번에 관리하고 일관성 있게 하려면 필요하긴 할듯
@@ -173,6 +173,8 @@ public class PlayerBase : ObjectBase {
                 curHP -= amount;
             }
         }
+        playerStatus.maxHP = maxHP;
+        playerStatus.curHP = curHP;
         PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
     }
     
@@ -192,6 +194,7 @@ public class PlayerBase : ObjectBase {
                 Dead();
             }
         }
+        playerStatus.curHP = curHP;
         PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
     }
 
@@ -205,6 +208,7 @@ public class PlayerBase : ObjectBase {
         {
             attackPower -= amount;
         }
+        playerStatus.attackPower = attackPower;
     }
 
     public void AttackSpeed(float amount, bool up)
@@ -217,6 +221,7 @@ public class PlayerBase : ObjectBase {
         {
             attackSpeed -= amount;            
         }
+        playerStatus.attackSpeed = attackSpeed;
         anim.SetFloat("AttackSpeed", attackSpeed);
     }
 
@@ -230,6 +235,7 @@ public class PlayerBase : ObjectBase {
         {
 
         }
+        playerStatus.attackRange = attackRange;
     }
 
     public void MoveSpeed(float amount, bool up)
@@ -242,6 +248,7 @@ public class PlayerBase : ObjectBase {
         {
             moveSpeed -= amount;
         }
+        playerStatus.moveSpeed = moveSpeed;
         anim.SetFloat("MoveSpeed", moveSpeed / 8);
     }
 
@@ -255,6 +262,7 @@ public class PlayerBase : ObjectBase {
         {
             pushBack -= amount;
         }
+        playerStatus.pushBack = pushBack;
     }
 
     public void Energy(float amount, bool up)
@@ -267,6 +275,7 @@ public class PlayerBase : ObjectBase {
         {
             energy -= amount;
         }
+        playerStatus.energy = energy;
     }
 
     public void Etere(float amount, bool up)
@@ -279,6 +288,7 @@ public class PlayerBase : ObjectBase {
         {
             etere -= amount;
         }
+        playerStatus.etere = etere;
     }
 
     public void DevilGage(float amount, bool up)
@@ -291,8 +301,7 @@ public class PlayerBase : ObjectBase {
         {
             devilGage -= amount;
         }
-
-
+        playerStatus.devilGage = devilGage;
     }
 
     public void Stance(float amount, bool up)
@@ -305,7 +314,7 @@ public class PlayerBase : ObjectBase {
         {
             stance -= amount;
         }
-
+        playerStatus.stance = stance;
         // 스텐스에 따라서 나눠줘야함. bool로 나누든..
     }
 }

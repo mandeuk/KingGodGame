@@ -61,8 +61,8 @@ public class Enemyhealth : HealthBase
         anim.speed = 0.5f;
        
         StartCoroutine(ColorChangeDie());
-        Invoke("DeadEffect", 0.8f);
 
+        Invoke("DeadEffect", 0.8f);
         Destroy(gameObject, .8f);
     }
 
@@ -103,11 +103,7 @@ public class Enemyhealth : HealthBase
     // 함수 기능 :  죽었을 때 에너지, 에테르를 드랍하고 이펙트를 만듬.
     public virtual void DeadEffect()
     {
-        //if (Random.Range(1, 11) > 9)
-        //{
-        //    EnergyManager.instance.DropEnergy(transform.position);
-        //}
-        //EnergyManager.instance.DropEtere(transform.position);
+
     }
 
     // 적과 플레이어 사이에 장애물이 있는지 체크함.

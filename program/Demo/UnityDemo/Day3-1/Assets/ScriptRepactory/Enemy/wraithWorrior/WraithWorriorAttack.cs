@@ -19,5 +19,11 @@ public class WraithWorriorAttack : MeleeAttack {
     void Update()
     {
         base.AttackUpdate();
-    }    
+    }
+
+    public override void NormalAttack()
+    {
+        base.NormalAttack();
+        EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithWorriorAttackEffect);
+    }
 }

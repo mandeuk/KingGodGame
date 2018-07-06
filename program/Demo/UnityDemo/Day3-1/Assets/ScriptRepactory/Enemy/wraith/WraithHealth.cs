@@ -23,6 +23,7 @@ public class WraithHealth : Enemyhealth {
     public override void DeadEffect()
     {
         base.DeadEffect();
+        
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithDeadEffect);
     }
 }
