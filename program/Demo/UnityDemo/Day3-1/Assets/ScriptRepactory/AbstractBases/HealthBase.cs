@@ -25,7 +25,6 @@ public class HealthBase : MonoBehaviour {
         Vector3 diff = damageNode.attacker.transform.position - transform.position;
         rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
 
-        entity.curHP -= damageNode.damage;
         if (entity.curHP <= 0 && !entity.isDead)
         {
             Death();

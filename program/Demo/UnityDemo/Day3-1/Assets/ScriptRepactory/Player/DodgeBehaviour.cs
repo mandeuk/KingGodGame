@@ -8,7 +8,8 @@ public class DodgeBehaviour : StateMachineBehaviour {
     {
         animator.GetComponent<PlayerBase>().isDodge = true;
         animator.GetComponent<PlayerBase>().isInvincibility = true;
-        EffectManager.instance.playDodgeDustEffect();
+        EffectManager.playDodgeDustEffect(animator.gameObject);
+        PlayerColorChange.instance.PlayerColorChangeWhite();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

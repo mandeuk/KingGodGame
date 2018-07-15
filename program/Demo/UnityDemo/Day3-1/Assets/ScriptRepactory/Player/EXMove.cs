@@ -72,19 +72,21 @@ public class EXMove : AttackBase {
     }
 
     void Update () {
-        if (!playerEntity.isDodge && !playerEntity.isChargeAttack)
+        if (!playerEntity.isDodge && !playerEntity.isChargeAttack && !playerEntity.isExMoveCooltime)
         {
             if (Input.GetKeyDown(KeyCode.K))
             {
                 avatar.SetTrigger("EXMoveOn");
                 avatar.SetBool("Combo", false);
                 StartCoroutine(EXMovePlay());
+
             }
         }
     }
 
     public IEnumerator EXMovePlay()
     {
+        playerEntity.isExMoveCooltime = true;
         damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack, 4);
         avatar.speed = 0;         // 잔상의 애니메이션을 멈춤
 
@@ -117,7 +119,7 @@ public class EXMove : AttackBase {
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 6;              // ex무브동안의 스피드 이속도로 고속이동함.
-        print(calcDistObj() * 7);       // 검사용 코드. 
+        print(calcDistObj() * 6);       // 검사용 코드. 
 
         yield return new WaitForSeconds(.05f);
         EffectManager.PlayEffect(gameObject, EffectManager.playExMoveRingEffectBack);
@@ -148,6 +150,9 @@ public class EXMove : AttackBase {
         afterImageR.GetComponent<Animator>().speed = 1;
         playerEntity.isInvincibility = false;
         playerEntity.isExmove = false;
+
+        yield return new WaitForSeconds(playerEntity.exmoveCoolTime-2.2f);      // ex무브의 시간인 0.2초
+        playerEntity.isExMoveCooltime = false;
         yield break;
     }
 

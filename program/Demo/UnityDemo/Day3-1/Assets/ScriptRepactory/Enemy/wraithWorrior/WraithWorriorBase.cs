@@ -12,8 +12,8 @@ public class WraithWorriorBase : EnemyBase {
         base.moveSpeed = 2;
         base.pushBack = 10;
 
-        base.attackPower = 1f;
-        base.attackDistance = 1.7f;
+        base.attackPower = 0.5f;
+        base.attackDistance = 1.5f;
         base.stopDistance = 1f;
         base.findDistance = 4f;
     }

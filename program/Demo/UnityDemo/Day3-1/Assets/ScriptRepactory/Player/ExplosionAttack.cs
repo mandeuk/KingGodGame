@@ -22,7 +22,7 @@ public class ExplosionAttack : AttackBase {
 
     // Update is called once per frame
     void Update () {
-        if (!playerEntity.isExmove && !playerEntity.isChargeAttack)
+        if (!playerEntity.isExmove && !playerEntity.isChargeAttack && !playerEntity.isDodge)
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
@@ -40,7 +40,7 @@ public class ExplosionAttack : AttackBase {
             }
         }
 
-        if (playerEntity.isChargeAttack)
+        if (playerEntity.isChargeAttack && !playerEntity.isDodge)
         {
             if (Input.GetKeyUp(KeyCode.L))
             {

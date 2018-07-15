@@ -71,7 +71,7 @@ public class EffectManager : MonoBehaviour {
     public GameObject playerChargingEffect; // 외부에서(chargeAttack FBX 마지막) 꺼줘야해서 public으로 선언.
     static GameObject playerChargeEndEffect;
 
-    public GameObject playerDodgeDustEffect;
+    static GameObject playerDodgeDustEffect;
 
     static GameObject playerEnergyApplyEffect;
     static GameObject playerEtereApplyEffect;
@@ -142,6 +142,7 @@ public class EffectManager : MonoBehaviour {
         playerEnergyApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EnergyGetEffect"), transform) as GameObject;
         playerEtereApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EtereGetEffect"), transform) as GameObject;
 
+        playerDodgeDustEffect = Instantiate(Resources.Load("Prefabs/Effect/DodgeDustEffect"), transform) as GameObject;
         
         for (int i = 0; i < 40; ++i)
         {
@@ -355,9 +356,11 @@ public class EffectManager : MonoBehaviour {
         playerSwordBlinkEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public void playDodgeDustEffect()
+    public static void playDodgeDustEffect(GameObject caller)
     {
         playerDodgeDustEffect.SetActive(true);
+        playerDodgeDustEffect.transform.position = caller.transform.position + Vector3.up;
+        playerEXmoveVanishEffect.transform.rotation = Quaternion.Euler(0, caller.transform.rotation.eulerAngles.y, 0);
         playerDodgeDustEffect.GetComponent<ParticleSystem>().Play();
     }
 

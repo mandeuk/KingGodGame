@@ -19,6 +19,7 @@ public class PlayerHealth : HealthBase {
         {
             StopCoroutine(PlayerColorChange.instance.ColorChange());
             StartCoroutine(PlayerColorChange.instance.ColorChange());
+            PlayerBase.instance.SetStatus(damageNode.damage, false, PlayerBase.instance.CurHP);
             base.TakeDamage(damageNode);
             PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
         }

@@ -38,6 +38,7 @@ public class Enemyhealth : HealthBase
 
     public override void TakeDamage(DamageNode damageNode)
     {
+        entity.curHP -= damageNode.damage;
         base.TakeDamage(damageNode);
         anim.SetTrigger("Damaged" + Random.Range(1, 3));
         if (!enemyEntity.isDead)

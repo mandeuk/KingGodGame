@@ -72,6 +72,11 @@ public class PlayerColorChange : MonoBehaviour {
         yield break;
     }
 
+    public void PlayerColorChangeWhite()
+    {
+        StartCoroutine(ColorWhiteChange());
+    }
+
 
     public void PlayerDisappear()
     {
@@ -112,7 +117,7 @@ public class PlayerColorChange : MonoBehaviour {
         {
             for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
             {
-                rendObjs[i].GetComponent<Renderer>().materials[j].color = new Vector4(1, 1, 1,1);
+                rendObjs[i].GetComponent<Renderer>().materials[j].color = new Vector4(2, 2, 2,1);
             }
         }
     }

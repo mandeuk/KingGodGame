@@ -20,8 +20,9 @@ public enum Status
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
     PlayerStatus playerStatus;
-    public float energy, attackSpeed, attackRange, devilGage, etere, stance;
+    public float energy, attackSpeed, attackRange, devilGage, etere, stance, exmoveCoolTime;
     public bool isExmove, isChargeAttack, isDodge;
+    public bool isExMoveCooltime;
 
     Animator anim;
     Rigidbody rigid;
@@ -49,6 +50,7 @@ public class PlayerBase : ObjectBase {
         etere = playerStatus.etere;      // 에테르
         devilGage = playerStatus.devilGage;     // 폭주 게이지 100이되면 죽음.
         stance = playerStatus.stance;      // 성향. 구원,타락 수치로 성향이 높아지고 낮아진다.
+        exmoveCoolTime = 8;
 
         isInvincibility = false;
         isExmove = false;
@@ -182,17 +184,14 @@ public class PlayerBase : ObjectBase {
     {
         if (up)
         {
-            if((int)curHP > (int)maxHP)
+            if ((int)curHP > (int)maxHP)
             {
                 curHP += amount;
             }
         }
         else
         {
-            if((int)curHP < 1)
-            {
-                Dead();
-            }
+            curHP -= amount;
         }
         playerStatus.curHP = curHP;
         PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
