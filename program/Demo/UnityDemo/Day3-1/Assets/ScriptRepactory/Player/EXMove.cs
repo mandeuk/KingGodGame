@@ -12,7 +12,6 @@ public class EXMove : AttackBase {
     Animator avatar;
     EffectManager effect;
     GameObject skillTarget;
-    //PlayerEffect EXEffect;
     
     Material[,] afterImageMats = new Material[5, 5];
 
@@ -39,36 +38,6 @@ public class EXMove : AttackBase {
                 afterImageMats[i, j] = Instantiate(afterImageRendObjs[i].GetComponent<Renderer>().materials[j]) as Material;
             }
         }
-    }
-
-    // Use this for initialization
-    void Start () {
-        //Init();
-
-        // 메터리얼을 인스턴스화 해서 저장한뒤 나중에 색깔을 빼서 쓰려고 만듬.
-        // 이제 무조건 배열안에 넣을때는 인스턴스 해서 넣기 알았지?
-
-        //for (int i = 0; i < rendObjs.Length; ++i)
-        //{
-        //    afterImageRendObjs[i].SetActive(false);
-        //    for (int j = 0; j < afterImageRendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
-        //    {
-        //        afterImageMats[i, j] = Instantiate(afterImageRendObjs[i].GetComponent<Renderer>().materials[j]) as Material;
-        //    }
-        //}
-
-        // 잔상의 게임오브젝트를 다 꺼줌.
-        // 잔상의 매터리얼을 인스턴스화 해서 컬러값을 저장해놓을거임.
-
-        //for (int i = 0; i < rendObjs.Length; ++i)
-        //{
-        //    for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
-        //    {
-        //        changeMats = rendObjs[i].GetComponent<Renderer>().materials;
-        //        changeMats[j] = afterImageMat;
-        //        rendObjs[i].GetComponent<Renderer>().materials = changeMats;
-        //    }
-        //}
     }
 
     void Update () {
@@ -141,9 +110,9 @@ public class EXMove : AttackBase {
         }   // 잔상은 이제 다 꺼야함. -> 필요없을듯 어짜피 알아서
         
 
-        PlayerColorChange.instance.PlayerAppear();
+        PlayerColorChange.instance.PlayerAppear();        
+        PlayerColorChange.instance.PlayerColorChangeBlack();
         rigid.Sleep();
-        StartCoroutine(PlayerColorChange.instance.ColorChange());
 
         playerEntity.moveSpeed = moveSpeed;
         avatar.speed = 1;

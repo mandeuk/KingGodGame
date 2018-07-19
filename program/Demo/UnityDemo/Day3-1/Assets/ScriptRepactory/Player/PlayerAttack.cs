@@ -93,7 +93,7 @@ public class PlayerAttack : AttackBase
         List<Collider> targetList = new List<Collider>(skillTarget.targetList);
         List<Collider> realTargetList = new List<Collider>();
         DamageNode damageNode =
-            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack + 20, 4);
+            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.8f, playerEntity.pushBack + 20, 4);
 
         if (skillTarget.anotherTargetList.Count > 0)
         {

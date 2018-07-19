@@ -245,7 +245,7 @@ public class RoomData : MonoBehaviour {
             player.position 
                 = RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().roomPos[doorType + 2].transform.position;
             RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().playerIn = true;
-            RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().RoomStart();
+            RoomSpawn.mapDataArray[y, x + 1].GetComponent<RoomData>().RoomStart();            
 
             StormCloudPosition.instance.transform.position = RoomSpawn.mapDataArray[y, x + 1].transform.position - Vector3.up * 8;
         }

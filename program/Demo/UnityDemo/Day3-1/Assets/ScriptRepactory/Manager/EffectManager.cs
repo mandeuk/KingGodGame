@@ -73,8 +73,8 @@ public class EffectManager : MonoBehaviour {
 
     static GameObject playerDodgeDustEffect;
 
-    static GameObject playerEnergyApplyEffect;
-    static GameObject playerEtereApplyEffect;
+    //static GameObject playerEnergyApplyEffect;
+    //static GameObject playerEtereApplyEffect;
 
     GameObject raphael;
 
@@ -119,10 +119,10 @@ public class EffectManager : MonoBehaviour {
         EffectVoidMethod PlayChargeAttackEndEffect
             = new EffectVoidMethod(playChargeAttackEndEffect);
 
-        EffectVoidMethod PlayEnergyApplyEffect
-            = new EffectVoidMethod(playEnergyApplyEffect);
-        EffectVoidMethod PlayEtereApplyEffect
-            = new EffectVoidMethod(playEtereApplyEffect);
+        //EffectVoidMethod PlayEnergyApplyEffect
+        //    = new EffectVoidMethod(playEnergyApplyEffect);
+        //EffectVoidMethod PlayEtereApplyEffect
+        //    = new EffectVoidMethod(playEtereApplyEffect);
     }
 
     protected void SpawnInit()
@@ -139,8 +139,8 @@ public class EffectManager : MonoBehaviour {
         playerChargingEffect = Instantiate(Resources.Load("Prefabs/Effect/ChargeAttackChargeEffect2"), transform) as GameObject;
         playerChargeEndEffect = Instantiate(Resources.Load("Prefabs/Effect/ChargeAttackEndEffect"), transform) as GameObject;
 
-        playerEnergyApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EnergyGetEffect"), transform) as GameObject;
-        playerEtereApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EtereGetEffect"), transform) as GameObject;
+        //playerEnergyApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EnergyGetEffect"), transform) as GameObject;
+        //playerEtereApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EtereGetEffect"), transform) as GameObject;
 
         playerDodgeDustEffect = Instantiate(Resources.Load("Prefabs/Effect/DodgeDustEffect"), transform) as GameObject;
         
@@ -353,6 +353,7 @@ public class EffectManager : MonoBehaviour {
     public void playplayerSwordBlinkEffect()
     {
         playerSwordBlinkEffect.SetActive(true);
+        playerSwordBlinkEffect.GetComponent<ParticleSystem>().Stop();
         playerSwordBlinkEffect.GetComponent<ParticleSystem>().Play();
     }
 
@@ -437,21 +438,21 @@ public class EffectManager : MonoBehaviour {
         playerChargeEndEffect.GetComponent<ParticleSystem>().Play();
     }
 
-    public static void playEnergyApplyEffect(GameObject caller)
-    {
-        playerEnergyApplyEffect.SetActive(false);
-        playerEnergyApplyEffect.SetActive(true);
-        playerEnergyApplyEffect.transform.position = caller.transform.position;
-        playerEnergyApplyEffect.GetComponent<ParticleSystem>().Play();
-    }
+    //public static void playEnergyApplyEffect(GameObject caller)
+    //{
+    //    playerEnergyApplyEffect.SetActive(false);
+    //    playerEnergyApplyEffect.SetActive(true);
+    //    playerEnergyApplyEffect.transform.position = caller.transform.position;
+    //    playerEnergyApplyEffect.GetComponent<ParticleSystem>().Play();
+    //}
 
-    public static void playEtereApplyEffect(GameObject caller)
-    {
-        playerEtereApplyEffect.SetActive(false);
-        playerEtereApplyEffect.SetActive(true);
-        playerEtereApplyEffect.transform.position = caller.transform.position;
-        playerEtereApplyEffect.GetComponent<ParticleSystem>().Play();
-    }
+    //public static void playEtereApplyEffect(GameObject caller)
+    //{
+    //    playerEtereApplyEffect.SetActive(false);
+    //    playerEtereApplyEffect.SetActive(true);
+    //    playerEtereApplyEffect.transform.position = caller.transform.position;
+    //    playerEtereApplyEffect.GetComponent<ParticleSystem>().Play();
+    //}
 
     //------------------------------Bullet------------------------------//
 

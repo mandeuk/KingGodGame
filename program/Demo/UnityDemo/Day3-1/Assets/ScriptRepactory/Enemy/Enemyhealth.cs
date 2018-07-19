@@ -51,6 +51,7 @@ public class Enemyhealth : HealthBase
     }
     public override void AfterDamage(DamageNode damageNode)
     {
+        rigid.Sleep();
         base.AfterDamage(damageNode);
         StartCoroutine(ColorChange());
     }
@@ -84,13 +85,30 @@ public class Enemyhealth : HealthBase
 
     public override IEnumerator SkillDamaged(DamageNode damageNode)
     {
+        Vector3 diff = damageNode.attacker.transform.position - transform.position;
+
         enemyEntity.isDamaged = true;
+        anim.SetTrigger("Damaged" + Random.Range(1, 3));
         rigid.Sleep();
         anim.speed = 0;
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.8f);
         anim.speed = 1;
-        TakeDamage(damageNode);        
+        rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
+        entity.curHP -= damageNode.damage;
+        if (!enemyEntity.isDead)
+        {
+            for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
+            {
+                enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
+            }
+        }
+
+        if (entity.curHP <= 0 && !entity.isDead)
+        {
+            Death();
+            yield break;
+        }  
 
         yield return new WaitForSeconds(damageNode.delay);
         if (!enemyEntity.isDead)
@@ -104,7 +122,12 @@ public class Enemyhealth : HealthBase
     // 함수 기능 :  죽었을 때 에너지, 에테르를 드랍하고 이펙트를 만듬.
     public virtual void DeadEffect()
     {
-
+        for (int i = 0; i < Random.Range(2, 5); i++)
+        {
+            EnergyManager.instance.DropEtere(transform.position);
+        }
+        if(Random.Range(1,100) > 66)
+            EnergyManager.instance.DropEnergy(transform.position);
     }
 
     // 적과 플레이어 사이에 장애물이 있는지 체크함.

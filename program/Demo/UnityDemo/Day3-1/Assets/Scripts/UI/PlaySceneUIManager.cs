@@ -21,6 +21,9 @@ public class PlaySceneUIManager : MonoBehaviour {
     GameObject fadeimageforUI;
     Color fadeimgcolor;
 
+    UnityEngine.UI.Text etertext;
+    UnityEngine.UI.Text energytext;
+
     private void Awake()
     {
         if (instance)//인스턴스가 생성되어있는가?
@@ -67,6 +70,9 @@ public class PlaySceneUIManager : MonoBehaviour {
         leftcharacterimg = GameObject.Find("LeftCharacterImg");
         leftcharacterimg.SetActive(false);
         dialogUI.SetActive(false);
+
+        etertext = eterUItext.GetComponent<UnityEngine.UI.Text>();
+        energytext = energyUItext.GetComponent<UnityEngine.UI.Text>();
 
         ChangeEnergyAmountText();
         ChangeEterAmountText();
@@ -162,13 +168,11 @@ public class PlaySceneUIManager : MonoBehaviour {
 
 
     public void ChangeEterAmountText()
-    {
-        UnityEngine.UI.Text etertext = eterUItext.GetComponent<UnityEngine.UI.Text>();
+    {        
         etertext.text = PlayerBase.instance.etere.ToString();
     }
     public void ChangeEnergyAmountText()
     {
-        UnityEngine.UI.Text energytext = energyUItext.GetComponent<UnityEngine.UI.Text>();
         energytext.text = PlayerBase.instance.energy.ToString();
     }
 

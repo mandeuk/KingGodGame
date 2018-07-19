@@ -5,19 +5,18 @@ using UnityEngine;
 public class EnergyManager : MonoBehaviour {
     public static EnergyManager instance = null;
     public GameObject SpawnCloneList;
-    
-    List<GameObject> energyCloneList = new List<GameObject>();
-    List<GameObject> usedEnergyCloneList = new List<GameObject>();
 
-    List<GameObject> etereCloneList = new List<GameObject>();
-    List<GameObject> usedEtereCloneList = new List<GameObject>();
+    public List<GameObject> energyCloneList = new List<GameObject>();
+    public List<GameObject> usedEnergyCloneList = new List<GameObject>();
+
+    public List<GameObject> etereCloneList = new List<GameObject>();
+    public List<GameObject> usedEtereCloneList = new List<GameObject>();
 
     private void Awake()
     {
         instance = this;
     }
-
-    // Use this for initialization
+    
     void Start () {
         InitEnergy();
     }
@@ -38,10 +37,9 @@ public class EnergyManager : MonoBehaviour {
         return energy;
     }
 
-
     public GameObject SpawnEtere()
     {
-        GameObject energy = Instantiate(Resources.Load("Prefabs/Effect/EterePop"), SpawnCloneList.transform) as GameObject;
+        GameObject energy = Instantiate(Resources.Load("Prefabs/EtereEffect"), SpawnCloneList.transform) as GameObject;
 
         return energy;
     }
@@ -63,7 +61,6 @@ public class EnergyManager : MonoBehaviour {
         energyBall.SetActive(true);
         energyBall.GetComponent<ParticleSystem>().Play();
         energyBall.transform.position = pos + Vector3.up * 0.6f;
-        energyBall.GetComponent<Rigidbody>().AddForce(Vector3.up * 100);
     }
 
     public void returnEnergy(GameObject other)
@@ -79,12 +76,15 @@ public class EnergyManager : MonoBehaviour {
     {
         GameObject etere = etereCloneList[0];
 
-        usedEtereCloneList.Add(etere);
-        etereCloneList.RemoveAt(0);
-
         etere.SetActive(true);
+        etere.GetComponent<Rigidbody>().AddForce((Vector3.up * 2
+            + Vector3.right * Random.Range(-10,10) / 10.0f  
+            + Vector3.forward * Random.Range(-10, 10) / 10.0f ) * 100f);
         etere.GetComponent<ParticleSystem>().Play();
         etere.transform.position = pos + Vector3.up * 0.6f;
+
+        usedEtereCloneList.Add(etere);
+        etereCloneList.RemoveAt(0);
     }
     
     public void ReturnEtere(GameObject other)

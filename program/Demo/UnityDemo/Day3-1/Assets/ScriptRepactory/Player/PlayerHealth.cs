@@ -17,8 +17,7 @@ public class PlayerHealth : HealthBase {
     {
         if (!playerEntity.isInvincibility && !playerEntity.isDead)
         {
-            StopCoroutine(PlayerColorChange.instance.ColorChange());
-            StartCoroutine(PlayerColorChange.instance.ColorChange());
+            PlayerColorChange.instance.PlayerColorChangeBlack();
             PlayerBase.instance.SetStatus(damageNode.damage, false, PlayerBase.instance.CurHP);
             base.TakeDamage(damageNode);
             PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수

@@ -28,7 +28,7 @@ public class EnemyMovement : MoveBase {
     {
         if (enemyEntity.isAgro)
         {
-            if (nav.enabled && !enemyEntity.isAttack)
+            if (nav.enabled && !enemyEntity.isAttack && !enemyEntity.isDead)
             {
                 nav.destination = player.transform.position;
 

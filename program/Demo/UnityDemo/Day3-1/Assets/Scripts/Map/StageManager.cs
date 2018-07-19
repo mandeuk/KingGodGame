@@ -15,12 +15,12 @@ public class StageManager : MonoBehaviour {
     public GameObject player;
 
     public int[,] mapSpawnArray = new int[9, 9] {   {0,0,0,0,0,0,0,0,0 },
+                                                    {0,0,2,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 },
-                                                    {0,0,0,0,2,0,0,0,0 },
-                                                    {0,0,0,0,1,0,0,0,0 },
-                                                    {0,0,0,0,1,0,0,0,0 },
+                                                    {0,0,0,0,0,0,0,0,0 },
+                                                    {0,0,0,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 }};
     
@@ -30,6 +30,8 @@ public class StageManager : MonoBehaviour {
         instance = this;
         stageNum = 1;
         MapRandomSetting();
+        //SearchAndSetRoom();
+
     }
 
     void MapRandomSetting()
@@ -45,28 +47,34 @@ public class StageManager : MonoBehaviour {
                                           {0,0,0,0,0,0,0,0,0 }};
     }
 
-    void SetStartRoom()
+    Node SetStartRoom(Node startroom)
     {
         //방 시작위치 설정하는 함수
         //방의 전체적인 생성모양이 예전에 잠깐 들었던 내용을 까먹어서 나중에 회의 한번 하고 수정할 예정
-        mapSpawnArray[0,0] = 2;
+        startroom.x = 1;
+        startroom.y = 1;
+
+        mapSpawnArray[startroom.x, startroom.y] = 2;
+        return startroom;
     }
 
-    void SetBossRoom()
+    Node SetBossRoom(Node bossroom)
     {
-        mapSpawnArray[5, 5] = 3;
-    }
-
-    void SearchRoute()
-    {
-        Node startroom;
-        Node bossroom;
-        Node curnode, leftnode, rightnode;
-        startroom.x = 0;
-        startroom.y = 0;
-        startroom.dist = 0;
         bossroom.x = 5;
         bossroom.y = 5;
+
+        mapSpawnArray[bossroom.x, bossroom.y] = 3;
+        return bossroom;
+    }
+
+    void SearchAndSetRoom()
+    {
+        Node startroom = new Node();
+        Node bossroom = new Node();
+        Node curnode, leftnode, rightnode;
+        startroom = SetStartRoom(startroom);
+        startroom.dist = 0;
+        bossroom = SetBossRoom(bossroom);
         bossroom.dist = 0;
 
 
@@ -87,7 +95,7 @@ public class StageManager : MonoBehaviour {
 
                 if (leftnode.dist == rightnode.dist)
                 {
-                    switch (Random.Range(1, 2))
+                    switch (Random.Range(1, 3))
                     {
                         case 1:
                             curnode = leftnode;

@@ -19,9 +19,7 @@ public class HealthBase : MonoBehaviour {
 
     // 함수 기능 :  딜레이시간 전의 맞는 처리. 이걸 오버로딩해서 사용하는게 좋을듯..
     public virtual void TakeDamage(DamageNode damageNode)
-    {
-        entity.isDamaged = true;
-        
+    {        
         Vector3 diff = damageNode.attacker.transform.position - transform.position;
         rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
 
@@ -45,8 +43,11 @@ public class HealthBase : MonoBehaviour {
     // 함수 기능 : 외부에서 StartCoroutine을 부르지 않고 내부에서 부르기 위한 함수. 
     public virtual void Damaged(DamageNode damageNode)
     {
-        StopCoroutine(NormalDamaged(damageNode));
-        StartCoroutine(NormalDamaged(damageNode));
+        if (!entity.isDamaged)
+        {
+            StopCoroutine(NormalDamaged(damageNode));
+            StartCoroutine(NormalDamaged(damageNode));
+        }
     }
 
     // 함수 기능 : 캐릭터가 밀리고, 딜레이 시간만큼 데미지 상태를 체크하고, 딜레이 시간 뒤에 멈추게함
@@ -57,13 +58,17 @@ public class HealthBase : MonoBehaviour {
     //              하다가 보니까 저게 더 거지같음 그냥 노말데미지 자체를 계속 오버라이드해서 구현하는게 나을거같다 망할
     public virtual IEnumerator NormalDamaged(DamageNode damageNode)
     {
+        entity.isDamaged = true;
         TakeDamage(damageNode);
-        
+
         yield return new WaitForSeconds(damageNode.delay);
         if (!entity.isDead)
         {
             AfterDamage(damageNode);
+
         }
+        entity.isDamaged = false;
+
         yield break;
     }
 

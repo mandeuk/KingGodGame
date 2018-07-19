@@ -14,7 +14,7 @@ public class EnemyAttack : AttackBase {
         enemyEntity = GetComponent<ObjectBase>() as EnemyBase;
         player = enemyEntity.player;
         anim = GetComponent<Animator>();
-        damageNode = new DamageNode(enemyEntity.attackPower, enemyEntity.gameObject, 0.2f, enemyEntity.pushBack, 1);
+        damageNode = new DamageNode(enemyEntity.attackPower, enemyEntity.gameObject, 0.5f, enemyEntity.pushBack, 1);
     }
 
     protected virtual void AttackUpdate()

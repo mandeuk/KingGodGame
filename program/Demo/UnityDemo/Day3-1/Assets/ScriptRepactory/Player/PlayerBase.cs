@@ -68,18 +68,22 @@ public class PlayerBase : ObjectBase {
     {
         
     }
+
     public void ExMoveAttack()
     {
-        
+        GetComponent<PlayerAttack>().skillAttack(4);
     }
+
     public override void Damaged(DamageNode damageNode)
     {
         GetComponent<PlayerHealth>().Damaged(damageNode);
     }
+
     public override void Dead()
     {
 
     }
+
     public void PlayerEnable()
     {
         transform.GetComponent<PlayerMovement>().enabled = true;
@@ -269,12 +273,14 @@ public class PlayerBase : ObjectBase {
         if (up)
         {
             energy += amount;
+            PlayerColorChange.instance.PlayerColorChangeYellow();
         }
         else
         {
             energy -= amount;
         }
         playerStatus.energy = energy;
+        PlaySceneUIManager.instance.ChangeEnergyAmountText();
     }
 
     public void Etere(float amount, bool up)
@@ -282,12 +288,15 @@ public class PlayerBase : ObjectBase {
         if (up)
         {
             etere += amount;
+            PlayerColorChange.instance.PlayerColorChangeBlue();
         }
         else
         {
             etere -= amount;
         }
+
         playerStatus.etere = etere;
+        PlaySceneUIManager.instance.ChangeEterAmountText();
     }
 
     public void DevilGage(float amount, bool up)

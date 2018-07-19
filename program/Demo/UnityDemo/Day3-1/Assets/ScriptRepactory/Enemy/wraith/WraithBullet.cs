@@ -9,7 +9,7 @@ public class WraithBullet : BulletBase {
         if (other.CompareTag("Player"))
         {
             if(!other.GetComponent<PlayerBase>().isDead && !other.GetComponent<PlayerBase>().isInvincibility)
-            BulletHit();
+                BulletHit();
         }
 
         if (other.CompareTag("mapClearCol"))
