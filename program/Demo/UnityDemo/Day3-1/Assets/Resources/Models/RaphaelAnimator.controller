@@ -1593,7 +1593,7 @@ AnimatorState:
   m_SpeedParameter: AttackSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: DashEndForce
 --- !u!1102 &1102725111834869584
 AnimatorState:
   serializedVersion: 5

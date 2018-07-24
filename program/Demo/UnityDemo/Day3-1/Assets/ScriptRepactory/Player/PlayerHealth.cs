@@ -35,9 +35,11 @@ public class PlayerHealth : HealthBase {
 
         anim.SetTrigger("Die");
         PlayerBase.instance.PlayerDisable();
+        GameManager.NewGameStart();
 
         Invoke("CameraFadeOut", 2);
         Invoke("loadMenuScene", 6);
+        
     }
 
     protected override void Init()

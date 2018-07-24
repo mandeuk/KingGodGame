@@ -65,7 +65,7 @@ public class NormalTarget : MonoBehaviour {
 
         for (int i = 0; i < enemyBulletList.Count; i++)
         {
-            if (!enemyBulletList[i].GetComponent<WraithBullet>().onFire)
+            if (!enemyBulletList[i].GetComponent<BulletBase>().onFire)
             {
                 enemyBulletList.Remove(enemyBulletList[i]);
             }

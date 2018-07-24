@@ -14,7 +14,7 @@ public class EnemyAttack : AttackBase {
         enemyEntity = GetComponent<ObjectBase>() as EnemyBase;
         player = enemyEntity.player;
         anim = GetComponent<Animator>();
-        damageNode = new DamageNode(enemyEntity.attackPower, enemyEntity.gameObject, 0.5f, enemyEntity.pushBack, 1);
+        damageNode = new DamageNode(enemyEntity.attackPower, enemyEntity.gameObject, 1f, enemyEntity.pushBack, 1);
     }
 
     protected virtual void AttackUpdate()
@@ -36,29 +36,22 @@ public class EnemyAttack : AttackBase {
         }
     }
 
-    public override void NormalAttack()
-    {
-
-    }
-
     // Use this for initialization
     void Start () {
         Init();
     }
 
-    public void StartAttack()
+    public virtual void StartAttack()
     {
-        enemyEntity.isAttack = true;
         anim.SetBool("Attack", true);
     }
 
-    public void StopAttack()
+    public virtual void StopAttack()
     {
-        enemyEntity.isAttack = false;
         anim.SetBool("Attack", false);
     }
 
-    public void Turn()
+    public virtual void Turn()
     {
         int turnDir;
         
@@ -91,5 +84,10 @@ public class EnemyAttack : AttackBase {
             return 1;
         else
             return -1;
+    }
+
+    public override void NormalAttack()
+    {
+
     }
 }

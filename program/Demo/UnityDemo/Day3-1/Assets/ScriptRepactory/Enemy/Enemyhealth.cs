@@ -6,12 +6,12 @@ public class Enemyhealth : HealthBase
 {
     public float flashSpeed = 2f;
 
-    EnemyBase enemyEntity;
-    GameObject player;
-    Animator anim;
+    protected EnemyBase enemyEntity;
+    protected GameObject player;
+    protected Animator anim;
 
-    Material[] enemyMat;
-    Color[] enemyMatOrigColor;
+    protected Material[] enemyMat;
+    protected Color[] enemyMatOrigColor;
 
     // Use this for initialization
     void Awake()
@@ -92,7 +92,7 @@ public class Enemyhealth : HealthBase
         rigid.Sleep();
         anim.speed = 0;
 
-        yield return new WaitForSeconds(.8f);
+        yield return new WaitForSeconds(.5f);
         anim.speed = 1;
         rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
         entity.curHP -= damageNode.damage;
@@ -108,7 +108,7 @@ public class Enemyhealth : HealthBase
         {
             Death();
             yield break;
-        }  
+        }
 
         yield return new WaitForSeconds(damageNode.delay);
         if (!enemyEntity.isDead)
@@ -122,7 +122,7 @@ public class Enemyhealth : HealthBase
     // 함수 기능 :  죽었을 때 에너지, 에테르를 드랍하고 이펙트를 만듬.
     public virtual void DeadEffect()
     {
-        for (int i = 0; i < Random.Range(2, 5); i++)
+        for (int i = 0; i < Random.Range(1, 4); i++)
         {
             EnergyManager.instance.DropEtere(transform.position);
         }

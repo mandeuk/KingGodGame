@@ -8,7 +8,7 @@ public class WraithBullet : BulletBase {
     {
         if (other.CompareTag("Player"))
         {
-            if(!other.GetComponent<PlayerBase>().isDead && !other.GetComponent<PlayerBase>().isInvincibility)
+            if(!other.GetComponent<ObjectBase>().isDead && !other.GetComponent<ObjectBase>().isInvincibility)
                 BulletHit();
         }
 
@@ -24,15 +24,6 @@ public class WraithBullet : BulletBase {
         Init();
     }
 
-    // 함수 기능 :  5초뒤에 사라지게 함.
-    public IEnumerator VanishingEffect()
-    {
-        yield return new WaitForSeconds(5.0f);
-        BulletHit();
-
-        yield break;
-    }
-
     public override void Init()
     {
         base.Init();
@@ -40,7 +31,7 @@ public class WraithBullet : BulletBase {
 
     public override void BulletHit()
     {
-        base.BulletHit();
+        onFire = false;
 
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
         EffectManager.instance.WraithBulletHit(gameObject);

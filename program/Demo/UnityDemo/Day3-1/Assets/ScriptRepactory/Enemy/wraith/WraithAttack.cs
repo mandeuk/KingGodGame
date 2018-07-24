@@ -11,11 +11,29 @@ public class WraithAttack : RangeAttack {
 
     protected override void Init()
     {
-        base.Init();
+        InitBullet();
+        base.Init();        
     }
 
     // Update is called once per frame
     void Update () {
         base.AttackUpdate();
-    }   
+    }
+
+    public override void Fire()
+    {
+        base.Fire();
+
+        bullet.transform.position = transform.transform.position + transform.up * 0.5f;
+        bullet.transform.rotation = transform.transform.rotation;
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 80);
+    }
+
+    public override void InitBullet()
+    {
+        base.InitBullet();
+
+        bulletList = EffectManager.instance.enemyWraithBullets;
+        firedBulletList = EffectManager.instance.enemyUsedWraithBullets;
+    }
 }

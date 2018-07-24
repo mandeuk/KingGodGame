@@ -10,7 +10,7 @@ public class WraithBase : EnemyBase {
         base.Init();
         base.maxHP = 100;
         base.curHP = 100;
-        base.moveSpeed = 2;
+        base.moveSpeed = 1;
 
         base.attackPower = 1;
         base.attackDistance = 6;

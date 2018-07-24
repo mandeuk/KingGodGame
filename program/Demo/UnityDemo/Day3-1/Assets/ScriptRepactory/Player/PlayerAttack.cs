@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerAttack : AttackBase
 {
-    PlayerBase playerEntity;
+    public PlayerBase playerEntity;
     public GameObject normalAttacCam;
     public GameObject exMoveCam;
     protected Animator avatar;
 
     public NormalTarget normalTarget;
     public SkillTarget skillTarget;
-    public ChargeAttackTarget chargeAttackTarget;
+    public ChargeAttackTarget chargeAttackTarget;    
 
     void Awake()
     {
@@ -65,7 +65,7 @@ public class PlayerAttack : AttackBase
         {
             if (targetList.Count > 0)
             {
-                StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+                StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.04f));
             }
 
             foreach (Collider one in targetList)
@@ -83,7 +83,7 @@ public class PlayerAttack : AttackBase
             foreach (Collider one in enemyBulletList)
             {
                 WraithEffect.instance.BulletHit(one.gameObject);
-                one.GetComponent<WraithBullet>().onFire = false;
+                //one.GetComponent<WraithBullet>().onFire = false;
             }
         }
     }
@@ -93,7 +93,7 @@ public class PlayerAttack : AttackBase
         List<Collider> targetList = new List<Collider>(skillTarget.targetList);
         List<Collider> realTargetList = new List<Collider>();
         DamageNode damageNode =
-            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.8f, playerEntity.pushBack + 20, 4);
+            new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.4f, playerEntity.pushBack + 7, 4);
 
         if (skillTarget.anotherTargetList.Count > 0)
         {
@@ -195,6 +195,7 @@ public class PlayerAttack : AttackBase
         {
             EffectManager.instance.PlayEffect(gameObject, stateNum, EffectManager.instance.playPlayerAttackEffect);
             NormalAttack(stateNum);
+            EventManager.AttackEvent(stateNum);
         }
     }
     
@@ -207,5 +208,4 @@ public class PlayerAttack : AttackBase
     {
         
     }
-
 }
