@@ -32,6 +32,8 @@ public class EffectManager : MonoBehaviour {
     {
         effectMethod(caller);
     }
+
+    public GameObject player;
     
     //-------------------enemy-------------------//
 
@@ -49,6 +51,9 @@ public class EffectManager : MonoBehaviour {
 
     List<GameObject> enemyWraithBulletHitEffects = new List<GameObject>();
     List<GameObject> enemyUsedWraithBulletHitEffects = new List<GameObject>();
+
+    List<GameObject> enemySoulOfImpHitEffects = new List<GameObject>();
+    List<GameObject> enemyUsedSoulOfImpHitEffects = new List<GameObject>();
 
     public List<GameObject> enemyWraithBullets = new List<GameObject>();
     public List<GameObject> enemyUsedWraithBullets = new List<GameObject>();
@@ -72,6 +77,10 @@ public class EffectManager : MonoBehaviour {
     static GameObject playerChargeEndEffect;
 
     static GameObject playerDodgeDustEffect;
+    static GameObject playerGetLegendItemEffet;
+    static GameObject playerGetMasterItemEffet;
+    static GameObject playerGetRareItemEffet;
+    static GameObject playerGetNormalItemEffet;
 
     //static GameObject playerEnergyApplyEffect;
     //static GameObject playerEtereApplyEffect;
@@ -127,6 +136,7 @@ public class EffectManager : MonoBehaviour {
 
     protected void SpawnInit()
     {
+        player = PlayerBase.instance.gameObject;
         //playerSwordBlinkEffect = Instantiate(Resources.Load("Prefabs/Effect/BlinkEffect"), blinkEffectPos.transform) as GameObject;
 
         playerEXmoveVanishEffect = Instantiate(Resources.Load("Prefabs/Effect/EXmoveVanishEffect"), transform) as GameObject;
@@ -141,9 +151,24 @@ public class EffectManager : MonoBehaviour {
 
         //playerEnergyApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EnergyGetEffect"), transform) as GameObject;
         //playerEtereApplyEffect = Instantiate(Resources.Load("Prefabs/Effect/EtereGetEffect"), transform) as GameObject;
+        
+        playerGetLegendItemEffet = Instantiate(Resources.Load("Prefabs/Item/LegendItemGetEffect"), player.transform) as GameObject;
+        playerGetMasterItemEffet = Instantiate(Resources.Load("Prefabs/Item/MasterItemGetEffect"), player.transform) as GameObject; 
+        playerGetRareItemEffet = Instantiate(Resources.Load("Prefabs/Item/RareItemGetEffect"), player.transform) as GameObject; 
+        playerGetNormalItemEffet = Instantiate(Resources.Load("Prefabs/Item/NormalItemGetEffect"), player.transform) as GameObject; 
 
         playerDodgeDustEffect = Instantiate(Resources.Load("Prefabs/Effect/DodgeDustEffect"), transform) as GameObject;
-        
+
+        //  1. 먹을지도 안먹을지도 모르는 아이템을 위해 처음부터 메모리공간 할당?
+        //  2. 한번에 총알,피격이펙트 140개를 한프레임에 띄워서 분명 프레임드랍이 일어날게 뻔함. 그래도 먹을때 생성?
+        //  2-1. 코루틴으로 프레임마다 10개씩 생성하는 방법도 있긴함.
+        for (int i = 0; i < 70; i++)
+        {
+            GameObject enemySoulOfImpHitEffectClone = Instantiate(Resources.Load("Prefabs/Effect/BallAttackEffect2"), transform) as GameObject;
+
+            enemySoulOfImpHitEffects.Add(enemySoulOfImpHitEffectClone);
+        }
+
         for (int i = 0; i < 40; ++i)
         {
             GameObject slashHitEffectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect"), transform) as GameObject;
@@ -193,6 +218,7 @@ public class EffectManager : MonoBehaviour {
         yield break;
     }
 
+    //  stateNum : 5번은 임프아이템.
     public IEnumerator playEnemyHitEffect(GameObject caller, int stateNum)
     {
         GameObject effectclone = enemyHitEffects[0];
@@ -225,6 +251,25 @@ public class EffectManager : MonoBehaviour {
         effectclone.SetActive(false);
         enemyHitEffects.Add(effectclone);
         enemyUsedHitEffects.Remove(effectclone);
+        yield break;
+    }
+
+    public IEnumerator playEnemyImpHitEffect(GameObject caller, int type)
+    {
+        GameObject effectclone = enemySoulOfImpHitEffects[0];
+
+        effectclone.SetActive(true);
+        effectclone.transform.position = caller.transform.position;
+
+        enemyUsedSoulOfImpHitEffects.Add(effectclone);
+        enemySoulOfImpHitEffects.Remove(effectclone);
+
+        yield return new WaitForSeconds(3.0f);
+
+        effectclone.SetActive(false);
+        enemySoulOfImpHitEffects.Add(effectclone);
+        enemyUsedSoulOfImpHitEffects.Remove(effectclone);
+
         yield break;
     }
 
@@ -350,6 +395,8 @@ public class EffectManager : MonoBehaviour {
         yield break;
     }
 
+
+
     public void playplayerSwordBlinkEffect()
     {
         playerSwordBlinkEffect.SetActive(true);
@@ -436,6 +483,34 @@ public class EffectManager : MonoBehaviour {
         playerChargeEndEffect.SetActive(true);
         playerChargeEndEffect.transform.position = caller.transform.position + Vector3.up;
         playerChargeEndEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+    public static void playGetLegendItemEffet()
+    {
+        playerGetLegendItemEffet.SetActive(false);
+        playerGetLegendItemEffet.SetActive(true);
+        playerGetLegendItemEffet.transform.position = PlayerBase.instance.transform.position + Vector3.up;
+    }
+
+    public static void playGetMasterItemEffet()
+    {
+        playerGetMasterItemEffet.SetActive(false);
+        playerGetMasterItemEffet.SetActive(true);
+        playerGetMasterItemEffet.transform.position = PlayerBase.instance.transform.position + Vector3.up;
+    }
+
+    public static void playGetRareItemEffet()
+    {
+        playerGetRareItemEffet.SetActive(false);
+        playerGetRareItemEffet.SetActive(true);
+        playerGetRareItemEffet.transform.position = PlayerBase.instance.transform.position + Vector3.up;
+    }
+
+    public static void playGetNormalItemEffect()
+    {
+        playerGetNormalItemEffet.SetActive(false);
+        playerGetNormalItemEffet.SetActive(true);
+        playerGetNormalItemEffet.transform.position = PlayerBase.instance.transform.position + Vector3.up;
     }
 
     //public static void playEnergyApplyEffect(GameObject caller)

@@ -15,7 +15,7 @@ public class BulletBase : MonoBehaviour {
 
     public virtual void Init()
     {
-        onFire = false;        
+        onFire = true;
     }
 
     public virtual void BulletHit()

@@ -1176,9 +1176,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1628194090667704}
-  m_LocalRotation: {x: -0, y: -0.46619084, z: -0, w: 0.8846842}
-  m_LocalPosition: {x: -0.88, y: 1.36, z: -6.14}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalRotation: {x: -0, y: 0.99998283, z: -0, w: 0.0058591384}
+  m_LocalPosition: {x: 1.8, y: 0.36, z: 3.86}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4418559353038648}
   - {fileID: 4604384593176992}
@@ -1186,7 +1186,7 @@ Transform:
   - {fileID: 4846583375646654}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -55.575, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.32901, z: 0}
 --- !u!4 &4816263928570810
 Transform:
   m_ObjectHideFlags: 1
@@ -1381,6 +1381,9 @@ MonoBehaviour:
   turnSpeed: 0
   isAgro: 0
   player: {fileID: 0}
+  isAttackTiming: 0
+  isAttackReady: 0
+  moveAttackDistance: 0
 --- !u!135 &135890360218210188
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1403,9 +1406,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6
-  m_Height: 1.2
+  m_Height: 1.3943745
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7, z: 0}
+  m_Center: {x: 0, y: 0.60281295, z: 0}
 --- !u!137 &137218136401903680
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

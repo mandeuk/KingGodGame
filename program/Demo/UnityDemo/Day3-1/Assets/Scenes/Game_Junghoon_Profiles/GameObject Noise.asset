@@ -11,5 +11,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f59e54f2bfd184b9dd451a678d089b, type: 3}
   m_Name: GameObject Noise
   m_EditorClassIdentifier: 
-  m_Position: []
-  m_Orientation: []
+  m_Position:
+  - X:
+      Amplitude: 0
+      Frequency: 0
+    Y:
+      Amplitude: 0
+      Frequency: 0
+    Z:
+      Amplitude: 0
+      Frequency: 0
+  - X:
+      Amplitude: 0
+      Frequency: 0
+    Y:
+      Amplitude: 0
+      Frequency: 0
+    Z:
+      Amplitude: 0
+      Frequency: 0
+  m_Orientation:
+  - X:
+      Amplitude: 0
+      Frequency: 0
+    Y:
+      Amplitude: 0
+      Frequency: 0
+    Z:
+      Amplitude: 0
+      Frequency: 0
+  - X:
+      Amplitude: 1
+      Frequency: 1
+    Y:
+      Amplitude: 1
+      Frequency: 1
+    Z:
+      Amplitude: 1
+      Frequency: 1

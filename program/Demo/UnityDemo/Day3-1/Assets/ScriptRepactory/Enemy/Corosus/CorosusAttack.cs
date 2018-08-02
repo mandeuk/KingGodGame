@@ -106,7 +106,7 @@ public class CorosusAttack : RangeAttack {
     {
         for (int i = 0; i < 100; i++)
         {
-            GameObject bulletclone = Instantiate(bullet, cloneSpawnObject.transform) as GameObject;
+            GameObject bulletclone = Instantiate(bullet) as GameObject;
 
             bulletList.Add(bulletclone);
         }
@@ -154,7 +154,7 @@ public class CorosusAttack : RangeAttack {
                 bullet.transform.position = transform.position + transform.up + bullet.transform.forward;
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 180);
             }
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.15f);
             angle += 10;
         }
 

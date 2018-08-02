@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemyhealth : HealthBase
 {
-    public float flashSpeed = 2f;
+    public float flashSpeed = 1f;
 
     protected EnemyBase enemyEntity;
     protected GameObject player;
@@ -39,13 +39,19 @@ public class Enemyhealth : HealthBase
     public override void TakeDamage(DamageNode damageNode)
     {
         entity.curHP -= damageNode.damage;
+        EventManager.EnemyHitEvent(damageNode.AttackType, this.gameObject);
         base.TakeDamage(damageNode);
-        anim.SetTrigger("Damaged" + Random.Range(1, 3));
+
+        if (!(damageNode.AttackType == 5))
+        {
+            anim.SetTrigger("Damaged" + Random.Range(1, 3));
+        }
+
         if (!enemyEntity.isDead)
         {
             for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
             {
-                enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
+                enemyMat[i].SetColor("_Color", Color.black);
             }
         }
     }
@@ -87,6 +93,7 @@ public class Enemyhealth : HealthBase
     {
         Vector3 diff = damageNode.attacker.transform.position - transform.position;
 
+        EventManager.EnemyHitEvent(damageNode.AttackType, this.gameObject);
         enemyEntity.isDamaged = true;
         anim.SetTrigger("Damaged" + Random.Range(1, 3));
         rigid.Sleep();
@@ -96,6 +103,7 @@ public class Enemyhealth : HealthBase
         anim.speed = 1;
         rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
         entity.curHP -= damageNode.damage;
+        
         if (!enemyEntity.isDead)
         {
             for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
@@ -126,7 +134,7 @@ public class Enemyhealth : HealthBase
         {
             EnergyManager.instance.DropEtere(transform.position);
         }
-        if(Random.Range(1,100) > 66)
+        if(Random.Range(1,100) > 85)
             EnergyManager.instance.DropEnergy(transform.position);
     }
 

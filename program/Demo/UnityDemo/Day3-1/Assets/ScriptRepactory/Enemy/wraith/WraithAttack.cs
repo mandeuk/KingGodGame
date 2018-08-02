@@ -31,7 +31,6 @@ public class WraithAttack : RangeAttack {
 
     public override void InitBullet()
     {
-        base.InitBullet();
 
         bulletList = EffectManager.instance.enemyWraithBullets;
         firedBulletList = EffectManager.instance.enemyUsedWraithBullets;

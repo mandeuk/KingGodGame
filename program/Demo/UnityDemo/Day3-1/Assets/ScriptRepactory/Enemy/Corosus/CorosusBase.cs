@@ -10,8 +10,8 @@ public class CorosusBase : EnemyBase {
     protected override void Init()
     {
         base.Init();
-        base.maxHP = 100;
-        base.curHP = 100;
+        base.maxHP = 1500;
+        base.curHP = 1500;
         base.moveSpeed = 2;
         base.pushBack = 10;
 

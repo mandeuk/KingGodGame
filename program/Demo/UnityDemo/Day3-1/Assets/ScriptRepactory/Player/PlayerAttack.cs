@@ -48,7 +48,8 @@ public class PlayerAttack : AttackBase
 
             if (realTargetList.Count > 0)
             {
-                StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.02f));
+                playerEntity.PlayerStiff();
+                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent());
             }
 
             foreach (Collider one in realTargetList)
@@ -65,7 +66,8 @@ public class PlayerAttack : AttackBase
         {
             if (targetList.Count > 0)
             {
-                StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent(targetList.Count * 0.04f));
+                playerEntity.PlayerStiff();
+                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent());
             }
 
             foreach (Collider one in targetList)
@@ -82,8 +84,7 @@ public class PlayerAttack : AttackBase
         {
             foreach (Collider one in enemyBulletList)
             {
-                WraithEffect.instance.BulletHit(one.gameObject);
-                //one.GetComponent<WraithBullet>().onFire = false;
+                one.GetComponent<BulletBase>().BulletHit();
             }
         }
     }
@@ -162,8 +163,7 @@ public class PlayerAttack : AttackBase
         {
             foreach (Collider one in enemyBulletList)
             {
-                WraithEffect.instance.BulletHit(one.gameObject);
-                one.GetComponent<WraithBullet>().onFire = false;
+                one.GetComponent<BulletBase>().BulletHit();
             }
         }
     }

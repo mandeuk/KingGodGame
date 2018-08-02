@@ -24,7 +24,7 @@ public class RangeAttack : EnemyAttack {
 
     public virtual void Fire()
     {
-        GameObject bullet = bulletList[0];
+        bullet = bulletList[0];
         bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
         bullet.GetComponent<BulletBase>().Attacker = gameObject;
 

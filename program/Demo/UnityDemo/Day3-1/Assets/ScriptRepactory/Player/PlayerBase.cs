@@ -325,4 +325,19 @@ public class PlayerBase : ObjectBase {
         playerStatus.stance = stance;
         // 스텐스에 따라서 나눠줘야함. bool로 나누든..
     }
+
+    public void PlayerStiff()
+    {
+        StartCoroutine(Stiff());
+    }
+
+    IEnumerator Stiff()
+    {
+        Time.timeScale = 0.0f;
+        //Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        yield return new WaitForSecondsRealtime(0.05f);
+        Time.timeScale = 1f;
+        //Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        yield break;
+    }
 }

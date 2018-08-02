@@ -162,6 +162,10 @@ Prefab:
       propertyPath: exMoveCam
       value: 
       objectReference: {fileID: 678889531}
+    - target: {fileID: 1982951383361452, guid: f21321b12c3d8634f9352e8c57888dfc, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f21321b12c3d8634f9352e8c57888dfc, type: 2}
   m_IsPrefabParent: 0
@@ -289,7 +293,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 0.41911763, g: 0.41911763, b: 0.41911763, a: 1}
-  m_Intensity: 1.69
+  m_Intensity: 1.28
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -616,6 +620,87 @@ Prefab:
       propertyPath: raphael
       value: 
       objectReference: {fileID: 1379578688}
+    - target: {fileID: 23157403538652160, guid: 37ca355ad60f1044d9232bc3f36dd1ef,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f118c33e1e930094499fa66ffa571d47, type: 2}
+    - target: {fileID: 1497950155677986, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776699657305410, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.00000059604645
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776699657305410, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000050738454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776699657305410, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.000006824732
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497950155677986, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_Name
+      value: Vinett
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606605920604842, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_Name
+      value: FrostQuad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783745729042034, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145533430608242, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125231049993528, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456291188683120, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085155738841960, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_Name
+      value: Vinett2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157008283435132, guid: 37ca355ad60f1044d9232bc3f36dd1ef,
+        type: 2}
+      propertyPath: m_Tonemapping.neutralWhiteLevel
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157008283435132, guid: 37ca355ad60f1044d9232bc3f36dd1ef,
+        type: 2}
+      propertyPath: m_Tonemapping.neutralWhiteClip
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157008283435132, guid: 37ca355ad60f1044d9232bc3f36dd1ef,
+        type: 2}
+      propertyPath: m_ColorGrading.basics.tint
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157008283435132, guid: 37ca355ad60f1044d9232bc3f36dd1ef,
+        type: 2}
+      propertyPath: m_ColorGrading.basics.temperatureShift
+      value: -0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130981959982406, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130981959982406, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130981959982406, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.56
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37ca355ad60f1044d9232bc3f36dd1ef, type: 2}
   m_IsPrefabParent: 0
