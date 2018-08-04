@@ -8,7 +8,7 @@ public class SoulOfImpItemEffect : ItemBase {
     {
         if (other.gameObject == player)
         {
-            ItemApply();
+            ItemApply(thisItemNum);
         }
     }
 
@@ -20,12 +20,13 @@ public class SoulOfImpItemEffect : ItemBase {
     protected override void Init()
     {
         base.Init();
+        thisItemNum = ItemNum.SoulOfImp;
     }
 
-    public override void ItemApply()
+    public override void ItemApply(ItemNum itemNum)
     {
-
-        Instantiate(Resources.Load("Prefabs/Item/SoulOfImp/SoulOfImpObj"),player.transform);
+        base.ItemApply(itemNum);
+        Itemtable.Instance.SpawnSoulOfImp();
         EffectManager.playGetLegendItemEffet();
         gameObject.SetActive(false);
         Destroy(this);

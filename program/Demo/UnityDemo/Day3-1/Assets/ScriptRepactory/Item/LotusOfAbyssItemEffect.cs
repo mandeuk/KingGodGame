@@ -8,7 +8,7 @@ public class LotusOfAbyssItemEffect : ItemBase {
     {
         if (other.gameObject == player)
         {
-            ItemApply();
+            ItemApply(thisItemNum);
         }
     }
 
@@ -18,13 +18,15 @@ public class LotusOfAbyssItemEffect : ItemBase {
     }
 
     protected override void Init()
-    {
+    {        
         base.Init();
+        thisItemNum = ItemNum.LutusOfAbyss;
     }
 
-    public override void ItemApply()
+    public override void ItemApply(ItemNum itemNum)
     {
-        Instantiate(Resources.Load("Prefabs/Item/LotusOfAbyss/LotusOfAbyssObj"), player.transform);
+        base.ItemApply(itemNum);
+        Itemtable.Instance.SpawnLotusOfAbyss();
         EffectManager.playGetLegendItemEffet();
         gameObject.SetActive(false);
         Destroy(this);

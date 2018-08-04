@@ -8,7 +8,7 @@ public class SmallSwordItemEffect : ItemBase {
     {
         if (other.gameObject == player)
         {
-            ItemApply();
+            ItemApply(thisItemNum);
         }
     }
 
@@ -20,12 +20,13 @@ public class SmallSwordItemEffect : ItemBase {
     protected override void Init()
     {
         base.Init();
+        thisItemNum = ItemNum.SmallSword;
     }
 
-    public override void ItemApply()
+    public override void ItemApply(ItemNum itemNum)
     {
-        
-        Instantiate(Resources.Load("Prefabs/Item/SmallSword/SmallSwordObj"));
+        base.ItemApply(itemNum);
+        Itemtable.Instance.SpawnSmallSword();
         EffectManager.playGetMasterItemEffet();
         gameObject.SetActive(false);
         Destroy(this);

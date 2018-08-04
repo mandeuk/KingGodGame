@@ -11,14 +11,25 @@ public class PlayerHealth : HealthBase {
 	// Use this for initialization
 	void Awake () {
         Init();
-    }    
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Damaged(new DamageNode(1, this.gameObject, 0.4f, 1, 1));
+        }
+    }
 
     public override void TakeDamage(DamageNode damageNode)
     {
         if (!playerEntity.isInvincibility && !playerEntity.isDead)
         {
             PlayerColorChange.instance.PlayerColorChangeBlack();
+            PlayerColorChange.instance.RimColorRed();
             PlayerBase.instance.SetStatus(damageNode.damage, false, PlayerBase.instance.CurHP);
+            print(damageNode.damage);
+            print(damageNode.attacker);
             base.TakeDamage(damageNode);
             PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
         }
@@ -26,6 +37,7 @@ public class PlayerHealth : HealthBase {
 
     public override void AfterDamage(DamageNode damageNode)
     {
+        PlayerColorChange.instance.RimColorOrigin();
         base.AfterDamage(damageNode);
     }
 

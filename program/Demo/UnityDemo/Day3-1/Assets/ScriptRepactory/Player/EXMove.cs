@@ -88,7 +88,7 @@ public class EXMove : AttackBase {
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 6;              // ex무브동안의 스피드 이속도로 고속이동함.
-        print(calcDistObj() * 6);       // 검사용 코드. 
+        //print(calcDistObj() * 6);       // 검사용 코드. 
 
         yield return new WaitForSeconds(.05f);
         EffectManager.PlayEffect(gameObject, EffectManager.playExMoveRingEffectBack);

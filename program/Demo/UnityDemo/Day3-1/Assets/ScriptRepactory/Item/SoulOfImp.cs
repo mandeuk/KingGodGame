@@ -76,4 +76,9 @@ public class SoulOfImp : MonoBehaviour {
             bulletList.Add(bulletclone);
         }
     }
+
+    private void OnDisable()
+    {
+        EventManager.EnemyHitEventCall -= new EnemyHitEventHandler(Fire);
+    }
 }

@@ -49,7 +49,6 @@ public class PlayerAttack : AttackBase
             if (realTargetList.Count > 0)
             {
                 playerEntity.PlayerStiff();
-                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent());
             }
 
             foreach (Collider one in realTargetList)
@@ -67,7 +66,6 @@ public class PlayerAttack : AttackBase
             if (targetList.Count > 0)
             {
                 playerEntity.PlayerStiff();
-                //StartCoroutine(normalAttacCam.GetComponent<NoiseCameraEvent>().cameraHitEvent());
             }
 
             foreach (Collider one in targetList)

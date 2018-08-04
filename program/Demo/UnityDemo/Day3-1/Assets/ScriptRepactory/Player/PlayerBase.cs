@@ -19,7 +19,7 @@ public enum Status
 
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
-    PlayerStatus playerStatus;
+    static PlayerStatus playerStatus;
     public float energy, attackSpeed, attackRange, devilGage, etere, stance, exmoveCoolTime;
     public bool isExmove, isChargeAttack, isDodge;
     public bool isExMoveCooltime;
@@ -30,6 +30,11 @@ public class PlayerBase : ObjectBase {
     void Awake()
     {
         Init();
+    }
+
+    private void Start()
+    {
+        GameManager.PlayerItemLoad();
     }
 
     protected override void Init()
@@ -334,10 +339,16 @@ public class PlayerBase : ObjectBase {
     IEnumerator Stiff()
     {
         Time.timeScale = 0.0f;
-        //Time.fixedDeltaTime = 0.02f * Time.timeScale;
-        yield return new WaitForSecondsRealtime(0.05f);
-        Time.timeScale = 1f;
-        //Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        yield return new WaitForSecondsRealtime(0.07f);
+        Time.timeScale = 1.3f;
+        yield return new WaitForSecondsRealtime(0.03f);
+        Time.timeScale = 1.0f;
+        yield break;
+    }
+
+    IEnumerator Devillization()
+    {
+
         yield break;
     }
 }

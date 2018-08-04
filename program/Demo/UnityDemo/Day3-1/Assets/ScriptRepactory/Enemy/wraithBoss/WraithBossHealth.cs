@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CorosusHealth : Enemyhealth {
-
+public class WraithBossHealth : Enemyhealth {
     void Awake()
     {
         Init();
@@ -15,7 +14,7 @@ public class CorosusHealth : Enemyhealth {
     }
 
     public override void Death()
-    {        
+    {
         enemyEntity.isDead = true;
         anim.SetTrigger("Damaged" + Random.Range(1, 3));
         anim.speed = 0.5f;
@@ -46,7 +45,7 @@ public class CorosusHealth : Enemyhealth {
                 enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
             }
         }
-        
+
         EffectManager.instance.PlayEffect(gameObject, damageNode.AttackType, EffectManager.instance.playEnemyHitEffect);
     }
 

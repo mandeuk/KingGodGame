@@ -72,6 +72,7 @@ public class PlayerColorChange : MonoBehaviour {
         StartCoroutine(RimPowChange());
     }
 
+    
 
     IEnumerator ColorChange()
     {
@@ -87,7 +88,7 @@ public class PlayerColorChange : MonoBehaviour {
                 {
                     rendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
                         "_Color", Color.Lerp(rendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_Color"),
-                        raphaelMats[i, j].color, Time.deltaTime * 2.0f));
+                        raphaelMats[i, j].color, Time.deltaTime * 1.0f));
                 }
             }
             yield return new WaitForEndOfFrame();
@@ -121,6 +122,28 @@ public class PlayerColorChange : MonoBehaviour {
     IEnumerator ColorRimYellowChange()
     {
         RimColorYellow();
+
+        float timer = new float();
+        while (timer < 2f)
+        {
+            timer += Time.deltaTime;
+            for (int i = 0; i < rendObjs.Length; ++i)
+            {
+                for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+                {
+                    rendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
+                        "_rimColor", Color.Lerp(rendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_rimColor"),
+                        raphaelMats[i, j].GetColor("_rimColor"), Time.deltaTime * 2.0f));
+                }
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        yield break;
+    }
+
+    IEnumerator ColorRimRedChange()
+    {
+        RimColorRed();
 
         float timer = new float();
         while (timer < 2f)
@@ -223,6 +246,30 @@ public class PlayerColorChange : MonoBehaviour {
         }
     }
 
+    public void RimColorRed()
+    {
+        for (int i = 0; i < rendObjs.Length; ++i)
+        {
+            for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+            {
+                if (!(i == 0 && j == 1))
+                    rendObjs[i].GetComponent<Renderer>().materials[j].SetColor("_rimColor", Color.red);
+            }
+        }
+    }
+    
+    public void RimColorOrigin()
+    {
+        for (int i = 0; i < rendObjs.Length; ++i)
+        {
+            for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+            {
+                if (!(i == 0 && j == 1))
+                    rendObjs[i].GetComponent<Renderer>().materials[j].SetColor("_rimColor", raphaelMats[i, j].GetColor("_rimColor"));
+            }
+        }
+    }
+    
 
     public void PlayerDisappear()
     {

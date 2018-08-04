@@ -167,10 +167,7 @@ public class EffectManager : MonoBehaviour {
             GameObject enemySoulOfImpHitEffectClone = Instantiate(Resources.Load("Prefabs/Effect/BallAttackEffect2"), transform) as GameObject;
 
             enemySoulOfImpHitEffects.Add(enemySoulOfImpHitEffectClone);
-        }
 
-        for (int i = 0; i < 40; ++i)
-        {
             GameObject slashHitEffectClone = Instantiate(Resources.Load("Prefabs/Effect/SlashHitEffect"), transform) as GameObject;
 
             enemyHitEffects.Add(slashHitEffectClone);
