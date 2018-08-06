@@ -53,11 +53,6 @@ public class WraithBossAttack : RangeAttack {
         }
     }
 
-    public override void StopAttack()
-    {
-        StopCoroutine(NormalFire());
-    }
-
     public void TurnAndFire()
     {
         int turnDir;
@@ -117,7 +112,7 @@ public class WraithBossAttack : RangeAttack {
         wraithBoss.isAttackReady = false;
         attackCnt = 0;
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
         while (attackCnt < 3)
         {
             TurnAndFire();
@@ -125,7 +120,7 @@ public class WraithBossAttack : RangeAttack {
         }
         anim.SetBool("Attack", false);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
         anim.SetBool("Attack", false);
         wraithBoss.isAttackReady = true;
         yield break;
@@ -136,7 +131,7 @@ public class WraithBossAttack : RangeAttack {
         int angle = 0;
         wraithBoss.isAttackReady = false;
         wraithBoss.isAttack = true;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
 
         while (angle < 250)
         {
@@ -158,7 +153,7 @@ public class WraithBossAttack : RangeAttack {
             angle += 10;
         }
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
         wraithBoss.isAttackReady = true;
         wraithBoss.isAttack = false;
         yield break;

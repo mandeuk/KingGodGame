@@ -19,6 +19,7 @@ public class WraithBossHealth : Enemyhealth {
         anim.SetTrigger("Damaged" + Random.Range(1, 3));
         anim.speed = 0.5f;
 
+        EventManager.BossDeathEvent();
         StartCoroutine(ColorChangeDie());
 
         Invoke("DeadEffect", 0.8f);
@@ -51,7 +52,8 @@ public class WraithBossHealth : Enemyhealth {
 
     public override void DeadEffect()
     {
-        base.DeadEffect();
+        //base.DeadEffect();
+        EffectManager.instance.stageClearDoorEffect(gameObject);
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithWorriorDeadEffect);
     }
 }

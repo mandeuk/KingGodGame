@@ -7,7 +7,6 @@ public class MeleeAttack : EnemyAttack {
      
 	void Awake () {
         Init();
-        //print(base.damageNode.attacker.ToString());
     }
 
     // 업데이트도 상속받아서 쓰고싶지만 모노비헤이비어에서 제공하는 업데이트라서
@@ -26,10 +25,10 @@ public class MeleeAttack : EnemyAttack {
     public override void NormalAttack()
     {
         attackAtrea.GetComponent<AttackTrigger>().damageNode = damageNode;
-        StartCoroutine(damageOn());       
+        StartCoroutine(damageOn());
     }
 
-    IEnumerator damageOn()
+    protected virtual IEnumerator damageOn()
     {
         attackAtrea.SetActive(true);
         yield return 0;

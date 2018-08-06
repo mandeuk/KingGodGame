@@ -85,7 +85,6 @@ public class Enemyhealth : HealthBase
     //        StartCoroutine(ColorChange());
     //    }
     //    enemyEntity.isDamaged = false;
-
     //    yield break;
     //}
 

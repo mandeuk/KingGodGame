@@ -1,34 +1,49 @@
 fileFormatVersion: 2
 guid: 081183ea96cb48a4fb9664b4e1912ea7
-timeCreated: 1525974705
+timeCreated: 1533560060
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: bn_btom
-    100002: bn_top
-    100004: Bone001
-    100006: Circle001
-    100008: coreBone
-    100010: niddlebone
-    100012: Object002
-    100014: Object007
-    100016: Point001
-    100018: sword
-    100020: //RootNode
-    400000: bn_btom
-    400002: bn_top
-    400004: Bone001
-    400006: Circle001
-    400008: coreBone
-    400010: niddlebone
-    400012: Object002
-    400014: Object007
-    400016: Point001
-    400018: sword
-    400020: //RootNode
+    100000: angelRing
+    100002: bn_btom
+    100004: bn_top
+    100006: body
+    100008: Bone001
+    100010: Circle001
+    100012: core
+    100014: coreBone
+    100016: niddlebone
+    100018: Object002
+    100020: Object007
+    100022: Object011
+    100024: Point001
+    100026: sword
+    100028: //RootNode
+    400000: angelRing
+    400002: bn_btom
+    400004: bn_top
+    400006: body
+    400008: Bone001
+    400010: Circle001
+    400012: core
+    400014: coreBone
+    400016: niddlebone
+    400018: Object002
+    400020: Object007
+    400022: Object011
+    400024: Point001
+    400026: sword
+    400028: //RootNode
+    2100000: 01 - Default
+    4300000: body
+    4300002: core
+    4300004: angelRing
     7400000: Take 001
     9500000: //RootNode
+    13700000: angelRing
+    13700002: body
+    13700004: core
   externalObjects: {}
   materials:
     importMaterials: 1

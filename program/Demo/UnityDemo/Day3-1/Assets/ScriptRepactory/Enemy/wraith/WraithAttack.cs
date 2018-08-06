@@ -26,7 +26,7 @@ public class WraithAttack : RangeAttack {
 
         bullet.transform.position = transform.transform.position + transform.up * 0.5f;
         bullet.transform.rotation = transform.transform.rotation;
-        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 80);
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * Time.deltaTime * 2500);
     }
 
     public override void InitBullet()

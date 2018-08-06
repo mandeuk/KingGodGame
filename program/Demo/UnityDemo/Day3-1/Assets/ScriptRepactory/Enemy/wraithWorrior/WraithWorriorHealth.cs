@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WraithWorriorHealth : Enemyhealth { 
-
+public class WraithWorriorHealth : Enemyhealth {
     // Use this for initialization
     void Awake()
     {

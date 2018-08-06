@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMovement : MoveBase {
-    EnemyBase enemyEntity;
-    GameObject player;
-    NavMeshAgent nav;
-    Animator anim;
+    protected EnemyBase enemyEntity;
+    protected GameObject player;
+    protected NavMeshAgent nav;
+    protected Animator anim;
 
     // Use this for initialization
     void Start()
@@ -24,7 +24,7 @@ public class EnemyMovement : MoveBase {
         anim = GetComponent<Animator>();
     }
 
-    public void MoveUpdate()
+    public virtual void MoveUpdate()
     {
         if (enemyEntity.isAgro)
         {
