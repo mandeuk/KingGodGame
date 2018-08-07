@@ -14,39 +14,9 @@ public class CorosusHealth : Enemyhealth {
         base.Init();
     }
 
-    public override void Death()
-    {        
-        enemyEntity.isDead = true;
-        anim.SetTrigger("Damaged" + Random.Range(1, 3));
-        anim.speed = 0.5f;
-
-        StartCoroutine(ColorChangeDie());
-
-        Invoke("DeadEffect", 0.8f);
-        Destroy(gameObject, 0.8f);
-    }
-
     public override void TakeDamage(DamageNode damageNode)
     {
-        entity.curHP -= damageNode.damage;
-        if (entity.curHP <= 0 && !entity.isDead)
-        {
-            Death();
-        }
-        EventManager.EnemyHitEvent(damageNode.AttackType, this.gameObject);
-        //Vector3 diff = damageNode.attacker.transform.position - transform.position;
-        //rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
-        //base.TakeDamage(damageNode);
-        //anim.SetTrigger("Damaged" + Random.Range(1, 3));
-
-        if (!enemyEntity.isDead)
-        {
-            for (int i = 0; i < GetComponentsInChildren<Renderer>().Length; i++)
-            {
-                enemyMat[i].SetColor("_Color", new Vector4(.2f, .2f, .2f, 1));
-            }
-        }
-        
+        base.TakeDamage(damageNode);
         EffectManager.instance.PlayEffect(gameObject, damageNode.AttackType, EffectManager.instance.playEnemyHitEffect);
     }
 
@@ -54,5 +24,11 @@ public class CorosusHealth : Enemyhealth {
     {
         base.DeadEffect();
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithWorriorDeadEffect);
+    }
+
+    public override void Death()
+    {
+        anim.SetTrigger("Break");
+        base.Death();
     }
 }

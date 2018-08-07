@@ -82,6 +82,8 @@ public class EffectManager : MonoBehaviour {
     static GameObject playerGetRareItemEffet;
     static GameObject playerGetNormalItemEffet;
 
+    GameObject stageClearDoor;
+
     //static GameObject playerEnergyApplyEffect;
     //static GameObject playerEtereApplyEffect;
 
@@ -158,6 +160,8 @@ public class EffectManager : MonoBehaviour {
         playerGetNormalItemEffet = Instantiate(Resources.Load("Prefabs/Item/NormalItemGetEffect"), player.transform) as GameObject; 
 
         playerDodgeDustEffect = Instantiate(Resources.Load("Prefabs/Effect/DodgeDustEffect"), transform) as GameObject;
+
+        stageClearDoor = Instantiate(Resources.Load("Prefabs/Map/StageClearDoorEffect"), transform) as GameObject;
 
         //  1. 먹을지도 안먹을지도 모르는 아이템을 위해 처음부터 메모리공간 할당?
         //  2. 한번에 총알,피격이펙트 140개를 한프레임에 띄워서 분명 프레임드랍이 일어날게 뻔함. 그래도 먹을때 생성?
@@ -480,6 +484,12 @@ public class EffectManager : MonoBehaviour {
         playerChargeEndEffect.SetActive(true);
         playerChargeEndEffect.transform.position = caller.transform.position + Vector3.up;
         playerChargeEndEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+    public void stageClearDoorEffect(GameObject caller)
+    {
+        stageClearDoor.transform.position = caller.transform.position + Vector3.up * 2;
+        stageClearDoor.SetActive(true);
     }
 
     public static void playGetLegendItemEffet()

@@ -35,8 +35,7 @@ public class EnemyAttack : AttackBase {
             }
         }
     }
-
-    // Use this for initialization
+    
     void Start () {
         Init();
     }
@@ -67,7 +66,7 @@ public class EnemyAttack : AttackBase {
             enemyEntity.isTurn = true;
             if (!enemyEntity.isAttack)
             {
-                transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime * 2);
+                transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime * 2.5f);
             }
         }
 

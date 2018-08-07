@@ -27,6 +27,7 @@ public class WraithBullet : BulletBase {
     public override void Init()
     {
         base.Init();
+        EventManager.EnemyBossDeathEventCall += new EnemyBossDeathEventHandler(BulletHit);
     }
 
     public override void BulletHit()
@@ -35,5 +36,10 @@ public class WraithBullet : BulletBase {
 
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
         EffectManager.instance.WraithBulletHit(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.EnemyBossDeathEventCall -= new EnemyBossDeathEventHandler(BulletHit);
     }
 }

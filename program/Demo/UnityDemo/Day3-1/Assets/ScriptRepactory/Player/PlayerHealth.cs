@@ -28,8 +28,6 @@ public class PlayerHealth : HealthBase {
             PlayerColorChange.instance.PlayerColorChangeBlack();
             PlayerColorChange.instance.RimColorRed();
             PlayerBase.instance.SetStatus(damageNode.damage, false, PlayerBase.instance.CurHP);
-            print(damageNode.damage);
-            print(damageNode.attacker);
             base.TakeDamage(damageNode);
             PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
         }

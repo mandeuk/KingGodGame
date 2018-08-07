@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CorosusAttack : RangeAttack {
-    protected CorosusBase Corosus;
-    protected int attackCnt;
-
+public class CorosusAttack : MeleeAttack {
+    CorosusBase corosusEntity;
+    public GameObject dashAttackAtrea;
     // Use this for initialization
     void Awake()
     {
@@ -14,25 +13,39 @@ public class CorosusAttack : RangeAttack {
 
     protected override void Init()
     {
-        InitBullet();
         base.Init();
-        Corosus = GetComponent<ObjectBase>() as CorosusBase;
+        corosusEntity = entity as CorosusBase;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         AttackUpdate();
+    }
+
+    public void DashAttack()
+    {
+        dashAttackAtrea.GetComponent<AttackTrigger>().damageNode = damageNode;
+        dashAttackAtrea.GetComponent<CorosusAttackTrigger>().attacker = this.gameObject;
+
+        //  코로서스 이펙트 넣어야됨.
+        //EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithWorriorAttackEffect);
+    }
+
+    //  점프어택 땅에 찍을때 발동될거임
+    public override void NormalAttack()
+    {
+        //  코로서스 이펙트 넣어야됨.
     }
 
     protected override void AttackUpdate()
     {
         if (enemyEntity.isAgro)
         {
-            if (Corosus.isMove)
+            if (!enemyEntity.isAttack && !corosusEntity.isDealTime)
                 Turn();
 
-            if (Vector3.Distance(player.transform.position, transform.position) < enemyEntity.attackDistance && Corosus.isAttackReady)
+            if (Vector3.Distance(player.transform.position, transform.position) < enemyEntity.attackDistance
+                && !enemyEntity.isTurn && corosusEntity.isAttackReady)
             {
                 StartAttack();
             }
@@ -41,126 +54,59 @@ public class CorosusAttack : RangeAttack {
 
     public override void StartAttack()
     {
-        Corosus.isAttackReady = false;
-
-        if (Random.Range(1, 4) > 2)
+        corosusEntity.isAttackReady = false;
+        if (Random.Range(1, 5) < 3)
         {
-            StartCoroutine(BulletAttack());
-        }
-        else
-        {
-            StartCoroutine(NormalFire());
-        }
-    }
-
-    public override void StopAttack()
-    {        
-        StopCoroutine(NormalFire());
-    }
-
-    public void TurnAndFire()
-    {
-        int turnDir;
-
-        Vector3 forwardPos = transform.position + transform.forward;
-
-        Vector3 forwardVec = forwardPos - transform.position;
-        Vector3 diff = player.transform.position - transform.position;
-
-        turnDir = Turnjudge(forwardVec.normalized, diff.normalized);
-
-        if (Vector3.Angle(forwardVec.normalized, diff.normalized) > 16.0f)
-        {
-            enemyEntity.isTurn = true;
-            transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime);            
-        }
-
-        else
-        {
-            transform.LookAt(player.transform.position);
             anim.SetBool("Attack", true);
-            enemyEntity.isTurn = false;
+        }
+        else
+        {
+            JumpAttack();
         }
     }
 
-    public override void Fire()
+    public void Dash()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            GameObject bullet = bulletList[0];
-            bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
-            bullet.GetComponent<BulletBase>().Attacker = gameObject;
-
-            firedBulletList.Add(bullet);
-            bulletList.RemoveAt(0);
-            bullet.SetActive(true);
-
-            bullet.transform.position = transform.position + transform.up + transform.forward + (transform.right * (i - 2)) * 0.7f;
-            bullet.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y - 40 + i * 20.0f, 0);
-            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 400);
-        }
-        attackCnt += 1;
+        attackAtrea.SetActive(true);
+        StartCoroutine(Dashing());
     }
 
-    public override void InitBullet()
+    public void JumpAttack()
     {
-        for (int i = 0; i < 100; i++)
-        {
-            GameObject bulletclone = Instantiate(bullet) as GameObject;
-
-            bulletList.Add(bulletclone);
-        }
+        anim.SetBool("JumpAttack", true);
+        StartCoroutine(JumpAttacking());
     }
 
-    public IEnumerator NormalFire()
-    {        
-        Corosus.isAttackReady = false;
-        attackCnt = 0;
+    IEnumerator JumpAttacking()
+    {
+        corosusEntity.isDealTime = true;
 
-        yield return new WaitForSeconds(2.0f);
-        while (attackCnt < 3)
-        {
-            TurnAndFire();
-            yield return new WaitForFixedUpdate();
-        }
-        anim.SetBool("Attack", false);
-
-        yield return new WaitForSeconds(2.0f);
-        anim.SetBool("Attack", false);
-        Corosus.isAttackReady = true;
+        yield return new WaitForSecondsRealtime(Random.Range(3.5f, 6.5f));
+        corosusEntity.isDealTime = false;
+        corosusEntity.isAttackReady = true;
         yield break;
     }
 
-    public IEnumerator BulletAttack()
+    IEnumerator Dashing()
     {
-        int angle = 0;
-        Corosus.isAttackReady = false;
-        Corosus.isAttack = true;
-        yield return new WaitForSeconds(2.0f);
-
-        while (angle < 250)
+        float timer = new float();
+               
+        while (timer < 7.0f && !corosusEntity.isBreak)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                GameObject bullet = bulletList[0];
-                bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
-                bullet.GetComponent<BulletBase>().Attacker = gameObject;
+            timer += Time.fixedDeltaTime;
+            rigid.MovePosition(transform.position + transform.forward * Time.deltaTime * corosusEntity.dashSpeed);
 
-                firedBulletList.Add(bullet);
-                bulletList.RemoveAt(0);
-                bullet.SetActive(true);
-
-                bullet.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + i * 90.0f + angle, 0);
-                bullet.transform.position = transform.position + transform.up + bullet.transform.forward;
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 180);
-            }
-            yield return new WaitForSeconds(.15f);
-            angle += 10;
+            yield return new WaitForEndOfFrame();
         }
+        attackAtrea.SetActive(false);
+        anim.SetTrigger("Break");
+        corosusEntity.isDealTime = true;
 
-        yield return new WaitForSeconds(2.0f);
-        Corosus.isAttackReady = true;
-        Corosus.isAttack = false;
+        yield return new WaitForSecondsRealtime(Random.Range(3.5f,5.5f));
+        corosusEntity.isDealTime = false;
+        anim.SetTrigger("Stun");
+        corosusEntity.isBreak = false;
+        corosusEntity.isAttackReady = true;
         yield break;
     }
 }

@@ -19,9 +19,12 @@ public class HealthBase : MonoBehaviour {
 
     // 함수 기능 :  딜레이시간 전의 맞는 처리. 이걸 오버로딩해서 사용하는게 좋을듯..
     public virtual void TakeDamage(DamageNode damageNode)
-    {        
-        Vector3 diff = damageNode.attacker.transform.position - transform.position;
-        rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
+    {
+        if (!entity.isSuperArmor)
+        {
+            Vector3 diff = damageNode.attacker.transform.position - transform.position;
+            rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
+        }
 
         if (entity.curHP < 1.0f && !entity.isDead)
         {
