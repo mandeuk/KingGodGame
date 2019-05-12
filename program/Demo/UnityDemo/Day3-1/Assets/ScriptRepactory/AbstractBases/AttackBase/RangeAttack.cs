@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RangeAttack : EnemyAttack {
     public GameObject bullet;
-    public GameObject cloneSpawnObject;
+
     [SerializeField]
     protected List<GameObject> bulletList = new List<GameObject>();
 
@@ -15,6 +15,7 @@ public class RangeAttack : EnemyAttack {
     protected override void Init()
     {
         base.Init();
+        InitBullet();
     }
 
     public override void NormalAttack()
@@ -22,16 +23,18 @@ public class RangeAttack : EnemyAttack {
         Fire();
     }
 
+    // 애니메이션FBX 타이밍 맞춰서 부르는 노말어택에서 Fire가 불림.
     public virtual void Fire()
     {
-        bullet = bulletList[0];
-        bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
-        bullet.GetComponent<BulletBase>().Attacker = gameObject;
+        //GameObject bullet = bulletList[0];
+        //bullet.GetComponent<AttackTrigger>().damageNode = damageNode;
+        //bullet.GetComponent<BulletBase>().Attacker = gameObject;
 
-        firedBulletList.Add(bullet);
-        bulletList.RemoveAt(0);
-        bullet.SetActive(true);
+        //firedBulletList.Add(bullet);
+        //bulletList.RemoveAt(0);
+        //bullet.SetActive(true);
     }
+
 
     public virtual void BulletHit(GameObject hitBullet)
     {
@@ -41,13 +44,26 @@ public class RangeAttack : EnemyAttack {
         firedBulletList.Remove(hitBullet);
     }
 
+
     public virtual void InitBullet()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 10; i++)
         {
-            GameObject bulletclone = Instantiate(bullet, cloneSpawnObject.transform) as GameObject;
+            //GameObject bulletclone = Instantiate(SpawnBullet()) as GameObject;
+            GameObject bulletclone = Instantiate(bullet) as GameObject; 
 
             bulletList.Add(bulletclone);
         }
     }
+    
+    //public virtual GameObject SpawnBullet()
+    //{
+    //    //GameObject bulletClone = Instantiate(Resources.Load("Prefabs/Effect/WraithBulletAttackHit")) as GameObject;
+    //    //
+    //    //return bulletClone;
+
+    //    GameObject bulletClone = new GameObject();
+
+    //    return bulletClone;
+    //}
 }

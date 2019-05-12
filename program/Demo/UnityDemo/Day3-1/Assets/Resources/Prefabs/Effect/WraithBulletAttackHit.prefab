@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4179331404627090}
   - component: {fileID: 198167354952129668}
   - component: {fileID: 199358998480516878}
-  - component: {fileID: 114126139952647210}
   m_Layer: 0
   m_Name: WraithBulletAttackHit
   m_TagString: EnemyBullet
@@ -73,17 +72,6 @@ Transform:
   m_Father: {fileID: 4179331404627090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114126139952647210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1835630269413862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9521cd9d175b404468b3ec00d444a6cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &198167354952129668
 ParticleSystem:
   m_ObjectHideFlags: 1

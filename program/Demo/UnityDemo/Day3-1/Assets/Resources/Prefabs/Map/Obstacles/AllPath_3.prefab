@@ -58,7 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4048451038284680}
   m_Layer: 0
-  m_Name: EnemySpawnPos (2)
+  m_Name: EnemySpawnPos
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -715,7 +715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257139549502592}
   m_Layer: 0
-  m_Name: EnemySpawnPos (4)
+  m_Name: EnemySpawnPos
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -901,7 +901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4628239669871896}
   m_Layer: 0
-  m_Name: EnemySpawnPos (5)
+  m_Name: EnemySpawnPos
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1068,7 +1068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4492964607576842}
   m_Layer: 0
-  m_Name: EnemySpawnPos (3)
+  m_Name: EnemySpawnPos
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1481,7 +1481,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4613297099192652}
-  - component: {fileID: 114345050690457752}
   - component: {fileID: 114648584213298974}
   m_Layer: 0
   m_Name: AllPath_3
@@ -7221,17 +7220,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114345050690457752
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959363499870556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c0265412d103ab438cb0c0c098672a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114350959674816338

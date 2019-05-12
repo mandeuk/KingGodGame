@@ -6,5 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game_Junghoon.unity
+    path: Assets/Scenes/GameIntromenu.unity
+    guid: 22064602410f2f24bb0efa7973c51c57
+  - enabled: 1
+    path: Assets/Scenes/Game_Stage1.unity
     guid: 1932d328aabfe254690581fd26d74372
+  - enabled: 1
+    path: Assets/Scenes/Game_Stage2.unity
+    guid: 533ef4ed1b1bcee4d9a08733d5492d3f

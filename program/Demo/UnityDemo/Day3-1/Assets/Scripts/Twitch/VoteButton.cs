@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class VoteButton : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static VoteButton instance = null;
+
+    private void Awake()
+    {
+        if (instance)//인스턴스가 생성되어있는가?
+        {
+            return;
+        }
+        else//인스턴스가 null일 때
+        {
+            instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
+        }
+    }
 
     public void VoteStartFunction()
     {
@@ -20,6 +24,7 @@ public class VoteButton : MonoBehaviour {
         {
             TwitchChat.Instance.StopVote();
             TwitchChat.Instance.DeleteVoteTextAll();
+            TwitchChat.Instance.SendChatMessage("플레이어에 의해 투표가 취소되었습니다.");
         }
         else
             TwitchChat.Instance.StartVote();

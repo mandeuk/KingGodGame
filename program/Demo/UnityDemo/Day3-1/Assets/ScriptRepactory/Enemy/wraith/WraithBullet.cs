@@ -18,28 +18,11 @@ public class WraithBullet : BulletBase {
         }
     }
 
-    private void OnEnable()
-    {
-        StartCoroutine(VanishingEffect());
-        Init();
-    }
-
-    public override void Init()
-    {
-        base.Init();
-        EventManager.EnemyBossDeathEventCall += new EnemyBossDeathEventHandler(BulletHit);
-    }
-
     public override void BulletHit()
     {
         onFire = false;
 
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
-        EffectManager.instance.WraithBulletHit(gameObject);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.EnemyBossDeathEventCall -= new EnemyBossDeathEventHandler(BulletHit);
+        Attacker.GetComponent<RangeAttack>().BulletHit(gameObject);
     }
 }

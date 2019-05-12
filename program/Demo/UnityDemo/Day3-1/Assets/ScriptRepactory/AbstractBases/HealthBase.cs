@@ -6,10 +6,8 @@ public class HealthBase : MonoBehaviour {
     protected ObjectBase entity;
     protected Rigidbody rigid;
 
-    void Awake()
-    {
-        Init();
-    }
+    IEnumerator NormalDamagedCo;
+    IEnumerator SkillDamagedCo;
 
     protected virtual void Init()
     {
@@ -17,38 +15,19 @@ public class HealthBase : MonoBehaviour {
         rigid = GetComponent<Rigidbody>();
     }
 
-    // 함수 기능 :  딜레이시간 전의 맞는 처리. 이걸 오버로딩해서 사용하는게 좋을듯..
-    public virtual void TakeDamage(DamageNode damageNode)
+    // 함수 기능 : 이벤트 등록. 맞고, 죽고.
+    public virtual void OnEnable()
     {
-        if (!entity.isSuperArmor)
-        {
-            Vector3 diff = damageNode.attacker.transform.position - transform.position;
-            rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
-        }
-
-        if (entity.curHP < 1.0f && !entity.isDead)
-        {
-            Death();
-        }
-    }
-
-    public virtual void AfterDamage(DamageNode damageNode)
-    {
-        rigid.Sleep();
-        entity.isDamaged = false;
-    }
-
-    public virtual void Death()
-    {
-        entity.isDead = true;
+        entity.entityDamagedCall += new DamagedEventHandler(Damaged);
+        entity.entityDeadCall += new DeadEventHandler(Death);
     }
 
     // 함수 기능 : 외부에서 StartCoroutine을 부르지 않고 내부에서 부르기 위한 함수. 
+    // 위의 이뉴머레이터들로 가져와서 덧입혀서 스탑코루틴 스타트코루틴 해줘야함. 나중에수정합시다.
     public virtual void Damaged(DamageNode damageNode)
     {
-        if (!entity.isDamaged)
+        if (!entity.isInvincibility && !entity.isDead)
         {
-            StopCoroutine(NormalDamaged(damageNode));
             StartCoroutine(NormalDamaged(damageNode));
         }
     }
@@ -74,8 +53,36 @@ public class HealthBase : MonoBehaviour {
         yield break;
     }
 
-    public virtual IEnumerator SkillDamaged(DamageNode damageNode)
+    // 함수 기능 :  딜레이시간 전의 맞는 처리. 이걸 오버로딩해서 사용하는게 좋을듯..
+    public virtual void TakeDamage(DamageNode damageNode)
     {
-        yield break;
+        if (!entity.isSuperArmor)
+        {
+            Vector3 diff = damageNode.attacker.transform.position - transform.position;
+            rigid.AddForce((-new Vector3(diff.x, 0f, diff.z)).normalized * 400f * damageNode.pushBack);
+        }
+
+        if (entity.curHP < 1.0f && !entity.isDead)
+        {
+            entity.Dead();
+        }
+    }
+
+    // 이거 에프터데미지에 왜 데미지노드가 있어야하는거엿더라..?
+    public virtual void AfterDamage(DamageNode damageNode)
+    {
+        rigid.Sleep();
+        entity.isDamaged = false;
+    }
+
+    public virtual void Death()
+    {
+        entity.isDead = true;
+    }
+
+    private void OnDisable()
+    {
+        entity.entityDamagedCall -= new DamagedEventHandler(Damaged);
+        entity.entityDeadCall -= new DeadEventHandler(Death);
     }
 }

@@ -17,6 +17,7 @@ public class EtereMovement : MonoBehaviour {
             gameObject.SetActive(false);
             PlayerBase.instance.SetStatus(1, true, PlayerBase.instance.Etere);
             EnergyManager.instance.ReturnEtere(gameObject);
+            SoundManager.playEtereGet();
         }
     }
 
@@ -31,6 +32,9 @@ public class EtereMovement : MonoBehaviour {
     
     private IEnumerator EtereMove()
     {
+        col.isTrigger = false;
+        rigid.useGravity = true;
+
         yield return new WaitForSeconds(1.0f);
         rigid.Sleep();
         col.isTrigger = true;
@@ -42,7 +46,6 @@ public class EtereMovement : MonoBehaviour {
             dir = ((player.transform.position + Vector3.up) - transform.position).normalized;
             rigid.MovePosition(transform.position + dir * speed * Time.deltaTime);
             speed += 0.1f;
-
             yield return new WaitForFixedUpdate();
         }
     }

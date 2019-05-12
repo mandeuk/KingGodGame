@@ -38,7 +38,6 @@ public class TwitchChat : MonoBehaviour
         }
     }
     
-
     
     
     // 함수이름 : Start()
@@ -56,23 +55,48 @@ public class TwitchChat : MonoBehaviour
             instance = this;//인스턴스가 생성되어있지 않으므로 지금 이 오브젝트를 인스턴스로
             //DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
-        
-        Connect();//트위치 irc서버에 접속시도
-        if (twitchClient.Connected)
-        {
-            SetupTwitchBtn();
-        }
+
+        TwitchStart();
     }//end of Start()
 
     private void Start()
     {
         votestart = false;
     }
+
+    //트위치 연결 코루틴을 실행하는 함수
+    void TwitchStart()
+    {
+        StartCoroutine(TwitchConnect());
+    }
+
+    //트위치 IRC서버와 연결하는 코루틴
+    IEnumerator TwitchConnect()
+    {
+        Connect();
+        if (twitchClient.Connected)
+        {
+            SetupTwitchBtn();
+        }
+        else
+        {
+            while (twitchClient.Connected == false)
+            {
+                Connect();//트위치 irc서버에 접속시도
+                if (twitchClient.Connected)
+                {
+                    SetupTwitchBtn();
+                }
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        yield break;
+    }
     
-    
+    //채팅시간갱신 + 채팅읽기 + 최종 투표처리
     public IEnumerator TwitchUpdate()
     {
-        float timer = 20.0f;
+        float timer = 30.0f;
         float textUpdateTime = 0.0f;
 
         while(votestart)
@@ -84,8 +108,9 @@ public class TwitchChat : MonoBehaviour
             }
             else
             {
-                timer -= Time.deltaTime;
-                textUpdateTime += Time.deltaTime;
+                float deltatime = Time.deltaTime;
+                timer -= deltatime;
+                textUpdateTime += deltatime;
                 if(textUpdateTime >= 1.0f)
                 {
                     UpdateVoteTimer((int)timer);
@@ -99,7 +124,7 @@ public class TwitchChat : MonoBehaviour
                     if (votestart)
                         ProcessVote();
                     StopVote();
-                    print("시간이 만료되어 투표종료");
+                    print("투표성공");
                 }
             }
             
@@ -114,7 +139,7 @@ public class TwitchChat : MonoBehaviour
         //    DeleteVoteTextAll();
         //}
         yield break;
-    }
+    }//end of TwitchUpdate()
 
 
     
@@ -123,16 +148,18 @@ public class TwitchChat : MonoBehaviour
     public void Connect()
     {
         twitchClient = new TcpClient("irc.chat.twitch.tv", 6667); //트위치의 IRC 채팅서버 주소와 포트번호, IRC서버는 보통 6667번 포트를 많이 사용한다.
-        reader = new StreamReader(twitchClient.GetStream());
-        writer = new StreamWriter(twitchClient.GetStream());
+        if (twitchClient.Connected == true)
+        {
+            reader = new StreamReader(twitchClient.GetStream());
+            writer = new StreamWriter(twitchClient.GetStream());
 
-        writer.WriteLine("PASS " + password);
-        writer.WriteLine("NICK " + username);
-        writer.WriteLine("USER " + username + " 8 * :" + username);
-        writer.WriteLine("JOIN #" + channelName);
-        writer.WriteLine("PRIVMSG #" + channelName + " :Counterflow와 Twitch채팅서버가 성공적으로 연결되었습니다.");
-        writer.Flush();//Flush() = 해당 writer의 버퍼를 clear하는 기능
-
+            writer.WriteLine("PASS " + password);
+            writer.WriteLine("NICK " + username);
+            writer.WriteLine("USER " + username + " 8 * :" + username);
+            writer.WriteLine("JOIN #" + channelName);
+            writer.WriteLine("PRIVMSG #" + channelName + " :Counterflow와 Twitch채팅서버가 성공적으로 연결되었습니다.");
+            writer.Flush();//Flush() = 해당 writer의 버퍼를 clear하는 기능
+        }
     }//end of Connect()
 
 
@@ -154,44 +181,47 @@ public class TwitchChat : MonoBehaviour
             //  앞쪽의 닉네임 문자열을 뽑아내기 위해 IndexOf()함수로 !의 위치를 리턴, splitPoint에 저장
             //  Substring()함수를 사용해 :mandeuk! 특수문자 사이의 mandeuk을 뽑아낸다.
             ///////////////////////////////////////////////////////////
-            if (message.Contains("PRIVMSG"))//개인채팅메시지인 경우
+            if (votestart == true)
             {
-                var splitPoint = message.IndexOf("!", 1);
-                var chatName = message.Substring(0, splitPoint);
-                chatName = chatName.Substring(1);
-
-                splitPoint = message.IndexOf(":", 1);
-                message = message.Substring(splitPoint + 1);
-                print(String.Format("{0}: {1}", chatName, message));
-
-                if (IDList.ContainsKey(chatName))
+                if (message.Contains("PRIVMSG"))//개인채팅메시지인 경우
                 {
-                    print("중복닉네임 존재");
-                }
-                else
-                {
-                    switch (message)
+                    var splitPoint = message.IndexOf("!", 1);
+                    var chatName = message.Substring(0, splitPoint);
+                    chatName = chatName.Substring(1);
+
+                    splitPoint = message.IndexOf(":", 1);
+                    message = message.Substring(splitPoint + 1);
+                    print(String.Format("{0}: {1}", chatName, message));
+
+                    if (IDList.ContainsKey(chatName))
                     {
-                        case "#1":
-                            IDList.Add(chatName, chatName);
-                            vote[0] += 1;
-                            print("1번 투표수" + vote[0]);
-                            break;
-                        case "#2":
-                            IDList.Add(chatName, chatName);
-                            vote[1] += 1;
-                            print("2번 투표수" + vote[1]);
-                            break;
-                        case "#3":
-                            IDList.Add(chatName, chatName);
-                            vote[2] += 1;
-                            print("3번 투표수" + vote[2]);
-                            break;
+                        print("중복닉네임 존재");
                     }
-                    UpdateVoteCount();//UI에 표시되는 숫자 변경
-                }
-            }//end of if
-        }//end of if
+                    else
+                    {
+                        switch (message)
+                        {
+                            case "#1":
+                                IDList.Add(chatName, chatName);
+                                vote[0] += 1;
+                                print("1번 투표수" + vote[0]);
+                                break;
+                            case "#2":
+                                IDList.Add(chatName, chatName);
+                                vote[1] += 1;
+                                print("2번 투표수" + vote[1]);
+                                break;
+                            case "#3":
+                                IDList.Add(chatName, chatName);
+                                vote[2] += 1;
+                                print("3번 투표수" + vote[2]);
+                                break;
+                        }
+                        UpdateVoteCount();//UI에 표시되는 숫자 변경
+                    }
+                }//end of if (message.Contains("PRIVMSG"))
+            }//end of if (votestart == true)
+        }//end of if (twitchClient.Available > 0)
     }// end of ReadChat()
 
 
@@ -205,15 +235,17 @@ public class TwitchChat : MonoBehaviour
         
         for (int loop = 0; loop < 3; loop++)
         {
-            product[loop] = UnityEngine.Random.Range(0, 6);
+            product[loop] = UnityEngine.Random.Range(0, 9);
         }
 
         UpdateVoteProduct();
         UpdateVoteCount();
 
         StartCoroutine(TwitchUpdate());//투표 코루틴 시작
-        print("코루틴 시작");
         SendChatMessage("투표시작");
+        SendChatMessage("#1 - " + voteProductName[0].GetComponent<UnityEngine.UI.Text>().text);
+        SendChatMessage("#2 - " + voteProductName[1].GetComponent<UnityEngine.UI.Text>().text);
+        SendChatMessage("#3 - " + voteProductName[2].GetComponent<UnityEngine.UI.Text>().text);
     }
 
     public void StopVote()
@@ -221,6 +253,8 @@ public class TwitchChat : MonoBehaviour
         //print("StopVote() 투표종료");
         votestart = false;
         StopCoroutine(TwitchUpdate());//투표 코루틴 강제정지
+        TwitchChat.Instance.DeleteVoteTextAll();
+        //SendChatMessage("플레이어에 의해 투표가 취소되었습니다.");
     }
 
     public void ProcessVote()
@@ -235,7 +269,7 @@ public class TwitchChat : MonoBehaviour
                 selected = 0;
             }
             else if (vote[0] == vote[2]) {
-                selected = UnityEngine.Random.Range(0, 1);
+                selected = UnityEngine.Random.Range(0, 2);
                 if (selected == 1)
                     selected = 2;
                 randomselect = true;
@@ -248,11 +282,11 @@ public class TwitchChat : MonoBehaviour
 
         else if (vote[0] == vote[1]) {
             if (vote[0] > vote[2]) {
-                selected = UnityEngine.Random.Range(0, 1);
+                selected = UnityEngine.Random.Range(0, 2);
                 randomselect = true;
             }
             else if (vote[0] == vote[2]) {
-                selected = UnityEngine.Random.Range(0, 2);
+                selected = UnityEngine.Random.Range(0, 3);
                 randomselect = true;
             }
             else if (vote[0] < vote[2]) {
@@ -268,7 +302,7 @@ public class TwitchChat : MonoBehaviour
             }
             else if (vote[1] == vote[2])
             {
-                selected = UnityEngine.Random.Range(1, 2);
+                selected = UnityEngine.Random.Range(1, 3);
                 randomselect = true;
             }
             else if (vote[1] < vote[2])
@@ -276,21 +310,29 @@ public class TwitchChat : MonoBehaviour
                 selected = 2;
             }
         }
-
-        if (randomselect)
+        
         {
-            SendChatMessage("투표가 종료되었습니다. 투표수가 같은 선택지가 존재하여, 그 중 무작위로 " + (selected + 1) + "번이 선택되었습니다.");
-        }
-        else
-        {
-            SendChatMessage("투표가 종료되었습니다." + (selected+1) + "번이 선택되었습니다.");
+            string finalitemname = Itemtable.Instance.GetItemName(product[selected]);
+            SendChatMessage("투표가 종료되었습니다. " + (selected + 1) + "번 " + finalitemname + "이(가) 선택되었습니다.");
+            PlaySceneUIManager.instance.ShowVoteDialog("투표결과 : " + finalitemname);
         }
 
-        //투표 결과 아이템을 플레이어 머리 위에 스폰
-        ItemManager.Instance.SpawnItem(PlayerBase.instance.gameObject.transform.position + new Vector3(0,10,0), product[selected]);
+        //투표 결과 적용부분
+        //능력치 수정
+        Itemtable.Instance.ApplyItem(product[selected]);
+        SoundManager.playTwitchApply();
+        PlayerColorChange.instance.PlayerColorChangePurple();
+        //이펙트 효과
+        //사운드 출력
+        //다이얼로그 출력
+
+        //(구) 아이템을 머리 위에 오브젝트로 떨어뜨려주는 기능
+        //ItemManager.Instance.SpawnItem(PlayerBase.instance.gameObject.transform.position + new Vector3(0,10,0), product[selected]);
+
+
     }//end of ProcessVote()
     
-    void SendChatMessage(string msg)
+    public void SendChatMessage(string msg)
     {
         //writer = new StreamWriter(twitchClient.GetStream());
         
@@ -299,6 +341,7 @@ public class TwitchChat : MonoBehaviour
         writer.Flush();
     }
 
+    //
     bool SetupTwitchBtn()
     {
         twitchVoteButton = GameObject.Find("TwitchButton");
@@ -323,26 +366,30 @@ public class TwitchChat : MonoBehaviour
         }
         return false;
     }
-
+    
+    //화면 우측에 표시되는 투표지의 아이템 이름 텍스트 갱신
     void UpdateVoteProduct()
     {
-        voteProductName[0].GetComponent<UnityEngine.UI.Text>().text = Itemtable.Instance.GetItemName(product[0]) + " #1 : ";
-        voteProductName[1].GetComponent<UnityEngine.UI.Text>().text = Itemtable.Instance.GetItemName(product[1]) + " #2 : ";
-        voteProductName[2].GetComponent<UnityEngine.UI.Text>().text = Itemtable.Instance.GetItemName(product[2]) + " #3 : ";
+        voteProductName[0].GetComponent<UnityEngine.UI.Text>().text = Itemtable.Instance.GetItemName(product[0]);
+        voteProductName[1].GetComponent<UnityEngine.UI.Text>().text = Itemtable.Instance.GetItemName(product[1]);
+        voteProductName[2].GetComponent<UnityEngine.UI.Text>().text = Itemtable.Instance.GetItemName(product[2]);
     }
 
+    //화면 우측에 표시되는 투표지에서 몇표가 선택되었는지 표시하는 텍스트 갱신
     void UpdateVoteCount()
     {
-        voteResultText[0].GetComponent<UnityEngine.UI.Text>().text = vote[0] + "표";
-        voteResultText[1].GetComponent<UnityEngine.UI.Text>().text = vote[1] + "표";
-        voteResultText[2].GetComponent<UnityEngine.UI.Text>().text = vote[2] + "표";
+        voteResultText[0].GetComponent<UnityEngine.UI.Text>().text = "#1번 " + vote[0] + "표";
+        voteResultText[1].GetComponent<UnityEngine.UI.Text>().text = "#2번 " + vote[1] + "표";
+        voteResultText[2].GetComponent<UnityEngine.UI.Text>().text = "#3번 " + vote[2] + "표";
     }
 
+    //투표시간 텍스트만 갱신, 시간계산은 TwitchUpdate()코루틴에 있음
     void UpdateVoteTimer(int time)
     {
         timerText.GetComponent<UnityEngine.UI.Text>().text = "투표 종료까지 " + time + "초";
     }
 
+    //투표종료 후 우측에 텍스트를 표시하지 않도록 텍스트 내용자체를 비워버림, SetActive true/false하는방식도 있지만 우선은 이 방식을 사용
     public void DeleteVoteTextAll()
     {
         for (int loop = 0; loop < 3; ++loop)
@@ -351,6 +398,23 @@ public class TwitchChat : MonoBehaviour
             voteResultText[loop].GetComponent<UnityEngine.UI.Text>().text = "";
         }
         timerText.GetComponent<UnityEngine.UI.Text>().text = "";
+    }
+
+    //트위치가 연결되어 있는지 확인하는 함수, 외부에서도 쉽게 부르기 위해 사용
+    public bool IsTwitchConnected()
+    {
+        if (twitchClient == null)
+        {
+            return false;
+        }
+        else if (twitchClient.Connected == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }//end of Class
 

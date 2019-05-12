@@ -39,7 +39,7 @@ public class LoadingSceneManager : MonoBehaviour {
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
-        SceneManager.LoadScene("Game_Stage1");
+        SceneManager.LoadScene(nextScene);
     }
 
     IEnumerator FadeIn()
@@ -80,6 +80,7 @@ public class LoadingSceneManager : MonoBehaviour {
         yield break;
     }
 
+    //로딩화면 만들 목적이었으나 문제가있어 사용하지않는 코드
     IEnumerator LoadScene()
     {
         print("로드씬");

@@ -10,6 +10,7 @@ public class EnergyMovement : MonoBehaviour {
         {
             gameObject.SetActive(false);
             PlayerBase.instance.SetStatus(1, true, PlayerBase.instance.Energy);
+            SoundManager.playEnergyGet();
         }
     }
 

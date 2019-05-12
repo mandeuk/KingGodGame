@@ -13,10 +13,10 @@ public class WraithBossAttack : RangeAttack {
     }
 
     protected override void Init()
-    {
-        InitBullet();
+    {        
         base.Init();
-        wraithBoss = GetComponent<ObjectBase>() as WraithBossBase;
+        turnSpeed = 1.5f;
+        wraithBoss = entity as WraithBossBase;
     }
 
     // Update is called once per frame
@@ -27,8 +27,9 @@ public class WraithBossAttack : RangeAttack {
 
     protected override void AttackUpdate()
     {
-        if (enemyEntity.isAgro)
+        if (enemyEntity.isAgro && !enemyEntity.isDead)
         {
+            // 레이스는 플레이어를 바라보지 않아도 되는 탄막공격이 존재하기때문에 turn이 움직일때만 되면 됨.
             if (wraithBoss.isMove)
                 Turn();
 
@@ -43,13 +44,13 @@ public class WraithBossAttack : RangeAttack {
     {
         wraithBoss.isAttackReady = false;
 
-        if (Random.Range(1, 4) > 2)
+        if (Random.Range(1, 4) > 0)
         {
-            StartCoroutine(BulletAttack());
+            StartCoroutine(NormalFire());            
         }
         else
         {
-            StartCoroutine(NormalFire());
+            StartCoroutine(BulletAttack());
         }
     }
 
@@ -67,7 +68,7 @@ public class WraithBossAttack : RangeAttack {
         if (Vector3.Angle(forwardVec.normalized, diff.normalized) > 16.0f)
         {
             enemyEntity.isTurn = true;
-            transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime);
+            transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime * turnSpeed);
         }
 
         else
@@ -78,6 +79,7 @@ public class WraithBossAttack : RangeAttack {
         }
     }
 
+    // 애니메이션FBX 타이밍 맞춰서 부르는 노말어택에서 Fire가 불림.
     public override void Fire()
     {
         for (int i = 0; i < 5; i++)
@@ -99,7 +101,7 @@ public class WraithBossAttack : RangeAttack {
 
     public override void InitBullet()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 40; i++)
         {
             GameObject bulletclone = Instantiate(bullet) as GameObject;
 

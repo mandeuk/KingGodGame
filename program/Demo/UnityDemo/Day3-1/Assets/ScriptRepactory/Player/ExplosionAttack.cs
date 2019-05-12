@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionAttack : AttackBase {
+public class ExplosionAttack : MonoBehaviour {
     Animator anim;
     EXMove isPlayerEXMove;
-    public GameObject noiseCamera;
     PlayerBase playerEntity;
 
 	// Use this for initialization
@@ -13,9 +12,8 @@ public class ExplosionAttack : AttackBase {
         Init();
     }
 
-    protected override void Init()
+    protected void Init()
     {
-        base.Init();
         playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         anim = GetComponent<Animator>();
     }
@@ -51,17 +49,12 @@ public class ExplosionAttack : AttackBase {
 
     public void ChargeAttackCameraEvent(float time)
     {
-        EXMoveCam.instance.playEXCameraEvent(time);
+        EventManager.CameraMoveEvent((int)CameraMoveType.EX);
     }
 
     public void UseEnergy()
     {
         PlayerBase.instance.energy -= 1;
-        PlaySceneUIManager.instance.ChangeEnergyAmountText();
-    }
-
-    public override void NormalAttack()
-    {
-
+        //PlaySceneUIManager.instance.ChangeEnergyAmountText();
     }
 }

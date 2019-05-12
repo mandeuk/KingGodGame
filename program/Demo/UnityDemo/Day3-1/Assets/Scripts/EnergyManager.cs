@@ -23,7 +23,7 @@ public class EnergyManager : MonoBehaviour {
 
     public void InitEnergy()
     {
-        for (int i = 0; i < 30; ++i)
+        for (int i = 0; i < 60; ++i)
         {
             energyCloneList.Add(SpawnEnergy());
             etereCloneList.Add(SpawnEtere());
@@ -32,21 +32,21 @@ public class EnergyManager : MonoBehaviour {
 
     public GameObject SpawnEnergy()
     {
-        GameObject energy = Instantiate(Resources.Load("Prefabs/EnergyBall"), SpawnCloneList.transform) as GameObject;
+        GameObject energy = Instantiate(Resources.Load("Prefabs/EnergyBall")) as GameObject;
 
         return energy;
     }
 
     public GameObject SpawnEtere()
     {
-        GameObject energy = Instantiate(Resources.Load("Prefabs/EtereEffect"), SpawnCloneList.transform) as GameObject;
+        GameObject energy = Instantiate(Resources.Load("Prefabs/EtereEffect")) as GameObject;
 
         return energy;
     }
 
     public GameObject SpawnLotus()
     {
-        GameObject lotus = Instantiate(Resources.Load("Prefabs/Effect/ItemFieldEffect"), SpawnCloneList.transform) as GameObject;
+        GameObject lotus = Instantiate(Resources.Load("Prefabs/Effect/ItemFieldEffect")) as GameObject;
 
         return lotus;
     }

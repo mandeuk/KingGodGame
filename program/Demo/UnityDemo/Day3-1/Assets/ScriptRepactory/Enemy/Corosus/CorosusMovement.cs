@@ -27,7 +27,7 @@ public class CorosusMovement : EnemyMovement{
     {
         if (enemyEntity.isAgro)
         {
-            if (nav.enabled && !enemyEntity.isAttack && !enemyEntity.isDead && !corosusEntity.isDealTime)
+            if (nav.enabled && !enemyEntity.isAttack && !enemyEntity.isDead && !enemyEntity.isTurn && !corosusEntity.isDealTime)
             {
                 nav.destination = player.transform.position;
 
@@ -40,6 +40,7 @@ public class CorosusMovement : EnemyMovement{
                     StopMove();
                 }
             }
+
             else
             {
                 StopMove();

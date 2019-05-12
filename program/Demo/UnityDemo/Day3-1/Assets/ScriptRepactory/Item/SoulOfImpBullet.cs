@@ -11,8 +11,8 @@ public class SoulOfImpBullet : BulletBase {
     {
         if (other.gameObject == target)
         {
-            //if(!other.GetComponent<ObjectBase>().isInvincibility)
-                BulletHit();
+            BulletHit();
+            SoundManager.playSoulOfImpHit();
         }
     }
 
@@ -24,7 +24,7 @@ public class SoulOfImpBullet : BulletBase {
         Init();
     }
 
-    public override void Init()
+    protected override void Init()
     {
         base.Init();
     }
@@ -43,15 +43,24 @@ public class SoulOfImpBullet : BulletBase {
         yield return new WaitForSeconds(0.3f);
         while (true)
         {
-            if (!target)
+            if (!target || target.GetComponent<ObjectBase>().isDead)
             {
                 BulletHit();
                 yield break;
             }
 
-            dir = (target.transform.position - transform.position).normalized;
+            //if(target.CompareTag("BossEnemy"))
+            //{
+            dir = (target.transform.GetChild(0).transform.position + Vector3.up * 0.3f - transform.position).normalized;
+            //    print(target.transform.GetChild(0));
+            //}
+            //else
+            //{
+            //    dir = (target.transform.position - transform.position).normalized;
+            //}
+            
             rigid.MovePosition(transform.position + dir * 25 * Time.deltaTime);
             yield return new WaitForFixedUpdate();
-        }
+        }        
     }
 }

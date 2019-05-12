@@ -27,8 +27,8 @@ public class EnemyMovement : MoveBase {
     public virtual void MoveUpdate()
     {
         if (enemyEntity.isAgro)
-        {
-            if (nav.enabled && !enemyEntity.isAttack && !enemyEntity.isDead)
+        {   // 턴하는 도중에 움직이는 이유는 도는 애니메이션이 따로 없어서 걷는애니메이션으로 도는것처럼 하기위함.
+            if (nav.enabled && !enemyEntity.isAttack && !enemyEntity.isDead/* && !enemyEntity.isTurn*/)
             {
                 nav.destination = player.transform.position;
 
@@ -47,7 +47,6 @@ public class EnemyMovement : MoveBase {
             }
         }
     }
-
 
     public void StopMove()
     {

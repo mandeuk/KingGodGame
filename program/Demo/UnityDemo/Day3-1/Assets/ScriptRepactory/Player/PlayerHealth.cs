@@ -13,12 +13,29 @@ public class PlayerHealth : HealthBase {
         Init();
     }
 
-    private void Update()
+    // 플레이어는 Damaged 를 따로 구현해준다.
+    // 플레이어는 1초의 무적시간이 필요하기때문에 isDamaged 상태값을 이용해서 무적시간을 주기 위함.
+    public override void Damaged(DamageNode damageNode)
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (!entity.isDamaged && !entity.isInvincibility)
         {
-            Damaged(new DamageNode(1, this.gameObject, 0.4f, 1, 1));
+            StartCoroutine(NormalDamaged(damageNode));
         }
+    }
+
+    public override IEnumerator NormalDamaged(DamageNode damageNode)
+    {
+        entity.isDamaged = true;
+        TakeDamage(damageNode);
+
+        yield return new WaitForSeconds(1.0f);
+        if (!entity.isDead)
+        {
+            AfterDamage(damageNode);
+        }
+        entity.isDamaged = false;
+
+        yield break;
     }
 
     public override void TakeDamage(DamageNode damageNode)
@@ -27,9 +44,11 @@ public class PlayerHealth : HealthBase {
         {
             PlayerColorChange.instance.PlayerColorChangeBlack();
             PlayerColorChange.instance.RimColorRed();
+            CameraEventManager.instance.VignetteColorRedChange();
             PlayerBase.instance.SetStatus(damageNode.damage, false, PlayerBase.instance.CurHP);
             base.TakeDamage(damageNode);
-            PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
+            if (PlaySceneUIManager.instance != null)
+                PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
         }
     }
 
@@ -45,11 +64,12 @@ public class PlayerHealth : HealthBase {
 
         anim.SetTrigger("Die");
         PlayerBase.instance.PlayerDisable();
+        SoundManager.instance.StopEnvironmentalBGM();
+        SoundManager.instance.StopStageBGM();
         GameManager.NewGameStart();
 
         Invoke("CameraFadeOut", 2);
-        Invoke("loadMenuScene", 6);
-        
+        Invoke("loadMenuScene", 6);        
     }
 
     protected override void Init()

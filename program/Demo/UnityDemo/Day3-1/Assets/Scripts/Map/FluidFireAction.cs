@@ -6,11 +6,6 @@ public class FluidFireAction : MonoBehaviour {
     public GameObject[] open = new GameObject[2];
     public GameObject[] close = new GameObject[2];
 
-    // Use this for initialization
-    void Awake () {
-
-    }
-
     public void DoorOpen()
     {
         open[0].SetActive(true);

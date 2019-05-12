@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillTarget : MonoBehaviour {
-    public List<Collider> targetList = new List<Collider>();
-    public List<Collider> anotherTargetList = new List<Collider>();
     public Vector3 movePos;
     PlayerBase playerEntity;
 
@@ -13,34 +11,6 @@ public class SkillTarget : MonoBehaviour {
     {
         playerEntity = PlayerBase.instance;
         movePos = playerEntity.transform.forward;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            if (!other.GetComponent<ObjectBase>().isDead)
-                targetList.Add(other);
-        }
-
-        if (other.CompareTag("Obstacle"))
-        {
-            anotherTargetList.Add(other);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            if (!other.GetComponent<ObjectBase>().isDead)
-                targetList.Remove(other);
-        }
-
-        if (other.CompareTag("Obstacle"))
-        {
-            anotherTargetList.Remove(other);
-        }
     }
 
     // Update is called once per frame
@@ -52,14 +22,6 @@ public class SkillTarget : MonoBehaviour {
             {
                 TurnJudgeFunc();
                 Turn(movePos);
-            }
-        }
-
-        for (int i = 0; i < targetList.Count; i++)
-        {
-            if (targetList[i].GetComponent<ObjectBase>().isDead)
-            {
-                targetList.Remove(targetList[i]);
             }
         }
     }

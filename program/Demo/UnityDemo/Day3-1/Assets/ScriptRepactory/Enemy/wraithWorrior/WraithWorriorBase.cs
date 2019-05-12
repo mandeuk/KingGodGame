@@ -10,7 +10,7 @@ public class WraithWorriorBase : EnemyBase {
         base.maxHP = 100;
         base.curHP = 100;
         base.moveSpeed = 2;
-        base.pushBack = 10;
+        base.pushBack = 40;
 
         base.attackPower = 1f;
         base.attackDistance = 1.5f;

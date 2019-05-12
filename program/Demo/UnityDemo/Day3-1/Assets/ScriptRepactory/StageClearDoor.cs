@@ -8,7 +8,7 @@ public class StageClearDoor : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.MoveStage2();
+            GameManager.instance.MoveStage();
         }
     }
 
@@ -19,7 +19,7 @@ public class StageClearDoor : MonoBehaviour {
 
     IEnumerator DoorOpen()
     {
-        yield return new WaitForSecondsRealtime(1.0f);
+        yield return new WaitForSecondsRealtime(2.0f);
         GetComponent<Collider>().isTrigger = true;
         yield break;
     }

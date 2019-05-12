@@ -6,8 +6,6 @@ public class DialogUIManager : MonoBehaviour {
 
     GameObject playerCharacterImg, dialogTextboxBg;
 
-
-
     private void Awake()
     {
         //dialogUI = Instantiate(Resources.Load("Prefabs/UI/Dialog/DialogUI"), PlaySceneUIManager.instance.canvas.transform) as GameObject;
@@ -20,7 +18,4 @@ public class DialogUIManager : MonoBehaviour {
 	void Start () {
         
     }
-	
-    
-
 }

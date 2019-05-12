@@ -17,12 +17,13 @@ public enum ItemNum
     RainbowSpirit   = 9,
     LutusOfAbyss    = 25,
     SmallSword      = 39,
-    SoulOfImp       = 40
+    SoulOfImp       = 40,
+    CheatItem       = 99
 }
 
 public class Itemtable : MonoBehaviour {
     private static Itemtable instance = null;
-    private Transform player;
+    private PlayerBase playerinstance;
 
     Color colorRedSpirit;
     Color colorOrangeSpirit;
@@ -56,19 +57,20 @@ public class Itemtable : MonoBehaviour {
             //DontDestroyOnLoad(gameObject);//씬이 바뀌어도 계속 유지하도록 설정
         }
 
-        player = PlayerBase.instance.transform;
+        playerinstance = PlayerBase.instance;
 
-        colorRedSpirit     = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-        colorOrangeSpirit  = new Color(1.0f, 0.7f, 0.0f, 1.0f);
-        colorYellowSpirit  = new Color(1.0f, 1.0f, 0.0f, 1.0f);
-        colorGreenSpirit   = new Color(0.0f, 1.0f, 0.0f, 1.0f);
-        colorBlueSpirit    = new Color(0.0f, 0.0f, 1.0f, 1.0f);
-        colorWhiteSpirit   = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        //colorRedSpirit     = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        //colorOrangeSpirit  = new Color(1.0f, 0.7f, 0.0f, 1.0f);
+        //colorYellowSpirit  = new Color(1.0f, 1.0f, 0.0f, 1.0f);
+        //colorGreenSpirit   = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+        //colorBlueSpirit    = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+        //colorWhiteSpirit   = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         //colorBlackSpirit   = new Color(0.1f, 0.1f, 0.1f, 1.0f);
-        colorVioletSpirit  = new Color(0.9f, 0.5f, 0.9f, 1.0f);
+        //colorVioletSpirit  = new Color(0.9f, 0.5f, 0.9f, 1.0f);
         //colorRainbowSpirit = new Color(0.0f, 1.0f, 1.0f, 1.0f);
     }  
 
+    /*
     public Color SetItemColor(int itemType)
     {
         Color itemColor = colorRedSpirit;//default값
@@ -107,123 +109,136 @@ public class Itemtable : MonoBehaviour {
 
         return itemColor;
     }
+    */
 
     public void ApplyItem(int itemType)
     {
         switch(itemType)
         {
-            case 0:
-                RedSpiritApply();
+            case 0: // 최대 체력 증가
+                MaxHPPlus();
                 break;
-            case 1:
-                OrangeSpiritApply();
+            case 1: // 한대 침
+                PlayerHit();
                 break;
-            case 2:
-                YellowSpiritApply();
+            case 2: // 체력 3 회복
+                Heal();
                 break;
-            case 3:
+            case 3: // 공격력,공격속도증가
                 GreenSpiritApply();
                 break;
-            case 4:
+            case 4: // 이동속도 증가
                 BlueSpiritApply();
                 break;
-            case 5:
+            case 5: // 꽝
                 WhiteSpiritApply();
                 break;
-            //case 7:
-            //    BlackSpiritApply();
-            //    break;
-            case 6:
+            case 6: // 이동 속도 감소
                 VioletSpiritApply();
                 break;
-            //case 8:
-            //    RainbowSpiritApply();
-            //    break;
+            case 7: // 폭주 게이지 증가
+                BlackSpiritApply();
+                break;
+            case 8: // 종합 능력치 증가
+                RainbowSpiritApply();
+                break;
         }
     }
 
-    void RedSpiritApply()
+    void MaxHPPlus()
     {
         GetMaxHP(1.0f);
-        PlaySceneUIManager.instance.UpdateHPUI();
     }
 
-    void OrangeSpiritApply()
+    void PlayerHit()
     {
-        PlayerBase.instance.attackPower += 1.0f;
+        //PlayerBase.instance.SetStatus(30f, true, PlayerBase.instance.AttackPower);
+        //PlayerBase.instance.SetStatus(1, false, PlayerBase.instance.MaxHP);
+        PlayerBase.instance.Damaged(new DamageNode(2, new GameObject(), 0.1f, 3, 1));
     }
 
-    void YellowSpiritApply()
+    void Heal()
     {
-        PlayerBase.instance.attackSpeed += 1.0f;
+        //playerinstance.attackSpeed += 1.0f;
+        //PlayerBase.instance.SetStatus(0.5f, true, PlayerBase.instance.AttackSpeed);
+        PlayerBase.instance.SetStatus(3f, true, PlayerBase.instance.CurHP);
     }
 
     void GreenSpiritApply()
     {
-        PlayerBase.instance.attackPower += 0.5f;
-        PlayerBase.instance.attackSpeed += 0.5f;
+        //playerinstance.attackPower += 0.5f;
+        //playerinstance.attackSpeed += 0.5f;
+        PlayerBase.instance.SetStatus(20f, true, PlayerBase.instance.AttackPower);
+        PlayerBase.instance.SetStatus(0.5f, true, PlayerBase.instance.AttackSpeed);
     }
 
     void BlueSpiritApply()
     {
-        PlayerBase.instance.moveSpeed += 0.5f;
+        //playerinstance.moveSpeed += 0.5f;
+        PlayerBase.instance.SetStatus(2f, true, PlayerBase.instance.MoveSpeed);
     }
 
     void WhiteSpiritApply()
     {
+
     }
 
     void BlackSpiritApply()
     {
-        PlayerBase.instance.devilGage += 6.0f;
+        //playerinstance.devilGage += 6.0f;
+        PlayerBase.instance.SetStatus(30f, true, PlayerBase.instance.DevilGage);
     }
 
     void VioletSpiritApply()
     {
-        PlayerBase.instance.attackRange += 0.1f;
+        //playerinstance.attackRange += 0.1f;
+        //PlayerBase.instance.SetStatus(0.1f, true, PlayerBase.instance.AttackRange);
+        PlayerBase.instance.SetStatus(2f, false, PlayerBase.instance.MoveSpeed);
     }
 
     void RainbowSpiritApply()
     {
         GetMaxHP(1.0f);
-        PlayerBase.instance.attackPower += 1.0f;
-        PlayerBase.instance.attackSpeed += 1.0f;
-        PlayerBase.instance.moveSpeed += 0.5f;
-        PlayerBase.instance.attackRange += 0.1f;
+        //playerinstance.attackPower += 1.0f;
+        //playerinstance.attackSpeed += 1.0f;
+        //playerinstance.moveSpeed += 0.5f;
+        //playerinstance.attackRange += 0.1f;
+        PlayerBase.instance.SetStatus(30f, true, PlayerBase.instance.AttackPower);
+        PlayerBase.instance.SetStatus(0.5f, true, PlayerBase.instance.AttackSpeed);
+        PlayerBase.instance.SetStatus(1f, true, PlayerBase.instance.MoveSpeed);
+        //PlayerBase.instance.SetStatus(0.1f, true, PlayerBase.instance.AttackRange);
     }
 
 
     void GetMaxHP(float getHP)
     {
-        PlayerBase.instance.maxHP += getHP;
-        if (PlayerBase.instance.maxHP > 10)
-            PlayerBase.instance.maxHP = 10;
-        PlayerBase.instance.curHP += getHP;
-        if (PlayerBase.instance.curHP > PlayerBase.instance.maxHP)
-            PlayerBase.instance.curHP = PlayerBase.instance.maxHP;
+        PlayerBase.instance.SetStatus(getHP, true, PlayerBase.instance.MaxHP);
+        //PlayerBase.instance.SetStatus(getHP, true, PlayerBase.instance.CurHP);
+        PlaySceneUIManager.instance.UpdateHPUI();
     }
 
     public String GetItemName(int itemtype)
     {
         switch(itemtype)
         {
-            case 0: return "RedSpirit";
-            case 1: return "OrangeSpirit";
-            case 2: return "YellowSpirit";
-            case 3: return "GreenSpirit";
-            case 4: return "BlueSpirit";
-            case 5: return "WhiteSpirit";
-            //case 6: return "BlackSpirit";
-            case 6: return "VioletSpirit";
-            //case 8: return "RainbowSpirit";
+            case 0: return "최대체력 증가";
+            case 1: return "한대 침";
+            case 2: return "체력 3 회복";
+            case 3: return "공격력/공격속도 증가";
+            case 4: return "이동속도 증가";
+            case 5: return "꽝";
+            case 6: return "이동 속도 감소";
+            case 7: return "폭주게이지 증가";
+            case 8: return "종합능력치 세트";
         }
-
         return "ERROR";
     }
 
+    // 아이템들 스폰 하는것만으로도 적용되게 해놨음.
+
     public void SpawnLotusOfAbyss()
     {
-        Instantiate(Resources.Load("Prefabs/Item/LotusOfAbyss/LotusOfAbyssObj"), player.transform);
+        Instantiate(Resources.Load("Prefabs/Item/LotusOfAbyss/LotusOfAbyssObj"), PlayerBase.instance.transform.transform);
     }
 
     public void SpawnSmallSword()
@@ -233,6 +248,6 @@ public class Itemtable : MonoBehaviour {
 
     public void SpawnSoulOfImp()
     {
-        Instantiate(Resources.Load("Prefabs/Item/SoulOfImp/SoulOfImpObj"), player.transform);
+        Instantiate(Resources.Load("Prefabs/Item/SoulOfImp/SoulOfImpObj"), PlayerBase.instance.transform.transform);
     }
 }

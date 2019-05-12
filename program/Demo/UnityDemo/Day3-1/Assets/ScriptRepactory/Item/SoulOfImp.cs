@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoulOfImp : MonoBehaviour {
-
     public GameObject bullet;
 
     [SerializeField]
@@ -28,6 +27,7 @@ public class SoulOfImp : MonoBehaviour {
         playerEntity = PlayerBase.instance;
         //EventManager.AttackEventCall += new PlayerAttackEventHandler(Fire);
         EventManager.EnemyHitEventCall += new EnemyHitEventHandler(Fire);
+
         damageNode = new DamageNode(10, playerEntity.gameObject, 0.5f, 0, 5);
         normalTarget = playerEntity.GetComponentInChildren<NormalTarget>();
         //targetList = new List<Collider>(normalTarget.targetList);
@@ -55,6 +55,7 @@ public class SoulOfImp : MonoBehaviour {
                     + transform.transform.right * Random.Range(-1f, 1f)
                     + transform.transform.up * Random.Range(1f, 2f)
                     - transform.transform.forward * Random.Range(2f, 2.5f);
+                SoundManager.playSoulOfImpShoot();
             }
         }
     }
@@ -81,4 +82,6 @@ public class SoulOfImp : MonoBehaviour {
     {
         EventManager.EnemyHitEventCall -= new EnemyHitEventHandler(Fire);
     }
+
+
 }

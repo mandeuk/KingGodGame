@@ -6,18 +6,19 @@ public class AfterImageBase : ObjectBase {
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Damaged(DamageNode damageNode)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Dead()
     {
-        throw new System.NotImplementedException();
+
     }
+
     protected override void Init()
     {
         base.Init();

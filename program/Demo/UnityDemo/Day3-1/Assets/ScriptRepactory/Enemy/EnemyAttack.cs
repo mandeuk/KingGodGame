@@ -7,20 +7,24 @@ public class EnemyAttack : AttackBase {
     protected GameObject player;
     protected Animator anim;
     protected GameObject Target;
+    protected float turnSpeed;
 
     protected override void Init()
     { 
         base.Init();
-        enemyEntity = GetComponent<ObjectBase>() as EnemyBase;
+        turnSpeed = 2.5f;
+        enemyEntity = entity as EnemyBase;
         player = enemyEntity.player;
         anim = GetComponent<Animator>();
-        damageNode = new DamageNode(enemyEntity.attackPower, enemyEntity.gameObject, 1f, enemyEntity.pushBack, 1);
     }
 
     protected virtual void AttackUpdate()
     {
-        if (enemyEntity.isAgro)
+        if (enemyEntity.isAgro && !enemyEntity.isDead)
         {
+            // turn 관련해서 AI좀 바꿔야할듯.
+            // 바라보고 움직이고, 바라보고 공격하고를 해야해서
+            // nav와 관련된 movement와 attack 알고리즘 다시설계해야함.
             if (!enemyEntity.isAttack)
                 Turn();
 
@@ -66,7 +70,7 @@ public class EnemyAttack : AttackBase {
             enemyEntity.isTurn = true;
             if (!enemyEntity.isAttack)
             {
-                transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime * 2.5f);
+                transform.Rotate(new Vector3(0, turnDir * 1 * 100, 0) * Time.deltaTime * turnSpeed);
             }
         }
 

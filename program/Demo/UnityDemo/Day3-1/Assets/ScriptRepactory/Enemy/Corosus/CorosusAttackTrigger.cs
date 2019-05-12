@@ -18,6 +18,7 @@ public class CorosusAttackTrigger : MonoBehaviour {
         }
         
         attacker.GetComponent<CorosusBase>().isBreak = true;
+        EventManager.CameraMoveEvent((int)CameraMoveType.EX);
         // 애니메이션에서 걸러야됨.
     }
 }

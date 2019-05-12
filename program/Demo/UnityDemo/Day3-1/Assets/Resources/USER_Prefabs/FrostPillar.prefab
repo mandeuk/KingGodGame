@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4726311270884208}
   - component: {fileID: 33053570088419766}
   - component: {fileID: 23990935955749768}
+  - component: {fileID: 114257526493492624}
+  - component: {fileID: 65444749821614348}
   m_Layer: 13
   m_Name: FrostPillar
   m_TagString: Obstacle
@@ -35,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776496117047360}
   m_LocalRotation: {x: 0.00000008940697, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.142, y: 3.4860718, z: 5.225}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,3 +84,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776496117047360}
   m_Mesh: {fileID: 4300000, guid: 3dcd869f308b5b448aa28cd49444b208, type: 3}
+--- !u!65 &65444749821614348
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776496117047360}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4074881, y: 3.4047978, z: 1.4101496}
+  m_Center: {x: 0.011761427, y: 1.5786673, z: 0.020877928}
+--- !u!114 &114257526493492624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776496117047360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

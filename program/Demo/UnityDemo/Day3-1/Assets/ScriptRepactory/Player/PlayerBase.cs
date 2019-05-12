@@ -19,14 +19,19 @@ public enum Status
 
 public class PlayerBase : ObjectBase {
     public static PlayerBase instance = null;
+
+    // 이거 왜 static이지? 나중에한번 지워봐야함.
     static PlayerStatus playerStatus;
+
     public float energy, attackSpeed, attackRange, devilGage, etere, stance, exmoveCoolTime;
-    public bool isExmove, isChargeAttack, isDodge;
+    public bool isExmove, isChargeAttack, isDodge, isDevil, isFly;
     public bool isExMoveCooltime;
+    public Vector2 curRoomPoint;
 
     Animator anim;
     Rigidbody rigid;
-    
+    IEnumerator DevilCo;
+
     void Awake()
     {
         Init();
@@ -35,6 +40,7 @@ public class PlayerBase : ObjectBase {
     private void Start()
     {
         GameManager.PlayerItemLoad();
+        StartCoroutine(DevilCo);
     }
 
     protected override void Init()
@@ -50,7 +56,7 @@ public class PlayerBase : ObjectBase {
         attackSpeed = playerStatus.attackSpeed;      // 공격속도
         attackRange = playerStatus.attackRange;      // 공격 범위
         moveSpeed = playerStatus.moveSpeed;      // 이동 속도
-        pushBack  = playerStatus.pushBack;      // 넉백을 주는 힘
+        pushBack = playerStatus.pushBack;      // 넉백을 주는 힘
         energy = playerStatus.energy;      // 에너지
         etere = playerStatus.etere;      // 에테르
         devilGage = playerStatus.devilGage;     // 폭주 게이지 100이되면 죽음.
@@ -61,22 +67,59 @@ public class PlayerBase : ObjectBase {
         isExmove = false;
         isChargeAttack = false;
         isDodge = false;
+        isDevil = false;
+        isFly = true;
 
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
 
         anim.SetFloat("AttackSpeed", attackSpeed);
         anim.SetFloat("MoveSpeed", moveSpeed / 8);
+
+        DevilCo = DevillizationCo();
+    }
+
+    private void Update()
+    {
+
+        // 본래상태로 되돌리는 cheat
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Cheat();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            InstanceDead();
+        }
+
+        // 좀 세지는 cheat
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            RealCheat();
+        }
+
+        // 7번 누르면 데빌게이지가 79로 고정.
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            GameManager.instance.MoveStage();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            SetStatus(50, false, DevilGage);
+            ReturnDevil();
+        }
     }
 
     public override void Attack()
     {
-        
+
     }
 
     public void ExMoveAttack()
     {
-        GetComponent<PlayerAttack>().skillAttack(4);
+        GetComponent<PlayerAttack>().SkillAttack();
     }
 
     public override void Damaged(DamageNode damageNode)
@@ -84,31 +127,95 @@ public class PlayerBase : ObjectBase {
         GetComponent<PlayerHealth>().Damaged(damageNode);
     }
 
-    public override void Dead()
+    public void Devillization()
     {
+        if (!isDevil)
+        {
+            isDevil = true;
+            CameraEventManager.instance.DevillizationCameraEvent();
+            GetComponent<PlayerEffect>().playOuraEffect();
+            EventManager.CameraMoveEvent((int)CameraMoveType.EX);
+            //EXMoveCam.instance.playEXCameraEvent(1);
+            SetStatus(20, true, AttackPower);
+            SetStatus(0.3f, true, AttackSpeed);
+            SetStatus(1f, true, MoveSpeed);
+        }
+    }
+
+    public void ReturnDevil()
+    {
+        isDevil = false;
+        GetComponent<PlayerEffect>().stopOuraEffect();
+        CameraEventManager.instance.ReturnDevilCameraEvent();
 
     }
 
-    public void PlayerEnable()
+    public void EndDevil()
     {
-        transform.GetComponent<PlayerMovement>().enabled = true;
-        transform.GetComponent<PlayerHealth>().enabled = true;
-        transform.GetComponent<PlayerAttack>().enabled = true;
-        transform.GetComponent<EXMove>().enabled = true;
-        transform.GetComponent<ExplosionAttack>().enabled = true;
-        //transform.GetComponent<Rigidbody>().isKinematic = false;
-        transform.GetComponent<Collider>().isTrigger = false;
+        ReturnDevil();
+        StopCoroutine(DevilCo);
+        devilGage = 30;
+        playerStatus.devilGage = devilGage;
+        EncroachmentManager.instance.UpdateDevilGauge();
+        GameManager.PlayerStatusSave(playerStatus);
     }
-    public void PlayerDisable()
+
+    void InstanceDead()
     {
-        transform.GetComponent<PlayerMovement>().enabled = false;
-        transform.GetComponent<PlayerHealth>().enabled = false;
-        transform.GetComponent<PlayerAttack>().enabled = false;
-        transform.GetComponent<EXMove>().enabled = false;
-        transform.GetComponent<ExplosionAttack>().enabled = false;
-        //transform.GetComponent<Rigidbody>().isKinematic = true;
-        transform.GetComponent<Collider>().isTrigger = true;
+        Damaged(new DamageNode(1, new GameObject(), 0.1f, 1, 1));
     }
+
+    // 데빌게이지는 데모버전 시연을위해 뺌.
+    public void RealCheat()
+    {
+        maxHP = 10;      // 맥스 hp
+        curHP = 10;      // 현재 hp
+        attackPower = 60;     // 공격력
+        attackSpeed = 1.5f;      // 공격속도
+        moveSpeed = 9;      // 이동 속도
+
+        playerStatus.moveSpeed = moveSpeed;
+        anim.SetFloat("MoveSpeed", moveSpeed / 8);
+        playerStatus.maxHP = maxHP;
+        playerStatus.curHP = curHP;
+        PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
+        playerStatus.attackPower = attackPower;
+        playerStatus.attackSpeed = attackSpeed;
+        anim.SetFloat("AttackSpeed", attackSpeed);
+
+        GameManager.PlayerStatusSave(playerStatus);
+    }
+
+    void Cheat()
+    {
+        maxHP = 8;      // 맥스 hp
+        curHP = 8;      // 현재 hp
+        attackPower = 30;     // 공격력
+        attackSpeed = 1;      // 공격속도
+        moveSpeed = 8;      // 이동 속도
+        devilGage = 30;     // 폭주 게이지 100이되면 죽음.
+
+        playerStatus.devilGage = devilGage;
+        EncroachmentManager.instance.UpdateDevilGauge();
+
+        if (devilGage > 80)
+        {
+            Devillization();
+        }
+        playerStatus.moveSpeed = moveSpeed;
+        anim.SetFloat("MoveSpeed", moveSpeed / 8);
+        playerStatus.maxHP = maxHP;
+        playerStatus.curHP = curHP;
+        PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
+        playerStatus.attackPower = attackPower;
+        playerStatus.attackSpeed = attackSpeed;
+        anim.SetFloat("AttackSpeed", attackSpeed);
+
+        ReturnDevil();
+
+        GameManager.PlayerStatusSave(playerStatus);
+    }
+
     public IEnumerator PlayerActSceneStart()
     {
         PlayerColorChange.instance.PlayerDisappear();
@@ -165,12 +272,13 @@ public class PlayerBase : ObjectBase {
                 return 0;
         }
     }
-
+    
+    
     public void MaxHP(float amount, bool up)
     {
         if (up)
         {
-            if ((int)maxHP < 14)    // 최대체력(14)보다 클경우
+            if ((int)maxHP < 10)    // 최대체력(14)보다 클경우
             {
                 maxHP += amount;
                 curHP += amount;
@@ -188,12 +296,12 @@ public class PlayerBase : ObjectBase {
         playerStatus.curHP = curHP;
         PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
     }
-    
+
     public void CurHP(float amount, bool up)
     {
         if (up)
         {
-            if ((int)curHP > (int)maxHP)
+            if ((int)curHP < (int)maxHP)
             {
                 curHP += amount;
             }
@@ -203,7 +311,8 @@ public class PlayerBase : ObjectBase {
             curHP -= amount;
         }
         playerStatus.curHP = curHP;
-        PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
+        if(PlaySceneUIManager.instance != null)
+            PlaySceneUIManager.instance.UpdateHPUI(); //체력UI 갱신 함수
     }
 
     public void AttackPower(float amount, bool up)
@@ -223,11 +332,25 @@ public class PlayerBase : ObjectBase {
     {
         if (up)
         {
-            attackSpeed += amount;
+            if (attackSpeed < 2)
+            {
+                attackSpeed += amount;
+            }
+            else
+            {
+                attackSpeed = 2;
+            }
         }
         else
         {
-            attackSpeed -= amount;            
+            if (attackSpeed > 0.6f)
+            {
+                attackSpeed -= amount;
+            }
+            else
+            {
+                attackSpeed = 0.6f;
+            }
         }
         playerStatus.attackSpeed = attackSpeed;
         anim.SetFloat("AttackSpeed", attackSpeed);
@@ -250,14 +373,28 @@ public class PlayerBase : ObjectBase {
     {
         if (up)
         {
-            moveSpeed += amount;
+            if (moveSpeed < 14)
+            {
+                moveSpeed += amount;
+            }
+            else
+            {
+                moveSpeed = 14;
+            }
         }
         else
         {
-            moveSpeed -= amount;
+            if (moveSpeed > 3)
+            {
+                moveSpeed -= amount;
+            }
+            else
+            {
+                moveSpeed = 3;
+            }
         }
         playerStatus.moveSpeed = moveSpeed;
-        anim.SetFloat("MoveSpeed", moveSpeed / 8);
+        anim.SetFloat("MoveSpeed", 7 + moveSpeed / 8);
     }
 
     public void PushBack(float amount, bool up)
@@ -285,7 +422,7 @@ public class PlayerBase : ObjectBase {
             energy -= amount;
         }
         playerStatus.energy = energy;
-        PlaySceneUIManager.instance.ChangeEnergyAmountText();
+        //PlaySceneUIManager.instance.ChangeEnergyAmountText();
     }
 
     public void Etere(float amount, bool up)
@@ -301,7 +438,7 @@ public class PlayerBase : ObjectBase {
         }
 
         playerStatus.etere = etere;
-        PlaySceneUIManager.instance.ChangeEterAmountText();
+        //PlaySceneUIManager.instance.ChangeEterAmountText();
     }
 
     public void DevilGage(float amount, bool up)
@@ -315,6 +452,12 @@ public class PlayerBase : ObjectBase {
             devilGage -= amount;
         }
         playerStatus.devilGage = devilGage;
+        //EncroachmentManager.instance.UpdateDevilGauge();
+
+        if (devilGage > 80)
+        {
+            Devillization();
+        }
     }
 
     public void Stance(float amount, bool up)
@@ -336,6 +479,20 @@ public class PlayerBase : ObjectBase {
         StartCoroutine(Stiff());
     }
 
+
+    // 이렇게 애니메이션으로 조절하면 이펙트가 안멈춤...
+    // 같이 멈추려면 시간을 멈추는게 일단은 답...
+    // 나중에 수정합시다 다같이멈추도록
+    //IEnumerator Stiff()
+    //{
+    //    anim.speed = 0.0f;
+    //    yield return new WaitForSecondsRealtime(0.7f);
+    //    anim.speed = 1.3f;
+    //    yield return new WaitForSecondsRealtime(0.3f);
+    //    anim.speed = 1.0f;
+    //    yield break;
+    //}
+
     IEnumerator Stiff()
     {
         Time.timeScale = 0.0f;
@@ -346,9 +503,46 @@ public class PlayerBase : ObjectBase {
         yield break;
     }
 
-    IEnumerator Devillization()
+    IEnumerator DevillizationCo()
     {
-
+        while (devilGage < 100)
+        //while(true)
+        {
+            if (!isDevil)
+            {
+                SetStatus(0.045f, true, DevilGage);
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+            {
+                //yield break;
+                SetStatus(0.012f, true, DevilGage);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        Dead();
         yield break;
+    }
+    
+    public void PlayerEnable()
+    {
+        transform.GetComponent<PlayerMovement>().enabled = true;
+        transform.GetComponent<PlayerHealth>().enabled = true;
+        transform.GetComponent<PlayerAttack>().enabled = true;
+        transform.GetComponent<EXMove>().enabled = true;
+        transform.GetComponent<ExplosionAttack>().enabled = true;
+        //transform.GetComponent<Rigidbody>().isKinematic = false;
+        transform.GetComponent<Collider>().isTrigger = false;
+    }
+
+    public void PlayerDisable()
+    {
+        transform.GetComponent<PlayerMovement>().enabled = false;
+        transform.GetComponent<PlayerHealth>().enabled = false;
+        transform.GetComponent<PlayerAttack>().enabled = false;
+        transform.GetComponent<EXMove>().enabled = false;
+        transform.GetComponent<ExplosionAttack>().enabled = false;
+        //transform.GetComponent<Rigidbody>().isKinematic = true;
+        transform.GetComponent<Collider>().isTrigger = true;
     }
 }

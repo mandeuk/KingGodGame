@@ -25,5 +25,6 @@ public class WraithWorriorAttack : MeleeAttack {
     {
         base.NormalAttack();
         EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithWorriorAttackEffect);
+        SoundManager.playWraithWorriorAttack();
     }
 }

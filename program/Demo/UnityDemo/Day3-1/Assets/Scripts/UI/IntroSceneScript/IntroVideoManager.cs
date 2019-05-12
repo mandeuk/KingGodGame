@@ -69,16 +69,16 @@ public class IntroVideoManager : MonoBehaviour {
     {
         
         float timer = 0.0f, originalYpos = 0.0f, targetYpos = 0.0f, originalflareYpos, targetflareYpos;
-
+        
         //로고 이미지 위치이동을 위한 코드
         Vector3 imagepos = logoimage.transform.position;
         originalYpos = imagepos.y;
-        targetYpos = imagepos.y + 75.0f;
+        targetYpos = imagepos.y + (Screen.height / 7.0f);
 
         //로고 이미지 위치이동을 위한 코드
         Vector3 flarepos = logoflareimage.transform.position;
         originalflareYpos = flarepos.y;
-        targetflareYpos = flarepos.y + 75.0f;
+        targetflareYpos = flarepos.y + (Screen.height / 7.0f);
 
         //배경 이미지 알파값 조절을 위한 코드
         backgroundimage.SetActive(true);//백그라운드 이미지 띄우기
@@ -94,11 +94,11 @@ public class IntroVideoManager : MonoBehaviour {
             timer += Time.deltaTime/3;
             
             //로고이미지
-            imagepos.y = originalYpos + (Mathf.Lerp(0.0f, 1.0f, timer) * 75.0f);
+            imagepos.y = originalYpos + (Mathf.Lerp(0.0f, 1.0f, timer) * (Screen.height / 7.0f));
             logoimage.transform.position = imagepos;
 
             //플레어이미지
-            flarepos.y = originalflareYpos + (Mathf.Lerp(0.0f, 1.0f, timer) * 75.0f);
+            flarepos.y = originalflareYpos + (Mathf.Lerp(0.0f, 1.0f, timer) * (Screen.height / 7.0f));
             logoflareimage.transform.position = flarepos;
 
             //배경이미지

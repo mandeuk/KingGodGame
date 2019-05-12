@@ -48,13 +48,13 @@ public class EXMove : AttackBase {
                 avatar.SetTrigger("EXMoveOn");
                 avatar.SetBool("Combo", false);
                 StartCoroutine(EXMovePlay());
-
             }
         }
     }
 
     public IEnumerator EXMovePlay()
     {
+        //PlaySceneUIManager.instance.StartCooltimeGauge();//<- 해당라인 코드 작성자 이인호, EX무브 실행시 쿨타임 게이지가 보이도록 하는 코드
         playerEntity.isExMoveCooltime = true;
         damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.2f, playerEntity.pushBack, 4);
         avatar.speed = 0;         // 잔상의 애니메이션을 멈춤
@@ -82,9 +82,11 @@ public class EXMove : AttackBase {
         }   // 잔상의 보이는 매터리얼을 다 킴. 잔상의 색깔을 빈 오브젝트인 afterImageMets 에 다 저장함.
         
         afterImageR.GetComponent<Animator>().speed = 0;           // 이때 잔상의 애니메이션은 가만히 있어야함.
+        moveSpeed = playerEntity.moveSpeed;
         playerEntity.moveSpeed = 0;
         EffectManager.PlayEffect(gameObject, EffectManager.playEXMoveVanishEffect);
         EffectManager.PlayEffect(gameObject, EffectManager.playEXMoveSlashEffect);
+        EffectManager.playEXMoveSlashEffect(gameObject);
 
         yield return new WaitForSeconds(0.13f);
         playerEntity.moveSpeed = calcDistObj() * 6;              // ex무브동안의 스피드 이속도로 고속이동함.
@@ -138,13 +140,12 @@ public class EXMove : AttackBase {
         {
             return hit.distance;
         }
+
         else
         {
             return 7;
         }
     }
-
-
 
     public override void NormalAttack()
     {

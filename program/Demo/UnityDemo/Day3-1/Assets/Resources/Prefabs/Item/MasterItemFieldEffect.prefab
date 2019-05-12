@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 198404991550924390}
   - component: {fileID: 199129988862507354}
   - component: {fileID: 135088839462377772}
-  - component: {fileID: 114583898220487370}
   m_Layer: 0
   m_Name: MasterItemFieldEffect
   m_TagString: Item
@@ -136,17 +135,6 @@ Transform:
   m_Father: {fileID: 4247125194165752}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
---- !u!114 &114583898220487370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1316313627114604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135088839462377772
 SphereCollider:
   m_ObjectHideFlags: 1

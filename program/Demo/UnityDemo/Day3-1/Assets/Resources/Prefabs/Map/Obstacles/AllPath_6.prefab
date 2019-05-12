@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4917151539349292}
   m_Layer: 0
-  m_Name: WorriorSpawnPos (4)
+  m_Name: WorriorSpawnPos
   m_TagString: WorriorSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4638633006429014}
-  - component: {fileID: 114849901585625550}
   - component: {fileID: 114371783180731814}
   m_Layer: 0
   m_Name: AllPath_6
@@ -428,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4675553415508032}
   m_Layer: 0
-  m_Name: WorriorSpawnPos (3)
+  m_Name: WorriorSpawnPos
   m_TagString: WorriorSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,7 +743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4370060860516474}
   m_Layer: 0
-  m_Name: WorriorSpawnPos (1)
+  m_Name: WorriorSpawnPos
   m_TagString: WorriorSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1281,7 +1280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4276041307303742}
   m_Layer: 0
-  m_Name: WorriorSpawnPos (5)
+  m_Name: WorriorSpawnPos
   m_TagString: WorriorSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1334,7 +1333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4785814387255554}
   m_Layer: 0
-  m_Name: WorriorSpawnPos (2)
+  m_Name: WorriorSpawnPos
   m_TagString: WorriorSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6164,17 +6163,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114849901585625550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1262286428643998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c0265412d103ab438cb0c0c098672a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114861442200444810

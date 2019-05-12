@@ -30,7 +30,7 @@ public class GamestartBtn : MonoBehaviour {
     public void LoadGameplayScene()
     {
         //GameObject.Find("Main Camera").GetComponent
-
+        GameManager.NewGameStart();//캐릭터 능력치 초기화
         StartCoroutine(LoadSceneWithFadeOut());
         gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
     }
@@ -46,7 +46,7 @@ public class GamestartBtn : MonoBehaviour {
             fadeimageforUI.GetComponent<UnityEngine.UI.Image>().color = fadeimgcolor;
 
             if (fadeimgcolor.a >= 1f)
-                LoadingSceneManager.LoadScene("Game_Junghoon");
+                LoadingSceneManager.LoadScene("Game_Stage1");
             yield return null;
         }
         //yield return new WaitForSeconds(1.0f);

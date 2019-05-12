@@ -6,10 +6,12 @@ public class EXMoveCam : MonoBehaviour {
     public static EXMoveCam instance = null;
     public GameObject mainCamera;
     public GameObject normalCamera;
+    PlayerBase player;
 
     void Awake()
     {
         instance = this;
+        player = PlayerBase.instance;
     }
 
 
@@ -18,17 +20,17 @@ public class EXMoveCam : MonoBehaviour {
         mainCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1000;
         normalCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 900;
         transform.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1100;
-        Time.timeScale = 0.5f;
 
-        yield return new WaitForSeconds(time);
+        //player.PlayerStiff();
+        yield return new WaitForSecondsRealtime(0.3f);
+
         mainCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 1000;
         normalCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 900;
         transform.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Priority = 900;
-        Time.timeScale = 1;
+
 
         yield break;
     }
-
 
     public void playEXCameraEvent(float time)
     {

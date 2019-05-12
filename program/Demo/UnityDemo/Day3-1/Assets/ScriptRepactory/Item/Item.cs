@@ -82,7 +82,7 @@ public class Item : MonoBehaviour {
                     {
                         ParticleSystem.MainModule myPMain;
                         myPMain = gameObject.GetComponent<ParticleSystem>().main;
-                        myPMain.startColor = Itemtable.Instance.SetItemColor(itemType);
+                        //myPMain.startColor = Itemtable.Instance.SetItemColor(itemType);
                         myPMain.startSpeed = 0;
                         myPMain.maxParticles = 1;
 

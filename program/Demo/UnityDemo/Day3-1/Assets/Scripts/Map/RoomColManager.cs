@@ -13,10 +13,6 @@ public class RoomColManager : MonoBehaviour {
     public GameObject frontDoorCol;
     public GameObject backDoorCol;
 
-    void Awake () {
-        
-    }
-     
     private void Start()
     {
         leftDoorCol.GetComponent<DoorCol>().doorType = 0;
@@ -28,37 +24,21 @@ public class RoomColManager : MonoBehaviour {
     public void LeftDoorOpen()
     {
         leftWallCol.SetActive(false);
+        leftDoorCol.SetActive(true);
     }
     public void RightDoorOpen()
     {
         rightWallCol.SetActive(false);
+        rightDoorCol.SetActive(true);
     }
     public void FrontDoorOpen()
     {
         frontWallCol.SetActive(false);
+        frontDoorCol.SetActive(true);
     }
     public void BackDoorOpen()
     {
         backWallCol.SetActive(false);
+        backDoorCol.SetActive(true);
     }
-
-    //public void JudgePlayerInNextRoom()
-    //{
-    //    if (leftDoorCol.GetComponent<DoorCol>().playerInDoor)
-    //    {
-    //        print("LeftIn");
-    //    }
-    //    else if (rightDoorCol.GetComponent<DoorCol>().playerInDoor)
-    //    {
-    //        print("rightIn");
-    //    }
-    //    else if (frontDoorCol.GetComponent<DoorCol>().playerInDoor)
-    //    {
-    //        print("FrontIn");
-    //    }
-    //    else if (backDoorCol.GetComponent<DoorCol>().playerInDoor)
-    //    {
-    //        print("BackIn");
-    //    }
-    //}
 }

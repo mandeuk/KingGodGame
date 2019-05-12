@@ -13,8 +13,7 @@
      Cull Off Lighting Off ZWrite Off
  
      SubShader {
-         Pass {
- 
+         Pass {			
              CGPROGRAM
              #pragma vertex vert
              #pragma fragment frag

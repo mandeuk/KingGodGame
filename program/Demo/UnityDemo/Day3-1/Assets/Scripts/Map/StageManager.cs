@@ -23,15 +23,56 @@ public class StageManager : MonoBehaviour {
                                                     {0,0,0,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 },
                                                     {0,0,0,0,0,0,0,0,0 }};
-    
+
 
     // Use this for initialization
-    void Awake () {
+    void Awake() {
         instance = this;
         stageNum = 1;
-        MapRandomSetting();
+        TestRoomArraySetting();
+        //MapRandomSetting();
         //SearchAndSetRoom();
+        StartCoroutine(CameraSetting());
+    }
 
+    void TestRoomArraySetting()
+    {
+        // 2번 : 시작방
+        // 3번 : 몬스터 짱많은방
+        // 4번 : 투표 및 임프방
+        // 5번 : 로투스 방
+        // 6번 : 스몰소드방
+        // 7번 : 보스방
+        // 8번 : 코로서스방
+        // 9번 : 하이프리스트방
+        // 10번 : stage2 시연하기위한 임시 방
+        // 11번
+        if (GameManager.playerPosition.stageNum == 1)
+        {
+            mapSpawnArray = new int[9, 9] { {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,2,0,0,0,0,0,0 },
+                                            {0,4,6,0,0,0,0,0,0 },
+                                            {0,0,5,3,9,0,0,0,0 },
+                                            {0,0,11,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 }};
+            SoundManager.instance.playStage1Music();
+        }
+        else if (GameManager.playerPosition.stageNum == 2)
+        {
+            mapSpawnArray = new int[9, 9] { {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,2,0,0,0,0,0,0 },
+                                            {0,0,10,0,0,0,0,0,0 },
+                                            {0,0,8,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 },
+                                            {0,0,0,0,0,0,0,0,0 }};
+            SoundManager.instance.playStage2Music();
+        }
     }
 
     void MapRandomSetting()
@@ -45,6 +86,14 @@ public class StageManager : MonoBehaviour {
                                           {0,0,0,0,0,0,0,0,0 },
                                           {0,0,0,0,0,0,0,0,0 },
                                           {0,0,0,0,0,0,0,0,0 }};
+    }
+
+    IEnumerator CameraSetting()
+    {
+        Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        yield return new WaitForSeconds(1.0f);
+        Camera.main.clearFlags = CameraClearFlags.Skybox;
+        yield break;
     }
 
     Node SetStartRoom(Node startroom)
@@ -148,8 +197,6 @@ public class StageManager : MonoBehaviour {
         //가장 가까운 노드로 이동, 이 때 거리가 같은 노드가 있다면 rand함수로 랜덤이동
         //이동한 노드의 방 상태값을 1로 변경
         //위 동작을 반복하되 거리값이 0인 노드만 거리를 측정하고 새로 측정한 노드사이에서 다음으로 이동할 노드 선택
-
-
     }
 
     float MySqrt(int x1, int y1, int x2, int y2)//노드 거리계산용

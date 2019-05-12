@@ -7,8 +7,8 @@ public class blink_dash_start : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetComponent<ObjectBase>().isAttack)
-            EffectManager.instance.playplayerSwordBlinkEffect();
+        //if (animator.GetComponent<ObjectBase>().isAttack)
+        //    EffectManager.instance.playplayerSwordBlinkEffect();
         animator.GetComponent<ObjectBase>().isAttack = false;
     }
 

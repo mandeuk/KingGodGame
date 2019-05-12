@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WraithMovement : EnemyMovement
 {
-    // Use this for initialization
     void Awake()
     {
         Init();
@@ -14,8 +13,7 @@ public class WraithMovement : EnemyMovement
     {
         base.Init();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         base.MoveUpdate();

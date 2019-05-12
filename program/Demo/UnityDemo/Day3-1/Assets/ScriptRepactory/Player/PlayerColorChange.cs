@@ -31,19 +31,6 @@ public class PlayerColorChange : MonoBehaviour {
         tailRimPow = raphaelMats[3, 0].GetFloat("_rimPow");
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            PlayerColorChangeYellow();
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            PlayerColorChangeBlue();
-        }
-    }
-
     public void PlayerColorChangeBlack()
     {
         StopCoroutine(ColorChange());
@@ -72,7 +59,14 @@ public class PlayerColorChange : MonoBehaviour {
         StartCoroutine(RimPowChange());
     }
 
-    
+    public void PlayerColorChangePurple()
+    {
+        StopCoroutine(ColorRimPurPleChange());
+        StopCoroutine(RimPowChange());
+
+        StartCoroutine(ColorRimPurPleChange());
+        StartCoroutine(RimPowChange());
+    }
 
     IEnumerator ColorChange()
     {
@@ -145,6 +139,29 @@ public class PlayerColorChange : MonoBehaviour {
     {
         RimColorRed();
 
+        float timer = new float();
+        while (timer < 2f)
+        {
+            timer += Time.deltaTime;
+            for (int i = 0; i < rendObjs.Length; ++i)
+            {
+                for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+                {
+                    rendObjs[i].GetComponent<Renderer>().materials[j].SetColor(
+                        "_rimColor", Color.Lerp(rendObjs[i].GetComponent<Renderer>().materials[j].GetColor("_rimColor"),
+                        raphaelMats[i, j].GetColor("_rimColor"), Time.deltaTime * 2.0f));
+                }
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        yield break;
+    }
+
+    IEnumerator ColorRimPurPleChange()
+    {
+        RimColorPurple();
+
+        yield return new WaitForSeconds(1.0f);
         float timer = new float();
         while (timer < 2f)
         {
@@ -257,7 +274,19 @@ public class PlayerColorChange : MonoBehaviour {
             }
         }
     }
-    
+
+    public void RimColorPurple()
+    {
+        for (int i = 0; i < rendObjs.Length; ++i)
+        {
+            for (int j = 0; j < rendObjs[i].GetComponent<Renderer>().materials.Length; ++j)
+            {
+                if (!(i == 0 && j == 1))
+                    rendObjs[i].GetComponent<Renderer>().materials[j].SetColor("_rimColor", new Color(1,0,1));
+            }
+        }
+    }
+
     public void RimColorOrigin()
     {
         for (int i = 0; i < rendObjs.Length; ++i)

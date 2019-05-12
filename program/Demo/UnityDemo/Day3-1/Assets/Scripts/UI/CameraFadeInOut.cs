@@ -3,40 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFadeInOut : MonoBehaviour {
-    Material color;
+    public static CameraFadeInOut instance;
 
-	// Use this for initialization
+    IEnumerator fadeInCo;
+    IEnumerator fadeOutCo;
+    Material color;
+    
 	void Awake () {
+        instance = this;
         color = transform.GetComponent<Renderer>().material;
-        color.color = new Vector4(0, 0, 0, 0);
+        if (!GameManager.instance.testMod)
+            color.color = new Vector4(0, 0, 0, 1);
+        else
+            color.color = new Vector4(1, 1, 1, 0);
     }
 
-    public IEnumerator FadeOut()
+    private void Start()
+    {
+        if(!GameManager.instance.testMod)
+            FadeIn();
+    }
+
+    public IEnumerator FadeOutUpdate()
     {
         float timer = new float();
         while (timer < 1f)
         {
             timer += Time.deltaTime;
-            color.SetColor("_Color", Color.Lerp(color.GetColor("_Color"), new Vector4(0, 0, 0, 1), Time.deltaTime * 3.5f));
+            color.SetColor("_Color", Color.Lerp(color.GetColor("_Color"), new Vector4(0, 0, 0, 1), Time.deltaTime * 7f));
             yield return new WaitForEndOfFrame();
         }
         yield break;
     }
 
-    public IEnumerator FadeIn()
+    public IEnumerator FadeInUpdate()
     {
         float timer = new float();
-        while (timer < 2f)
+        color.color = new Vector4(0, 0, 0, 1);
+        while (timer < 1f)
         {
             timer += Time.deltaTime;
-            color.SetColor("_Color", Color.Lerp(color.GetColor("_Color"), new Vector4(0, 0, 0, 0), Time.deltaTime * 3.5f));
+            color.SetColor("_Color", Color.Lerp(color.GetColor("_Color"), new Vector4(0, 0, 0, 0), Time.deltaTime * 7f));
             yield return new WaitForEndOfFrame();
         }
         yield break;
     }
 
-    public void ActiveFadeOut()
+    public void FadeOut()
     {
-        StartCoroutine(FadeOut());
+        //StopCoroutine(FadeOutUpdate());
+        //StopCoroutine(FadeInUpdate());
+        StartCoroutine(FadeOutUpdate());
+    }
+
+    public void FadeIn()
+    {
+        //StopCoroutine(FadeInUpdate());
+        //StopCoroutine(FadeOutUpdate());
+        StartCoroutine(FadeInUpdate());
     }
 }

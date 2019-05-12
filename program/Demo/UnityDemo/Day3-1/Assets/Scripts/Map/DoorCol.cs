@@ -14,9 +14,4 @@ public class DoorCol : MonoBehaviour {
             StartCoroutine(transform.parent.parent.GetComponentInChildren<RoomData>().RoomMove(doorType));
         }
     }
-
-    // Use this for initialization
-    void Awake () {
-		
-	}
 }

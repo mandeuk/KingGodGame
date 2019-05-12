@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CorosusBreakBehaviour : StateMachineBehaviour {
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        //animator.transform.GetComponent<ObjectBase>().isAttack = false;
-        //animator.SetBool("Attack", false);
+        animator.transform.GetComponent<CorosusAttack>().Break();
     }
 }

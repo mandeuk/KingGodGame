@@ -666,7 +666,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4699812103015560}
-  - component: {fileID: 114477028072145690}
   - component: {fileID: 114208333333258422}
   m_Layer: 0
   m_Name: ThreePath_1
@@ -4177,17 +4176,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed1f84e6c91e9d4283e5c5bac660128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114477028072145690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1655674047572184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c0265412d103ab438cb0c0c098672a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114562520693054018

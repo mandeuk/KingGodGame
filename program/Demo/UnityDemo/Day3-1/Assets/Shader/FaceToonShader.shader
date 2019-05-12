@@ -3,6 +3,8 @@
 		_Color("Main Color", Color) = (0.5,0.5,0.5,1)
 		_MainTex("Base (RGB)", 2D) = "white" {}
 	_Ramp("Toon Ramp (RGB)", 2D) = "gray" {}
+	_rimPow("rim Pow", Range(0,10)) = 0
+		_rimColor("rim Color", Color) = (0,0,0,0)
 	}
 
 		SubShader{
@@ -13,6 +15,9 @@
 #pragma surface surf ToonRamp
 
 		sampler2D _Ramp;
+
+	float _rimPow;
+	float3 _rimColor;
 
 	// custom lighting function that uses a texture ramp based
 	// on angle between light direction and normal
@@ -38,11 +43,17 @@
 
 	struct Input {
 		float2 uv_MainTex : TEXCOORD0;
+		float3 viewDir;
 	};
 
 	void surf(Input IN, inout SurfaceOutput o) {
 		half4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 		o.Albedo = c.rgb;
+		o.Alpha = c.a;
+
+		float rim = dot(o.Normal, IN.viewDir);
+		o.Emission = saturate(pow(1 - rim, _rimPow)) * _rimColor.rgb;
+		
 		o.Alpha = c.a;
 	}
 	ENDCG

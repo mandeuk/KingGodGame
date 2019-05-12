@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4742819189663206}
   - component: {fileID: 198990134541271750}
   - component: {fileID: 199222315893104112}
-  - component: {fileID: 114788666005867806}
   m_Layer: 0
   m_Name: WraithWorriorDeadEffect
   m_TagString: Untagged
@@ -42,17 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114788666005867806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1008971370450428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c35f5fddd35dd14983787dd312486b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &198990134541271750
 ParticleSystem:
   m_ObjectHideFlags: 1

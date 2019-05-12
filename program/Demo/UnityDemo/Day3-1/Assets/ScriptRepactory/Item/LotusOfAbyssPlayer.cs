@@ -23,7 +23,7 @@ public class LotusOfAbyssPlayer : MonoBehaviour{
     {
         playerEntity = PlayerBase.instance;
         EventManager.AttackEventCall += new PlayerAttackEventHandler(Fire);
-        damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.5f, playerEntity.pushBack, 4);
+        damageNode = new DamageNode(playerEntity.attackPower, playerEntity.gameObject, 0.5f, playerEntity.pushBack, 1);
     }
 
     public void Fire(int stateNum)
@@ -80,6 +80,7 @@ public class LotusOfAbyssPlayer : MonoBehaviour{
                 Quaternion.Euler(0,transform.rotation.eulerAngles.y, 0);
         }
         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 550);
+        SoundManager.playItemLotusOfAbyssShoot();
     }
 
     public void BulletHit(GameObject hitBullet)
@@ -92,7 +93,7 @@ public class LotusOfAbyssPlayer : MonoBehaviour{
 
     public void InitBullet()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 30; i++)
         {
             GameObject bulletclone = Instantiate(bullet) as GameObject;
 

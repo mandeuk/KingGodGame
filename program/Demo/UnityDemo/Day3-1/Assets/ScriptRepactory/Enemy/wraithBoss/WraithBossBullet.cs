@@ -18,14 +18,10 @@ public class WraithBossBullet : BulletBase {
         }
     }
 
-    private void OnEnable()
+    public override void BulletHit()
     {
-        StartCoroutine(VanishingEffect());
-        Init();
-    }
+        EffectManager.instance.PlayEffect(gameObject, 1, EffectManager.instance.playEnemyWraithBulletHitEffect);
 
-    public override void Init()
-    {
-        base.Init();
+        base.BulletHit();
     }
 }

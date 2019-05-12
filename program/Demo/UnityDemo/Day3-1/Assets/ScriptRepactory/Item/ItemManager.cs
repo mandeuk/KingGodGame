@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour {
     {
         instance = this;
         player = PlayerBase.instance.gameObject;
+        ItemCloneList = Instantiate(Resources.Load("Prefabs/ItemCloneList")) as GameObject;
     }
 
     private void Start()
@@ -40,7 +41,7 @@ public class ItemManager : MonoBehaviour {
     // 기능 : 아이템을 생성하지만, 바로 맵에 배치하지 않고 메모리에 공간만 확보하는 기능
     public GameObject GenerateItem()
     {
-        GameObject cloneItem = Instantiate(Resources.Load("Prefabs/Item"), ItemCloneList.transform) as GameObject;//Items 생성
+        GameObject cloneItem = Instantiate(Resources.Load("Prefabs/Item")) as GameObject;//Items 생성
         cloneItem.SetActive(false);
 
         return cloneItem;
@@ -93,20 +94,35 @@ public class ItemManager : MonoBehaviour {
     {
         GameObject itemClone 
             = Instantiate(Resources.Load("Prefabs/Item/SmallSword/SmallSwordItemEffect"), transform) as GameObject;
+        itemClone.SetActive(false);
         itemClone.transform.position = pos + Vector3.up * 1.5f;
+        itemClone.SetActive(true);
     }
 
     public void SpawnLotusOfAbyssItem(Vector3 pos)
     {
         GameObject itemClone
             = Instantiate(Resources.Load("Prefabs/Item/LotusOfAbyss/LotusOfAbyssItemEffect"), transform) as GameObject;
+        itemClone.SetActive(false);
         itemClone.transform.position = pos + Vector3.up * 1.5f;
+        itemClone.SetActive(true);
     }
 
     public void SpawnSoulOfImpItem(Vector3 pos)
     {
         GameObject itemClone
             = Instantiate(Resources.Load("Prefabs/Item/SoulOfImp/SoulOfImpItemEffect"), transform) as GameObject;
+        itemClone.SetActive(false);
         itemClone.transform.position = pos + Vector3.up * 1.5f;
+        itemClone.SetActive(true);
+    }
+
+    public void SpawnCheatItem(Vector3 pos)
+    {
+        GameObject itemClone
+    = Instantiate(Resources.Load("Prefabs/Item/CheatItemEffect"), transform) as GameObject;
+        itemClone.SetActive(false);
+        itemClone.transform.position = pos + Vector3.up * 1.5f;
+        itemClone.SetActive(true);
     }
 }

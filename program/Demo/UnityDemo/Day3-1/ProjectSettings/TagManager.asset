@@ -9,13 +9,17 @@ TagManager:
   - AfterImage
   - Wall
   - Obstacle
-  - EffectCamera
   - mapClearCol
   - GlobalLight
-  - EnemySpawn
   - MainVirtualCamera
   - EnemyBullet
-  - ItemMagnet
+  - Etere
+  - Energy
+  - ClonesObject
+  - WorriorSpawn
+  - EnemySpawn
+  - CorosusSpawn
+  - BossEnemy
   layers:
   - Default
   - TransparentFX
@@ -31,7 +35,7 @@ TagManager:
   - Enemy
   - Door
   - Obstacle
-  - 
+  - Item
   - 
   - 
   - 

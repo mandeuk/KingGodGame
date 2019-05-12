@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class myCameraEvent : MonoBehaviour {
     Cinemachine.CinemachineVirtualCamera mainCamera;
-    public GameObject raphael;
+    GameObject raphael;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +14,6 @@ public class myCameraEvent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        mainCamera.m_Lens.FieldOfView = raphael.GetComponent<Animator>().GetFloat("cameraFOV") + 40;
+        mainCamera.m_Lens.FieldOfView = raphael.GetComponent<Animator>().GetFloat("cameraFOV")/2 + 40;
     }
 }

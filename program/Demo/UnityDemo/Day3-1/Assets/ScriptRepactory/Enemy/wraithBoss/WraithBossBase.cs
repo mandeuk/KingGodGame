@@ -11,10 +11,10 @@ public class WraithBossBase : EnemyBase {
     protected override void Init()
     {
         base.Init();
-        base.maxHP = 1500;
-        base.curHP = 1500;
+        base.maxHP = 600;
+        base.curHP = 600;
         base.moveSpeed = 2;
-        base.pushBack = 10;
+        base.pushBack = 40;
 
         base.attackPower = 1;
         base.attackDistance = 9;

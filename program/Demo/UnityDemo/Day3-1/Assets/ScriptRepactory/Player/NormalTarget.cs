@@ -35,7 +35,7 @@ public class NormalTarget : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("EnemyWorrior"))
+        if (other.CompareTag("Enemy"))
         {
             if (!other.GetComponent<ObjectBase>().isDead)
                 targetList.Remove(other);

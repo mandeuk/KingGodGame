@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WraithBase : EnemyBase {
+    public delegate void wriathDead();
+
     public float bulletSpeed;
 
     protected override void Init()
@@ -11,6 +13,7 @@ public class WraithBase : EnemyBase {
         base.maxHP = 100;
         base.curHP = 100;
         base.moveSpeed = 1;
+        base.pushBack = 40;
 
         base.attackPower = 1;
         base.attackDistance = 6;

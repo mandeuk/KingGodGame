@@ -9,13 +9,9 @@ public class WraitAttackBehaviour : StateMachineBehaviour {
     {
         animator.transform.GetComponent<ObjectBase>().isAttack = true;
     }
-
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-
-	}
     
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            animator.transform.GetComponent<ObjectBase>().isAttack = false;
+        animator.transform.GetComponent<ObjectBase>().isAttack = false;
     }
 }

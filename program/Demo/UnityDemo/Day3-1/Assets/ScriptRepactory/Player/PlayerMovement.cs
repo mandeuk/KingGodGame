@@ -21,7 +21,6 @@ public class PlayerMovement : MoveBase {
         base.Init();
         playerEntity = GetComponent<ObjectBase>() as PlayerBase;
         avatar = GetComponent<Animator>();
-        skillMovePos = GetComponentInChildren<SkillTarget>().transform;
         movePos = transform.forward;
         rigid.rotation = Quaternion.LookRotation(Vector3.right);
         transform.rotation = Quaternion.LookRotation(Vector3.right);
@@ -85,6 +84,10 @@ public class PlayerMovement : MoveBase {
 
     public void TurnJudgeFunc()
     {
+        //float x = Input.GetAxis("Horizontal");
+        //float y = Input.GetAxis("Vertical");
+        //movePos.Set(x, 0, y);
+
         if (Input.GetKey(KeyCode.A)) //Quaternion.LookRotation(new Vector3(-1, 0, 0))
             movePos.Set(-1, 0, 1);
 
@@ -112,13 +115,19 @@ public class PlayerMovement : MoveBase {
 
     void IsWalking()
     {
-        avatar.SetBool("Dash", true);
+        if (playerEntity.isFly)
+            avatar.SetBool("Dash", true);
+        else
+            avatar.SetBool("Run", true);
         playerEntity.isMove = true;
     }
 
     void StopWalking()
     {
-        avatar.SetBool("Dash", false);
+        if (playerEntity.isFly)
+            avatar.SetBool("Dash", false);
+        else
+            avatar.SetBool("Run", false);
         playerEntity.isMove = false;
     }
 

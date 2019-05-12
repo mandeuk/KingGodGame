@@ -52,10 +52,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4280934446600242}
   - component: {fileID: 114569816389017996}
-  - component: {fileID: 114557368407546724}
-  - component: {fileID: 114353352400858284}
-  - component: {fileID: 114677673372650294}
   - component: {fileID: 114766925100481594}
+  - component: {fileID: 114353352400858284}
+  - component: {fileID: 114687696850700120}
+  - component: {fileID: 114677673372650294}
+  - component: {fileID: 114269148020244694}
   m_Layer: 0
   m_Name: Stage1
   m_TagString: Untagged
@@ -78,7 +79,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4160471935559244
 Transform:
   m_ObjectHideFlags: 1
@@ -143,8 +144,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0.58823526, g: 0.58823526, b: 0.58823526, a: 1}
-  m_Intensity: 1.02
+  m_Color: {r: 0.43382353, g: 0.43382353, b: 0.43382353, a: 1}
+  m_Intensity: 1.48
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -217,6 +218,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038bb4baf17b1eb4887bcb55a24b9260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114269148020244694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925456858009104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042117f85832adc4ab7cbaa5c805ade5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnCloneList: {fileID: 0}
+  energyCloneList: []
+  usedEnergyCloneList: []
+  etereCloneList: []
+  usedEtereCloneList: []
 --- !u!114 &114353352400858284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,20 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d6732525f49754d85c5036bc94e03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114557368407546724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1925456858009104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2073d47fb8d75a248814329fcd42425e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemList: []
-  useditemList: []
-  ItemCloneList: {fileID: 0}
 --- !u!114 &114569816389017996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,10 +269,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98346e16b00bab347a12b1ac779d0b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   enemyWraithBullets: []
   enemyUsedWraithBullets: []
-  playerSwordBlinkEffect: {fileID: 0}
   playerChargingEffect: {fileID: 0}
+--- !u!114 &114687696850700120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925456858009104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2073d47fb8d75a248814329fcd42425e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  itemList: []
+  useditemList: []
+  ItemCloneList: {fileID: 0}
 --- !u!114 &114766925100481594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,5 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  cooltimeGauge: {fileID: 0}
   hpList: []
   hpillusionList: []
